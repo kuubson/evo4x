@@ -1,0 +1,67 @@
+*,
+*::before,
+*::after {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'Indie Flower', cursive !important;
+    outline: none;
+    color: white;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body,
+#root {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+label {
+    display: block;
+}
+
+button,
+input {
+    font-size: 16px;
+    display: block;
+    background: none;
+    border: none;
+    filter: none;
+}
+
+button {
+    cursor: pointer;
+    &::-moz-focus-inner {
+        border: 0px;
+    }
+}
+
+input {
+    &::placeholder {
+        color: white;
+    }
+    &:-webkit-autofill {
+        transition: background-color 9999s ease-in-out 0s;
+        -webkit-text-fill-color: white;
+    }
+}
+
+img {
+    text-indent: -999px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    text-align: center;
+}
