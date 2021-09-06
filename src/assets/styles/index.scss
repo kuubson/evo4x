@@ -3,10 +3,11 @@
 *::after {
     margin: 0px;
     padding: 0px;
-    box-sizing: border-box;
+    color: black;
+    letter-spacing: 1.5px;
     font-family: 'Indie Flower', cursive !important;
     outline: none;
-    color: white;
+    box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
 }
 
@@ -29,9 +30,9 @@ label {
 button,
 input {
     font-size: 16px;
-    display: block;
     background: none;
     border: none;
+    display: block;
     filter: none;
 }
 
@@ -44,11 +45,11 @@ button {
 
 input {
     &::placeholder {
-        color: white;
+        color: black;
     }
     &:-webkit-autofill {
         transition: background-color 9999s ease-in-out 0s;
-        -webkit-text-fill-color: white;
+        -webkit-text-fill-color: black;
     }
 }
 
