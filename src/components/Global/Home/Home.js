@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components/macro'
 
+import Logo from 'assets/images/Logo.png'
+
 import Dashboard from './styled/Dashboard'
 
 const HomeContainer = styled.div`
@@ -18,7 +20,7 @@ const HomeContainer = styled.div`
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        clip-path: polygon(100% 80%, 0 100%, 100% 100%);
+        clip-path: polygon(0 95%, 100% 80%, 100% 100%, 0% 100%);
     }
 `
 
@@ -40,7 +42,7 @@ const Home = () => {
                 </Dashboard.Advantage>
             </Dashboard.Advantages>
             <Dashboard.Header>
-                <Dashboard.Logo>Evo4x</Dashboard.Logo>
+                <Dashboard.Logo src={Logo} alt="evo4x" />
                 <Dashboard.Button>Join our community</Dashboard.Button>
             </Dashboard.Header>
         </HomeContainer>
