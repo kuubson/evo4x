@@ -5,7 +5,7 @@ import Advantages from './Advantages'
 import Advantage from './Advantage'
 import Dollar from './Dollar'
 
-export default {
+const Dashboard = {
     Header,
     Logo,
     Button,
@@ -13,3 +13,5 @@ export default {
     Advantage,
     Dollar
 }
+
+export default Dashboard

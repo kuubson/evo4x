@@ -4,7 +4,7 @@
     margin: 0px;
     padding: 0px;
     color: black;
-    letter-spacing: 1.5px;
+    letter-spacing: 1px;
     font-family: 'Indie Flower', cursive !important;
     outline: none;
     box-sizing: border-box;
@@ -23,20 +23,25 @@ ul {
     list-style: none;
 }
 
-label {
+dialog {
+    border: none;
+}
+
+label,
+dialog {
     display: block;
 }
 
 button,
 input {
-    font-size: 16px;
+    display: block;
     background: none;
     border: none;
-    display: block;
     filter: none;
 }
 
 button {
+    font-size: 16px;
     cursor: pointer;
     &::-moz-focus-inner {
         border: 0px;
@@ -65,4 +70,5 @@ h5,
 h6,
 p {
     text-align: center;
+    font-weight: normal;
 }

@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components/macro'
+
+import RegistrationModal from 'components/Guest/Modals/RegistrationModal/RegistrationModal'
 
 import Logo from 'assets/images/Logo.png'
 
 import Dashboard from './styled/Dashboard'
 
-const HomeContainer = styled.div`
+const HomeContainer = styled.section`
     height: 100%;
     display: flex;
     justify-content: space-around;
@@ -14,8 +16,8 @@ const HomeContainer = styled.div`
     &::before {
         content: '';
         width: 100%;
-        background: #ffff00;
         height: 100%;
+        background: ${({ theme }) => theme.primaryColor};
         position: absolute;
         top: 50%;
         left: 50%;
@@ -25,25 +27,34 @@ const HomeContainer = styled.div`
 `
 
 const Home = () => {
+    const [showRegistrationModal, setShowRegistrationModal] = useState(false)
+    const toggleRegistrationModal = () =>
+        setShowRegistrationModal(showRegistrationModal => !showRegistrationModal)
     return (
         <HomeContainer>
+            <RegistrationModal
+                showRegistrationModal={showRegistrationModal}
+                onClose={toggleRegistrationModal}
+            />
             <Dashboard.Advantages>
-                <Dashboard.Advantage>
-                    <Dashboard.Dollar>$</Dashboard.Dollar>
-                    Profitable either poor analysis? We don't care. Trust the process!
-                </Dashboard.Advantage>
                 <Dashboard.Advantage>
                     <Dashboard.Dollar>$</Dashboard.Dollar>
                     Straightforward trading message - keep it simple.
                 </Dashboard.Advantage>
                 <Dashboard.Advantage>
                     <Dashboard.Dollar>$</Dashboard.Dollar>
-                    Remember! It's a mental battle, not technical one.
+                    Profitable either poor analysis? We don't care - trust the process!
+                </Dashboard.Advantage>
+                <Dashboard.Advantage>
+                    <Dashboard.Dollar>$</Dashboard.Dollar>
+                    Remember - it's a mental battle, not technical one.
                 </Dashboard.Advantage>
             </Dashboard.Advantages>
             <Dashboard.Header>
                 <Dashboard.Logo src={Logo} alt="evo4x" />
-                <Dashboard.Button>Join our community</Dashboard.Button>
+                <Dashboard.Button onClick={toggleRegistrationModal} fill={showRegistrationModal}>
+                    Join our community
+                </Dashboard.Button>
             </Dashboard.Header>
         </HomeContainer>
     )

@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components/macro'
 import { Switch, Route, Redirect } from 'react-router-dom'
 
-import Home from 'components/Global/Home/Home'
+import Home from 'components/Guest/Home/Home'
 
 const AppContainer = styled.main`
     height: 100%;
