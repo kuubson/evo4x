@@ -49,12 +49,12 @@ const Home = () => {
                     <Dashboard.Dollar>$</Dashboard.Dollar>
                     Remember - it's a mental battle, not technical one.
                 </Dashboard.Advantage>
+                <Dashboard.Button onClick={toggleRegistrationModal} fill={showRegistrationModal}>
+                    join evo4x's community
+                </Dashboard.Button>
             </Dashboard.Advantages>
             <Dashboard.Header>
                 <Dashboard.Logo src={Logo} alt="evo4x" />
-                <Dashboard.Button onClick={toggleRegistrationModal} fill={showRegistrationModal}>
-                    Join our community
-                </Dashboard.Button>
             </Dashboard.Header>
         </HomeContainer>
     )

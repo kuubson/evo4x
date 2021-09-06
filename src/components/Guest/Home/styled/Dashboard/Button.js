@@ -1,31 +1,14 @@
-import styled, { css } from 'styled-components/macro'
+import styled from 'styled-components/macro'
 
 export default styled.button`
-    margin-top: 3px;
-    padding: 15px;
+    background: ${({ theme }) => theme.primaryColor};
+    margin: 60px auto 0px auto;
+    padding: 10px 30px;
+    border-radius: 10px;
+    text-shadow: 1px 1px white;
+    font-size: 22px;
     transition: transform ease-in-out 0.3s;
-    position: relative;
-    &::after {
-        content: '';
-        width: 100%;
-        height: 0px;
-        background: black;
-        transition: height ease-in-out 0.3s;
-        position: absolute;
-        bottom: 0px;
-        left: 0px;
-    }
     &:hover {
-        transform: scale(1.08);
-        &::after {
-            height: 2.5px;
-        }
+        transform: scale(1.05);
     }
-    ${({ fill }) =>
-        fill &&
-        css`
-            &::after {
-                height: 2.5px;
-            }
-        `}
 `

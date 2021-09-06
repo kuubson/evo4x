@@ -7,7 +7,7 @@ export default styled.button`
     overflow: hidden;
     color: white;
     font-size: 14px;
-    border-radius: 10px;
+    border-radius: 5px;
     transition: all 0.3s ease-in-out;
     transition-property: max-height, margin, padding;
     ${({ scaleIn }) =>
