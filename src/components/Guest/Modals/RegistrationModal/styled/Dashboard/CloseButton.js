@@ -3,6 +3,8 @@ import styled from 'styled-components/macro'
 export default styled.div`
     font-size: 25px;
     cursor: pointer;
+    font-weight: bold;
+    text-shadow: 1px 1px white;
     position: absolute;
     top: 25px;
     right: 30px;

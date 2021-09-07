@@ -7,7 +7,7 @@ import Dashboard from './styled/Dashboard'
 
 import Composed from './composed'
 
-const RegistrationModalContainer = styled.section`
+export const RegistrationModalContainer = styled.section`
     width: 100%;
     height: 100%;
     transition: background ease-in-out 0.3s;
@@ -17,15 +17,15 @@ const RegistrationModalContainer = styled.section`
     transform: translate(-50%, -50%);
     z-index: 1;
     pointer-events: none;
-    ${({ showRegistrationModal }) =>
-        showRegistrationModal &&
+    ${({ showModal }) =>
+        showModal &&
         css`
             background: rgba(0, 0, 0, 0.5);
             pointer-events: auto;
         `}
 `
 
-const RegistrationModal = ({ showRegistrationModal, onClose }) => {
+const RegistrationModal = ({ showModal, onClose }) => {
     const [form, setForm] = useState({
         name: '',
         nameError: '',
@@ -70,13 +70,14 @@ const RegistrationModal = ({ showRegistrationModal, onClose }) => {
     }
     const formCompleted = name && email && password && repeatedPassword
     return (
-        <RegistrationModalContainer showRegistrationModal={showRegistrationModal}>
-            <Dashboard.Content showRegistrationModal={showRegistrationModal}>
+        <RegistrationModalContainer showModal={showModal}>
+            <Dashboard.Content showModal={showModal}>
                 <Dashboard.CloseButton onClick={onClose}>✕</Dashboard.CloseButton>
                 <Dashboard.Header scaleOut={formCompleted}>
-                    "Get rich or die trying"
+                    {`"You either win or learn - 
+                    not win or lose"`}
                 </Dashboard.Header>
-                <Dashboard.Form onSubmit={register} novalidate>
+                <Dashboard.Form onSubmit={register} noValidate>
                     <Composed.Input
                         id="name"
                         type="text"
@@ -87,7 +88,7 @@ const RegistrationModal = ({ showRegistrationModal, onClose }) => {
                         onChange={formHandler.handleInputValue}
                     />
                     <Composed.Input
-                        id="email"
+                        id="registrationEmail"
                         type="email"
                         label="Email address"
                         value={email}
@@ -96,7 +97,7 @@ const RegistrationModal = ({ showRegistrationModal, onClose }) => {
                         onChange={formHandler.handleInputValue}
                     />
                     <Composed.Input
-                        id="password"
+                        id="registrationPassword"
                         type="password"
                         label="Password"
                         value={password}
@@ -105,7 +106,7 @@ const RegistrationModal = ({ showRegistrationModal, onClose }) => {
                         onChange={formHandler.handleInputValue}
                     />
                     <Composed.Input
-                        id="repeatedPassword"
+                        id="registrationRepeatedPassword"
                         type="password"
                         label="Password again"
                         value={repeatedPassword}

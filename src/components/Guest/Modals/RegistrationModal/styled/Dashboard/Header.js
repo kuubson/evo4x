@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components/macro'
 
 export default styled.h2`
-    max-height: 50px;
+    max-height: 92px;
     margin-bottom: 30px;
     font-size: 25px;
     white-space: pre-line;

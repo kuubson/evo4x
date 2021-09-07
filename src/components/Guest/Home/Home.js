@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components/macro'
 
 import RegistrationModal from 'components/Guest/Modals/RegistrationModal/RegistrationModal'
+import LoginModal from 'components/Guest/Modals/LoginModal/LoginModal'
 
 import Logo from 'assets/images/Logo.png'
 
@@ -35,19 +36,22 @@ const HomeContainer = styled.section`
 
 const Home = () => {
     const [showRegistrationModal, setShowRegistrationModal] = useState(false)
+    const [showLoginModal, setShowLoginModal] = useState(false)
     const toggleRegistrationModal = () =>
         setShowRegistrationModal(showRegistrationModal => !showRegistrationModal)
+    const toggleLoginModal = () => setShowLoginModal(showLoginModal => !showLoginModal)
     return (
         <HomeContainer>
             <RegistrationModal
-                showRegistrationModal={showRegistrationModal}
+                showModal={showRegistrationModal}
                 onClose={toggleRegistrationModal}
             />
+            <LoginModal showModal={showLoginModal} onClose={toggleLoginModal} />
             <Dashboard.Navbar>
                 <Dashboard.Brand>evo4x</Dashboard.Brand>
                 <Dashboard.Links>
                     <Dashboard.Link>Indicators</Dashboard.Link>
-                    <Dashboard.Link>Login</Dashboard.Link>
+                    <Dashboard.Link onClick={toggleLoginModal}>Login</Dashboard.Link>
                 </Dashboard.Links>
             </Dashboard.Navbar>
             <Dashboard.Advantages>

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components/macro'
 
-export default styled.div`
+export default styled.dialog`
     width: 50%;
     min-height: 80%;
     background: ${({ theme }) => theme.primaryColor};
@@ -27,8 +27,8 @@ export default styled.div`
         height: 100%;
         border-radius: 0px;
     }
-    ${({ showRegistrationModal }) =>
-        showRegistrationModal &&
+    ${({ showModal }) =>
+        showModal &&
         css`
             top: 50%;
             transform: translate(-50%, -50%);

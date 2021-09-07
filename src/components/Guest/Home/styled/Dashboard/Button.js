@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components/macro'
 export default styled.button`
     border-bottom: 3px solid ${({ theme }) => theme.primaryColor};
     margin: 60px auto 0px auto;
-    padding: 10px 20px;
+    padding: 15px 20px 10px 20px;
     text-shadow: 1px 1px white;
     font-size: 22px;
     transition: all ease-in-out 0.3s;
@@ -23,6 +23,7 @@ export default styled.button`
     }
     @media (max-width: 750px) {
         font-size: 16px;
+        padding: 13px 15px 8px 15px;
     }
     @media (max-width: 500px) {
         font-size: 14px;
