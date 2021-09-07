@@ -11,10 +11,12 @@ const AppContainer = styled.main`
 const App = () => {
     const routes = [
         {
+            id: 1,
             path: '/',
             render: () => <Home />
         },
         {
+            id: 2,
             pathname: '*',
             render: () => <Redirect to="/" />
         }
@@ -22,8 +24,8 @@ const App = () => {
     return (
         <AppContainer>
             <Switch>
-                {routes.map(({ path, render }) => (
-                    <Route path={path} render={render} exact />
+                {routes.map(({ id, path, render }) => (
+                    <Route key={id} path={path} render={render} exact />
                 ))}
             </Switch>
         </AppContainer>

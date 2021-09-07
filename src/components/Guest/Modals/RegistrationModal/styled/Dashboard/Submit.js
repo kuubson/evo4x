@@ -10,6 +10,12 @@ export default styled.button`
     border-radius: 5px;
     transition: all 0.3s ease-in-out;
     transition-property: max-height, margin, padding;
+    @media (max-width: 1200px) {
+        font-size: 13px;
+    }
+    @media (max-width: 1000px) {
+        font-size: 12px;
+    }
     ${({ scaleIn }) =>
         scaleIn &&
         css`

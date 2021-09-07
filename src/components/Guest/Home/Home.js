@@ -23,6 +23,12 @@ const HomeContainer = styled.section`
         left: 50%;
         transform: translate(-50%, -50%);
         clip-path: polygon(0 95%, 100% 80%, 100% 100%, 0% 100%);
+        @media (max-width: 900px) {
+            clip-path: polygon(0 95%, 100% 85%, 100% 100%, 0% 100%);
+        }
+        @media (max-width: 500px) {
+            clip-path: polygon(0 95%, 100% 88%, 100% 100%, 0% 100%);
+        }
     }
 `
 
@@ -56,6 +62,7 @@ const Home = () => {
                     <Dashboard.Dollar>$</Dashboard.Dollar>
                     Remember - it's a mental battle, not technical one.
                 </Dashboard.Advantage>
+                <Dashboard.Logo src={Logo} alt="evo4x" mobile />
                 <Dashboard.Button onClick={toggleRegistrationModal} fill={showRegistrationModal}>
                     join evo4x's community
                 </Dashboard.Button>
