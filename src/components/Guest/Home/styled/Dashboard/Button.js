@@ -31,6 +31,6 @@ export default styled.button`
         fill &&
         css`
             border-radius: 10px;
-            box-shadow: inset 0px -50px ${({ theme }) => theme.primaryColor};
+            box-shadow: inset 0px -58px ${({ theme }) => theme.primaryColor};
         `}
 `

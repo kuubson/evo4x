@@ -8,7 +8,8 @@ import Logo from 'assets/images/Logo.png'
 import Dashboard from './styled/Dashboard'
 
 const HomeContainer = styled.section`
-    height: 100%;
+    min-height: 100%;
+    padding: 90px 0px;
     display: flex;
     justify-content: space-around;
     align-items: center;

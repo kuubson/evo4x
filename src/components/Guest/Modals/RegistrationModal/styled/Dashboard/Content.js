@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components/macro'
 
-export default styled.dialog`
+export default styled.div`
     width: 50%;
-    height: 80%;
+    min-height: 80%;
     background: ${({ theme }) => theme.primaryColor};
     padding: 20px;
     border-radius: 10px;

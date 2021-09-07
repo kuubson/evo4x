@@ -20,7 +20,7 @@ export default styled.button`
         scaleIn &&
         css`
             max-height: 43px;
-            margin: 60px auto 0px auto;
+            margin: 40px auto 0px auto;
             padding: 12px 30px;
         `};
 `

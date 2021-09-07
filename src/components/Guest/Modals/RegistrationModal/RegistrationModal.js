@@ -10,9 +10,8 @@ import Composed from './composed'
 const RegistrationModalContainer = styled.section`
     width: 100%;
     height: 100%;
-    background: none;
     transition: background ease-in-out 0.3s;
-    position: fixed;
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
