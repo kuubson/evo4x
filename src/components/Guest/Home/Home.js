@@ -36,6 +36,13 @@ const Home = () => {
                 showRegistrationModal={showRegistrationModal}
                 onClose={toggleRegistrationModal}
             />
+            <Dashboard.Navbar>
+                <Dashboard.Brand>evo4x</Dashboard.Brand>
+                <Dashboard.Links>
+                    <Dashboard.Link>Indicators</Dashboard.Link>
+                    <Dashboard.Link>Login</Dashboard.Link>
+                </Dashboard.Links>
+            </Dashboard.Navbar>
             <Dashboard.Advantages>
                 <Dashboard.Advantage>
                     <Dashboard.Dollar>$</Dashboard.Dollar>

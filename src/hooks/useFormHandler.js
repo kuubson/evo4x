@@ -1,7 +1,7 @@
 import validator from 'validator'
 import sanitize from 'sanitize-html'
 
-export default setForm => {
+const useFormHandler = setForm => {
     const handleInputValue = ({ target: { name, value } }) =>
         setForm(form => ({ ...form, [name]: value }))
     const handleInputError = (errorKey, error) =>
@@ -110,3 +110,5 @@ export default setForm => {
         validateRepeatedPassword
     }
 }
+
+export default useFormHandler
