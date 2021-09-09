@@ -11,9 +11,7 @@ const handleApiError = error => {
             return utils.redirectTo('/')
         }
         if (!apiError) {
-            return utils.setApiFeedback(
-                `A connection couldn't be established with the server or an unexpected problem occurred on its side`
-            )
+            return utils.setApiFeedback('The connection could not be established with the server')
         }
         return utils.setApiFeedback(apiError)
     }

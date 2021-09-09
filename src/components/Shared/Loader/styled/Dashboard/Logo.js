@@ -22,16 +22,16 @@ export default styled.img`
     bottom: -52px;
     left: 20px;
     z-index: 2;
-    @media (max-width: 1200px) {
+    @media (max-width: ${({ theme }) => theme.firstBreakpoint}) {
         width: 38px;
     }
-    @media (max-width: 1000px) {
+    @media (max-width: ${({ theme }) => theme.secondBreakpoint}) {
         width: 36px;
     }
-    @media (max-width: 750px) {
+    @media (max-width: ${({ theme }) => theme.fourthBreakpoint}) {
         width: 34px;
     }
-    @media (max-width: 500px) {
+    @media (max-width: ${({ theme }) => theme.fifthBreakpoint}) {
         width: 32px;
     }
     ${({ $loading }) =>

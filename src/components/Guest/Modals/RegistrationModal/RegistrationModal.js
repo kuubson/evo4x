@@ -11,20 +11,9 @@ import Composed from './composed'
 
 import utils from 'utils'
 
-export const RegistrationModalContainer = styled.section`
-    width: 100%;
-    height: 100%;
-    transition: background ease-in-out 0.3s;
-    position: absolute;
-    z-index: 1;
-    pointer-events: none;
-    ${({ showModal }) =>
-        showModal &&
-        css`
-            background: rgba(0, 0, 0, 0.5);
-            pointer-events: auto;
-        `}
-`
+import { BlackLayer } from 'components/Shared/BlackLayer/BlackLayer'
+
+export const RegistrationModalContainer = styled(BlackLayer)``
 
 const RegistrationModal = ({ showModal, toggleModal }) => {
     const [form, setForm] = useState({
@@ -81,7 +70,7 @@ const RegistrationModal = ({ showModal, toggleModal }) => {
     }
     const formCompleted = name && email && password && repeatedPassword
     return (
-        <RegistrationModalContainer showModal={showModal}>
+        <RegistrationModalContainer showLayer={showModal}>
             <Dashboard.Content showModal={showModal}>
                 <Dashboard.CloseButton onClick={toggleModal}>✕</Dashboard.CloseButton>
                 <Dashboard.Header scaleOut={formCompleted}>

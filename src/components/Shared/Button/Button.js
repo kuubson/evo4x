@@ -1,13 +1,14 @@
 import styled from 'styled-components/macro'
 
-export default styled.p`
-    text-align: left;
-    font-size: 12px;
-    margin-top: 5px;
+export const Button = styled.button`
+    background: black;
+    color: white;
+    font-size: 14px;
+    border-radius: 5px;
     @media (max-width: ${({ theme }) => theme.firstBreakpoint}) {
-        font-size: 11px;
+        font-size: 13px;
     }
     @media (max-width: ${({ theme }) => theme.secondBreakpoint}) {
-        font-size: 10px;
+        font-size: 12px;
     }
 `

@@ -2,9 +2,9 @@ import styled, { css } from 'styled-components/macro'
 
 export default styled.dialog`
     width: 50%;
-    min-height: 80%;
+    min-height: 70%;
     background: ${({ theme }) => theme.primaryColor};
-    padding: 20px;
+    padding: 40px;
     border-radius: 10px;
     transition: width ease-in-out 0.3s, height ease-in-out 0.3s, border-radius ease-in-out 0.3s,
         transform ease-in-out 0.6s, top ease-in-out 0.6s;
@@ -16,13 +16,13 @@ export default styled.dialog`
     top: 0%;
     left: 50%;
     transform: translate(-50%, -100%);
-    @media (max-width: 1000px) {
+    @media (max-width: ${({ theme }) => theme.secondBreakpoint}) {
         width: 60%;
     }
-    @media (max-width: 750px) {
+    @media (max-width: ${({ theme }) => theme.fourthBreakpoint}) {
         width: 80%;
     }
-    @media (max-width: 500px) {
+    @media (max-width: ${({ theme }) => theme.fifthBreakpoint}) {
         width: 100%;
         height: 100%;
         border-radius: 0px;

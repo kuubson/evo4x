@@ -10,16 +10,16 @@ export default styled.h2`
     text-shadow: 1px 1px white;
     transition: all 0.3s ease-in-out;
     transition-property: max-height, margin-bottom, transform;
-    @media (max-width: 1200px) {
+    @media (max-width: ${({ theme }) => theme.firstBreakpoint}) {
         font-size: 23px;
     }
-    @media (max-width: 1000px) {
+    @media (max-width: ${({ theme }) => theme.secondBreakpoint}) {
         font-size: 21px;
     }
-    @media (max-width: 750px) {
+    @media (max-width: ${({ theme }) => theme.fourthBreakpoint}) {
         font-size: 19px;
     }
-    @media (max-width: 500px) {
+    @media (max-width: ${({ theme }) => theme.fifthBreakpoint}) {
         font-size: 17px;
     }
     ${({ scaleOut }) =>

@@ -15,6 +15,7 @@ import utils from 'utils'
 
 const HomeContainer = styled.section`
     min-height: 100%;
+    padding: 85px 0px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -29,10 +30,10 @@ const HomeContainer = styled.section`
         left: 50%;
         transform: translate(-50%, -50%);
         clip-path: polygon(0 95%, 100% 80%, 100% 100%, 0% 100%);
-        @media (max-width: 900px) {
+        @media (max-width: ${({ theme }) => theme.thirdBreakpoint}) {
             clip-path: polygon(0 95%, 100% 85%, 100% 100%, 0% 100%);
         }
-        @media (max-width: 500px) {
+        @media (max-width: ${({ theme }) => theme.fifthBreakpoint}) {
             clip-path: polygon(0 95%, 100% 88%, 100% 100%, 0% 100%);
         }
     }

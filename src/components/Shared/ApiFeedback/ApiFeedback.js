@@ -14,17 +14,17 @@ const ApiFeedbackContainer = styled.p`
         margin: 0px;
         padding: 0px;
     }
-    @media (max-width: 1200px) {
+    @media (max-width: ${({ theme }) => theme.firstBreakpoint}) {
         max-width: 100%;
         font-size: 13px;
     }
-    @media (max-width: 1000px) {
+    @media (max-width: ${({ theme }) => theme.secondBreakpoint}) {
         font-size: 12px;
     }
-    @media (max-width: 750px) {
+    @media (max-width: ${({ theme }) => theme.fourthBreakpoint}) {
         font-size: 11px;
     }
-    @media (max-width: 500px) {
+    @media (max-width: ${({ theme }) => theme.fifthBreakpoint}) {
         font-size: 10px;
     }
 `

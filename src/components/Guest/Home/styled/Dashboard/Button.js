@@ -12,20 +12,20 @@ export default styled.button`
         border-radius: 10px;
         box-shadow: inset 0px -58px ${({ theme }) => theme.primaryColor};
     }
-    @media (max-width: 1200px) {
+    @media (max-width: ${({ theme }) => theme.firstBreakpoint}) {
         font-size: 20px;
     }
-    @media (max-width: 1000px) {
+    @media (max-width: ${({ theme }) => theme.secondBreakpoint}) {
         font-size: 18px;
     }
-    @media (max-width: 900px) {
+    @media (max-width: ${({ theme }) => theme.thirdBreakpoint}) {
         margin-top: 30px;
     }
-    @media (max-width: 750px) {
+    @media (max-width: ${({ theme }) => theme.fourthBreakpoint}) {
         font-size: 16px;
         padding: 13px 15px 8px 15px;
     }
-    @media (max-width: 500px) {
+    @media (max-width: ${({ theme }) => theme.fifthBreakpoint}) {
         font-size: 14px;
     }
     ${({ $fill }) =>

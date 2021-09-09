@@ -7,25 +7,17 @@ import Logo from 'assets/images/Logo.png'
 
 import Dashboard from './styled/Dashboard'
 
-const LoaderContainer = styled.section`
-    width: 100%;
-    height: 100%;
-    transition: background ease-in-out 0.3s;
+import { BlackLayer } from 'components/Shared/BlackLayer/BlackLayer'
+
+const LoaderContainer = styled(BlackLayer)`
     position: fixed;
     z-index: 2;
-    pointer-events: none;
-    ${({ $loading }) =>
-        $loading &&
-        css`
-            background: rgba(0, 0, 0, 0.1);
-            pointer-events: auto;
-        `}
 `
 
 const Loader = () => {
     const { loading } = hooks.useLoader()
     return (
-        <LoaderContainer $loading={loading}>
+        <LoaderContainer showLayer={loading}>
             <Dashboard.Logo src={Logo} $loading={loading} />
         </LoaderContainer>
     )

@@ -14,23 +14,9 @@ import RMComposed from 'components/Guest/Modals/RegistrationModal/composed'
 
 import utils from 'utils'
 
-const HelpSidebarContainer = styled.section`
-    width: 100%;
-    height: 100%;
-    transition: background ease-in-out 0.3s;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    position: fixed;
-    z-index: 1;
-    pointer-events: none;
-    ${({ showSidebar }) =>
-        showSidebar &&
-        css`
-            background: rgba(0, 0, 0, 0.5);
-            pointer-events: auto;
-        `}
-`
+import { BlackLayer } from 'components/Shared/BlackLayer/BlackLayer'
+
+const HelpSidebarContainer = styled(BlackLayer)``
 
 const HelpSidebar = ({ showSidebar, toggleSidebar, hideSidebar, showLoginModal }) => {
     const { token } = queryString.parse(useLocation().search)
@@ -115,7 +101,7 @@ const HelpSidebar = ({ showSidebar, toggleSidebar, hideSidebar, showLoginModal }
         }
     ]
     return (
-        <HelpSidebarContainer showSidebar={showSidebar}>
+        <HelpSidebarContainer showLayer={showSidebar}>
             <StyledHelpSidebar.Content showSidebar={showSidebar}>
                 <RMDashboard.CloseButton
                     onClick={() => {
@@ -127,6 +113,7 @@ const HelpSidebar = ({ showSidebar, toggleSidebar, hideSidebar, showLoginModal }
                 </RMDashboard.CloseButton>
                 {issues.map(({ issue, active, handleOnClick }) => (
                     <StyledHelpSidebar.Issue
+                        key={issue}
                         active={active}
                         onClick={() => {
                             utils.setApiFeedback('')
@@ -173,7 +160,7 @@ const HelpSidebar = ({ showSidebar, toggleSidebar, hideSidebar, showLoginModal }
                                 onChange={formHandler.handleInputValue}
                             />
                         )}
-                        <RMDashboard.Submit scaleIn>
+                        <RMDashboard.Submit>
                             {issue === 'email'
                                 ? 'Resend e-mail'
                                 : issue === 'link'

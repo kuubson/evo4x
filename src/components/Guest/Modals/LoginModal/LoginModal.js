@@ -53,7 +53,7 @@ const LoginModal = ({ showModal, toggleModal }) => {
         }
     }
     return (
-        <LoginModalContainer showModal={showModal}>
+        <LoginModalContainer showLayer={showModal}>
             <RMDashboard.Content showModal={showModal}>
                 <RMDashboard.CloseButton onClick={toggleModal}>✕</RMDashboard.CloseButton>
                 <RMDashboard.Header>"Get rich or die trying"</RMDashboard.Header>
@@ -78,7 +78,7 @@ const LoginModal = ({ showModal, toggleModal }) => {
                         error={passwordError}
                         onChange={formHandler.handleInputValue}
                     />
-                    <RMDashboard.Submit scaleIn>Login</RMDashboard.Submit>
+                    <RMDashboard.Submit>Login</RMDashboard.Submit>
                     <ApiFeedback />
                 </RMDashboard.Form>
             </RMDashboard.Content>
