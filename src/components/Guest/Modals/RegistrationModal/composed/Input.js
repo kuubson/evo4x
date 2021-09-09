@@ -10,13 +10,13 @@ const InputContainer = styled.div`
     }
 `
 
-const Input = ({ id, type, label, value, placeholder, error, onChange }) => {
+const Input = ({ id, name, type, label, value, placeholder, error, onChange }) => {
     return (
         <InputContainer>
             <Dashboard.Label htmlFor={id}>{label}</Dashboard.Label>
             <Dashboard.Input
                 id={id}
-                name={id}
+                name={name}
                 type={type}
                 value={value}
                 placeholder={placeholder}

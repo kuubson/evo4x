@@ -3,15 +3,19 @@ import styled from 'styled-components/macro'
 
 import hooks from 'hooks'
 
-import { RegistrationModalContainer } from 'components/Guest/Modals/RegistrationModal/RegistrationModal'
+import ApiFeedback from 'components/Shared/ApiFeedback/ApiFeedback'
 
 import RMDashboard from 'components/Guest/Modals/RegistrationModal/styled/Dashboard'
 
 import RMComposed from 'components/Guest/Modals/RegistrationModal/composed'
 
+import utils from 'utils'
+
+import { RegistrationModalContainer } from 'components/Guest/Modals/RegistrationModal/RegistrationModal'
+
 const LoginModalContainer = styled(RegistrationModalContainer)``
 
-const LoginModal = ({ showModal, onClose }) => {
+const LoginModal = ({ showModal, toggleModal }) => {
     const [form, setForm] = useState({
         email: '',
         emailError: '',
@@ -31,20 +35,32 @@ const LoginModal = ({ showModal, onClose }) => {
         if (!formHandler.validatePassword(password, undefined, true)) validated = false
         return validated
     }
-    const login = e => {
+    const login = async e => {
         e.preventDefault()
         if (validate()) {
-            alert('Logged')
+            try {
+                const url = '/api/user/login'
+                const response = await utils.axios.post(url, {
+                    email,
+                    password
+                })
+                if (response) {
+                    utils.redirectTo('/user/profile')
+                }
+            } catch (error) {
+                utils.handleApiValidation(error, setForm)
+            }
         }
     }
     return (
         <LoginModalContainer showModal={showModal}>
             <RMDashboard.Content showModal={showModal}>
-                <RMDashboard.CloseButton onClick={onClose}>✕</RMDashboard.CloseButton>
+                <RMDashboard.CloseButton onClick={toggleModal}>✕</RMDashboard.CloseButton>
                 <RMDashboard.Header>"Get rich or die trying"</RMDashboard.Header>
                 <RMDashboard.Form onSubmit={login} noValidate>
                     <RMComposed.Input
                         id="loginEmail"
+                        name="email"
                         type="email"
                         label="Email address"
                         value={email}
@@ -54,6 +70,7 @@ const LoginModal = ({ showModal, onClose }) => {
                     />
                     <RMComposed.Input
                         id="loginPassword"
+                        name="password"
                         type="password"
                         label="Password"
                         value={password}
@@ -62,6 +79,7 @@ const LoginModal = ({ showModal, onClose }) => {
                         onChange={formHandler.handleInputValue}
                     />
                     <RMDashboard.Submit scaleIn>Login</RMDashboard.Submit>
+                    <ApiFeedback />
                 </RMDashboard.Form>
             </RMDashboard.Content>
         </LoginModalContainer>

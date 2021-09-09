@@ -90,7 +90,7 @@ const useFormHandler = setForm => {
         switch (true) {
             case !repeatedPassword:
                 validated = false
-                handleInputError('repeatedPassword', 'You have to type password twice')
+                handleInputError('repeatedPassword', 'Type password twice')
                 break
             case repeatedPassword !== password:
                 validated = false

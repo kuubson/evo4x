@@ -7,7 +7,7 @@ import Input from './Input'
 import Error from './Error'
 import Submit from './Submit'
 
-const RegistrationModal = {
+const Dashboard = {
     Content,
     CloseButton,
     Header,
@@ -18,4 +18,4 @@ const RegistrationModal = {
     Submit
 }
 
-export default RegistrationModal
+export default Dashboard

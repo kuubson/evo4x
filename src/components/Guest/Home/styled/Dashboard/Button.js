@@ -28,8 +28,8 @@ export default styled.button`
     @media (max-width: 500px) {
         font-size: 14px;
     }
-    ${({ fill }) =>
-        fill &&
+    ${({ $fill }) =>
+        $fill &&
         css`
             border-radius: 10px;
             box-shadow: inset 0px -58px ${({ theme }) => theme.primaryColor};
