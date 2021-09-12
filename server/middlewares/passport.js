@@ -5,7 +5,7 @@ import { User } from '@database'
 const JwtStrategy = passportJwt.Strategy
 const ExtractJwt = passportJwt.ExtractJwt
 
-export default passport => {
+const passport = passport => {
     const extractJwtFromCookies = ({ cookies }) => cookies.token
     passport.use(
         new JwtStrategy(
@@ -33,3 +33,5 @@ export default passport => {
         )
     )
 }
+
+export default passport

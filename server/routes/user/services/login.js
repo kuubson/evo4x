@@ -5,7 +5,7 @@ import { Connection, User, Authentication } from '@database'
 
 import utils from '@utils'
 
-export default async (req, res, next) => {
+const login = async (req, res, next) => {
     try {
         await Connection.transaction(async transaction => {
             const { email, password } = req.body
@@ -30,7 +30,7 @@ export default async (req, res, next) => {
                 secure: process.env.NODE_ENV === 'production',
                 httpOnly: true,
                 sameSite: true,
-                maxAge: utils.cookieMaxAge()
+                maxAge: utils.cookie.maxAge
             }).send()
         })
     } catch (error) {
@@ -42,3 +42,5 @@ export const validation = () => [
     utils.validator.validateEmail(),
     utils.validator.validatePassword(true)
 ]
+
+export default login

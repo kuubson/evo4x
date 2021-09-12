@@ -30,7 +30,7 @@ const init = app => {
                 secure: process.env.NODE_ENV === 'production',
                 httpOnly: true,
                 sameSite: true,
-                maxAge: utils.cookieMaxAge()
+                maxAge: utils.cookie.maxAge
             }
         })
     )
@@ -38,7 +38,7 @@ const init = app => {
         res.cookie('XSRF-TOKEN', req.csrfToken(), {
             secure: process.env.NODE_ENV === 'production',
             sameSite: true,
-            maxAge: utils.cookieMaxAge()
+            maxAge: utils.cookie.maxAge
         })
         next()
     })

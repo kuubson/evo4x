@@ -69,7 +69,7 @@ const validateRepeatedPassword = () =>
             return repeatedPassword
         })
 
-export default {
+const validator = {
     validateProperty,
     validateInteger,
     validateBoolean,
@@ -78,3 +78,5 @@ export default {
     validatePassword,
     validateRepeatedPassword
 }
+
+export default validator

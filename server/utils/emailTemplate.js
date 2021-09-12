@@ -1,4 +1,4 @@
-export default (header, content, buttontText, href) => `
+const emailTemplate = (header, content, buttontText, href) => `
     <table
         cellpadding="20"
         cellspacing="0"
@@ -63,3 +63,5 @@ export default (header, content, buttontText, href) => `
         </tr>
     </table>
 `
+
+export default emailTemplate

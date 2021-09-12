@@ -3,21 +3,21 @@ import ApiError from './ApiError'
 import handleError from './handleError'
 import baseUrl from './baseUrl'
 import transporter from './transporter'
+import cookie from './cookie'
 import emailTemplate from './emailTemplate'
-import cookieMaxAge from './cookieMaxAge'
 import validator from './validator'
 import checkSanitization from './checkSanitization'
-import getCookie from './getCookie'
 
-export default {
+const utils = {
     Op,
     ApiError,
     handleError,
     baseUrl,
     transporter,
+    cookie,
     emailTemplate,
-    cookieMaxAge,
     validator,
-    checkSanitization,
-    getCookie
+    checkSanitization
 }
+
+export default utils

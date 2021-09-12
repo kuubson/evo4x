@@ -1,4 +1,4 @@
-export default (res, error) => {
+const handleError = (res, error) => {
     if (process.env.NODE_ENV !== 'production') {
         console.log(error)
     }
@@ -21,3 +21,5 @@ export default (res, error) => {
         error: apiError
     })
 }
+
+export default handleError
