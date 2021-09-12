@@ -4,7 +4,7 @@ export default styled.dialog`
     width: 50%;
     min-height: 70%;
     background: ${({ theme }) => theme.primaryColor};
-    padding: 40px;
+    padding: 40px 0px;
     border-radius: 10px;
     transition: width ease-in-out 0.3s, height ease-in-out 0.3s, border-radius ease-in-out 0.3s,
         transform ease-in-out 0.6s, top ease-in-out 0.6s;

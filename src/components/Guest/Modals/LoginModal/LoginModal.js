@@ -5,15 +5,14 @@ import hooks from 'hooks'
 
 import ApiFeedback from 'components/Shared/ApiFeedback/ApiFeedback'
 
+import sharedStyled from 'components/Shared/styled'
 import RMDashboard from 'components/Guest/Modals/RegistrationModal/styled/Dashboard'
 
 import RMComposed from 'components/Guest/Modals/RegistrationModal/composed'
 
 import utils from 'utils'
 
-import { RegistrationModalContainer } from 'components/Guest/Modals/RegistrationModal/RegistrationModal'
-
-const LoginModalContainer = styled(RegistrationModalContainer)``
+const LoginModalContainer = styled(sharedStyled.BlackLayer)``
 
 const LoginModal = ({ showModal, toggleModal }) => {
     const [form, setForm] = useState({
@@ -45,7 +44,7 @@ const LoginModal = ({ showModal, toggleModal }) => {
                     password
                 })
                 if (response) {
-                    utils.redirectTo('/user/profile')
+                    utils.history.push('/user/profile')
                 }
             } catch (error) {
                 utils.handleApiValidation(error, setForm)

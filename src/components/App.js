@@ -19,6 +19,11 @@ const App = () => {
         },
         {
             id: 2,
+            pathname: '/user/profile',
+            render: () => <div>User Profile</div>
+        },
+        {
+            id: 3,
             pathname: '*',
             render: () => <Redirect to="/" />
         }

@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components/macro'
 
-import { Button } from 'components/Shared/Button/Button'
+import sharedStyled from 'components/Shared/styled'
 
-export default styled(Button)`
+export default styled(sharedStyled.Button)`
     max-height: 0px;
     margin: 0px auto;
     padding: 0px;

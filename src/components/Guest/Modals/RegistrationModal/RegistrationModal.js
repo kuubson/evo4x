@@ -1,19 +1,18 @@
 import React, { useState } from 'react'
-import styled, { css } from 'styled-components/macro'
+import styled from 'styled-components/macro'
 
 import hooks from 'hooks'
 
 import ApiFeedback from 'components/Shared/ApiFeedback/ApiFeedback'
 
+import sharedStyled from 'components/Shared/styled'
 import Dashboard from './styled/Dashboard'
 
 import Composed from './composed'
 
 import utils from 'utils'
 
-import { BlackLayer } from 'components/Shared/BlackLayer/BlackLayer'
-
-export const RegistrationModalContainer = styled(BlackLayer)``
+const RegistrationModalContainer = styled(sharedStyled.BlackLayer)``
 
 const RegistrationModal = ({ showModal, toggleModal }) => {
     const [form, setForm] = useState({

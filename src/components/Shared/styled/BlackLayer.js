@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components/macro'
 
-export const BlackLayer = styled.section`
+export default styled.section`
     width: 100%;
     height: 100%;
     transition: background ease-in-out 0.3s;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
 import styled from 'styled-components/macro'
+import { useParams } from 'react-router-dom'
 
 import Logo from 'assets/images/Logo.png'
 

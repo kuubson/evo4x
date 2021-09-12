@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro'
 
-export const Button = styled.button`
+export default styled.button`
     background: black;
     color: white;
     font-size: 14px;

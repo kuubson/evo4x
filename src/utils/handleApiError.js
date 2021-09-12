@@ -8,7 +8,7 @@ const handleApiError = error => {
         const status = error.response.status
         const { error: apiError } = error.response.data
         if (status === 401 || status === 403) {
-            return utils.redirectTo('/')
+            return utils.history.push('/')
         }
         if (!apiError) {
             return utils.setApiFeedback('The connection could not be established with the server')
@@ -18,7 +18,7 @@ const handleApiError = error => {
     if (error.request) {
         return utils.setApiFeedback('The server cannot temporarily process your request')
     }
-    utils.setApiFeedback('An unexpected problem has occurred in the application')
+    utils.setApiFeedback('The app has encountered an unexpected error')
 }
 
 export default handleApiError

@@ -1,15 +1,14 @@
 import React from 'react'
-import styled, { css } from 'styled-components/macro'
+import styled from 'styled-components/macro'
 
 import hooks from 'hooks'
 
 import Logo from 'assets/images/Logo.png'
 
+import sharedStyled from 'components/Shared/styled'
 import Dashboard from './styled/Dashboard'
 
-import { BlackLayer } from 'components/Shared/BlackLayer/BlackLayer'
-
-const LoaderContainer = styled(BlackLayer)`
+const LoaderContainer = styled(sharedStyled.BlackLayer)`
     position: fixed;
     z-index: 2;
 `

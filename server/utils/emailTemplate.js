@@ -4,7 +4,7 @@ export default (header, content, buttontText, href) => `
         cellspacing="0"
         align="center"
         border="0"
-        style="width: 100%; background: #0088ff; padding: 15px;"
+        style="width: 100%; background: #ffff00; padding: 15px;"
     >   
         <tr>
             <td align="center">

@@ -3,7 +3,7 @@ import setLoading from './setLoading'
 import handleApiError from './handleApiError'
 import handleApiValidation from './handleApiValidation'
 import setApiFeedback from './setApiFeedback'
-import redirectTo from './redirectTo'
+import history from './history'
 
 const utils = {
     axios,
@@ -11,7 +11,7 @@ const utils = {
     handleApiError,
     handleApiValidation,
     setApiFeedback,
-    redirectTo
+    history
 }
 
 export default utils

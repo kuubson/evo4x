@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
+import styled from 'styled-components/macro'
 import { useLocation } from 'react-router'
 import queryString from 'query-string'
-import styled, { css } from 'styled-components/macro'
 
 import hooks from 'hooks'
 
 import ApiFeedback from 'components/Shared/ApiFeedback/ApiFeedback'
 
+import sharedStyled from 'components/Shared/styled'
 import RMDashboard from 'components/Guest/Modals/RegistrationModal/styled/Dashboard'
 import StyledHelpSidebar from '../styled/HelpSidebar'
 
@@ -14,9 +15,7 @@ import RMComposed from 'components/Guest/Modals/RegistrationModal/composed'
 
 import utils from 'utils'
 
-import { BlackLayer } from 'components/Shared/BlackLayer/BlackLayer'
-
-const HelpSidebarContainer = styled(BlackLayer)``
+const HelpSidebarContainer = styled(sharedStyled.BlackLayer)``
 
 const HelpSidebar = ({ showSidebar, toggleSidebar, hideSidebar, showLoginModal }) => {
     const { token } = queryString.parse(useLocation().search)
