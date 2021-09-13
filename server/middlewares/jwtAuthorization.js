@@ -11,7 +11,7 @@ const jwtAuthorization = (req, res, next) => {
                 })
                 .status(401)
                 .send({
-                    error: 'The authentication cookie is invalid, log in again'
+                    error: 'Authentication has failed. Please login again'
                 })
         }
         req.user = user

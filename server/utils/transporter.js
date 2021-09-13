@@ -18,7 +18,7 @@ transporter.verify((error, success) => {
         })
     }
     if (success) {
-        console.log('The connection with evo4x email has been successfully established')
+        console.log('The connection with evo4x email has been established')
     }
 })
 

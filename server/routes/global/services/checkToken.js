@@ -23,14 +23,11 @@ const checkToken = async (req, res, next) => {
                 if (error) {
                     if (error.message.includes('expired')) {
                         throw new utils.ApiError(
-                            'The authentication cookie has expired, log in again',
+                            'The authentication cookie has expired. Please login again',
                             401
                         )
                     }
-                    throw new utils.ApiError(
-                        'The authentication cookie is invalid, log in again',
-                        401
-                    )
+                    throw new utils.ApiError('Authentication has failed. Please login again', 401)
                 }
                 if (data.role === 'user') {
                     const user = await User.findOne({
@@ -41,7 +38,7 @@ const checkToken = async (req, res, next) => {
                     })
                     if (!user) {
                         throw new utils.ApiError(
-                            'The authentication cookie is invalid, log in again',
+                            'Authentication has failed. Please login again',
                             401
                         )
                     }
@@ -49,10 +46,7 @@ const checkToken = async (req, res, next) => {
                         role: 'user'
                     })
                 } else {
-                    throw new utils.ApiError(
-                        'The authentication cookie is invalid, log in again',
-                        401
-                    )
+                    throw new utils.ApiError('Authentication has failed. Please login again', 401)
                 }
             } catch (error) {
                 next(error)

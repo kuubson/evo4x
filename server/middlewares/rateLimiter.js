@@ -7,7 +7,7 @@ const rateLimiter = request => {
         handler: (_, res) => {
             const status = 429
             res.status(status).send({
-                error: `You have exceeded ${request} requests. Try again later`,
+                error: `You have exceeded the number of ${request} requests. Try again later`,
                 status
             })
         }

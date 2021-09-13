@@ -13,19 +13,24 @@ const changePassword = async (req, res, next) => {
                 try {
                     if (error) {
                         if (error.message.includes('expired')) {
-                            throw new utils.ApiError('The password reset link has expired', 400)
+                            throw new utils.ApiError(
+                                'The link to change your password has expired',
+                                400
+                            )
                         }
-                        throw new utils.ApiError('The password reset link is invalid', 400)
+                        throw new utils.ApiError('The link to change your password is invalid', 400)
                     }
                     const user = await User.findOne({
                         where: {
                             email: data.email,
                             passwordToken
-                        },
-                        transaction
+                        }
                     })
                     if (!user) {
-                        throw new utils.ApiError('The password reset link is invalid', 404)
+                        throw new utils.ApiError(
+                            'The link to change your password is incorrect',
+                            404
+                        )
                     }
                     await user.update(
                         {
@@ -37,7 +42,7 @@ const changePassword = async (req, res, next) => {
                         }
                     )
                     res.send({
-                        feedback: 'Your password has been successfully changed, you can login now'
+                        feedback: 'Your password has been changed. You can login now'
                     })
                 } catch (error) {
                     next(error)

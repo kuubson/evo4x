@@ -13,18 +13,23 @@ const authenticateEmail = async (req, res, next) => {
                     const authentication = await Authentication.findOne({
                         where: {
                             token
-                        },
-                        transaction
+                        }
                     })
                     if (error || !authentication) {
                         if (authentication && error.message.includes('expired')) {
-                            throw new utils.ApiError('The activation link has expired', 400)
+                            throw new utils.ApiError(
+                                'The link to authenticate your email address has expired',
+                                400
+                            )
                         }
-                        throw new utils.ApiError('The activation link is invalid', 400)
+                        throw new utils.ApiError(
+                            'The link to authenticate your email address is invalid',
+                            400
+                        )
                     }
                     if (authentication.authenticated) {
                         throw new utils.ApiError(
-                            'An account assigned to email address provided is already authenticated',
+                            'The email address provided is already authenticated',
                             400
                         )
                     }
@@ -37,8 +42,7 @@ const authenticateEmail = async (req, res, next) => {
                         }
                     )
                     res.send({
-                        feedback:
-                            'Your email address has been successfully authenticated, you can login now'
+                        feedback: 'Your email address has been authenticated. You can login now'
                     })
                 } catch (error) {
                     next(error)

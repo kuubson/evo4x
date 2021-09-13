@@ -28,4 +28,4 @@ app.get('*', (_, res) => res.sendFile(path.resolve(__dirname, buildPath, 'index.
 
 const port = process.env.PORT || 3001
 
-server.listen(port, () => console.log(`The server has been successfully started on port ${port}`))
+server.listen(port, () => console.log(`The server has been started on port ${port}`))

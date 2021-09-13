@@ -10,6 +10,7 @@ const ApiFeedbackContainer = styled(sharedStyled.Button)`
     margin: 40px auto 0px auto;
     padding: 10px;
     border-radius: 0px;
+    cursor: initial;
     @media (max-width: ${({ theme }) => theme.firstBreakpoint}) {
         max-width: 100%;
     }
@@ -23,7 +24,7 @@ const ApiFeedbackContainer = styled(sharedStyled.Button)`
 
 const ApiFeedback = () => {
     const { apiFeedback } = hooks.useApiFeedback()
-    return apiFeedback ? <ApiFeedbackContainer>{apiFeedback}</ApiFeedbackContainer> : null
+    return apiFeedback ? <ApiFeedbackContainer as="p">{apiFeedback}</ApiFeedbackContainer> : null
 }
 
 export default ApiFeedback

@@ -12,7 +12,7 @@ const emailTemplate = (header, content, buttontText, href) => `
                 style="
                     margin: 0px;
                     font-size: 16px;
-                    color: white;
+                    color: black;
                     text-transform: uppercase;
                     font-weight: 600;
                     font-family: cursive;
@@ -29,7 +29,7 @@ const emailTemplate = (header, content, buttontText, href) => `
                 style="
                     margin: 0px;
                     font-size: 15px;
-                    color: white;
+                    color: black;
                     font-family: cursive;
                     letter-spacing: 1px;
                 "
@@ -46,9 +46,9 @@ const emailTemplate = (header, content, buttontText, href) => `
                     width: 180px;
                     display: block;
                     padding: 18px;
-                    color: white;
+                    color: black;
                     background: none;
-                    border: 2px solid white;
+                    border: 2px solid black;
                     border-radius: 20px;
                     font-family: cursive;
                     letter-spacing: 1px;

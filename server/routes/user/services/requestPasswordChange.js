@@ -4,7 +4,7 @@ import { Connection, User, Authentication } from '@database'
 
 import utils from '@utils'
 
-const resetPassword = async (req, res, next) => {
+const requestPasswordChange = async (req, res, next) => {
     try {
         await Connection.transaction(async transaction => {
             const { email } = req.body
@@ -12,15 +12,14 @@ const resetPassword = async (req, res, next) => {
                 where: {
                     email
                 },
-                include: [Authentication],
-                transaction
+                include: [Authentication]
             })
             if (!user || !user.authentication) {
-                throw new utils.ApiError('The email address provided is invalid', 404)
+                throw new utils.ApiError('The email address provided is incorrect', 404)
             }
             if (!user.authentication.authenticated) {
                 throw new utils.ApiError(
-                    'An account assigned to email address provided must be firstly authenticated',
+                    'The email address provided must first be authenticated',
                     409
                 )
             }
@@ -36,9 +35,9 @@ const resetPassword = async (req, res, next) => {
             const mailOptions = {
                 from: `"evo4x app" <${process.env.NODEMAILER_USERNAME}>`,
                 to: email,
-                subject: 'Password reset in the evo4x app',
+                subject: 'Password changing in the evo4x app',
                 html: utils.emailTemplate(
-                    'Password reset in the evo4x app',
+                    'Password changing in the evo4x app',
                     `To change your password click the button`,
                     'Change password',
                     `${utils.baseUrl(req)}/?token=${passwordToken}`
@@ -48,13 +47,13 @@ const resetPassword = async (req, res, next) => {
                 try {
                     if (error || !info) {
                         throw new utils.ApiError(
-                            'There was a problem when sending an e-mail with a password reset link for your account',
+                            'There was a problem sending an e-mail with a link to change your password',
                             502
                         )
                     }
                     res.send({
                         feedback:
-                            'An e-mail with an password reset link for your account has been sent'
+                            'An e-mail with a link to change your password has been sent to you'
                     })
                 } catch (error) {
                     next(error)
@@ -68,4 +67,4 @@ const resetPassword = async (req, res, next) => {
 
 export const validation = () => [utils.validator.validateEmail()]
 
-export default resetPassword
+export default requestPasswordChange

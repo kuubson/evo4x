@@ -12,19 +12,15 @@ const resendEmail = async (req, res, next) => {
                 where: {
                     email
                 },
-                include: [Authentication],
-                transaction
+                include: [Authentication]
             })
             if (!user || !user.authentication) {
-                throw new utils.ApiError('The email address provided is invalid', 404)
+                throw new utils.ApiError('The email address provided is incorrect', 404)
             }
             if (user.authentication.authenticated) {
-                throw new utils.ApiError(
-                    'An account assigned to email address provided is already authenticated',
-                    409
-                )
+                throw new utils.ApiError('The email address provided is already authenticated', 409)
             }
-            const token = jwt.sign({ email }, process.env.JWT_KEY, { expiresIn: '24h' })
+            const token = jwt.sign({ email }, process.env.JWT_KEY, { expiresIn: '2h' })
             await user.authentication.update(
                 {
                     token
@@ -36,11 +32,11 @@ const resendEmail = async (req, res, next) => {
             const mailOptions = {
                 from: `"evo4x app" <${process.env.NODEMAILER_USERNAME}>`,
                 to: email,
-                subject: 'Account activation in the evo4x app',
+                subject: 'Email address authentication in the evo4x app',
                 html: utils.emailTemplate(
-                    'Account activation in the evo4x app',
-                    `To activate your account click the button`,
-                    'Activate account',
+                    'Email address authentication in the evo4x app',
+                    `To authenticate your email address click the button`,
+                    'Authenticate email address',
                     `${utils.baseUrl(req)}/${token}`
                 )
             }
@@ -48,13 +44,13 @@ const resendEmail = async (req, res, next) => {
                 try {
                     if (error || !info) {
                         throw new utils.ApiError(
-                            'There was a problem when sending an e-mail with an activation link for your account',
+                            'There was a problem resending an e-mail with a link to authenticate your email address',
                             502
                         )
                     }
                     res.send({
                         feedback:
-                            'An e-mail with an activation link for your account has been resent'
+                            'An e-mail with a link to authenticate your email address has been resent to you'
                     })
                 } catch (error) {
                     next(error)

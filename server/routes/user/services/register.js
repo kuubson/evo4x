@@ -11,13 +11,12 @@ const register = async (req, res, next) => {
             const user = await User.findOne({
                 where: {
                     email
-                },
-                transaction
+                }
             })
             if (user) {
-                throw new utils.ApiError('User with email address provided already exists', 409)
+                throw new utils.ApiError('The email address provided is already taken', 409)
             }
-            const token = jwt.sign({ email }, process.env.JWT_KEY, { expiresIn: '24h' })
+            const token = jwt.sign({ email }, process.env.JWT_KEY, { expiresIn: '2h' })
             await User.create(
                 {
                     name,
@@ -35,11 +34,11 @@ const register = async (req, res, next) => {
             const mailOptions = {
                 from: `"evo4x app" <${process.env.NODEMAILER_USERNAME}>`,
                 to: email,
-                subject: 'Account activation in the evo4x app',
+                subject: 'Email address authentication in the evo4x app',
                 html: utils.emailTemplate(
-                    'Account activation in the evo4x app',
-                    `To activate your account click the button`,
-                    'Activate account',
+                    'Email address authentication in the evo4x app',
+                    `To authenticate your email address click the button`,
+                    'Authenticate email address',
                     `${utils.baseUrl(req)}/${token}`
                 )
             }
@@ -47,13 +46,13 @@ const register = async (req, res, next) => {
                 try {
                     if (error || !info) {
                         throw new utils.ApiError(
-                            'There was a problem when sending an e-mail with an activation link for your account',
+                            'There was a problem sending an e-mail with a link to authenticate your email address',
                             502
                         )
                     }
                     res.send({
                         feedback:
-                            'An e-mail with an activation link has been sent to the email address provided. Open it and activate your account'
+                            'An e-mail with a link to authenticate your email address has been sent to you'
                     })
                 } catch (error) {
                     next(error)

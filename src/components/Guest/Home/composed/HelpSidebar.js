@@ -21,7 +21,7 @@ const HelpSidebar = ({ showSidebar, toggleSidebar, hideSidebar, showLoginModal }
     const { token } = queryString.parse(useLocation().search)
     useEffect(() => {
         if (token) {
-            setIssue('resetPassword')
+            setIssue('changePassword')
             toggleSidebar()
         }
     }, [])
@@ -45,7 +45,7 @@ const HelpSidebar = ({ showSidebar, toggleSidebar, hideSidebar, showLoginModal }
             passwordError: '',
             repeatedPasswordError: ''
         }))
-        if (issue === 'resetPassword') {
+        if (issue === 'changePassword') {
             if (!formHandler.validatePassword(password)) validated = false
             if (!formHandler.validateRepeatedPassword(repeatedPassword, password)) validated = false
         } else {
@@ -57,7 +57,7 @@ const HelpSidebar = ({ showSidebar, toggleSidebar, hideSidebar, showLoginModal }
         e.preventDefault()
         if (validate()) {
             try {
-                if (issue === 'resetPassword') {
+                if (issue === 'changePassword') {
                     const url = '/api/user/changePassword'
                     const response = await utils.axios.post(url, {
                         password,
@@ -71,7 +71,7 @@ const HelpSidebar = ({ showSidebar, toggleSidebar, hideSidebar, showLoginModal }
                     }
                 } else {
                     const url = `/api/user/${
-                        issue === 'password' ? 'resetPassword' : 'resendEmail'
+                        issue === 'password' ? 'requestPasswordChange' : 'resendEmail'
                     }`
                     await utils.axios.post(url, {
                         email
@@ -84,18 +84,18 @@ const HelpSidebar = ({ showSidebar, toggleSidebar, hideSidebar, showLoginModal }
     }
     const issues = [
         {
-            issue: 'Have not receieved any e-mail?',
+            issue: 'Have not you receieved any e-mail?',
             active: issue === 'email',
             handleOnClick: () => setIssue('email')
         },
         {
-            issue: 'Activation link has expired?',
+            issue: 'Has the link to authenticate your email address expired?',
             active: issue === 'link',
             handleOnClick: () => setIssue('link')
         },
         {
-            issue: 'Forgot password?',
-            active: issue === 'password' || issue === 'resetPassword',
+            issue: 'Did you forget the password?',
+            active: issue === 'password' || issue === 'changePassword',
             handleOnClick: () => setIssue('password')
         }
     ]
@@ -124,7 +124,7 @@ const HelpSidebar = ({ showSidebar, toggleSidebar, hideSidebar, showLoginModal }
                 ))}
                 {issue && (
                     <StyledHelpSidebar.Form onSubmit={handleHelpSidebar} noValidate>
-                        {issue === 'resetPassword' ? (
+                        {issue === 'changePassword' ? (
                             <>
                                 <RMComposed.Input
                                     id="helpSidebarPassword"
@@ -166,7 +166,7 @@ const HelpSidebar = ({ showSidebar, toggleSidebar, hideSidebar, showLoginModal }
                                 ? 'Resend link'
                                 : issue === 'password'
                                 ? 'Reset password'
-                                : issue === 'resetPassword' && 'Change password'}
+                                : issue === 'changePassword' && 'Change password'}
                         </RMDashboard.Submit>
                         <ApiFeedback />
                     </StyledHelpSidebar.Form>

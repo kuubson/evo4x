@@ -16,7 +16,7 @@ router.post(
 
 router.post(
     '/authenticateEmail',
-    middlewares.rateLimiter('email authentication'),
+    middlewares.rateLimiter('email address authentication'),
     Services.authenticateEmail.validation(),
     middlewares.checkValidation,
     Services.authenticateEmail.default
@@ -24,7 +24,7 @@ router.post(
 
 router.post(
     '/resendEmail',
-    middlewares.rateLimiter('resending email'),
+    middlewares.rateLimiter('e-mail resend'),
     Services.resendEmail.validation(),
     middlewares.checkValidation,
     Services.resendEmail.default
@@ -39,24 +39,16 @@ router.post(
 )
 
 router.post(
-    '/resetPassword',
-    middlewares.rateLimiter('reseting password'),
-    Services.resetPassword.validation(),
+    '/requestPasswordChange',
+    middlewares.rateLimiter('password change'),
+    Services.requestPasswordChange.validation(),
     middlewares.checkValidation,
-    Services.resetPassword.default
-)
-
-router.post(
-    '/checkPasswordToken',
-    middlewares.rateLimiter('reseting password'),
-    Services.checkPasswordToken.validation(),
-    middlewares.checkValidation,
-    Services.checkPasswordToken.default
+    Services.requestPasswordChange.default
 )
 
 router.post(
     '/changePassword',
-    middlewares.rateLimiter('changing password'),
+    middlewares.rateLimiter('password change'),
     Services.changePassword.validation(),
     middlewares.checkValidation,
     Services.changePassword.default
