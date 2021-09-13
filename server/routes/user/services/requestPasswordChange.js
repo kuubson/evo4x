@@ -40,7 +40,7 @@ const requestPasswordChange = async (req, res, next) => {
                     'Password changing in the evo4x app',
                     `To change your password click the button`,
                     'Change password',
-                    `${utils.baseUrl(req)}/?token=${passwordToken}`
+                    `${utils.baseUrl(req)}/?passwordToken=${passwordToken}`
                 )
             }
             utils.transporter.sendMail(mailOptions, (error, info) => {

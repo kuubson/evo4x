@@ -8,7 +8,8 @@ const handleApiError = error => {
         const status = error.response.status
         const { error: apiError } = error.response.data
         if (status === 401 || status === 403) {
-            return utils.history.push('/')
+            utils.setRole('guest')
+            utils.history.push('/?failedAuthentication=true')
         }
         if (!apiError) {
             return utils.setApiFeedback('The connection could not be established with the server')

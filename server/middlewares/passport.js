@@ -13,8 +13,7 @@ const passport = passport => {
                 jwtFromRequest: ExtractJwt.fromExtractors([extractJwtFromCookies]),
                 secretOrKey: process.env.JWT_KEY
             },
-            async (data, done) => {
-                const { email, role } = data
+            async ({ role, email }, done) => {
                 if (role === 'user') {
                     const user = await User.findOne({
                         where: {
@@ -23,8 +22,8 @@ const passport = passport => {
                     })
                     return user
                         ? done(false, {
-                              user,
-                              role
+                              role,
+                              user
                           })
                         : done(false, {})
                 }

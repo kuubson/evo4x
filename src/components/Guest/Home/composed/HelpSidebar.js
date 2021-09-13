@@ -18,11 +18,14 @@ import utils from 'utils'
 const HelpSidebarContainer = styled(sharedStyled.BlackLayer)``
 
 const HelpSidebar = ({ showSidebar, toggleSidebar, hideSidebar, showLoginModal }) => {
-    const { token } = queryString.parse(useLocation().search)
+    const { passwordToken, failedAuthentication } = queryString.parse(useLocation().search)
     useEffect(() => {
-        if (token) {
+        if (passwordToken) {
             setIssue('changePassword')
             toggleSidebar()
+        }
+        if (failedAuthentication) {
+            showLoginModal()
         }
     }, [])
     const [issue, setIssue] = useState('')
@@ -62,7 +65,7 @@ const HelpSidebar = ({ showSidebar, toggleSidebar, hideSidebar, showLoginModal }
                     const response = await utils.axios.post(url, {
                         password,
                         repeatedPassword,
-                        passwordToken: token
+                        passwordToken
                     })
                     if (response) {
                         setIssue('')
@@ -165,7 +168,7 @@ const HelpSidebar = ({ showSidebar, toggleSidebar, hideSidebar, showLoginModal }
                                 : issue === 'link'
                                 ? 'Resend link'
                                 : issue === 'password'
-                                ? 'Reset password'
+                                ? 'Request password change'
                                 : issue === 'changePassword' && 'Change password'}
                         </RMDashboard.Submit>
                         <ApiFeedback />

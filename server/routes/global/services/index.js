@@ -1,7 +1,7 @@
-import * as checkToken from './checkToken'
+import * as checkRole from './checkRole'
 import * as logout from './logout'
 
 export default {
-    checkToken,
+    checkRole,
     logout
 }

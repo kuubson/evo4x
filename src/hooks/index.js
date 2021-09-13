@@ -1,11 +1,13 @@
 import useLoader from './useLoader'
-import useFormHandler from './useFormHandler'
 import useApiFeedback from './useApiFeedback'
+import useRole from './useRole'
+import useFormHandler from './useFormHandler'
 
 const hooks = {
     useLoader,
-    useFormHandler,
-    useApiFeedback
+    useApiFeedback,
+    useRole,
+    useFormHandler
 }
 
 export default hooks

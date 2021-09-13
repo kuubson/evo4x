@@ -1,7 +1,7 @@
 import passport from 'passport'
 
 const jwtAuthorization = (req, res, next) => {
-    passport.authenticate('jwt', { session: false }, (error, { user, role }) => {
+    passport.authenticate('jwt', { session: false }, (error, { role, user }) => {
         if (error || !user || role !== req.originalUrl.split('/')[2]) {
             return res
                 .clearCookie('token', {

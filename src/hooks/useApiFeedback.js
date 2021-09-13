@@ -1,10 +1,10 @@
 import { useSelector } from 'react-redux'
 
-const useLoader = () => {
+const useApiFeedback = () => {
     const { apiFeedback } = useSelector(state => state.apiFeedback)
     return {
         apiFeedback
     }
 }
 
-export default useLoader
+export default useApiFeedback

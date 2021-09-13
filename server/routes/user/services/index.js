@@ -4,6 +4,7 @@ import * as resendEmail from './resendEmail'
 import * as login from './login'
 import * as requestPasswordChange from './requestPasswordChange'
 import * as changePassword from './changePassword'
+import * as getProfile from './getProfile'
 
 export default {
     register,
@@ -11,5 +12,6 @@ export default {
     resendEmail,
     login,
     requestPasswordChange,
-    changePassword
+    changePassword,
+    getProfile
 }

@@ -7,10 +7,10 @@ import Services from './services'
 const router = Router()
 
 router.get(
-    '/checkToken',
-    Services.checkToken.validation(),
+    '/checkRole',
+    Services.checkRole.validation(),
     middlewares.checkValidation,
-    Services.checkToken.default
+    Services.checkRole.default
 )
 
 router.get('/logout', Services.logout.default)

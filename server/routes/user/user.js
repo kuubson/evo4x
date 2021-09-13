@@ -54,4 +54,6 @@ router.post(
     Services.changePassword.default
 )
 
+router.get('/getProfile', middlewares.jwtAuthorization, Services.getProfile.default)
+
 export default router

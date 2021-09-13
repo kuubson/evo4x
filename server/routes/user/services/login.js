@@ -20,7 +20,7 @@ const login = async (req, res, next) => {
         if (!user.authentication.authenticated) {
             throw new utils.ApiError('The email address provided must first be authenticated', 409)
         }
-        const token = jwt.sign({ email, role: 'user' }, process.env.JWT_KEY)
+        const token = jwt.sign({ role: 'user', email }, process.env.JWT_KEY)
         res.cookie('token', token, {
             secure: process.env.NODE_ENV === 'production',
             httpOnly: true,

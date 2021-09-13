@@ -44,6 +44,7 @@ const LoginModal = ({ showModal, toggleModal }) => {
                     password
                 })
                 if (response) {
+                    utils.setRole('user')
                     utils.history.push('/user/profile')
                 }
             } catch (error) {

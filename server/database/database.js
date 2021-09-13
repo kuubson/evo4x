@@ -26,7 +26,7 @@ const init = async () => {
         // await connection.sync({ force: true })
         // await connection.sync({ alter: true })
         await connection.sync()
-        console.log('The database has been connected')
+        console.log('The connection has been established with the database')
     } catch (error) {
         console.log({
             error,
