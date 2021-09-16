@@ -23,11 +23,11 @@ ReactDOM.render(
     <React.StrictMode>
         <Router history={utils.history}>
             <Provider store={store}>
-                {/* <PersistGate loading={<Loader />} persistor={persistor}> */}
-                <ThemeProvider theme={theme}>
-                    <App />
-                </ThemeProvider>
-                {/* </PersistGate> */}
+                <PersistGate loading={<Loader />} persistor={persistor}>
+                    <ThemeProvider theme={theme}>
+                        <App />
+                    </ThemeProvider>
+                </PersistGate>
             </Provider>
         </Router>
     </React.StrictMode>,

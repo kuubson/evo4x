@@ -35,7 +35,7 @@ const App = () => {
     const routes = [
         {
             id: 1,
-            path: '/:token?',
+            pathname: '/:token?',
             render: () => (
                 <Guest>
                     <Home />
@@ -61,8 +61,8 @@ const App = () => {
         <AppContainer>
             <Loader />
             <Switch>
-                {routes.map(({ id, path, render }) => (
-                    <Route key={id} path={path} render={render} exact />
+                {routes.map(({ id, pathname, render }) => (
+                    <Route key={id} path={pathname} render={render} exact />
                 ))}
             </Switch>
         </AppContainer>

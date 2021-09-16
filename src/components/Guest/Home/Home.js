@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom'
 
 import Logo from 'assets/images/Logo.png'
 
+import Navbar from 'components/Shared/Navbar/Navbar'
+
 import RegistrationModal from 'components/Guest/Modals/RegistrationModal/RegistrationModal'
 import LoginModal from 'components/Guest/Modals/LoginModal/LoginModal'
 
@@ -83,18 +85,21 @@ const Home = () => {
                 showModal={showLoginModal}
                 toggleModal={() => handleToggler(setShowLoginModal)}
             />
-            <Dashboard.Navbar>
-                <Dashboard.Brand>evo4x</Dashboard.Brand>
-                <Dashboard.Links>
-                    <Dashboard.Link>Indicators</Dashboard.Link>
-                    <Dashboard.Link onClick={() => handleToggler(setShowLoginModal)}>
-                        Login
-                    </Dashboard.Link>
-                    <Dashboard.Link onClick={() => handleToggler(setShowHelpSidebar)}>
-                        Help
-                    </Dashboard.Link>
-                </Dashboard.Links>
-            </Dashboard.Navbar>
+            <Navbar
+                links={[
+                    {
+                        link: 'Indicators'
+                    },
+                    {
+                        link: 'Login',
+                        onClick: () => handleToggler(setShowLoginModal)
+                    },
+                    {
+                        link: 'Help',
+                        onClick: () => handleToggler(setShowHelpSidebar)
+                    }
+                ]}
+            />
             <Dashboard.Advantages>
                 <Dashboard.Advantage>
                     <Dashboard.Dollar>$</Dashboard.Dollar>

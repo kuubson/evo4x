@@ -6,10 +6,15 @@ import loader from './loader'
 import apiFeedback from './apiFeedback'
 import role from './role'
 
+const roleConfig = {
+    key: 'role',
+    storage
+}
+
 const rootReducer = combineReducers({
     loader,
     apiFeedback,
-    role
+    role: persistReducer(roleConfig, role)
 })
 
 export default rootReducer

@@ -1,5 +1,5 @@
 const initialState = {
-    role: false
+    role: 'guest'
 }
 
 const role = (state = initialState, { payload, type }) => {

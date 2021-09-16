@@ -1,4 +1,4 @@
-import styled from 'styled-components/macro'
+import styled, { css } from 'styled-components/macro'
 
 export default styled.li`
     margin-right: 20px;
@@ -21,4 +21,10 @@ export default styled.li`
     @media (max-width: ${({ theme }) => theme.fifthBreakpoint}) {
         font-size: 12px;
     }
+    ${({ active }) =>
+        active &&
+        css`
+            font-weight: bold;
+            transform: scale(1.03);
+        `}
 `

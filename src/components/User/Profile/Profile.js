@@ -5,7 +5,6 @@ import utils from 'utils'
 
 const ProfileContainer = styled.section`
     min-height: 100%;
-    background: ${({ theme }) => theme.primaryColor};
     display: flex;
     justify-content: center;
     align-items: center;
