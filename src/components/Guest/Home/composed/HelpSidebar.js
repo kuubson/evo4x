@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
-import { useLocation } from 'react-router'
-import queryString from 'query-string'
 
 import hooks from 'hooks'
 
@@ -18,7 +16,7 @@ import utils from 'utils'
 const HelpSidebarContainer = styled(sharedStyled.BlackLayer)``
 
 const HelpSidebar = ({ showSidebar, toggleSidebar, hideSidebar, showLoginModal }) => {
-    const { passwordToken, failedAuthentication } = queryString.parse(useLocation().search)
+    const { passwordToken, failedAuthentication } = hooks.useQueryParams()
     useEffect(() => {
         if (passwordToken) {
             setIssue('changePassword')

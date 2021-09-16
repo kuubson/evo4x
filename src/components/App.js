@@ -35,7 +35,7 @@ const App = () => {
     const routes = [
         {
             id: 1,
-            pathname: '/:token?',
+            pathname: '/',
             render: () => (
                 <Guest>
                     <Home />

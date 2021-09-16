@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
-import { useParams } from 'react-router-dom'
 
-import Logo from 'assets/images/Logo.png'
+import hooks from 'hooks'
 
 import Navbar from 'components/Shared/Navbar/Navbar'
 
@@ -14,6 +13,8 @@ import Dashboard from './styled/Dashboard'
 import Composed from './composed'
 
 import utils from 'utils'
+
+import Logo from 'assets/images/Logo.png'
 
 const HomeContainer = styled.section`
     min-height: 100%;
@@ -42,7 +43,7 @@ const HomeContainer = styled.section`
 `
 
 const Home = () => {
-    const { token } = useParams()
+    const { token } = hooks.useQueryParams()
     useEffect(() => {
         const authenticateEmail = async () => {
             handleToggler(setShowLoginModal)

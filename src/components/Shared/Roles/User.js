@@ -18,6 +18,14 @@ const User = ({ children }) => {
             utils.history.push('/?failedAuthentication=true')
         }
     }, [])
+    const logout = async () => {
+        const url = '/api/global/logout'
+        const response = await utils.axios.get(url)
+        if (response) {
+            utils.setRole('guest')
+            utils.history.push('/')
+        }
+    }
     return role === 'user' ? (
         <UserContainer>
             <Navbar
@@ -57,6 +65,10 @@ const User = ({ children }) => {
                     {
                         link: 'Mentors',
                         pathname: '/user/mentors'
+                    },
+                    {
+                        link: 'Logout',
+                        onClick: logout
                     }
                 ]}
             />

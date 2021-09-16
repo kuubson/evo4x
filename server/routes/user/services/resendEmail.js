@@ -37,7 +37,7 @@ const resendEmail = async (req, res, next) => {
                     'Email address authentication in the evo4x app',
                     `To authenticate your email address click the button`,
                     'Authenticate email address',
-                    `${utils.baseUrl(req)}/${token}`
+                    `${utils.baseUrl(req)}/?token=${token}`
                 )
             }
             utils.transporter.sendMail(mailOptions, (error, info) => {
