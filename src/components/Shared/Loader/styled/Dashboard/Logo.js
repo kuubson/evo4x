@@ -28,10 +28,10 @@ export default styled.img`
     @media (max-width: ${({ theme }) => theme.secondBreakpoint}) {
         width: 36px;
     }
-    @media (max-width: ${({ theme }) => theme.fourthBreakpoint}) {
+    @media (max-width: ${({ theme }) => theme.thirdBreakpoint}) {
         width: 34px;
     }
-    @media (max-width: ${({ theme }) => theme.fifthBreakpoint}) {
+    @media (max-width: ${({ theme }) => theme.fourthBreakpoint}) {
         width: 32px;
     }
     ${({ $loading }) =>

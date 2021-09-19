@@ -15,7 +15,7 @@ const useFormHandler = setForm => {
                 break
             case value !== sanitize(value):
                 validated = false
-                handleInputError(property, 'This field contains invalid characters')
+                handleInputError(property, 'This field contains incorrect characters')
                 break
             default:
                 handleInputError(property, '')

@@ -16,10 +16,10 @@ export default styled.h2`
     @media (max-width: ${({ theme }) => theme.secondBreakpoint}) {
         font-size: 21px;
     }
-    @media (max-width: ${({ theme }) => theme.fourthBreakpoint}) {
+    @media (max-width: ${({ theme }) => theme.thirdBreakpoint}) {
         font-size: 19px;
     }
-    @media (max-width: ${({ theme }) => theme.fifthBreakpoint}) {
+    @media (max-width: ${({ theme }) => theme.fourthBreakpoint}) {
         font-size: 17px;
     }
     ${({ scaleOut }) =>

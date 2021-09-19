@@ -13,15 +13,15 @@ export default styled.img`
         mobile &&
         css`
             display: none;
-            @media (max-width: ${({ theme }) => theme.thirdBreakpoint}) {
+            @media (max-width: ${({ theme }) => theme.additionalBreakpoint}) {
                 width: 80px;
-                display: block;
                 margin: 30px auto 0px auto;
+                display: block;
             }
-            @media (max-width: ${({ theme }) => theme.fourthBreakpoint}) {
+            @media (max-width: ${({ theme }) => theme.thirdBreakpoint}) {
                 width: 70px;
             }
-            @media (max-width: ${({ theme }) => theme.fifthBreakpoint}) {
+            @media (max-width: ${({ theme }) => theme.fourthBreakpoint}) {
                 width: 60px;
             }
         `}

@@ -11,7 +11,7 @@ const validateProperty = property =>
         .isString()
         .bail()
         .custom(utils.checkSanitization)
-        .withMessage('This field contains invalid characters')
+        .withMessage('This field contains incorrect characters')
         .bail()
 const validateInteger = property => {
     return check(`${property}`).notEmpty().bail().isInt().bail()

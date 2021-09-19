@@ -1,7 +1,5 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components/macro'
-
-import utils from 'utils'
 
 const ProfileContainer = styled.section`
     min-height: 100%;
@@ -11,13 +9,6 @@ const ProfileContainer = styled.section`
 `
 
 const Profile = () => {
-    useEffect(() => {
-        const getProfile = async () => {
-            const url = '/api/user/getProfile'
-            await utils.axios.get(url)
-        }
-        getProfile()
-    }, [])
     return <ProfileContainer>User Profile</ProfileContainer>
 }
 

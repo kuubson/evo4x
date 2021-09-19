@@ -33,10 +33,10 @@ const HomeContainer = styled.section`
         left: 50%;
         transform: translate(-50%, -50%);
         clip-path: polygon(0 95%, 100% 80%, 100% 100%, 0% 100%);
-        @media (max-width: ${({ theme }) => theme.thirdBreakpoint}) {
+        @media (max-width: ${({ theme }) => theme.additionalBreakpoint}) {
             clip-path: polygon(0 95%, 100% 85%, 100% 100%, 0% 100%);
         }
-        @media (max-width: ${({ theme }) => theme.fifthBreakpoint}) {
+        @media (max-width: ${({ theme }) => theme.fourthBreakpoint}) {
             clip-path: polygon(0 95%, 100% 88%, 100% 100%, 0% 100%);
         }
     }
@@ -46,8 +46,8 @@ const Home = () => {
     const { token } = hooks.useQueryParams()
     useEffect(() => {
         const authenticateEmail = async () => {
-            handleToggler(setShowLoginModal)
             try {
+                handleToggler(setShowLoginModal)
                 const url = '/api/user/authenticateEmail'
                 await utils.axios.post(url, {
                     token

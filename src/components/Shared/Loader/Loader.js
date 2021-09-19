@@ -10,7 +10,7 @@ import Logo from 'assets/images/Logo.png'
 
 const LoaderContainer = styled(sharedStyled.BlackLayer)`
     position: fixed;
-    z-index: 2;
+    z-index: 4;
 `
 
 const Loader = () => {

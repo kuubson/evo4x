@@ -9,6 +9,7 @@ import Loader from 'components/Shared/Loader/Loader'
 import Home from 'components/Guest/Home/Home'
 
 import Profile from 'components/User/Profile/Profile'
+import Chat from 'components/User/Chat/Chat'
 
 import utils from 'utils'
 
@@ -53,6 +54,15 @@ const App = () => {
         },
         {
             id: 3,
+            pathname: '/user/chat',
+            render: () => (
+                <User chat>
+                    <Chat />
+                </User>
+            )
+        },
+        {
+            id: 11,
             pathname: '*',
             render: () => <Redirect to="/" />
         }

@@ -96,7 +96,7 @@ const HelpSidebar = ({ showSidebar, toggleSidebar, hideSidebar, showLoginModal }
         },
         {
             issue: 'Did you forget the password?',
-            active: issue === 'password' || issue === 'changePassword',
+            active: issue === 'password',
             handleOnClick: () => setIssue('password')
         }
     ]

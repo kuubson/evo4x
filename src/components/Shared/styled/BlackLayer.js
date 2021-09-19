@@ -5,7 +5,7 @@ export default styled.section`
     height: 100%;
     transition: background ease-in-out 0.3s;
     position: absolute;
-    z-index: 1;
+    z-index: 3;
     pointer-events: none;
     ${({ showLayer }) =>
         showLayer &&

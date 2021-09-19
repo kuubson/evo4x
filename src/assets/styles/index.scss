@@ -34,9 +34,9 @@ dialog {
 
 button,
 input {
-    display: block;
     background: none;
     border: none;
+    display: block;
     filter: none;
 }
 
@@ -49,12 +49,16 @@ button {
 }
 
 input {
-    &::placeholder {
-        color: black;
-    }
     &:-webkit-autofill {
         transition: background-color 9999s ease-in-out 0s;
         -webkit-text-fill-color: black;
+    }
+}
+
+input,
+textarea {
+    &::placeholder {
+        color: black;
     }
 }
 

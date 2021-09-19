@@ -4,6 +4,7 @@ import handleApiError from './handleApiError'
 import handleApiValidation from './handleApiValidation'
 import setRole from './setRole'
 import setApiFeedback from './setApiFeedback'
+import detectMobileDevice from './detectMobileDevice'
 import history from './history'
 
 const utils = {
@@ -13,6 +14,7 @@ const utils = {
     handleApiValidation,
     setRole,
     setApiFeedback,
+    detectMobileDevice,
     history
 }
 

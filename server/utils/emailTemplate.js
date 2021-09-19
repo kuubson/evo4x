@@ -49,7 +49,7 @@ const emailTemplate = (header, content, buttontText, href) => `
                     color: black;
                     background: none;
                     border: 2px solid black;
-                    border-radius: 20px;
+                    border-radius: 10px;
                     font-family: cursive;
                     letter-spacing: 1px;
                     font-size: 14px;

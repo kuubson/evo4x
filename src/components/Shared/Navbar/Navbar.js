@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components/macro'
 import { useLocation } from 'react-router'
 
@@ -16,18 +16,50 @@ const NavbarContainer = styled.nav`
     position: fixed;
     top: 0px;
     left: 0px;
+    z-index: 2;
+    @media (max-width: ${({ theme }) => theme.additionalBreakpoint}) {
+        padding: 0px 30px;
+        height: 65px;
+    }
 `
 
-const Navbar = ({ links }) => {
+const Navbar = ({ hamburger, links }) => {
     const location = useLocation()
+    const [toggleHamburger, setToggleHamburger] = useState(false)
+    const withHamburger = hamburger && toggleHamburger
     return (
         <NavbarContainer>
             <Dashboard.Brand>evo4x</Dashboard.Brand>
-            <Dashboard.Links>
-                {links.map(({ link, pathname, onClick }) => (
+            {hamburger && (
+                <Dashboard.Hamburger
+                    onClick={() => setToggleHamburger(toggleHamburger => !toggleHamburger)}
+                    withHamburger={withHamburger}
+                >
+                    <Dashboard.Line withHamburger={withHamburger} />
+                    <Dashboard.Line withHamburger={withHamburger} />
+                    <Dashboard.Line withHamburger={withHamburger} />
+                </Dashboard.Hamburger>
+            )}
+            <Dashboard.Menu withHamburger={withHamburger}>
+                {links.map(({ link, pathname, counter, onClick }) => (
                     <Dashboard.Link
+                        key={link}
                         onClick={onClick ? onClick : () => utils.history.push(pathname)}
                         active={pathname === location.pathname}
+                        counter={counter}
+                        withHamburger={withHamburger}
+                    >
+                        {link}
+                    </Dashboard.Link>
+                ))}
+            </Dashboard.Menu>
+            <Dashboard.Links hamburger={hamburger}>
+                {links.map(({ link, pathname, counter, onClick }) => (
+                    <Dashboard.Link
+                        key={link}
+                        onClick={onClick ? onClick : () => utils.history.push(pathname)}
+                        active={pathname === location.pathname}
+                        counter={counter}
                     >
                         {link}
                     </Dashboard.Link>

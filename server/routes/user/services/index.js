@@ -4,7 +4,10 @@ import * as resendEmail from './resendEmail'
 import * as login from './login'
 import * as requestPasswordChange from './requestPasswordChange'
 import * as changePassword from './changePassword'
-import * as getProfile from './getProfile'
+import * as getMessages from './getMessages'
+import * as sendMessage from './sendMessage'
+import * as sendFile from './sendFile'
+import * as getUnreadMessagesInfo from './getUnreadMessagesInfo'
 
 export default {
     register,
@@ -13,5 +16,8 @@ export default {
     login,
     requestPasswordChange,
     changePassword,
-    getProfile
+    getMessages,
+    sendMessage,
+    sendFile,
+    getUnreadMessagesInfo
 }

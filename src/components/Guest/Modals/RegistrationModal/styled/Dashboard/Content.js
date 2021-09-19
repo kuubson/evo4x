@@ -19,10 +19,10 @@ export default styled.dialog`
     @media (max-width: ${({ theme }) => theme.secondBreakpoint}) {
         width: 60%;
     }
-    @media (max-width: ${({ theme }) => theme.fourthBreakpoint}) {
+    @media (max-width: ${({ theme }) => theme.thirdBreakpoint}) {
         width: 80%;
     }
-    @media (max-width: ${({ theme }) => theme.fifthBreakpoint}) {
+    @media (max-width: ${({ theme }) => theme.fourthBreakpoint}) {
         width: 100%;
         height: 100%;
         border-radius: 0px;

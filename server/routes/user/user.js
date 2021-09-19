@@ -54,6 +54,33 @@ router.post(
     Services.changePassword.default
 )
 
-router.get('/getProfile', middlewares.jwtAuthorization, Services.getProfile.default)
+router.post(
+    '/getMessages',
+    middlewares.jwtAuthorization,
+    Services.getMessages.validation(),
+    middlewares.checkValidation,
+    Services.getMessages.default
+)
+
+router.post(
+    '/sendMessage',
+    middlewares.jwtAuthorization,
+    Services.sendMessage.validation(),
+    middlewares.checkValidation,
+    Services.sendMessage.default
+)
+
+router.post(
+    '/sendFile',
+    middlewares.jwtAuthorization,
+    middlewares.handleMulterFile(),
+    Services.sendFile.default
+)
+
+router.get(
+    '/getUnreadMessagesInfo',
+    middlewares.jwtAuthorization,
+    Services.getUnreadMessagesInfo.default
+)
 
 export default router

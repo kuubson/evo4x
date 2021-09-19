@@ -9,10 +9,10 @@ export default styled.h1`
     @media (max-width: ${({ theme }) => theme.secondBreakpoint}) {
         font-size: 26px;
     }
-    @media (max-width: ${({ theme }) => theme.fourthBreakpoint}) {
+    @media (max-width: ${({ theme }) => theme.thirdBreakpoint}) {
         font-size: 24px;
     }
-    @media (max-width: ${({ theme }) => theme.fifthBreakpoint}) {
+    @media (max-width: ${({ theme }) => theme.fourthBreakpoint}) {
         font-size: 22px;
     }
 `
