@@ -1,4 +1,5 @@
 import axios from './axios'
+import subscribePushNotifications from './subscribePushNotifications'
 import setLoading from './setLoading'
 import handleApiError from './handleApiError'
 import handleApiValidation from './handleApiValidation'
@@ -9,6 +10,7 @@ import history from './history'
 
 const utils = {
     axios,
+    subscribePushNotifications,
     setLoading,
     handleApiError,
     handleApiValidation,

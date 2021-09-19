@@ -4,6 +4,7 @@ import * as resendEmail from './resendEmail'
 import * as login from './login'
 import * as requestPasswordChange from './requestPasswordChange'
 import * as changePassword from './changePassword'
+import * as subscribePushNotifications from './subscribePushNotifications'
 import * as getMessages from './getMessages'
 import * as sendMessage from './sendMessage'
 import * as sendFile from './sendFile'
@@ -16,6 +17,7 @@ export default {
     login,
     requestPasswordChange,
     changePassword,
+    subscribePushNotifications,
     getMessages,
     sendMessage,
     sendFile,

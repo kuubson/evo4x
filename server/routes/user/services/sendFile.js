@@ -6,9 +6,9 @@ import { Connection, User, Subscription } from '@database'
 
 import utils from '@utils'
 
-export default async (req, res, next) => {
-    const { filename, path } = req.file
+const sendFile = async (req, res, next) => {
     try {
+        const { filename, path } = req.file
         await Connection.transaction(async transaction => {
             const { id, name } = req.user
             let type, content, cloudinaryId
@@ -89,7 +89,7 @@ export default async (req, res, next) => {
                                     tag: id,
                                     title: `From ${name}`,
                                     body: message,
-                                    icon: 'https://picsum.photos/1920/1080',
+                                    icon: `${utils.baseUrl(req)}/Logo.png`,
                                     data: {
                                         userName: name,
                                         url: `${utils.baseUrl(req)}/user/chat`
@@ -116,3 +116,5 @@ export default async (req, res, next) => {
         next(error)
     }
 }
+
+export default sendFile

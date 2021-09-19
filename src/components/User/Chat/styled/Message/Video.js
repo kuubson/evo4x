@@ -5,6 +5,7 @@ export default styled.video`
     height: 400px;
     border-radius: 10px;
     @media (max-width: ${({ theme }) => theme.additionalBreakpoint}) {
+        max-width: 75vw;
         height: 50vh;
     }
 `

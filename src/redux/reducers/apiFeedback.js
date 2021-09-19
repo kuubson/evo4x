@@ -1,5 +1,5 @@
 const initialState = {
-    apiFeedback: false
+    apiFeedback: ''
 }
 
 const apiFeedback = (state = initialState, { payload, type }) => {

@@ -4,6 +4,8 @@ import axios from 'axios'
 
 import hooks from 'hooks'
 
+import ApiFeedback from 'components/Shared/ApiFeedback/ApiFeedback'
+
 import Dashboard from './styled/Dashboard'
 import StyledTextarea from './styled/Textarea'
 
@@ -67,6 +69,7 @@ const Chat = () => {
     }
     useEffect(() => {
         getMessages(20, 0)
+        utils.subscribePushNotifications('/api/user/subscribePushNotifications')
     }, [])
     useEffect(() => {
         const handleOnSendMessage = message => {
@@ -117,6 +120,7 @@ const Chat = () => {
                     content: message
                 })
                 if (response) {
+                    utils.setApiFeedback('')
                     socket.emit('sendMessage', _message)
                 }
             } catch (error) {
@@ -144,14 +148,11 @@ const Chat = () => {
                 setShowFileInput(true)
             }
             const largeSizeError = () => {
-                return utils.setApiFeedback('Sending a file', 'You cannot send this large file')
+                return utils.setApiFeedback('You cannot send this large file')
             }
             if (!isImage && !isVideo && !isFile) {
                 resetFileInput()
-                return utils.setApiFeedback(
-                    'Sending a file',
-                    'You cannot send a file with this extension'
-                )
+                return utils.setApiFeedback('You cannot send a file with this extension')
             }
             if (isImage) {
                 if (size > 31457280) {
@@ -183,6 +184,7 @@ const Chat = () => {
                 }, 500)
                 const response = await axios.post(url, form)
                 if (response) {
+                    utils.setApiFeedback('')
                     setUploadPercentage(100)
                     clearInterval(intervalId)
                     setTimeout(() => {
@@ -241,6 +243,9 @@ const Chat = () => {
                     })}
                     <div ref={endOfMessages}></div>
                 </Dashboard.Messages>
+                <Dashboard.Error>
+                    <ApiFeedback />
+                </Dashboard.Error>
                 <StyledTextarea.Container>
                     <StyledTextarea.Content
                         ref={textareaRef}

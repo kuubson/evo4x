@@ -55,6 +55,14 @@ router.post(
 )
 
 router.post(
+    '/subscribePushNotifications',
+    middlewares.jwtAuthorization,
+    Services.subscribePushNotifications.validation(),
+    middlewares.checkValidation,
+    Services.subscribePushNotifications.default
+)
+
+router.post(
     '/getMessages',
     middlewares.jwtAuthorization,
     Services.getMessages.validation(),

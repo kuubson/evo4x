@@ -8,7 +8,7 @@ import sharedStyled from 'components/Shared/styled'
 const ApiFeedbackContainer = styled(sharedStyled.Button)`
     max-width: 85%;
     margin: 40px auto 0px auto;
-    padding: 10px;
+    padding: 10px 20px;
     border-radius: 0px;
     cursor: initial;
     @media (max-width: ${({ theme }) => theme.firstBreakpoint}) {

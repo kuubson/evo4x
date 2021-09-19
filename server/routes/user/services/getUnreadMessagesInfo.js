@@ -1,6 +1,6 @@
 import { Message } from '@database'
 
-export default async (req, res, next) => {
+const getUnreadMessagesInfo = async (req, res, next) => {
     try {
         const { id } = req.user
         const { lastUnreadMessageIndex, unreadMessagesAmount } = await Message.findAll().then(
@@ -33,3 +33,5 @@ export default async (req, res, next) => {
         next(error)
     }
 }
+
+export default getUnreadMessagesInfo

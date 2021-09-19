@@ -43,7 +43,7 @@ const sendMessage = async (req, res, next) => {
                                     tag: id,
                                     title: `From ${name}`,
                                     body: `${content}`,
-                                    icon: 'https://picsum.photos/1920/1080',
+                                    icon: `${utils.baseUrl(req)}/Logo.png`,
                                     data: {
                                         userName: name,
                                         url: `${utils.baseUrl(req)}/user/chat`

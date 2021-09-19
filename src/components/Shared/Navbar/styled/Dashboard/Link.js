@@ -8,7 +8,7 @@ export default styled.li`
     transition-property: margin, font-size;
     position: relative;
     &:hover {
-        transform: scale(1.03);
+        font-weight: bold;
     }
     &:last-of-type {
         margin-right: 0px;
@@ -31,7 +31,6 @@ export default styled.li`
         active
             ? css`
                   font-weight: bold;
-                  transform: scale(1.03);
               `
             : null}
     ${({ counter }) =>
