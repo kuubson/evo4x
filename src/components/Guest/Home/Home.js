@@ -43,23 +43,23 @@ const HomeContainer = styled.section`
 `
 
 const Home = () => {
-    const { token } = hooks.useQueryParams()
+    const { emailToken } = hooks.useQueryParams()
     useEffect(() => {
         const authenticateEmail = async () => {
             try {
                 handleToggler(setShowLoginModal)
                 const url = '/api/user/authenticateEmail'
                 await utils.axios.post(url, {
-                    token
+                    emailToken
                 })
             } catch (error) {
                 utils.handleApiError(error)
             }
         }
-        if (token) {
+        if (emailToken) {
             authenticateEmail()
         }
-    }, [token])
+    }, [emailToken])
     const [showHelpSidebar, setShowHelpSidebar] = useState(false)
     const [showRegistrationModal, setShowRegistrationModal] = useState(false)
     const [showLoginModal, setShowLoginModal] = useState(false)

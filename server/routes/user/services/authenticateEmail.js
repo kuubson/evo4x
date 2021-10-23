@@ -7,12 +7,12 @@ import utils from '@utils'
 const authenticateEmail = async (req, res, next) => {
     try {
         await Connection.transaction(async transaction => {
-            const { token } = req.body
-            return jwt.verify(token, process.env.JWT_KEY, async error => {
+            const { emailToken } = req.body
+            return jwt.verify(emailToken, process.env.JWT_KEY, async error => {
                 try {
                     const authentication = await Authentication.findOne({
                         where: {
-                            token
+                            emailToken
                         }
                     })
                     if (error || !authentication) {
@@ -54,6 +54,6 @@ const authenticateEmail = async (req, res, next) => {
     }
 }
 
-export const validation = () => [utils.validator.validateProperty('token').isJWT()]
+export const validation = () => [utils.validator.validateProperty('emailToken').isJWT()]
 
 export default authenticateEmail

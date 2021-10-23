@@ -6,7 +6,7 @@ export default styled.dialog`
     background: ${({ theme }) => theme.primaryColor};
     padding: 40px 0px;
     border-radius: 10px;
-    transition: width ease-in-out 0.3s, height ease-in-out 0.3s, border-radius ease-in-out 0.3s,
+    transition: width ease-in-out 0.3s, min-height ease-in-out 0.3s, border-radius ease-in-out 0.3s,
         transform ease-in-out 0.6s, top ease-in-out 0.6s;
     display: flex;
     justify-content: center;
@@ -24,7 +24,7 @@ export default styled.dialog`
     }
     @media (max-width: ${({ theme }) => theme.fourthBreakpoint}) {
         width: 100%;
-        height: 100%;
+        min-height: 100%;
         border-radius: 0px;
     }
     ${({ showModal }) =>

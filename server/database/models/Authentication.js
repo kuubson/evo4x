@@ -4,7 +4,7 @@ export default sequelize => {
     class Authentication extends Model {}
     Authentication.init(
         {
-            token: {
+            emailToken: {
                 type: TEXT,
                 allowNull: false
             },

@@ -16,14 +16,14 @@ const register = async (req, res, next) => {
             if (user) {
                 throw new utils.ApiError('The email address provided is already taken', 409)
             }
-            const token = jwt.sign({ email }, process.env.JWT_KEY, { expiresIn: '2h' })
+            const emailToken = jwt.sign({ email }, process.env.JWT_KEY, { expiresIn: '2h' })
             await User.create(
                 {
                     name,
                     email,
                     password,
                     authentication: {
-                        token
+                        emailToken
                     }
                 },
                 {
@@ -39,7 +39,7 @@ const register = async (req, res, next) => {
                     'Email address authentication in the evo4x app',
                     `To authenticate your email address click the button`,
                     'Authenticate email address',
-                    `${utils.baseUrl(req)}/?token=${token}`
+                    `${utils.baseUrl(req)}/?emailToken=${emailToken}`
                 )
             }
             utils.transporter.sendMail(mailOptions, (error, info) => {
