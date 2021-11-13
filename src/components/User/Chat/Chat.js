@@ -17,6 +17,7 @@ import { pushToTheBottom } from 'components/User/Chat/utils'
 
 const ChatContainer = styled.section`
     height: 100%;
+    position: relative;
 `
 
 const Chat = () => {

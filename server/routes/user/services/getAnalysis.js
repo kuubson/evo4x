@@ -23,13 +23,12 @@ const getAnalysis = async (req, res, next) => {
                             if (!readByIds.includes(id.toString())) {
                                 readByIds.push(id)
                             }
-                            const readBy = readByIds.join(',')
                             await analysis.update({
-                                readBy
+                                readBy: readByIds.join(',')
                             })
                             return {
                                 ...analysis.dataValues,
-                                views: readBy.length
+                                views: readByIds.length
                             }
                         })
                 )

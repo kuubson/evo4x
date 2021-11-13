@@ -10,7 +10,6 @@ export default styled.div`
     font-size: 15px;
     border-radius: 12px;
     white-space: pre-line;
-    word-break: break-all;
     cursor: pointer;
     color: black;
     position: relative;
