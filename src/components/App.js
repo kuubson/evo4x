@@ -55,6 +55,15 @@ const App = () => {
         },
         {
             id: 3,
+            pathname: '/users/:id',
+            render: () => (
+                <User>
+                    <Profile />
+                </User>
+            )
+        },
+        {
+            id: 4,
             pathname: '/user/chat',
             render: () => (
                 <User chat>
@@ -63,7 +72,7 @@ const App = () => {
             )
         },
         {
-            id: 4,
+            id: 5,
             pathname: '/user/analysis',
             render: () => (
                 <User>
@@ -72,7 +81,7 @@ const App = () => {
             )
         },
         {
-            id: 11,
+            id: 99,
             pathname: '*',
             render: () => <Redirect to="/" />
         }

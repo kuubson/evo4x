@@ -36,7 +36,7 @@ export default styled.li`
     ${({ counter }) =>
         counter
             ? css`
-                  ::after {
+                  &::after {
                       width: 20px;
                       height: 20px;
                       background: ${({ theme }) => theme.primaryColor};

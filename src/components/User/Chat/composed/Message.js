@@ -4,14 +4,17 @@ import fileSaver from 'file-saver'
 
 import StyledMessage from '../styled/Message'
 
+import utils from 'utils'
+
 const MessageContainer = styled.div`
     display: flex;
     flex-direction: column;
     ${({ withLastUserMessage }) =>
-        withLastUserMessage &&
-        css`
-            margin-bottom: 15px;
-        `}
+        withLastUserMessage
+            ? css`
+                  margin-bottom: 15px;
+              `
+            : null}
 `
 
 const Message = ({
@@ -47,7 +50,11 @@ const Message = ({
     )
     const showAvatar = () =>
         !withAnalysis && (
-            <StyledMessage.Avatar withCurrentUser={withCurrentUser}>
+            <StyledMessage.Avatar
+                name={user.name}
+                onDoubleClick={() => utils.history.push(`/users/${user.id}`)}
+                withCurrentUser={withCurrentUser}
+            >
                 {user.name.charAt(0)}
             </StyledMessage.Avatar>
         )

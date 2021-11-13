@@ -29,9 +29,10 @@ export default styled.button`
         font-size: 14px;
     }
     ${({ $fill }) =>
-        $fill &&
-        css`
-            border-radius: 10px;
-            box-shadow: inset 0px -58px ${({ theme }) => theme.primaryColor};
-        `}
+        $fill
+            ? css`
+                  border-radius: 10px;
+                  box-shadow: inset 0px -58px ${({ theme }) => theme.primaryColor};
+              `
+            : null}
 `

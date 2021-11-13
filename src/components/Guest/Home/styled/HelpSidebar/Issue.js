@@ -15,9 +15,10 @@ export default styled(sharedStyled.Button)`
         margin-bottom: 0px;
     }
     ${({ active }) =>
-        active &&
-        css`
-            transform: scale(1.03);
-            border-bottom: 2px solid white;
-        `}
+        active
+            ? css`
+                  transform: scale(1.03);
+                  border-bottom: 2px solid white;
+              `
+            : null}
 `

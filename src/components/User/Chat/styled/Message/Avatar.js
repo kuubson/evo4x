@@ -16,6 +16,28 @@ export default styled.div`
     position: absolute;
     bottom: -2px;
     right: -50px;
+    &::before {
+        max-width: 50px;
+        border-radius: 5px;
+        cursor: initial;
+        content: ${({ name }) => `'${name}'`};
+        font-size: 10px;
+        opacity: 0;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        font-weight: initial;
+        position: absolute;
+        top: 50%;
+        left: calc(100% + 10px);
+        transform: translate(0px, -50%);
+        transition: opacity ease-in-out 0.5s;
+    }
+    &:hover {
+        &::before {
+            opacity: 1;
+        }
+    }
     @media (max-width: ${({ theme }) => theme.firstBreakpoint}) {
         width: 37px;
         height: 37px;
@@ -41,20 +63,25 @@ export default styled.div`
         right: -38px;
     }
     ${({ withCurrentUser }) =>
-        withCurrentUser &&
-        css`
-            left: -65px;
-            @media (max-width: ${({ theme }) => theme.firstBreakpoint}) {
-                left: -62px;
-            }
-            @media (max-width: ${({ theme }) => theme.secondBreakpoint}) {
-                left: -59px;
-            }
-            @media (max-width: ${({ theme }) => theme.thirdBreakpoint}) {
-                left: -56px;
-            }
-            @media (max-width: ${({ theme }) => theme.fourthBreakpoint}) {
-                left: -53px;
-            }
-        `}
+        withCurrentUser
+            ? css`
+                  left: -65px;
+                  &::before {
+                      left: auto;
+                      right: calc(100% + 10px);
+                  }
+                  @media (max-width: ${({ theme }) => theme.firstBreakpoint}) {
+                      left: -62px;
+                  }
+                  @media (max-width: ${({ theme }) => theme.secondBreakpoint}) {
+                      left: -59px;
+                  }
+                  @media (max-width: ${({ theme }) => theme.thirdBreakpoint}) {
+                      left: -56px;
+                  }
+                  @media (max-width: ${({ theme }) => theme.fourthBreakpoint}) {
+                      left: -53px;
+                  }
+              `
+            : null}
 `

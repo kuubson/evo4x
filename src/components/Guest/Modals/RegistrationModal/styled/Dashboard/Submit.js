@@ -10,10 +10,11 @@ export default styled(sharedStyled.Button)`
     transition: all 0.3s ease-in-out;
     transition-property: max-height, margin, padding;
     ${({ scaleIn }) =>
-        (scaleIn || scaleIn === undefined) &&
-        css`
-            max-height: 43px;
-            margin: 40px auto 0px auto;
-            padding: 12px 30px;
-        `};
+        scaleIn || scaleIn === undefined
+            ? css`
+                  max-height: 43px;
+                  margin: 40px auto 0px auto;
+                  padding: 12px 30px;
+              `
+            : null}
 `

@@ -11,8 +11,9 @@ export default styled.div`
     align-self: flex-start;
     position: relative;
     ${({ withCurrentUser }) =>
-        withCurrentUser &&
-        css`
-            align-self: flex-end;
-        `}
+        withCurrentUser
+            ? css`
+                  align-self: flex-end;
+              `
+            : null}
 `

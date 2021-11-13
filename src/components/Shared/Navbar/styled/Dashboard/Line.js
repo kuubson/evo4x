@@ -9,14 +9,15 @@ export default styled.div`
         margin-bottom: 0px;
     }
     ${({ withHamburger }) =>
-        withHamburger &&
-        css`
-            margin-bottom: 0px;
-            &:nth-child(1) {
-                opacity: 0;
-            }
-            &:nth-child(3) {
-                transform: rotate(90deg) translateX(-2.8px);
-            }
-        `}
+        withHamburger
+            ? css`
+                  margin-bottom: 0px;
+                  &:nth-child(1) {
+                      opacity: 0;
+                  }
+                  &:nth-child(3) {
+                      transform: rotate(90deg) translateX(-2.8px);
+                  }
+              `
+            : null}
 `

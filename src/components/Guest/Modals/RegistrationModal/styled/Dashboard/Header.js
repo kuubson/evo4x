@@ -23,10 +23,11 @@ export default styled.h2`
         font-size: 17px;
     }
     ${({ scaleOut }) =>
-        scaleOut &&
-        css`
-            max-height: 0px;
-            margin-bottom: 0px;
-            transform: scale(0);
-        `};
+        scaleOut
+            ? css`
+                  max-height: 0px;
+                  margin-bottom: 0px;
+                  transform: scale(0);
+              `
+            : null}
 `

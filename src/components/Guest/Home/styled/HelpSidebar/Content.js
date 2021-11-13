@@ -21,8 +21,9 @@ export default styled.aside`
         width: 100%;
     }
     ${({ showSidebar }) =>
-        showSidebar &&
-        css`
-            transform: translateX(0px);
-        `}
+        showSidebar
+            ? css`
+                  transform: translateX(0px);
+              `
+            : null}
 `

@@ -28,9 +28,10 @@ export default styled.dialog`
         border-radius: 0px;
     }
     ${({ showModal }) =>
-        showModal &&
-        css`
-            top: 50%;
-            transform: translate(-50%, -50%);
-        `}
+        showModal
+            ? css`
+                  top: 50%;
+                  transform: translate(-50%, -50%);
+              `
+            : null}
 `

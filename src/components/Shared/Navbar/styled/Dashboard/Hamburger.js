@@ -13,8 +13,9 @@ export default styled.div`
         right: calc(0% + 20px);
     }
     ${({ withHamburger }) =>
-        withHamburger &&
-        css`
-            transform: translate(-50%, -50%) rotate(45deg);
-        `}
+        withHamburger
+            ? css`
+                  transform: translate(-50%, -50%) rotate(45deg);
+              `
+            : null}
 `

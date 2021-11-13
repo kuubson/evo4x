@@ -35,8 +35,9 @@ export default styled.img`
         width: 32px;
     }
     ${({ $loading }) =>
-        $loading &&
-        css`
-            bottom: 20px;
-        `}
+        $loading
+            ? css`
+                  bottom: 20px;
+              `
+            : null}
 `

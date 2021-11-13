@@ -10,19 +10,20 @@ export default styled.img`
         width: 130px;
     }
     ${({ mobile }) =>
-        mobile &&
-        css`
-            display: none;
-            @media (max-width: ${({ theme }) => theme.additionalBreakpoint}) {
-                width: 80px;
-                margin: 30px auto 0px auto;
-                display: block;
-            }
-            @media (max-width: ${({ theme }) => theme.thirdBreakpoint}) {
-                width: 70px;
-            }
-            @media (max-width: ${({ theme }) => theme.fourthBreakpoint}) {
-                width: 60px;
-            }
-        `}
+        mobile
+            ? css`
+                  display: none;
+                  @media (max-width: ${({ theme }) => theme.additionalBreakpoint}) {
+                      width: 80px;
+                      margin: 30px auto 0px auto;
+                      display: block;
+                  }
+                  @media (max-width: ${({ theme }) => theme.thirdBreakpoint}) {
+                      width: 70px;
+                  }
+                  @media (max-width: ${({ theme }) => theme.fourthBreakpoint}) {
+                      width: 60px;
+                  }
+              `
+            : null}
 `

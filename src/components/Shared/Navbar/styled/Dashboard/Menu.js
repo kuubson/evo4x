@@ -15,10 +15,11 @@ export default styled.ul`
     transform: translateX(100%);
     z-index: 1;
     ${({ withHamburger }) =>
-        withHamburger &&
-        css`
-            @media (max-width: 1000px) {
-                transform: translateX(0px);
-            }
-        `}
+        withHamburger
+            ? css`
+                  @media (max-width: 1000px) {
+                      transform: translateX(0px);
+                  }
+              `
+            : null}
 `
