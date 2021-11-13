@@ -15,7 +15,7 @@ const MessageContainer = styled.div`
 `
 
 const Message = ({
-    message: { type, content, createdAt, user },
+    message: { type, content, createdAt, user, views },
     nextMessage,
     currentUser,
     withAnalysis
@@ -102,6 +102,7 @@ const Message = ({
                     {new Date().toDateString() === date.toDateString()
                         ? date.toLocaleTimeString()
                         : date.toLocaleString()}
+                    {withAnalysis && `, ${views}👁️`}
                 </StyledMessage.Date>
             )}
         </MessageContainer>

@@ -1,4 +1,4 @@
-import { Admin, Analysis } from '@database'
+import { Analysis } from '@database'
 
 import utils from '@utils'
 
@@ -12,13 +12,7 @@ const getAnalysis = async (req, res, next) => {
             order: [['id', 'DESC']],
             attributes: {
                 exclude: 'adminId'
-            },
-            include: [
-                {
-                    model: Admin,
-                    attributes: ['id']
-                }
-            ]
+            }
         }).then(
             async analysis =>
                 await Promise.all(
@@ -29,10 +23,14 @@ const getAnalysis = async (req, res, next) => {
                             if (!readByIds.includes(id.toString())) {
                                 readByIds.push(id)
                             }
+                            const readBy = readByIds.join(',')
                             await analysis.update({
-                                readBy: readByIds.join(',')
+                                readBy
                             })
-                            return analysis
+                            return {
+                                ...analysis.dataValues,
+                                views: readBy.length
+                            }
                         })
                 )
         )
