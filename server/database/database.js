@@ -12,15 +12,22 @@ const connection = new sequelize(DATABASE_NAME, DATABASE_USERNAME, DATABASE_PASS
     // logging: false
 })
 
+import AdminModel from './models/Admin'
 import UserModel from './models/User'
 import AuthenticationModel from './models/Authentication'
 import MessageModel from './models/Message'
+import AnalysisModel from './models/Analysis'
 import SubscriptionModel from './models/Subscription'
 
+const Admin = AdminModel(connection)
 const User = UserModel(connection)
 const Authentication = AuthenticationModel(connection)
 const Message = MessageModel(connection)
+const Analysis = AnalysisModel(connection)
 const Subscription = SubscriptionModel(connection)
+
+Admin.hasMany(Analysis)
+Analysis.belongsTo(Admin)
 
 User.hasOne(Authentication)
 Authentication.belongsTo(User)
@@ -46,4 +53,4 @@ const init = async () => {
 }
 init()
 
-export { connection as Connection, User, Authentication, Message, Subscription }
+export { connection as Connection, Admin, User, Authentication, Message, Analysis, Subscription }

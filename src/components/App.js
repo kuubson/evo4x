@@ -10,6 +10,7 @@ import Home from 'components/Guest/Home/Home'
 
 import Profile from 'components/User/Profile/Profile'
 import Chat from 'components/User/Chat/Chat'
+import Analysis from 'components/User/Analysis/Analysis'
 
 import utils from 'utils'
 
@@ -58,6 +59,15 @@ const App = () => {
             render: () => (
                 <User chat>
                     <Chat />
+                </User>
+            )
+        },
+        {
+            id: 4,
+            pathname: '/user/analysis',
+            render: () => (
+                <User>
+                    <Analysis />
                 </User>
             )
         },

@@ -91,4 +91,12 @@ router.get(
     Services.getUnreadMessagesInfo.default
 )
 
+router.post(
+    '/getAnalysis',
+    middlewares.jwtAuthorization,
+    Services.getAnalysis.validation(),
+    middlewares.checkValidation,
+    Services.getAnalysis.default
+)
+
 export default router

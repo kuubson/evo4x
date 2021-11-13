@@ -9,6 +9,7 @@ import * as getMessages from './getMessages'
 import * as sendMessage from './sendMessage'
 import * as sendFile from './sendFile'
 import * as getUnreadMessagesInfo from './getUnreadMessagesInfo'
+import * as getAnalysis from './getAnalysis'
 
 export default {
     register,
@@ -21,5 +22,6 @@ export default {
     getMessages,
     sendMessage,
     sendFile,
-    getUnreadMessagesInfo
+    getUnreadMessagesInfo,
+    getAnalysis
 }

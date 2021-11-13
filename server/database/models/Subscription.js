@@ -1,8 +1,6 @@
-import { Model, DataTypes } from 'sequelize'
+import { Model, STRING } from 'sequelize'
 
-const { STRING } = DataTypes
-
-export default sequelize => {
+const Subscription = sequelize => {
     class Subscription extends Model {}
     Subscription.init(
         {
@@ -26,3 +24,5 @@ export default sequelize => {
     )
     return Subscription
 }
+
+export default Subscription

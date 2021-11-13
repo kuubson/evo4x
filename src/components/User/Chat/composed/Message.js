@@ -14,10 +14,16 @@ const MessageContainer = styled.div`
         `}
 `
 
-const Message = ({ message: { type, content, createdAt, user }, nextMessage, currentUser }) => {
+const Message = ({
+    message: { type, content, createdAt, user },
+    nextMessage,
+    currentUser,
+    withAnalysis
+}) => {
     const date = new Date(createdAt)
-    const withCurrentUser = user.id === currentUser.id
-    const withLastUserMessage = (nextMessage && user.id !== nextMessage.user.id) || !nextMessage
+    const withCurrentUser = withAnalysis || user.id === currentUser.id
+    const withLastUserMessage =
+        (nextMessage && !withAnalysis && user.id !== nextMessage.user.id) || !nextMessage
     const withFile = type === 'FILE'
     const [showDetails, setShowDetails] = useState(false)
     useEffect(() => {
@@ -39,11 +45,12 @@ const Message = ({ message: { type, content, createdAt, user }, nextMessage, cur
             {withLastUserMessage && showAvatar()}
         </StyledMessage.Content>
     )
-    const showAvatar = () => (
-        <StyledMessage.Avatar withCurrentUser={withCurrentUser}>
-            {user.name.charAt(0)}
-        </StyledMessage.Avatar>
-    )
+    const showAvatar = () =>
+        !withAnalysis && (
+            <StyledMessage.Avatar withCurrentUser={withCurrentUser}>
+                {user.name.charAt(0)}
+            </StyledMessage.Avatar>
+        )
     return (
         <MessageContainer
             onClick={() => setShowDetails(true)}

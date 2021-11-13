@@ -13,35 +13,35 @@ import Composed from './composed'
 
 import utils from 'utils'
 
+import { pushToTheBottom } from 'components/User/Chat/utils'
+
 const ChatContainer = styled.section`
     height: 100%;
-    position: relative;
 `
 
 const Chat = () => {
     const { socket } = hooks.useSocket()
     const messagesRef = useRef()
     const textareaRef = useRef()
-    const endOfMessages = useRef()
     const [isLoading, setIsLoading] = useState(true)
     const [messages, setMessages] = useState([])
     const [message, setMessage] = useState('')
-    const [moreMessages, setMoreMessages] = useState(true)
+    const [hasMoreMessages, setHasMoreMessages] = useState(true)
     const [currentUser, setCurrentUser] = useState({})
     const { lastUnreadMessageIndex, setUnreadMessagesAmount } = hooks.useMessages()
     const [showFileInput, setShowFileInput] = useState(true)
     const [uploadPercentage, setUploadPercentage] = useState(0)
-    const fileUpload = uploadPercentage > 0
+    const fileUpload = !!uploadPercentage
     const getMessages = async (limit, offset, e) => {
         const url = '/api/user/getMessages'
-        if (e && e.target.scrollTop <= 0 && moreMessages) {
+        if (e && e.target.scrollTop <= 0 && hasMoreMessages) {
             const response = await utils.axios.post(url, {
                 limit,
                 offset
             })
             if (response) {
                 const { messages } = response.data
-                setMoreMessages(messages.length !== 0)
+                setHasMoreMessages(messages.length !== 0)
                 const lastScroll = e.target.scrollHeight
                 setMessages(_messages => [...messages, ..._messages])
                 e.target.scrollTop = e.target.scrollHeight - lastScroll
@@ -60,7 +60,7 @@ const Chat = () => {
                 const { messages, user } = response.data
                 setMessages(messages)
                 setCurrentUser(user)
-                pushToLastMessage()
+                pushToTheBottom(messagesRef)
                 if (messages.length >= lastUnreadMessageIndex) {
                     setUnreadMessagesAmount(0)
                 }
@@ -74,7 +74,7 @@ const Chat = () => {
     useEffect(() => {
         const handleOnSendMessage = message => {
             setMessages(messages => [...messages, message])
-            pushToLastMessage()
+            pushToTheBottom(messagesRef)
             socket.emit('readMessages')
         }
         socket && socket.on('sendMessage', handleOnSendMessage)
@@ -95,11 +95,6 @@ const Chat = () => {
             setUnreadMessagesAmount(0)
         }
     }
-    const pushToLastMessage = () => {
-        setTimeout(() => {
-            messagesRef.current.scrollTop = messagesRef.current.scrollHeight
-        }, 0)
-    }
     const sendMessage = async () => {
         if (message.trim()) {
             const lastMessage = messages[messages.length - 1]
@@ -112,7 +107,7 @@ const Chat = () => {
                 user: currentUser
             }
             setMessages(messages => [...messages, _message])
-            pushToLastMessage()
+            pushToTheBottom(messagesRef)
             setTimeout(() => setMessage(''), 0)
             try {
                 const url = '/api/user/sendMessage'
@@ -201,7 +196,7 @@ const Chat = () => {
                         user: currentUser
                     }
                     setMessages([...messages, message])
-                    pushToLastMessage()
+                    pushToTheBottom(messagesRef)
                     resetFileInput()
                     socket.emit('sendMessage', message)
                 }
@@ -212,6 +207,7 @@ const Chat = () => {
             }
         }
     }
+    const areThereMessages = !!messages.length
     return (
         <ChatContainer>
             {!isLoading && lastUnreadMessageIndex && messages.length < lastUnreadMessageIndex && (
@@ -225,23 +221,27 @@ const Chat = () => {
                     onTouchStart={() => textareaRef.current && textareaRef.current.blur()}
                     onScroll={e => getMessages(20, messages.length, e)}
                 >
-                    {messages.map(({ id, type, content, createdAt, user }, index) => {
-                        const nextMessage = messages[index + 1]
-                        return (
-                            <Composed.Message
-                                key={id}
-                                message={{
-                                    type,
-                                    content,
-                                    createdAt,
-                                    user
-                                }}
-                                nextMessage={nextMessage}
-                                currentUser={currentUser}
-                            />
-                        )
-                    })}
-                    <div ref={endOfMessages}></div>
+                    {!isLoading &&
+                        (areThereMessages ? (
+                            messages.map(({ id, type, content, createdAt, user }, index) => {
+                                const nextMessage = messages[index + 1]
+                                return (
+                                    <Composed.Message
+                                        key={id}
+                                        message={{
+                                            type,
+                                            content,
+                                            createdAt,
+                                            user
+                                        }}
+                                        nextMessage={nextMessage}
+                                        currentUser={currentUser}
+                                    />
+                                )
+                            })
+                        ) : (
+                            <Dashboard.Warning>There are no messages yet</Dashboard.Warning>
+                        ))}
                 </Dashboard.Messages>
                 <Dashboard.Error>
                     <ApiFeedback />

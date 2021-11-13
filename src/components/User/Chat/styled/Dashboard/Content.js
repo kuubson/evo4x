@@ -1,4 +1,4 @@
-import styled from 'styled-components/macro'
+import styled, { css } from 'styled-components/macro'
 
 export default styled.div`
     width: 100%;
@@ -8,4 +8,9 @@ export default styled.div`
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
+    ${({ withAnalysis }) =>
+        withAnalysis &&
+        css`
+            padding-bottom: 10px;
+        `}
 `

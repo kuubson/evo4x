@@ -1,8 +1,8 @@
 import { Model, ENUM, TEXT } from 'sequelize'
 
-const Message = sequelize => {
-    class Message extends Model {}
-    Message.init(
+const Analysis = sequelize => {
+    class Analysis extends Model {}
+    Analysis.init(
         {
             type: {
                 type: ENUM(['MESSAGE', 'IMAGE', 'VIDEO', 'FILE']),
@@ -22,10 +22,11 @@ const Message = sequelize => {
         },
         {
             sequelize,
-            modelName: 'message'
+            modelName: 'analysis',
+            freezeTableName: true
         }
     )
-    return Message
+    return Analysis
 }
 
-export default Message
+export default Analysis

@@ -85,7 +85,7 @@ const HelpSidebar = ({ showSidebar, toggleSidebar, hideSidebar, showLoginModal }
     }
     const issues = [
         {
-            issue: 'Have not you receieved any e-mail?',
+            issue: 'Have not you received any e-mail?',
             active: issue === 'email',
             handleOnClick: () => setIssue('email')
         },

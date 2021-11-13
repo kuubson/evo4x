@@ -1,7 +1,7 @@
 import { Model, STRING, TEXT } from 'sequelize'
 import bcrypt from 'bcrypt'
 
-export default sequelize => {
+const User = sequelize => {
     class User extends Model {}
     User.init(
         {
@@ -33,3 +33,5 @@ export default sequelize => {
     )
     return User
 }
+
+export default User

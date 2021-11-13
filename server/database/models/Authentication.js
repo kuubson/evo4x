@@ -1,6 +1,6 @@
 import { Model, TEXT, BOOLEAN } from 'sequelize'
 
-export default sequelize => {
+const Authentication = sequelize => {
     class Authentication extends Model {}
     Authentication.init(
         {
@@ -20,3 +20,5 @@ export default sequelize => {
     )
     return Authentication
 }
+
+export default Authentication
