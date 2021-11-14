@@ -14,6 +14,7 @@ import utils from 'utils'
 
 const ProfileContainer = styled.section`
     min-height: 100%;
+    padding: 30px;
     display: flex;
     justify-content: center;
     align-items: center;

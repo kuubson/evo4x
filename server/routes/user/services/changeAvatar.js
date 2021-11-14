@@ -7,9 +7,12 @@ const changeAvatar = async (req, res, next) => {
     try {
         const { path } = req.file
         await Connection.transaction(async transaction => {
-            await cloudinary.v2.uploader.destroy(req.user.profile.avatarCloudinaryId, {
-                invalidate: true
-            })
+            const cloudinaryId = req.user.profile.avatarCloudinaryId
+            if (cloudinaryId) {
+                await cloudinary.v2.uploader.destroy(cloudinaryId, {
+                    invalidate: true
+                })
+            }
             const { public_id, secure_url } = await cloudinary.v2.uploader.upload(path, {
                 use_filename: true
             })

@@ -140,7 +140,9 @@ const Chat = () => {
             const isFile = fileExtensions.test(path) || fileExtensions.test(name)
             const resetFileInput = () => {
                 setShowFileInput(false)
-                setShowFileInput(true)
+                setTimeout(() => {
+                    setShowFileInput(true)
+                }, 0)
             }
             const largeSizeError = () => {
                 return utils.setApiFeedback('You cannot send this large file')

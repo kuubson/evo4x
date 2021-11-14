@@ -5,4 +5,8 @@ export default styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    @media (max-width: ${({ theme }) => theme.additionalBreakpoint}) {
+        order: 1;
+        margin-bottom: 40px;
+    }
 `

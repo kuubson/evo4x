@@ -6,4 +6,8 @@ export default styled.img`
     border-radius: 50%;
     border: 1px solid black;
     object-fit: cover;
+    @media (max-width: ${({ theme }) => theme.additionalBreakpoint}) {
+        width: 120px;
+        height: 120px;
+    }
 `
