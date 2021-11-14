@@ -12,6 +12,8 @@ import * as getUnreadMessagesInfo from './getUnreadMessagesInfo'
 import * as getAnalysis from './getAnalysis'
 import * as getProfile from './getProfile'
 import * as updateProfile from './updateProfile'
+import * as changeAvatar from './changeAvatar'
+import * as removeAvatar from './removeAvatar'
 
 export default {
     register,
@@ -27,5 +29,7 @@ export default {
     getUnreadMessagesInfo,
     getAnalysis,
     getProfile,
-    updateProfile
+    updateProfile,
+    changeAvatar,
+    removeAvatar
 }

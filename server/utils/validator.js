@@ -17,7 +17,7 @@ const validateInteger = property => {
     return check(`${property}`).notEmpty().bail().isInt().bail()
 }
 const validateBoolean = property => {
-    return check(`${property}`).notEmpty().bail().isBoolean().bail()
+    return check(`${property}`).isBoolean().bail()
 }
 const validateArray = (property, canBeEmpty) =>
     !canBeEmpty

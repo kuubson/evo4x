@@ -1,6 +1,6 @@
 import utils from '@utils'
 
-const login = async (req, res, next) => {
+const updateProfile = async (req, res, next) => {
     try {
         const { name, story, avatar } = req.body
         await req.user.profile.update({
@@ -21,4 +21,4 @@ export const validation = () => [
     utils.validator.validateProperty('avatar')
 ]
 
-export default login
+export default updateProfile

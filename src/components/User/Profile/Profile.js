@@ -5,6 +5,7 @@ import hooks from 'hooks'
 
 import ApiFeedback from 'components/Shared/ApiFeedback/ApiFeedback'
 
+import CDashboard from 'components/User/Chat/styled/Dashboard'
 import Dashboard from './styled/Dashboard'
 
 import RMComposed from 'components/Guest/Modals/RegistrationModal/composed'
@@ -19,6 +20,7 @@ const ProfileContainer = styled.section`
 `
 
 const Profile = () => {
+    const [showAvatarInput, setShowAvatarInput] = useState(true)
     const [form, setForm] = useState({
         name: '',
         nameError: '',
@@ -77,6 +79,50 @@ const Profile = () => {
             }
         }
     }
+    const changeAvatar = async e => {
+        const file = e.target.files[0]
+        if (file) {
+            const path = e.target.value
+            const { name, size } = file
+            const imageExtensions = /\.(jpg|jpeg|png|gif)$/i
+            const isImage = imageExtensions.test(path) || imageExtensions.test(name)
+            const resetFileInput = () => {
+                setShowAvatarInput(false)
+                setShowAvatarInput(true)
+            }
+            if (!isImage) {
+                resetFileInput()
+                return utils.setApiFeedback('You cannot upload this file as an avatar')
+            }
+            if (isImage) {
+                if (size > 31457280) {
+                    resetFileInput() // 30MB
+                    return utils.setApiFeedback('You cannot upload this large file')
+                }
+            }
+            const form = new FormData()
+            form.append('file', file)
+            try {
+                const url = '/api/user/changeAvatar'
+                const response = await utils.axios.post(url, form)
+                if (response) {
+                    const { avatar } = response.data
+                    setAvatar(avatar)
+                    resetFileInput()
+                }
+            } catch (error) {
+                resetFileInput()
+            }
+        }
+    }
+    const removeAvatar = async () => {
+        const url = '/api/user/removeAvatar'
+        const response = await utils.axios.get(url)
+        if (response) {
+            const { avatar } = response.data
+            setAvatar(avatar)
+        }
+    }
     return (
         <ProfileContainer>
             <Dashboard.Content>
@@ -107,9 +153,16 @@ const Profile = () => {
                 <Dashboard.AvatarContainer>
                     {avatar && <Dashboard.Avatar src={avatar} />}
                     <Dashboard.Buttons>
-                        <Dashboard.Button>Change photo</Dashboard.Button>
-                        {!withDefaultAvatar && <Dashboard.Button>Remove photo</Dashboard.Button>}
+                        <Dashboard.Button as="label" htmlFor="file">
+                            Change avatar
+                        </Dashboard.Button>
+                        {!withDefaultAvatar && (
+                            <Dashboard.Button onClick={removeAvatar}>
+                                Remove avatar
+                            </Dashboard.Button>
+                        )}
                     </Dashboard.Buttons>
+                    {showAvatarInput && <CDashboard.FileInput onChange={changeAvatar} />}
                 </Dashboard.AvatarContainer>
             </Dashboard.Content>
         </ProfileContainer>

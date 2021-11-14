@@ -27,6 +27,10 @@ dialog {
     border: none;
 }
 
+label {
+    cursor: pointer;
+}
+
 label,
 dialog {
     display: block;

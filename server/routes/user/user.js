@@ -109,4 +109,13 @@ router.post(
     Services.updateProfile.default
 )
 
+router.post(
+    '/changeAvatar',
+    middlewares.jwtAuthorization,
+    middlewares.handleMulterFile(),
+    Services.changeAvatar.default
+)
+
+router.get('/removeAvatar', middlewares.jwtAuthorization, Services.removeAvatar.default)
+
 export default router

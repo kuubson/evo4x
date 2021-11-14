@@ -15,6 +15,9 @@ const Profile = sequelize => {
             avatar: {
                 type: TEXT,
                 allowNull: false
+            },
+            avatarCloudinaryId: {
+                type: TEXT
             }
         },
         {

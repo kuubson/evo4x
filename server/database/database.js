@@ -46,8 +46,8 @@ Subscription.belongsTo(User)
 const init = async () => {
     try {
         // await connection.sync({ force: true })
-        await connection.sync({ alter: true })
-        // await connection.sync()
+        // await connection.sync({ alter: true })
+        await connection.sync()
         console.log('The database connection has been established')
     } catch (error) {
         console.log({
