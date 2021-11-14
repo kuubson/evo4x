@@ -7,8 +7,8 @@ import { Connection, User, Subscription } from '@database'
 import utils from '@utils'
 
 const sendFile = async (req, res, next) => {
+    const { filename, path } = req.file
     try {
-        const { filename, path } = req.file
         await Connection.transaction(async transaction => {
             const { id, name } = req.user
             let type, content, cloudinaryId

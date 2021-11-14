@@ -4,12 +4,12 @@ import cloudinary from 'cloudinary'
 import { Connection } from '@database'
 
 const changeAvatar = async (req, res, next) => {
+    const { path } = req.file
     try {
-        const { path } = req.file
         await Connection.transaction(async transaction => {
-            const cloudinaryId = req.user.profile.avatarCloudinaryId
-            if (cloudinaryId) {
-                await cloudinary.v2.uploader.destroy(cloudinaryId, {
+            const { profile } = req.user
+            if (profile.avatarCloudinaryId) {
+                await cloudinary.v2.uploader.destroy(profile.avatarCloudinaryId, {
                     invalidate: true
                 })
             }
@@ -19,7 +19,7 @@ const changeAvatar = async (req, res, next) => {
             try {
                 fs.existsSync(path) && fs.unlinkSync(path)
             } catch (error) {}
-            await req.user.profile.update(
+            await profile.update(
                 {
                     avatar: secure_url,
                     avatarCloudinaryId: public_id

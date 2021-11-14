@@ -7,14 +7,14 @@ import utils from '@utils'
 const removeAvatar = async (req, res, next) => {
     try {
         await Connection.transaction(async transaction => {
-            const cloudinaryId = req.user.profile.avatarCloudinaryId
-            if (cloudinaryId) {
-                await cloudinary.v2.uploader.destroy(cloudinaryId, {
+            const { profile } = req.user
+            if (profile.avatarCloudinaryId) {
+                await cloudinary.v2.uploader.destroy(profile.avatarCloudinaryId, {
                     invalidate: true
                 })
             }
-            const avatar = utils.defaultAvatar(req.user.profile.name)
-            await req.user.profile.update(
+            const avatar = utils.defaultAvatar(profile.name)
+            await profile.update(
                 {
                     avatar
                 },
