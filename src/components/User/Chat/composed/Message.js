@@ -51,12 +51,11 @@ const Message = ({
     const showAvatar = () =>
         !withAnalysis && (
             <StyledMessage.Avatar
+                src={user.profile.avatar}
                 name={user.profile.name}
                 onDoubleClick={() => utils.history.push(`/users/${user.id}`)}
                 withCurrentUser={withCurrentUser}
-            >
-                {user.profile.name.charAt(0)}
-            </StyledMessage.Avatar>
+            />
         )
     return (
         <MessageContainer

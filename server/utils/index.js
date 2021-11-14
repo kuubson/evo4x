@@ -7,6 +7,7 @@ import cookie from './cookie'
 import emailTemplate from './emailTemplate'
 import validator from './validator'
 import checkSanitization from './checkSanitization'
+import defaultAvatar from './defaultAvatar'
 
 const utils = {
     Op,
@@ -17,7 +18,8 @@ const utils = {
     cookie,
     emailTemplate,
     validator,
-    checkSanitization
+    checkSanitization,
+    defaultAvatar
 }
 
 export default utils

@@ -22,7 +22,7 @@ const getMessages = async (req, res, next) => {
                     attributes: ['id'],
                     include: {
                         model: Profile,
-                        attributes: ['name']
+                        attributes: ['name', 'avatar']
                     }
                 }
             ]

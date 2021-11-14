@@ -26,7 +26,7 @@ const register = async (req, res, next) => {
                     },
                     profile: {
                         name,
-                        avatar: `https://eu.ui-avatars.com/api/?name=${name.charAt(0)}`
+                        avatar: utils.defaultAvatar(name)
                     }
                 },
                 {

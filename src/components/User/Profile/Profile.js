@@ -63,9 +63,7 @@ const Profile = () => {
         if (validate()) {
             try {
                 const url = '/api/user/updateProfile'
-                const updatedAvatar = withDefaultAvatar
-                    ? `https://eu.ui-avatars.com/api/?name=${name.charAt(0)}`
-                    : avatar
+                const updatedAvatar = withDefaultAvatar ? utils.defaultAvatar(name) : avatar
                 await utils.axios.post(url, {
                     name,
                     story,

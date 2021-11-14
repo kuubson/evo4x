@@ -7,6 +7,7 @@ import setRole from './setRole'
 import setApiFeedback from './setApiFeedback'
 import detectMobileDevice from './detectMobileDevice'
 import history from './history'
+import defaultAvatar from './defaultAvatar'
 
 const utils = {
     axios,
@@ -17,7 +18,8 @@ const utils = {
     setRole,
     setApiFeedback,
     detectMobileDevice,
-    history
+    history,
+    defaultAvatar
 }
 
 export default utils

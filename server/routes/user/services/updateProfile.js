@@ -1,3 +1,5 @@
+import { check } from 'express-validator'
+
 import utils from '@utils'
 
 const updateProfile = async (req, res, next) => {
@@ -18,7 +20,8 @@ const updateProfile = async (req, res, next) => {
 
 export const validation = () => [
     utils.validator.validateProperty('name'),
-    utils.validator.validateProperty('avatar')
+    check('story').trim().isString().bail(),
+    check('avatar').isURL()
 ]
 
 export default updateProfile

@@ -4,7 +4,8 @@ export default styled.div`
     width: 40px;
     height: 40px;
     margin-left: 15px;
-    background: ${({ theme }) => theme.primaryColor};
+    background: ${({ src }) => `url(${src})`} no-repeat center center;
+    background-size: 100% 100%;
     font-size: 16px;
     border-radius: 50%;
     color: black;
