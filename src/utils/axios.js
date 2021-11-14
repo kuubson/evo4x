@@ -11,7 +11,6 @@ apiAxios.interceptors.request.use(
         !timeoutId &&
             (timeoutId = setTimeout(() => {
                 utils.setLoading(true)
-                utils.setApiFeedback('')
             }, 500))
         return request
     },

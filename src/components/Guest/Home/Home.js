@@ -63,13 +63,7 @@ const Home = () => {
     const [showHelpSidebar, setShowHelpSidebar] = useState(false)
     const [showRegistrationModal, setShowRegistrationModal] = useState(false)
     const [showLoginModal, setShowLoginModal] = useState(false)
-    const handleToggler = dispatcher =>
-        dispatcher(state => {
-            if (state) {
-                setTimeout(() => utils.setApiFeedback(''), 600)
-            }
-            return !state
-        })
+    const handleToggler = dispatcher => dispatcher(state => !state)
     return (
         <HomeContainer>
             <Composed.HelpSidebar

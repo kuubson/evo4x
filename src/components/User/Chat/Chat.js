@@ -116,7 +116,6 @@ const Chat = () => {
                     content: message
                 })
                 if (response) {
-                    utils.setApiFeedback('')
                     socket.emit('sendMessage', _message)
                 }
             } catch (error) {
@@ -180,7 +179,6 @@ const Chat = () => {
                 }, 500)
                 const response = await axios.post(url, form)
                 if (response) {
-                    utils.setApiFeedback('')
                     setUploadPercentage(100)
                     clearInterval(intervalId)
                     setTimeout(() => {

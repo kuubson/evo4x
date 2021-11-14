@@ -71,9 +71,6 @@ const Profile = () => {
                     avatar: updatedAvatar
                 })
                 setAvatar(updatedAvatar)
-                setTimeout(() => {
-                    utils.setApiFeedback('')
-                }, 1500)
             } catch (error) {
                 utils.handleApiValidation(error, setForm)
             }

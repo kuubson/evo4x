@@ -112,14 +112,7 @@ const HelpSidebar = ({ showSidebar, toggleSidebar, hideSidebar, showLoginModal }
                     ✕
                 </RMDashboard.CloseButton>
                 {issues.map(({ issue, active, handleOnClick }) => (
-                    <StyledHelpSidebar.Issue
-                        key={issue}
-                        active={active}
-                        onClick={() => {
-                            utils.setApiFeedback('')
-                            handleOnClick()
-                        }}
-                    >
+                    <StyledHelpSidebar.Issue key={issue} active={active} onClick={handleOnClick}>
                         {issue}
                     </StyledHelpSidebar.Issue>
                 ))}
