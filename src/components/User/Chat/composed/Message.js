@@ -51,11 +51,11 @@ const Message = ({
     const showAvatar = () =>
         !withAnalysis && (
             <StyledMessage.Avatar
-                name={user.name}
+                name={user.profile.name}
                 onDoubleClick={() => utils.history.push(`/users/${user.id}`)}
                 withCurrentUser={withCurrentUser}
             >
-                {user.name.charAt(0)}
+                {user.profile.name.charAt(0)}
             </StyledMessage.Avatar>
         )
     return (

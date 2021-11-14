@@ -1,6 +1,6 @@
 import passportJwt from 'passport-jwt'
 
-import { User } from '@database'
+import { User, Profile } from '@database'
 
 const JwtStrategy = passportJwt.Strategy
 const ExtractJwt = passportJwt.ExtractJwt
@@ -18,7 +18,8 @@ const passport = passport => {
                     const user = await User.findOne({
                         where: {
                             email
-                        }
+                        },
+                        include: [Profile]
                     })
                     return user
                         ? done(false, {

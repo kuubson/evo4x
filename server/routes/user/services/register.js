@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 
-import { Connection, User, Authentication } from '@database'
+import { Connection, User, Authentication, Profile } from '@database'
 
 import utils from '@utils'
 
@@ -19,15 +19,18 @@ const register = async (req, res, next) => {
             const emailToken = jwt.sign({ email }, process.env.JWT_KEY, { expiresIn: '2h' })
             await User.create(
                 {
-                    name,
                     email,
                     password,
                     authentication: {
                         emailToken
+                    },
+                    profile: {
+                        name,
+                        avatar: `https://eu.ui-avatars.com/api/?name=${name.charAt(0)}`
                     }
                 },
                 {
-                    include: [Authentication],
+                    include: [Authentication, Profile],
                     transaction
                 }
             )

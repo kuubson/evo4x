@@ -5,10 +5,6 @@ const User = sequelize => {
     class User extends Model {}
     User.init(
         {
-            name: {
-                type: STRING,
-                allowNull: false
-            },
             email: {
                 type: STRING,
                 allowNull: false

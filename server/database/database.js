@@ -15,6 +15,7 @@ const connection = new sequelize(DATABASE_NAME, DATABASE_USERNAME, DATABASE_PASS
 import AdminModel from './models/Admin'
 import UserModel from './models/User'
 import AuthenticationModel from './models/Authentication'
+import ProfileModel from './models/Profile'
 import MessageModel from './models/Message'
 import AnalysisModel from './models/Analysis'
 import SubscriptionModel from './models/Subscription'
@@ -22,6 +23,7 @@ import SubscriptionModel from './models/Subscription'
 const Admin = AdminModel(connection)
 const User = UserModel(connection)
 const Authentication = AuthenticationModel(connection)
+const Profile = ProfileModel(connection)
 const Message = MessageModel(connection)
 const Analysis = AnalysisModel(connection)
 const Subscription = SubscriptionModel(connection)
@@ -32,6 +34,9 @@ Analysis.belongsTo(Admin)
 User.hasOne(Authentication)
 Authentication.belongsTo(User)
 
+User.hasOne(Profile)
+Profile.belongsTo(User)
+
 User.hasMany(Message)
 Message.belongsTo(User)
 
@@ -41,8 +46,8 @@ Subscription.belongsTo(User)
 const init = async () => {
     try {
         // await connection.sync({ force: true })
-        // await connection.sync({ alter: true })
-        await connection.sync()
+        await connection.sync({ alter: true })
+        // await connection.sync()
         console.log('The database connection has been established')
     } catch (error) {
         console.log({
@@ -53,4 +58,13 @@ const init = async () => {
 }
 init()
 
-export { connection as Connection, Admin, User, Authentication, Message, Analysis, Subscription }
+export {
+    connection as Connection,
+    Admin,
+    User,
+    Authentication,
+    Profile,
+    Message,
+    Analysis,
+    Subscription
+}

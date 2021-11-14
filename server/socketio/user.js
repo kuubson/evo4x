@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 
-import { User, Message } from '@database'
+import { User, Profile, Message } from '@database'
 
 import utils from '@utils'
 
@@ -20,7 +20,8 @@ export default io => {
                         const user = await User.findOne({
                             where: {
                                 email
-                            }
+                            },
+                            include: [Profile]
                         })
                         if (!user) {
                             next(new Error())

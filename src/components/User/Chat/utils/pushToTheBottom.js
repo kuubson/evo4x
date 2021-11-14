@@ -1,8 +1,12 @@
-const pushToTheBottom = ref => {
+const pushToTheBottom = (ref, withoutDelay) => {
     if (ref.current) {
-        setTimeout(() => {
+        if (withoutDelay) {
             ref.current.scrollTop = ref.current.scrollHeight
-        }, 0)
+        } else {
+            setTimeout(() => {
+                ref.current.scrollTop = ref.current.scrollHeight
+            }, 0)
+        }
     }
 }
 

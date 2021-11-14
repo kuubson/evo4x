@@ -99,4 +99,14 @@ router.post(
     Services.getAnalysis.default
 )
 
+router.get('/getProfile', middlewares.jwtAuthorization, Services.getProfile.default)
+
+router.post(
+    '/updateProfile',
+    middlewares.jwtAuthorization,
+    Services.updateProfile.validation(),
+    middlewares.checkValidation,
+    Services.updateProfile.default
+)
+
 export default router

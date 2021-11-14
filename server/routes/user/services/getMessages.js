@@ -1,10 +1,13 @@
-import { User, Message } from '@database'
+import { User, Profile, Message } from '@database'
 
 import utils from '@utils'
 
 const getMessages = async (req, res, next) => {
     try {
-        const { id, name } = req.user
+        const {
+            id,
+            profile: { name }
+        } = req.user
         const { limit, offset } = req.body
         const messages = await Message.findAll({
             limit,
@@ -16,7 +19,11 @@ const getMessages = async (req, res, next) => {
             include: [
                 {
                     model: User,
-                    attributes: ['id', 'name']
+                    attributes: ['id'],
+                    include: {
+                        model: Profile,
+                        attributes: ['name']
+                    }
                 }
             ]
         }).then(
@@ -40,7 +47,9 @@ const getMessages = async (req, res, next) => {
             messages,
             user: {
                 id,
-                name
+                profile: {
+                    name
+                }
             }
         })
     } catch (error) {

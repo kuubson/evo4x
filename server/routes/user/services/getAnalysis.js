@@ -3,8 +3,8 @@ import { Analysis } from '@database'
 import utils from '@utils'
 
 const getAnalysis = async (req, res, next) => {
-    const { id } = req.user
     try {
+        const { id } = req.user
         const { limit, offset } = req.body
         const analysis = await Analysis.findAll({
             limit,

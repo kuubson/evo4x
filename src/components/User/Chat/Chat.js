@@ -61,7 +61,7 @@ const Chat = () => {
                 const { messages, user } = response.data
                 setMessages(messages)
                 setCurrentUser(user)
-                pushToTheBottom(messagesRef)
+                pushToTheBottom(messagesRef, true)
                 if (messages.length >= lastUnreadMessageIndex) {
                     setUnreadMessagesAmount(0)
                 }
