@@ -60,6 +60,7 @@ const Home = () => {
             authenticateEmail()
         }
     }, [emailToken])
+    const [role, setRole] = useState('user')
     const [showHelpSidebar, setShowHelpSidebar] = useState(false)
     const [showRegistrationModal, setShowRegistrationModal] = useState(false)
     const [showLoginModal, setShowLoginModal] = useState(false)
@@ -79,6 +80,8 @@ const Home = () => {
             <LoginModal
                 showModal={showLoginModal}
                 toggleModal={() => handleToggler(setShowLoginModal)}
+                role={role}
+                setRole={setRole}
             />
             <Navbar
                 links={[
@@ -119,6 +122,12 @@ const Home = () => {
             <Dashboard.Header>
                 <Dashboard.Logo src={Logo} alt="evo4x" />
             </Dashboard.Header>
+            <Dashboard.HiddenButton
+                onDoubleClick={() => {
+                    setRole('admin')
+                    handleToggler(setShowLoginModal)
+                }}
+            />
         </HomeContainer>
     )
 }

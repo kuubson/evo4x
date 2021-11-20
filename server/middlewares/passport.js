@@ -14,6 +14,19 @@ const passport = passport => {
                 secretOrKey: process.env.JWT_KEY
             },
             async ({ role, email }, done) => {
+                if (role === 'admin') {
+                    const admin = await User.findOne({
+                        where: {
+                            email
+                        }
+                    })
+                    return admin
+                        ? done(false, {
+                              role,
+                              user: admin
+                          })
+                        : done(false, {})
+                }
                 if (role === 'user') {
                     const user = await User.findOne({
                         where: {

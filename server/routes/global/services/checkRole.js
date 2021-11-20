@@ -29,7 +29,19 @@ const checkRole = async (req, res, next) => {
                 throw new utils.ApiError('Authentication has failed. Please login again', 401)
             }
             const { role, email } = data
-            if (role === 'user') {
+            if (role === 'admin') {
+                const admin = await Admin.findOne({
+                    where: {
+                        email
+                    }
+                })
+                if (!admin) {
+                    throw new utils.ApiError('Authentication has failed. Please login again', 401)
+                }
+                res.send({
+                    role: 'admin'
+                })
+            } else if (role === 'user') {
                 const user = await User.findOne({
                     where: {
                         email

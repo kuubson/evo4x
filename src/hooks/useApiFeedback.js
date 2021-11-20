@@ -9,7 +9,7 @@ const useApiFeedback = () => {
         if (apiFeedback) {
             setTimeout(() => {
                 utils.setApiFeedback('')
-            }, 2000)
+            }, 3000)
         }
     }, [apiFeedback])
     return {

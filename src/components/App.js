@@ -3,10 +3,12 @@ import styled from 'styled-components/macro'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import axios from 'axios'
 
-import { Guest, User } from 'components/Shared/Roles'
+import { Guest, Admin, User } from 'components/Shared/Roles'
 import Loader from 'components/Shared/Loader/Loader'
 
 import Home from 'components/Guest/Home/Home'
+
+import AdminAnalysis from 'components/Admin/Analysis/Analysis'
 
 import Profile from 'components/User/Profile/Profile'
 import Chat from 'components/User/Chat/Chat'
@@ -78,6 +80,15 @@ const App = () => {
                 <User>
                     <Analysis />
                 </User>
+            )
+        },
+        {
+            id: 6,
+            pathname: '/admin/analysis',
+            render: () => (
+                <Admin>
+                    <AdminAnalysis />
+                </Admin>
             )
         },
         {

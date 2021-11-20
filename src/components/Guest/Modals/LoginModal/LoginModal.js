@@ -14,7 +14,7 @@ import utils from 'utils'
 
 const LoginModalContainer = styled(sharedStyled.BlackLayer)``
 
-const LoginModal = ({ showModal, toggleModal }) => {
+const LoginModal = ({ showModal, toggleModal, role, setRole }) => {
     const [form, setForm] = useState({
         email: '',
         emailError: '',
@@ -38,14 +38,14 @@ const LoginModal = ({ showModal, toggleModal }) => {
         e.preventDefault()
         if (validate()) {
             try {
-                const url = '/api/user/login'
+                const url = `/api/${role}/login`
                 const response = await utils.axios.post(url, {
                     email,
                     password
                 })
                 if (response) {
-                    utils.setRole('user')
-                    utils.history.push('/user/profile')
+                    utils.setRole(role)
+                    utils.history.push(role === 'admin' ? '/admin/analysis' : '/user/profile')
                 }
             } catch (error) {
                 utils.handleApiValidation(error, setForm)
@@ -55,7 +55,14 @@ const LoginModal = ({ showModal, toggleModal }) => {
     return (
         <LoginModalContainer showLayer={showModal}>
             <RMDashboard.Content showModal={showModal}>
-                <RMDashboard.CloseButton onClick={toggleModal}>✕</RMDashboard.CloseButton>
+                <RMDashboard.CloseButton
+                    onClick={() => {
+                        setRole('user')
+                        toggleModal()
+                    }}
+                >
+                    ✕
+                </RMDashboard.CloseButton>
                 <RMDashboard.Header>"Get rich or die trying"</RMDashboard.Header>
                 <RMDashboard.Form onSubmit={login} noValidate>
                     <RMComposed.Input

@@ -61,6 +61,8 @@ const User = ({ children, chat }) => {
         const url = '/api/global/logout'
         const response = await utils.axios.get(url)
         if (response) {
+            socket.disconnect()
+            setSocket(undefined)
             utils.setRole('guest')
             utils.history.push('/')
         }
