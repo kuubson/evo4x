@@ -15,7 +15,7 @@ const passport = passport => {
             },
             async ({ role, email }, done) => {
                 if (role === 'admin') {
-                    const admin = await User.findOne({
+                    const admin = await Admin.findOne({
                         where: {
                             email
                         }

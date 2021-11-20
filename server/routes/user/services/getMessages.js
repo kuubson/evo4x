@@ -6,7 +6,7 @@ const getMessages = async (req, res, next) => {
     try {
         const {
             id,
-            profile: { name }
+            profile: { name, avatar }
         } = req.user
         const { limit, offset } = req.body
         const messages = await Message.findAll({
@@ -48,7 +48,8 @@ const getMessages = async (req, res, next) => {
             user: {
                 id,
                 profile: {
-                    name
+                    name,
+                    avatar
                 }
             }
         })

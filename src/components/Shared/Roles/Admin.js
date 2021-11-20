@@ -8,6 +8,8 @@ import Navbar from 'components/Shared/Navbar/Navbar'
 
 import utils from 'utils'
 
+import { logout } from './utils'
+
 const AdminContainer = styled.section`
     height: 100%;
     padding-top: 80px;
@@ -27,16 +29,6 @@ const Admin = ({ children }) => {
             setSocket(io('/admin'))
         }
     }, [])
-    const logout = async () => {
-        const url = '/api/global/logout'
-        const response = await utils.axios.get(url)
-        if (response) {
-            socket.disconnect()
-            setSocket(undefined)
-            utils.setRole('guest')
-            utils.history.push('/')
-        }
-    }
     return role === 'admin' ? (
         <AdminContainer>
             <Navbar
@@ -48,7 +40,7 @@ const Admin = ({ children }) => {
                     },
                     {
                         link: 'Logout',
-                        onClick: logout
+                        onClick: () => logout(socket, setSocket)
                     }
                 ]}
             />
