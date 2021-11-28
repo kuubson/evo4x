@@ -38,7 +38,7 @@ const LoginModal = ({ showModal, toggleModal, role, setRole }) => {
         e.preventDefault()
         if (validate()) {
             try {
-                const url = `/api/${role}/login`
+                const url = `/api/${role}/auth/login`
                 const response = await utils.axios.post(url, {
                     email,
                     password

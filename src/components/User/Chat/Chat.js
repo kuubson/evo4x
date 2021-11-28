@@ -34,7 +34,7 @@ const Chat = () => {
     const [uploadPercentage, setUploadPercentage] = useState(0)
     const fileUpload = !!uploadPercentage
     const getMessages = async (limit, offset, e) => {
-        const url = '/api/user/getMessages'
+        const url = '/api/user/communication/getMessages'
         if (e && e.target.scrollTop <= 0 && hasMoreMessages) {
             const response = await utils.axios.post(url, {
                 limit,
@@ -70,7 +70,7 @@ const Chat = () => {
     }
     useEffect(() => {
         getMessages(20, 0)
-        utils.subscribePushNotifications('/api/user/subscribePushNotifications')
+        utils.subscribePushNotifications('/api/user/communication/subscribePushNotifications')
     }, [])
     useEffect(() => {
         const handleOnSendMessage = message => {
@@ -82,7 +82,7 @@ const Chat = () => {
         return () => socket && socket.off('sendMessage', handleOnSendMessage)
     }, [socket])
     const getUnreadMessages = async () => {
-        const url = '/api/user/getMessages'
+        const url = '/api/user/communication/getMessages'
         const response = await utils.axios.post(url, {
             limit: lastUnreadMessageIndex,
             offset: 0
@@ -111,7 +111,7 @@ const Chat = () => {
             pushToTheBottom(messagesRef)
             setTimeout(() => setMessage(''), 0)
             try {
-                const url = '/api/user/sendMessage'
+                const url = '/api/user/communication/sendMessage'
                 const response = await axios.post(url, {
                     content: message
                 })
@@ -172,7 +172,7 @@ const Chat = () => {
             const form = new FormData()
             form.append('file', file)
             try {
-                const url = '/api/user/sendFile'
+                const url = '/api/user/communication/sendFile'
                 intervalId = setInterval(() => {
                     if (percentage < 100) {
                         percentage++

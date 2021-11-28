@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 
-import { User } from '@database'
+import { Admin, User } from '@database'
 
 import utils from '@utils'
 

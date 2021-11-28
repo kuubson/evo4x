@@ -31,7 +31,7 @@ const Profile = () => {
     const [avatar, setAvatar] = useState('')
     useEffect(() => {
         const getProfile = async () => {
-            const url = '/api/user/getProfile'
+            const url = '/api/user/profile/getProfile'
             const response = await utils.axios.get(url)
             if (response) {
                 const { name, story, avatar } = response.data
@@ -62,7 +62,7 @@ const Profile = () => {
         e.preventDefault()
         if (validate()) {
             try {
-                const url = '/api/user/updateProfile'
+                const url = '/api/user/profile/updateProfile'
                 const updatedAvatar = withDefaultAvatar ? utils.defaultAvatar(name) : avatar
                 await utils.axios.post(url, {
                     name,
@@ -99,7 +99,7 @@ const Profile = () => {
             const form = new FormData()
             form.append('file', file)
             try {
-                const url = '/api/user/changeAvatar'
+                const url = '/api/user/profile/changeAvatar'
                 const response = await utils.axios.post(url, form)
                 if (response) {
                     const { avatar } = response.data
@@ -112,7 +112,7 @@ const Profile = () => {
         }
     }
     const removeAvatar = async () => {
-        const url = '/api/user/removeAvatar'
+        const url = '/api/user/profile/removeAvatar'
         const response = await utils.axios.get(url)
         if (response) {
             const { avatar } = response.data

@@ -55,7 +55,7 @@ const RegistrationModal = ({ showModal, toggleModal }) => {
         e.preventDefault()
         if (validate()) {
             try {
-                const url = '/api/user/register'
+                const url = '/api/user/auth/register'
                 await utils.axios.post(url, {
                     name,
                     email,

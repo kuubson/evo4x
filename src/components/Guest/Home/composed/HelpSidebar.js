@@ -59,7 +59,7 @@ const HelpSidebar = ({ showSidebar, toggleSidebar, hideSidebar, showLoginModal }
         if (validate()) {
             try {
                 if (issue === 'changePassword') {
-                    const url = '/api/user/changePassword'
+                    const url = '/api/user/auth/changePassword'
                     const response = await utils.axios.post(url, {
                         password,
                         repeatedPassword,
@@ -71,7 +71,7 @@ const HelpSidebar = ({ showSidebar, toggleSidebar, hideSidebar, showLoginModal }
                         showLoginModal()
                     }
                 } else {
-                    const url = `/api/user/${
+                    const url = `/api/user/auth/${
                         issue === 'password' ? 'requestPasswordChange' : 'resendEmail'
                     }`
                     await utils.axios.post(url, {

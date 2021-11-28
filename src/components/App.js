@@ -24,7 +24,7 @@ const App = () => {
     useEffect(() => {
         const checkRole = async () => {
             try {
-                const url = '/api/global/checkRole'
+                const url = '/api/global/auth/checkRole'
                 const response = await axios.get(url)
                 if (response) {
                     const { role } = response.data

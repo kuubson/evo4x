@@ -4,8 +4,10 @@ import admin from './admin/admin'
 
 import user from './user/user'
 
-export default app => {
+const routes = app => {
     app.use('/api/global', global)
     app.use('/api/admin', admin)
     app.use('/api/user', user)
 }
+
+export default routes

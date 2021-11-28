@@ -1,18 +1,9 @@
 import { Router } from 'express'
 
-import middlewares from '@middlewares'
-
-import Services from './services'
+import Controllers from './controllers'
 
 const router = Router()
 
-router.get(
-    '/checkRole',
-    Services.checkRole.validation(),
-    middlewares.checkValidation,
-    Services.checkRole.default
-)
-
-router.get('/logout', Services.logout.default)
+router.use('/auth', Controllers.Auth)
 
 export default router

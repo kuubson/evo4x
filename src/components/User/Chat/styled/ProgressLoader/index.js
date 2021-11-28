@@ -3,9 +3,11 @@ import Rings from './Rings'
 import Ring from './Ring'
 import Percentage from './Percentage'
 
-export default {
+const StyledProgressLoader = {
     Rings,
     RingsContainer,
     Ring,
     Percentage
 }
+
+export default StyledProgressLoader

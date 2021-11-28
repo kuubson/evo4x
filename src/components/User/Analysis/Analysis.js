@@ -18,7 +18,7 @@ const Analysis = () => {
     const [analysis, setAnalysis] = useState([])
     const [hasMoreAnalysis, setHasMoreAnalysis] = useState(true)
     const getAnalysis = async (limit, offset, e) => {
-        const url = '/api/user/getAnalysis'
+        const url = '/api/user/communication/getAnalysis'
         if (e && e.target.scrollTop <= 0 && hasMoreAnalysis) {
             const response = await utils.axios.post(url, {
                 limit,

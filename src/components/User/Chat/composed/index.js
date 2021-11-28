@@ -1,7 +1,9 @@
 import Message from './Message'
 import ProgressLoader from './ProgressLoader'
 
-export default {
+const Composed = {
     Message,
     ProgressLoader
 }
+
+export default Composed

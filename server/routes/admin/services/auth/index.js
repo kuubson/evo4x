@@ -1,5 +1,7 @@
 import * as login from './login'
 
-export default {
+const auth = {
     login
 }
+
+export default auth

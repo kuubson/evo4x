@@ -48,7 +48,7 @@ const Home = () => {
         const authenticateEmail = async () => {
             try {
                 handleToggler(setShowLoginModal)
-                const url = '/api/user/authenticateEmail'
+                const url = '/api/user/auth/authenticateEmail'
                 await utils.axios.post(url, {
                     emailToken
                 })

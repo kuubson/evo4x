@@ -36,7 +36,7 @@ const User = ({ children, chat }) => {
             setSocket(io('/user'))
         }
         const getUnreadMessagesInfo = async () => {
-            const url = '/api/user/getUnreadMessagesInfo'
+            const url = '/api/user/communication/getUnreadMessagesInfo'
             const response = await utils.axios.get(url)
             if (response) {
                 const { user, lastUnreadMessageIndex, unreadMessagesAmount } = response.data

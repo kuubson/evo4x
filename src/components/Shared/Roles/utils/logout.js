@@ -1,7 +1,7 @@
 import utils from 'utils'
 
 const logout = async (socket, setSocket) => {
-    const url = '/api/global/logout'
+    const url = '/api/global/auth/logout'
     const response = await utils.axios.get(url)
     if (response) {
         socket.disconnect()
