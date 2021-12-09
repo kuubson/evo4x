@@ -4,7 +4,7 @@ import utils from 'utils'
 
 const apiAxios = axios.create()
 
-let timeoutId
+let timeoutId: any
 
 apiAxios.interceptors.request.use(
     request => {

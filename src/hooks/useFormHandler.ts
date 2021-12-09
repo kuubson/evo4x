@@ -1,12 +1,34 @@
+import React from 'react'
 import validator from 'validator'
 import sanitize from 'sanitize-html'
 
-const useFormHandler = setForm => {
-    const handleInputValue = ({ target: { name, value } }) =>
+type InputValueHandler = (e: React.ChangeEvent<HTMLInputElement>) => void
+
+type InputErrorHandler = (errorKey: string, error: string) => void
+
+type PropertyValidator = (property: string, value: string) => boolean
+
+type EmailValidator = (email: string) => boolean
+
+type PasswordValidator = (password: string, repeatedPassword: string, withLogin: boolean) => boolean
+
+type RepeatedPasswordValidator = (repeatedPassword: string, password: string) => boolean
+
+type FormHandler = <T>(setForm: React.Dispatch<React.SetStateAction<T>>) => {
+    handleInputValue: InputValueHandler
+    handleInputError: InputErrorHandler
+    validateProperty: PropertyValidator
+    validateEmail: EmailValidator
+    validatePassword: PasswordValidator
+    validateRepeatedPassword: RepeatedPasswordValidator
+}
+
+const useFormHandler: FormHandler = setForm => {
+    const handleInputValue: InputValueHandler = ({ target: { name, value } }) =>
         setForm(form => ({ ...form, [name]: value }))
-    const handleInputError = (errorKey, error) =>
+    const handleInputError: InputErrorHandler = (errorKey, error) =>
         setForm(form => ({ ...form, [`${errorKey}Error`]: error }))
-    const validateProperty = (property, value) => {
+    const validateProperty: PropertyValidator = (property, value) => {
         let validated = true
         switch (true) {
             case !value.trim():
@@ -22,7 +44,7 @@ const useFormHandler = setForm => {
         }
         return validated
     }
-    const validateEmail = email => {
+    const validateEmail: EmailValidator = email => {
         let validated = true
         switch (true) {
             case !email.trim():
@@ -38,7 +60,7 @@ const useFormHandler = setForm => {
         }
         return validated
     }
-    const validatePassword = (password, repeatedPassword, withLogin = false) => {
+    const validatePassword: PasswordValidator = (password, repeatedPassword, withLogin) => {
         let validated = true
         if (!withLogin) {
             switch (true) {
@@ -85,7 +107,7 @@ const useFormHandler = setForm => {
         }
         return validated
     }
-    const validateRepeatedPassword = (repeatedPassword, password) => {
+    const validateRepeatedPassword: RepeatedPasswordValidator = (repeatedPassword, password) => {
         let validated = true
         switch (true) {
             case !repeatedPassword:

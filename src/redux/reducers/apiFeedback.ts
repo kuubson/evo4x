@@ -1,10 +1,17 @@
+import actions from 'redux/actions'
+
 const initialState = {
     apiFeedback: ''
 }
 
-const apiFeedback = (state = initialState, { payload, type }) => {
+type Action = {
+    payload: string
+    type: 'SET_API_FEEDBACK'
+}
+
+const apiFeedback = (state = initialState, { payload, type }: Action) => {
     switch (type) {
-        case 'setApiFeedback':
+        case actions.SET_API_FEEDBACK:
             return {
                 ...state,
                 apiFeedback: payload

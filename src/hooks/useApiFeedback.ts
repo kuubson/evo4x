@@ -1,10 +1,10 @@
 import { useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useAppSelector } from 'redux/hooks'
 
 import utils from 'utils'
 
 const useApiFeedback = () => {
-    const { apiFeedback } = useSelector(state => state.apiFeedback)
+    const { apiFeedback } = useAppSelector(state => state.apiFeedback)
     useEffect(() => {
         if (apiFeedback) {
             setTimeout(() => {

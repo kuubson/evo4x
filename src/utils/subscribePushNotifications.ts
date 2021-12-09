@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const urlBase64ToUint8Array = base64String => {
+const urlBase64ToUint8Array = (base64String: string) => {
     const padding = '='.repeat((4 - (base64String.length % 4)) % 4)
     const base64 = (base64String + padding).replace(/\-/g, '+').replace(/_/g, '/')
     const rawData = window.atob(base64)
@@ -11,7 +11,7 @@ const urlBase64ToUint8Array = base64String => {
     return outputArray
 }
 
-const subscribePushNotifications = async url => {
+const subscribePushNotifications = async (url: string) => {
     try {
         const { permissions, serviceWorker } = navigator
         const handlePushNotifications = async () => {
@@ -21,7 +21,7 @@ const subscribePushNotifications = async url => {
                     const subscription = await pushManager.subscribe({
                         userVisibleOnly: true,
                         applicationServerKey: urlBase64ToUint8Array(
-                            process.env.REACT_APP_PUBLIC_VAPID_KEY
+                            process.env.REACT_APP_PUBLIC_VAPID_KEY!
                         )
                     })
                     await axios.post(url, subscription)
@@ -29,7 +29,11 @@ const subscribePushNotifications = async url => {
             }
         }
         if (permissions) {
-            const { state } = await permissions.query({ name: 'push', userVisibleOnly: true })
+            const options = {
+                name: 'push',
+                userVisibleOnly: true
+            }
+            const { state } = await permissions.query(options as any)
             switch (state) {
                 case 'granted':
                     handlePushNotifications()

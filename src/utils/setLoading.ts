@@ -1,6 +1,6 @@
 import { store } from 'redux/store'
 
-const setLoading = loading =>
+const setLoading = (loading: boolean) =>
     store.dispatch({
         type: 'setLoading',
         payload: loading

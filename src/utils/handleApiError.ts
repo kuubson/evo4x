@@ -1,6 +1,6 @@
 import utils from 'utils'
 
-const handleApiError = error => {
+const handleApiError = (error: any) => {
     if (process.env.NODE_ENV !== 'production') {
         console.log(error)
     }

@@ -1,11 +1,11 @@
-import { useDispatch, useSelector } from 'react-redux'
+import { useAppDispatch, useAppSelector } from 'redux/hooks'
 
 const useMessages = () => {
-    const dispatch = useDispatch()
-    const { lastUnreadMessageIndex, unreadMessagesAmount } = useSelector(state => state.messages)
-    const setLastUnreadMessageIndex = payload =>
+    const dispatch = useAppDispatch()
+    const { lastUnreadMessageIndex, unreadMessagesAmount } = useAppSelector(state => state.messages)
+    const setLastUnreadMessageIndex = (payload: number) =>
         dispatch({ type: 'setLastUnreadMessageIndex', payload })
-    const setUnreadMessagesAmount = payload =>
+    const setUnreadMessagesAmount = (payload: number) =>
         dispatch({ type: 'setUnreadMessagesAmount', payload })
     return {
         lastUnreadMessageIndex,

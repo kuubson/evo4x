@@ -1,6 +1,6 @@
 import { store } from 'redux/store'
 
-const setApiFeedback = apiFeedback =>
+const setApiFeedback = (apiFeedback: string) =>
     store.dispatch({
         type: 'setApiFeedback',
         payload: apiFeedback
