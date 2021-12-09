@@ -1,15 +1,20 @@
+/// <reference lib="webworker" />
+/* eslint-disable no-restricted-globals */
+
 import { clientsClaim } from 'workbox-core'
 import { ExpirationPlugin } from 'workbox-expiration'
 import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching'
 import { registerRoute } from 'workbox-routing'
 import { StaleWhileRevalidate } from 'workbox-strategies'
 
+declare const self: ServiceWorkerGlobalScope
+
 clientsClaim()
 
 precacheAndRoute(self.__WB_MANIFEST)
 
 const fileExtensionRegexp = new RegExp('/[^/?]+\\.[^/]+$')
-registerRoute(({ request, url }) => {
+registerRoute(({ request, url }: { request: Request; url: URL }) => {
     if (request.mode !== 'navigate') {
         return false
     }
@@ -37,9 +42,9 @@ self.addEventListener('message', event => {
 })
 
 self.addEventListener('push', event => {
-    const { tag, title, body, image, icon, data } = event.data.json()
+    const { tag, title, body, image, icon, data } = event.data?.json()
     const isFocused = () =>
-        clients
+        self.clients
             .matchAll({
                 type: 'window',
                 includeUncontrolled: true
@@ -94,7 +99,7 @@ self.addEventListener('notificationclick', event => {
             .then(notifications => notifications.map(notification => notification.close()))
     )
     event.waitUntil(
-        clients
+        self.clients
             .matchAll({
                 type: 'window',
                 includeUncontrolled: true
@@ -104,7 +109,7 @@ self.addEventListener('notificationclick', event => {
                     const client = clientsList[i]
                     if ('focus' in client) return client.focus()
                 }
-                return clients.openWindow(event.notification.data.url)
+                return self.clients.openWindow(event.notification.data.url)
             })
     )
 })
