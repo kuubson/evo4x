@@ -1,7 +1,5 @@
 import actions from 'redux/actions'
 
-type Role = 'admin' | 'user' | 'guest'
-
 type State = {
     role: Role
 }

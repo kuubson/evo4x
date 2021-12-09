@@ -1,8 +1,10 @@
 import { store } from 'redux/store'
 
-const setRole = (role: 'admin' | 'user' | 'guest') =>
+import actions from 'redux/actions'
+
+const setRole = (role: Role) =>
     store.dispatch({
-        type: 'setRole',
+        type: actions.SET_ROLE,
         payload: role
     })
 
