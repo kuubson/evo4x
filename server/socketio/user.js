@@ -4,7 +4,7 @@ import { User, Profile, Message } from '@database'
 
 import utils from '@utils'
 
-export default io => {
+const user = io => {
     const userIo = io.of('/user')
     userIo.use((socket, next) => {
         const token = utils.cookie.getCookie(socket.request.headers.cookie, 'token')
@@ -57,3 +57,5 @@ export default io => {
         })
     })
 }
+
+export default user

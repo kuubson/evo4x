@@ -1,5 +1,7 @@
 import user from './user'
 
-export default io => {
+const socketio = io => {
     user(io)
 }
+
+export default socketio
