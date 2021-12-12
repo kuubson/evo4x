@@ -19,7 +19,7 @@ type MessageTypes = 'MESSAGE' | 'IMAGE' | 'VIDEO' | 'FILE'
 
 type Message = {
     id: number
-    type: Messagetypes
+    type: MessageTypes
     content: string
     createdAt: Date
     user: User
@@ -27,7 +27,7 @@ type Message = {
 
 type Analysis = {
     id: number
-    type: Messagetypes
+    type: MessageTypes
     content: string
     createdAt: Date
     views: number
