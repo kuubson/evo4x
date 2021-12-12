@@ -12,7 +12,10 @@ const useSocket = () => {
             type: actions.SET_SOCKET,
             payload
         })
-    return [socket, setSocket]
+    return {
+        socket,
+        setSocket
+    }
 }
 
 export default useSocket
