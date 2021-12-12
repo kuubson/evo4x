@@ -6,9 +6,9 @@ import hooks from 'hooks'
 import ApiFeedback from 'components/Shared/ApiFeedback/ApiFeedback'
 
 import sharedStyled from 'components/Shared/styled'
-import RMDashboard from 'components/Guest/Modals/RegistrationModal/styled/Dashboard'
+import RegistrationModalDashboard from 'components/Guest/Modals/RegistrationModal/styled/Dashboard'
 
-import RMComposed from 'components/Guest/Modals/RegistrationModal/composed'
+import RegistrationModalComposed from 'components/Guest/Modals/RegistrationModal/composed'
 
 import utils from 'utils'
 
@@ -61,18 +61,18 @@ const LoginModal: React.FC<ILoginModal> = ({ showModal, toggleModal, role, setRo
     }
     return (
         <LoginModalContainer showLayer={showModal}>
-            <RMDashboard.Content showModal={showModal}>
-                <RMDashboard.CloseButton
+            <RegistrationModalDashboard.Content showModal={showModal}>
+                <RegistrationModalDashboard.CloseButton
                     onClick={() => {
                         setRole('user')
                         toggleModal()
                     }}
                 >
                     ✕
-                </RMDashboard.CloseButton>
-                <RMDashboard.Header>"Get rich or die trying"</RMDashboard.Header>
-                <RMDashboard.Form onSubmit={login} noValidate>
-                    <RMComposed.Input
+                </RegistrationModalDashboard.CloseButton>
+                <RegistrationModalDashboard.Header>"Get rich or die trying"</RegistrationModalDashboard.Header>
+                <RegistrationModalDashboard.Form onSubmit={login} noValidate>
+                    <RegistrationModalComposed.Input
                         id="loginEmail"
                         name="email"
                         type="email"
@@ -82,7 +82,7 @@ const LoginModal: React.FC<ILoginModal> = ({ showModal, toggleModal, role, setRo
                         error={emailError}
                         onChange={formHandler.handleInputValue}
                     />
-                    <RMComposed.Input
+                    <RegistrationModalComposed.Input
                         id="loginPassword"
                         name="password"
                         type="password"
@@ -92,10 +92,10 @@ const LoginModal: React.FC<ILoginModal> = ({ showModal, toggleModal, role, setRo
                         error={passwordError}
                         onChange={formHandler.handleInputValue}
                     />
-                    <RMDashboard.Submit>Login</RMDashboard.Submit>
+                    <RegistrationModalDashboard.Submit>Login</RegistrationModalDashboard.Submit>
                     <ApiFeedback />
-                </RMDashboard.Form>
-            </RMDashboard.Content>
+                </RegistrationModalDashboard.Form>
+            </RegistrationModalDashboard.Content>
         </LoginModalContainer>
     )
 }

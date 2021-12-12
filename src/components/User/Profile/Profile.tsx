@@ -5,10 +5,10 @@ import hooks from 'hooks'
 
 import ApiFeedback from 'components/Shared/ApiFeedback/ApiFeedback'
 
-import CDashboard from 'components/User/Chat/styled/Dashboard'
+import ChatDashboard from 'components/User/Chat/styled/Dashboard'
 import Dashboard from './styled/Dashboard'
 
-import RMComposed from 'components/Guest/Modals/RegistrationModal/composed'
+import RegistrationModalComposed from 'components/Guest/Modals/RegistrationModal/composed'
 
 import utils from 'utils'
 
@@ -123,7 +123,7 @@ const Profile = () => {
         <ProfileContainer>
             <Dashboard.Content>
                 <Dashboard.Info onSubmit={updateProfile}>
-                    <RMComposed.Input
+                    <RegistrationModalComposed.Input
                         id="name"
                         name="name"
                         type="text"
@@ -133,7 +133,7 @@ const Profile = () => {
                         error={nameError}
                         onChange={formHandler.handleInputValue}
                     />
-                    <RMComposed.Input
+                    <RegistrationModalComposed.Input
                         id="story"
                         name="story"
                         type="textarea"
@@ -158,7 +158,7 @@ const Profile = () => {
                             </Dashboard.Button>
                         )}
                     </Dashboard.Buttons>
-                    {showAvatarInput && <CDashboard.FileInput onChange={changeAvatar} />}
+                    {showAvatarInput && <ChatDashboard.FileInput onChange={changeAvatar} />}
                 </Dashboard.AvatarContainer>
             </Dashboard.Content>
         </ProfileContainer>

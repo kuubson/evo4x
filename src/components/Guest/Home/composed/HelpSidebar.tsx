@@ -6,10 +6,10 @@ import hooks from 'hooks'
 import ApiFeedback from 'components/Shared/ApiFeedback/ApiFeedback'
 
 import sharedStyled from 'components/Shared/styled'
-import RMDashboard from 'components/Guest/Modals/RegistrationModal/styled/Dashboard'
+import RegistrationModalDashboard from 'components/Guest/Modals/RegistrationModal/styled/Dashboard'
 import StyledHelpSidebar from '../styled/HelpSidebar'
 
-import RMComposed from 'components/Guest/Modals/RegistrationModal/composed'
+import RegistrationModalComposed from 'components/Guest/Modals/RegistrationModal/composed'
 
 import utils from 'utils'
 
@@ -115,14 +115,14 @@ const HelpSidebar: React.FC<IHelpSidebar> = ({
     return (
         <HelpSidebarContainer showLayer={showSidebar}>
             <StyledHelpSidebar.Content showSidebar={showSidebar}>
-                <RMDashboard.CloseButton
+                <RegistrationModalDashboard.CloseButton
                     onClick={() => {
                         setTimeout(() => setIssue(''), 600)
                         toggleSidebar()
                     }}
                 >
                     ✕
-                </RMDashboard.CloseButton>
+                </RegistrationModalDashboard.CloseButton>
                 {issues.map(({ issue, active, handleOnClick }) => (
                     <StyledHelpSidebar.Issue key={issue} active={active} onClick={handleOnClick}>
                         {issue}
@@ -132,7 +132,7 @@ const HelpSidebar: React.FC<IHelpSidebar> = ({
                     <StyledHelpSidebar.Form onSubmit={handleHelpSidebar} noValidate>
                         {issue === 'changePassword' ? (
                             <>
-                                <RMComposed.Input
+                                <RegistrationModalComposed.Input
                                     id="helpSidebarPassword"
                                     name="password"
                                     type="password"
@@ -142,7 +142,7 @@ const HelpSidebar: React.FC<IHelpSidebar> = ({
                                     error={passwordError}
                                     onChange={formHandler.handleInputValue}
                                 />
-                                <RMComposed.Input
+                                <RegistrationModalComposed.Input
                                     id="helpSidebarRepeatedPassword"
                                     name="repeatedPassword"
                                     type="password"
@@ -154,7 +154,7 @@ const HelpSidebar: React.FC<IHelpSidebar> = ({
                                 />
                             </>
                         ) : (
-                            <RMComposed.Input
+                            <RegistrationModalComposed.Input
                                 id="helpSidebarEmail"
                                 name="email"
                                 type="email"
@@ -165,7 +165,7 @@ const HelpSidebar: React.FC<IHelpSidebar> = ({
                                 onChange={formHandler.handleInputValue}
                             />
                         )}
-                        <RMDashboard.Submit>
+                        <RegistrationModalDashboard.Submit>
                             {issue === 'email'
                                 ? 'Resend e-mail'
                                 : issue === 'link'
@@ -173,7 +173,7 @@ const HelpSidebar: React.FC<IHelpSidebar> = ({
                                 : issue === 'password'
                                 ? 'Request password change'
                                 : issue === 'changePassword' && 'Change password'}
-                        </RMDashboard.Submit>
+                        </RegistrationModalDashboard.Submit>
                         <ApiFeedback />
                     </StyledHelpSidebar.Form>
                 )}

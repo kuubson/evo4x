@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components/macro'
 
-import CDashboard from 'components/User/Chat/styled/Dashboard'
+import ChatDashboard from 'components/User/Chat/styled/Dashboard'
 
 import Composed from './composed'
 
@@ -56,8 +56,8 @@ const Analysis = () => {
     }, [])
     return (
         <AnalysisContainer>
-            <CDashboard.Content withAnalysis>
-                <CDashboard.Messages
+            <ChatDashboard.Content withAnalysis>
+                <ChatDashboard.Messages
                     ref={analysisRef}
                     onScroll={e => getAnalysis(20, analysis.length, e)}
                 >
@@ -77,8 +77,8 @@ const Analysis = () => {
                             />
                         )
                     })}
-                </CDashboard.Messages>
-            </CDashboard.Content>
+                </ChatDashboard.Messages>
+            </ChatDashboard.Content>
         </AnalysisContainer>
     )
 }

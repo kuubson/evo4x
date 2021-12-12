@@ -2,7 +2,7 @@ import React from 'react'
 
 import chatHooks from 'components/User/Chat/hooks'
 
-import CStyledMessage from 'components/User/Chat/styled/Message'
+import ChatStyledMessage from 'components/User/Chat/styled/Message'
 
 interface IAnalysis {
     analysis: Analysis
@@ -15,9 +15,13 @@ const Message: React.FC<IAnalysis> = ({
 }) => {
     const withLastUserMessage = !nextAnalysis
     const showError = (error: string) => (
-        <CStyledMessage.Content withCurrentUser withLastUserMessage={withLastUserMessage} withError>
+        <ChatStyledMessage.Content
+            withCurrentUser
+            withLastUserMessage={withLastUserMessage}
+            withError
+        >
             {error}
-        </CStyledMessage.Content>
+        </ChatStyledMessage.Content>
     )
     const { renderMessage: renderAnalysis } = chatHooks.useMessages({
         type,

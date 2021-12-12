@@ -13,7 +13,7 @@ import Composed from './composed'
 
 import utils from 'utils'
 
-import { pushToTheBottom } from 'components/User/Chat/utils'
+import { pushToTheBottom } from './utils'
 
 const ChatContainer = styled.section`
     height: 100%;
