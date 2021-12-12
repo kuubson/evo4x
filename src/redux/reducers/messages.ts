@@ -12,7 +12,7 @@ const initialState: State = {
 
 type LastUnreadMessageIndexAction = {
     payload: number
-    type: 'SET_LAST_UNDREAD_MESSAGE_INDEX'
+    type: 'SET_LAST_UNREAD_MESSAGE_INDEX'
 }
 
 type UnreadMessagesAmountAction = {
@@ -24,7 +24,7 @@ type Action = LastUnreadMessageIndexAction | UnreadMessagesAmountAction
 
 const messages = (state = initialState, { payload, type }: Action) => {
     switch (type) {
-        case actions.SET_LAST_UNDREAD_MESSAGE_INDEX:
+        case actions.SET_LAST_UNREAD_MESSAGE_INDEX:
             return {
                 ...state,
                 lastUnreadMessageIndex: payload

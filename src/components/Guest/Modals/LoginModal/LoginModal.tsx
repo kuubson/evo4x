@@ -70,7 +70,9 @@ const LoginModal: React.FC<ILoginModal> = ({ showModal, toggleModal, role, setRo
                 >
                     ✕
                 </RegistrationModalDashboard.CloseButton>
-                <RegistrationModalDashboard.Header>"Get rich or die trying"</RegistrationModalDashboard.Header>
+                <RegistrationModalDashboard.Header>
+                    "Get rich or die trying"
+                </RegistrationModalDashboard.Header>
                 <RegistrationModalDashboard.Form onSubmit={login} noValidate>
                     <RegistrationModalComposed.Input
                         id="loginEmail"
