@@ -1,15 +1,14 @@
 import 'dotenv/config'
-import './aliases'
 
 import express from 'express'
 import http from 'http'
 import path from 'path'
 
-import '@database'
+import 'database/database'
 
-import middlewares from '@middlewares'
+import middlewares from 'middlewares'
 
-import routes from '@routes'
+import routes from 'routes/routes'
 
 const app = express()
 const server = http.createServer(app)

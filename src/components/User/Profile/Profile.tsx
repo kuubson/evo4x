@@ -31,16 +31,20 @@ const Profile = () => {
     const [showAvatarInput, setShowAvatarInput] = useState(true)
     useEffect(() => {
         const getProfile = async () => {
-            const url = '/api/user/profile/getProfile'
-            const response = await utils.axios.get(url)
-            if (response) {
-                const { name, story, avatar } = response.data
-                setForm(form => ({
-                    ...form,
-                    name,
-                    story
-                }))
-                setAvatar(avatar)
+            try {
+                const url = '/api/user/profile/getProfile'
+                const response = await utils.axios.get(url)
+                if (response) {
+                    const { name, story, avatar } = response.data
+                    setForm(form => ({
+                        ...form,
+                        name,
+                        story
+                    }))
+                    setAvatar(avatar)
+                }
+            } catch (error) {
+                setAvatar(utils.defaultAvatar(''))
             }
         }
         getProfile()
@@ -147,7 +151,7 @@ const Profile = () => {
                     <ApiFeedback />
                 </Dashboard.Info>
                 <Dashboard.AvatarContainer>
-                    {avatar && <Dashboard.Avatar src={avatar} />}
+                    <Dashboard.Avatar src={avatar} />
                     <Dashboard.Buttons>
                         <Dashboard.Button as="label" htmlFor="file">
                             Change avatar

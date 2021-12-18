@@ -1,0 +1,17 @@
+{
+    "name": "evo4x",
+    "private": true,
+    "scripts": {
+        "start": "nodemon -r tsconfig-paths/register server.ts",
+        "build": "tsc --project ."
+    },
+    "dependencies": {
+        "express": "^4.17.2",
+        "tsconfig-paths": "^3.12.0"
+    },
+    "devDependencies": {
+        "@types/express": "^4.17.13",
+        "dotenv": "^10.0.0",
+        "nodemon": "^2.0.15"
+    }
+}
