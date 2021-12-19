@@ -1,8 +1,17 @@
-import { Model, STRING, TEXT } from 'sequelize'
+import { Sequelize, Model, STRING, TEXT } from 'sequelize'
 import bcrypt from 'bcrypt'
 
-const Admin = sequelize => {
-    class Admin extends Model {}
+class AdminValues extends Model {
+    id: number
+    email: string
+    password: string
+}
+
+export class Admin extends AdminValues {
+    dataValues: AdminValues
+}
+
+const AdminModel = (sequelize: Sequelize) => {
     Admin.init(
         {
             email: {
@@ -27,4 +36,4 @@ const Admin = sequelize => {
     return Admin
 }
 
-export default Admin
+export default AdminModel

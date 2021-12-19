@@ -1,9 +1,9 @@
 import { check } from 'express-validator'
 import webpush from 'web-push'
 
-import { Connection, User, Subscription } from '@database'
+import { Connection, User, Subscription } from 'database/database'
 
-import utils from '@utils'
+import utils from 'utils'
 
 const sendMessage = async (req, res, next) => {
     try {

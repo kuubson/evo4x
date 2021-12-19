@@ -1,6 +1,8 @@
 import { validationResult } from 'express-validator'
 
-const checkValidation = (req, res, next) => {
+import { Route } from 'types/express'
+
+const checkValidation: Route = (req, res, next) => {
     const results = validationResult(req)
     if (!results.isEmpty()) {
         return res.status(422).send({

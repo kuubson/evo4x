@@ -1,5 +1,7 @@
 class ApiError extends Error {
-    constructor(error, status) {
+    error: string
+    status: number
+    constructor(error: string, status: number) {
         super()
         this.error = error
         this.status = status

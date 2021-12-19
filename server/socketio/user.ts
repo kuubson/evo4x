@@ -1,17 +1,23 @@
 import jwt from 'jsonwebtoken'
+import { Server, Socket } from 'socket.io'
 
-import { User, Profile, Message } from '@database'
+import { User, Profile, Message } from 'database/database'
+import { User as UserClass } from 'database/models/User'
 
-import utils from '@utils'
+import utils from 'utils'
 
-const user = io => {
+interface ISocket extends Socket {
+    user?: UserClass
+}
+
+const user = (io: Server) => {
     const userIo = io.of('/user')
-    userIo.use((socket, next) => {
+    userIo.use((socket: ISocket, next) => {
         const token = utils.cookie.getCookie(socket.request.headers.cookie, 'token')
         if (!token) {
             next(new Error())
         } else {
-            jwt.verify(token, process.env.JWT_KEY, async (error, data) => {
+            jwt.verify(token, process.env.JWT_KEY!, async (error, data: any) => {
                 if (error) {
                     next(new Error())
                 } else {
@@ -36,8 +42,8 @@ const user = io => {
             })
         }
     })
-    userIo.on('connection', socket => {
-        const id = socket.user.id
+    userIo.on('connection', (socket: ISocket) => {
+        const id = socket.user!.id
         socket.on('sendMessage', data => socket.broadcast.emit('sendMessage', data))
         socket.on('readMessages', async () => {
             await Message.findAll().then(
@@ -45,8 +51,9 @@ const user = io => {
                     await Promise.all(
                         messages.map(async message => {
                             const readByIds = message.readBy.split(',').filter(v => v)
-                            if (!readByIds.includes(id.toString())) {
-                                readByIds.push(id)
+                            const ID = id.toString()
+                            if (!readByIds.includes(ID)) {
+                                readByIds.push(ID)
                             }
                             await message.update({
                                 readBy: readByIds.join(',')

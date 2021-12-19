@@ -1,7 +1,17 @@
-import { Model, STRING } from 'sequelize'
+import { Sequelize, Model, STRING } from 'sequelize'
 
-const Subscription = sequelize => {
-    class Subscription extends Model {}
+class SubscriptionValues extends Model {
+    id: number
+    endpoint: string
+    p256dh: string
+    auth: string
+}
+
+export class Subscription extends SubscriptionValues {
+    dataValues: SubscriptionValues
+}
+
+const SubscriptionModel = (sequelize: Sequelize) => {
     Subscription.init(
         {
             endpoint: {
@@ -25,4 +35,4 @@ const Subscription = sequelize => {
     return Subscription
 }
 
-export default Subscription
+export default SubscriptionModel

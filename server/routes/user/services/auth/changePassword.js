@@ -1,9 +1,9 @@
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 
-import { Connection, User } from '@database'
+import { Connection, User } from 'database/database'
 
-import utils from '@utils'
+import utils from 'utils'
 
 const changePassword = async (req, res, next) => {
     try {

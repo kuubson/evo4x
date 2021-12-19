@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken'
 
-import { Connection, Authentication } from '@database'
+import { Connection, Authentication } from 'database/database'
 
-import utils from '@utils'
+import utils from 'utils'
 
 const authenticateEmail = async (req, res, next) => {
     try {

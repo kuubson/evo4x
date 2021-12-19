@@ -1,4 +1,4 @@
-const emailTemplate = (header, content, buttontText, href) => `
+const emailTemplate = (header: string, content: string, buttontText: string, href: string) => `
     <table
         cellpadding="20"
         cellspacing="0"

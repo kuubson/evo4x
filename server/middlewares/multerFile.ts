@@ -3,6 +3,8 @@ import path from 'path'
 import crypto from 'crypto'
 import multer from 'multer'
 
+import { MulterRequest } from 'types/multer'
+
 const storage = multer.diskStorage({
     destination: (_, __, callback) => {
         try {
@@ -20,7 +22,7 @@ const storage = multer.diskStorage({
 
 const multerFile = multer({
     storage,
-    fileFilter: (req, { mimetype, originalname, size }, callback) => {
+    fileFilter: (req: MulterRequest, { mimetype, originalname, size }, callback) => {
         const imageExtensions = /jpg|jpeg|png|gif|/i
         const videoExtensions = /mp4|/i
         const fileExtensions = /txt|rtf|doc|docx|xlsx|ppt|pptx|pdf|/i

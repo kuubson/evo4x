@@ -1,7 +1,17 @@
-import { Model, STRING, TEXT } from 'sequelize'
+import { Sequelize, Model, STRING, TEXT } from 'sequelize'
 
-const Profile = sequelize => {
-    class Profile extends Model {}
+class ProfileValues extends Model {
+    name: string
+    story: string
+    avatar: string
+    avatarCloudinaryId: string
+}
+
+export class Profile extends ProfileValues {
+    dataValues: ProfileValues
+}
+
+const ProfileModel = (sequelize: Sequelize) => {
     Profile.init(
         {
             name: {
@@ -28,4 +38,4 @@ const Profile = sequelize => {
     return Profile
 }
 
-export default Profile
+export default ProfileModel

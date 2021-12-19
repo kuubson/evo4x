@@ -1,6 +1,6 @@
-import { Connection } from '@database'
+import { Connection } from 'database/database'
 
-import utils from '@utils'
+import utils from 'utils'
 
 const subscribePushNotifications = async (req, res, next) => {
     try {

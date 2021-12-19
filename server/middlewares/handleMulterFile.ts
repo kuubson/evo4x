@@ -1,11 +1,13 @@
 import fs from 'fs'
 import sharp from 'sharp'
 
-import middlewares from '@middlewares'
+import middlewares from 'middlewares'
 
-import utils from '@utils'
+import utils from 'utils'
 
-const handleMulterFile = () => (req, res, next) =>
+import { MulterRoute } from 'types/multer'
+
+const handleMulterFile = (): MulterRoute => (req, res, next) =>
     middlewares.multerFile.single('file')(req, res, () => {
         const deleteFile = () => {
             try {
@@ -13,7 +15,7 @@ const handleMulterFile = () => (req, res, next) =>
             } catch (error) {}
         }
         switch (true) {
-            case !req.file:
+            case !req.file as boolean:
                 next(new utils.ApiError('There was a problem sending the file', 500))
                 break
             case req.allowedExtenstionsError:

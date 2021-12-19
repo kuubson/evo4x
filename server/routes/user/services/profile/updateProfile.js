@@ -1,6 +1,6 @@
 import { check } from 'express-validator'
 
-import utils from '@utils'
+import utils from 'utils'
 
 const updateProfile = async (req, res, next) => {
     try {

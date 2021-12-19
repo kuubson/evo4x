@@ -1,9 +1,9 @@
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 
-import { Admin } from '@database'
+import { Admin } from 'database/database'
 
-import utils from '@utils'
+import utils from 'utils'
 
 const login = async (req, res, next) => {
     try {

@@ -1,11 +1,22 @@
-import { Model, ENUM, TEXT } from 'sequelize'
+import { Sequelize, Model, ENUM, TEXT } from 'sequelize'
 
-const Analysis = sequelize => {
-    class Analysis extends Model {}
+class AnalysisValues extends Model {
+    id: number
+    type: 'MESSAGE' | 'IMAGE' | 'VIDEO' | 'FILE'
+    content: string
+    readBy: string
+    cloudinaryId: string
+}
+
+export class Analysis extends AnalysisValues {
+    dataValues: AnalysisValues
+}
+
+const AnalysisModel = (sequelize: Sequelize) => {
     Analysis.init(
         {
             type: {
-                type: ENUM(['MESSAGE', 'IMAGE', 'VIDEO', 'FILE']),
+                type: ENUM('MESSAGE', 'IMAGE', 'VIDEO', 'FILE'),
                 allowNull: false
             },
             content: {
@@ -29,4 +40,4 @@ const Analysis = sequelize => {
     return Analysis
 }
 
-export default Analysis
+export default AnalysisModel

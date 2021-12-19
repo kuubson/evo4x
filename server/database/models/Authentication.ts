@@ -1,7 +1,16 @@
-import { Model, TEXT, BOOLEAN } from 'sequelize'
+import { Sequelize, Model, TEXT, BOOLEAN } from 'sequelize'
 
-const Authentication = sequelize => {
-    class Authentication extends Model {}
+class AuthenticationValues extends Model {
+    id: number
+    emailToken: string
+    authenticated: boolean
+}
+
+export class Authentication extends AuthenticationValues {
+    dataValues: AuthenticationValues
+}
+
+const AuthenticationModel = (sequelize: Sequelize) => {
     Authentication.init(
         {
             emailToken: {
@@ -21,4 +30,4 @@ const Authentication = sequelize => {
     return Authentication
 }
 
-export default Authentication
+export default AuthenticationModel

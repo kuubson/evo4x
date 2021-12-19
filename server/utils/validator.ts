@@ -1,8 +1,8 @@
 import { check } from 'express-validator'
 
-import utils from '@utils'
+import utils from 'utils'
 
-const validateProperty = property =>
+const validateProperty = (property: string) =>
     check(`${property}`)
         .trim()
         .notEmpty()
@@ -13,13 +13,13 @@ const validateProperty = property =>
         .custom(utils.checkSanitization)
         .withMessage('This field contains incorrect characters')
         .bail()
-const validateInteger = property => {
+const validateInteger = (property: string) => {
     return check(`${property}`).notEmpty().bail().isInt().bail()
 }
-const validateBoolean = property => {
+const validateBoolean = (property: string) => {
     return check(`${property}`).isBoolean().bail()
 }
-const validateArray = (property, canBeEmpty) =>
+const validateArray = (property: string, canBeEmpty: boolean) =>
     !canBeEmpty
         ? check(`${property}`).notEmpty().bail().isArray().bail()
         : check(`${property}`).isArray().bail()
@@ -38,7 +38,7 @@ const validatePassword = (withLogin = false) =>
               .notEmpty()
               .withMessage('Type your password')
               .bail()
-              .custom((password, { req }) => {
+              .custom((password: string, { req }) => {
                   if (!/(?=.{8,})/.test(password)) {
                       throw new Error('Password must be at least 8 characters long')
                   }
@@ -62,7 +62,7 @@ const validateRepeatedPassword = () =>
         .notEmpty()
         .withMessage('Type password twice')
         .bail()
-        .custom((repeatedPassword, { req }) => {
+        .custom((repeatedPassword: string, { req }) => {
             if (repeatedPassword !== req.body.password) {
                 throw new Error('Passwords are different')
             }

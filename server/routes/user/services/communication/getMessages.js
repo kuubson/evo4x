@@ -1,6 +1,6 @@
-import { User, Profile, Message } from '@database'
+import { User, Profile, Message } from 'database/database'
 
-import utils from '@utils'
+import utils from 'utils'
 
 const getMessages = async (req, res, next) => {
     try {

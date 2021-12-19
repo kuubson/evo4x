@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken'
 
-import { Admin, User } from '@database'
+import { Admin, User } from 'database/database'
 
-import utils from '@utils'
+import utils from 'utils'
 
 const checkRole = async (req, res, next) => {
     const { token } = req.cookies

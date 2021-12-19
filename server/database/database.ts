@@ -1,8 +1,8 @@
-import sequelize from 'sequelize'
+import { Sequelize } from 'sequelize'
 
 const { DATABASE_HOST, DATABASE_NAME, DATABASE_USERNAME, DATABASE_PASSWORD } = process.env
 
-const connection = new sequelize(DATABASE_NAME, DATABASE_USERNAME, DATABASE_PASSWORD, {
+const connection = new Sequelize(DATABASE_NAME!, DATABASE_USERNAME!, DATABASE_PASSWORD, {
     host: DATABASE_HOST,
     dialect: 'mysql',
     define: {

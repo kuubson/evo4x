@@ -1,4 +1,4 @@
-import { Message } from '@database'
+import { Message } from 'database/database'
 
 const getUnreadMessagesInfo = async (req, res, next) => {
     try {

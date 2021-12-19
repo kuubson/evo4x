@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken'
 
-import { Connection, User, Authentication } from '@database'
+import { Connection, User, Authentication } from 'database/database'
 
-import utils from '@utils'
+import utils from 'utils'
 
 const requestPasswordChange = async (req, res, next) => {
     try {

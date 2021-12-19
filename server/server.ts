@@ -1,8 +1,9 @@
-import 'dotenv/config'
+import path from 'path'
+import dotenv from 'dotenv'
+dotenv.config({ path: path.resolve(__dirname, '../.env') })
 
 import express from 'express'
 import http from 'http'
-import path from 'path'
 
 import 'database/database'
 

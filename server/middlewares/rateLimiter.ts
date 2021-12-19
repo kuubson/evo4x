@@ -1,6 +1,6 @@
 import limiter from 'express-rate-limit'
 
-const rateLimiter = request =>
+const rateLimiter = (request: string) =>
     limiter({
         max: 10,
         windowMs: 30 * 60 * 1000, // 30 minutes

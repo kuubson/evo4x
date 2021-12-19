@@ -1,8 +1,8 @@
 import cloudinary from 'cloudinary'
 
-import { Connection } from '@database'
+import { Connection } from 'database/database'
 
-import utils from '@utils'
+import utils from 'utils'
 
 const removeAvatar = async (req, res, next) => {
     try {

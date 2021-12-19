@@ -2,9 +2,9 @@ import fs from 'fs'
 import cloudinary from 'cloudinary'
 import webpush from 'web-push'
 
-import { Connection, User, Subscription } from '@database'
+import { Connection, User, Subscription } from 'database/database'
 
-import utils from '@utils'
+import utils from 'utils'
 
 const sendFile = async (req, res, next) => {
     const { filename, path } = req.file

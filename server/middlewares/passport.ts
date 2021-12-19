@@ -1,12 +1,19 @@
+import { PassportStatic } from 'passport'
 import passportJwt from 'passport-jwt'
 
-import { User, Profile } from '@database'
+import { Admin, User, Profile } from 'database/database'
 
 const JwtStrategy = passportJwt.Strategy
 const ExtractJwt = passportJwt.ExtractJwt
 
-const passport = passport => {
-    const extractJwtFromCookies = ({ cookies }) => cookies.token
+type Cookies = {
+    cookies: {
+        token: string
+    }
+}
+
+const passport = (passport: PassportStatic) => {
+    const extractJwtFromCookies = ({ cookies }: Cookies) => cookies.token
     passport.use(
         new JwtStrategy(
             {

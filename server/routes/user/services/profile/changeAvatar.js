@@ -1,7 +1,7 @@
 import fs from 'fs'
 import cloudinary from 'cloudinary'
 
-import { Connection } from '@database'
+import { Connection } from 'database/database'
 
 const changeAvatar = async (req, res, next) => {
     const { path } = req.file

@@ -1,6 +1,6 @@
-import { Analysis } from '@database'
+import { Analysis } from 'database/database'
 
-import utils from '@utils'
+import utils from 'utils'
 
 const getAnalysis = async (req, res, next) => {
     try {

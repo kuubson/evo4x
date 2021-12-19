@@ -1,4 +1,6 @@
-const handleError = (res, error) => {
+import { Response } from 'express'
+
+const handleError = (res: Response, error: any) => {
     if (process.env.NODE_ENV !== 'production') {
         console.log(error)
     }
