@@ -4,7 +4,9 @@ import { Admin, User } from 'database/database'
 
 import utils from 'utils'
 
-const checkRole = async (req, res, next) => {
+import { Route } from 'types/express'
+
+const checkRole: Route = async (req, res, next) => {
     const { token } = req.cookies
     if (!token) {
         return res
@@ -17,7 +19,7 @@ const checkRole = async (req, res, next) => {
                 role: 'guest'
             })
     }
-    return jwt.verify(token, process.env.JWT_KEY, async (error, data) => {
+    return jwt.verify(token, process.env.JWT_KEY!, async (error: any, data: any) => {
         try {
             if (error) {
                 if (error.message.includes('expired')) {

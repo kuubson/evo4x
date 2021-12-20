@@ -4,7 +4,9 @@ import { Connection, User, Authentication, Profile } from 'database/database'
 
 import utils from 'utils'
 
-const register = async (req, res, next) => {
+import { Route } from 'types/express'
+
+const register: Route = async (req, res, next) => {
     try {
         await Connection.transaction(async transaction => {
             const { name, email, password } = req.body
@@ -16,7 +18,7 @@ const register = async (req, res, next) => {
             if (user) {
                 throw new utils.ApiError('The email address provided is already taken', 409)
             }
-            const emailToken = jwt.sign({ email }, process.env.JWT_KEY, { expiresIn: '2h' })
+            const emailToken = jwt.sign({ email }, process.env.JWT_KEY!, { expiresIn: '2h' })
             await User.create(
                 {
                     email,

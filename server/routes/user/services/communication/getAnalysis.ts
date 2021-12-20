@@ -2,7 +2,9 @@ import { Analysis } from 'database/database'
 
 import utils from 'utils'
 
-const getAnalysis = async (req, res, next) => {
+import { ProtectedRoute } from 'types/express'
+
+const getAnalysis: ProtectedRoute = async (req, res, next) => {
     try {
         const { id } = req.user
         const { limit, offset } = req.body
@@ -11,7 +13,7 @@ const getAnalysis = async (req, res, next) => {
             offset,
             order: [['id', 'DESC']],
             attributes: {
-                exclude: 'adminId'
+                exclude: ['adminId']
             }
         }).then(
             async analysis =>
@@ -20,8 +22,9 @@ const getAnalysis = async (req, res, next) => {
                         .sort((a, b) => a.id - b.id)
                         .map(async analysis => {
                             const readByIds = analysis.readBy.split(',').filter(v => v)
-                            if (!readByIds.includes(id.toString())) {
-                                readByIds.push(id)
+                            const ID = id.toString()
+                            if (!readByIds.includes(ID)) {
+                                readByIds.push(ID)
                             }
                             await analysis.update({
                                 readBy: readByIds.join(',')

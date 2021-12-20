@@ -23,7 +23,7 @@ const initCloudinary = () => {
 }
 initCloudinary()
 
-import initSocketIo from '../socketio/socketio'
+import initSocketIo from 'socketio/socketio'
 import initCSRF from './csrf'
 import initPassport from './passport'
 initPassport(passport)

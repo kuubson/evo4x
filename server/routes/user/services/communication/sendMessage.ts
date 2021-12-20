@@ -5,7 +5,9 @@ import { Connection, User, Subscription } from 'database/database'
 
 import utils from 'utils'
 
-const sendMessage = async (req, res, next) => {
+import { ProtectedRoute } from 'types/express'
+
+const sendMessage: ProtectedRoute = async (req, res, next) => {
     try {
         await Connection.transaction(async transaction => {
             const { id, name } = req.user

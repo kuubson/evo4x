@@ -6,4 +6,4 @@ export type MulterRequest = Request & {
     sizeLimit: boolean
 }
 
-export type MulterRoute = (req: MulterRequest, res: Response, next: NextFunction) => void
+export type MulterMiddleware = (req: MulterRequest, res: Response, next: NextFunction) => void

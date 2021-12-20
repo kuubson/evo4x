@@ -1,10 +1,12 @@
+import fs from 'fs'
 import cloudinary from 'cloudinary'
 
 import { Connection } from 'database/database'
 
-import utils from 'utils'
+import { ProtectedMulterRoute } from 'types/express'
 
-const removeAvatar = async (req, res, next) => {
+const changeAvatar: ProtectedMulterRoute = async (req, res, next) => {
+    const { path } = req.file
     try {
         await Connection.transaction(async transaction => {
             const { profile } = req.user
@@ -13,23 +15,32 @@ const removeAvatar = async (req, res, next) => {
                     invalidate: true
                 })
             }
-            const avatar = utils.defaultAvatar(profile.name)
+            const { public_id, secure_url } = await cloudinary.v2.uploader.upload(path, {
+                use_filename: true
+            })
+            try {
+                fs.existsSync(path) && fs.unlinkSync(path)
+            } catch (error) {}
             await profile.update(
                 {
-                    avatar
+                    avatar: secure_url,
+                    avatarCloudinaryId: public_id
                 },
                 {
                     transaction
                 }
             )
             res.send({
-                avatar,
+                avatar: secure_url,
                 feedback: 'Your avatar has been updated'
             })
         })
     } catch (error) {
+        try {
+            fs.existsSync(path) && fs.unlinkSync(path)
+        } catch (error) {}
         next(error)
     }
 }
 
-export default removeAvatar
+export default changeAvatar

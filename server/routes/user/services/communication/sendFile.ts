@@ -6,7 +6,9 @@ import { Connection, User, Subscription } from 'database/database'
 
 import utils from 'utils'
 
-const sendFile = async (req, res, next) => {
+import { ProtectedMulterRoute } from 'types/express'
+
+const sendFile: ProtectedMulterRoute = async (req, res, next) => {
     const { filename, path } = req.file
     try {
         await Connection.transaction(async transaction => {
@@ -25,7 +27,7 @@ const sendFile = async (req, res, next) => {
                 default:
                     throw new utils.ApiError('There was a problem sending the file', 500)
             }
-            let message
+            let message: string
             if (type === 'IMAGE') {
                 message = `${name} has sent a new image`
                 const { public_id, secure_url } = await cloudinary.v2.uploader.upload(path, {

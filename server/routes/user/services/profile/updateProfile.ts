@@ -2,7 +2,9 @@ import { check } from 'express-validator'
 
 import utils from 'utils'
 
-const updateProfile = async (req, res, next) => {
+import { ProtectedRoute } from 'types/express'
+
+const updateProfile: ProtectedRoute = async (req, res, next) => {
     try {
         const { name, story, avatar } = req.body
         await req.user.profile.update({

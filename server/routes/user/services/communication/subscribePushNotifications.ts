@@ -2,7 +2,9 @@ import { Connection } from 'database/database'
 
 import utils from 'utils'
 
-const subscribePushNotifications = async (req, res, next) => {
+import { ProtectedRoute } from 'types/express'
+
+const subscribePushNotifications: ProtectedRoute = async (req, res, next) => {
     try {
         await Connection.transaction(async transaction => {
             const {

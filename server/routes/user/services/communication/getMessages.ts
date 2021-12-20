@@ -2,7 +2,9 @@ import { User, Profile, Message } from 'database/database'
 
 import utils from 'utils'
 
-const getMessages = async (req, res, next) => {
+import { ProtectedRoute } from 'types/express'
+
+const getMessages: ProtectedRoute = async (req, res, next) => {
     try {
         const {
             id,
@@ -14,16 +16,18 @@ const getMessages = async (req, res, next) => {
             offset,
             order: [['id', 'DESC']],
             attributes: {
-                exclude: 'userId'
+                exclude: ['userId']
             },
             include: [
                 {
                     model: User,
                     attributes: ['id'],
-                    include: {
-                        model: Profile,
-                        attributes: ['name', 'avatar']
-                    }
+                    include: [
+                        {
+                            model: Profile,
+                            attributes: ['name', 'avatar']
+                        }
+                    ]
                 }
             ]
         }).then(
@@ -33,8 +37,9 @@ const getMessages = async (req, res, next) => {
                         .sort((a, b) => a.id - b.id)
                         .map(async message => {
                             const readByIds = message.readBy.split(',').filter(v => v)
-                            if (!readByIds.includes(id.toString())) {
-                                readByIds.push(id)
+                            const ID = id.toString()
+                            if (!readByIds.includes(ID)) {
+                                readByIds.push(ID)
                             }
                             await message.update({
                                 readBy: readByIds.join(',')

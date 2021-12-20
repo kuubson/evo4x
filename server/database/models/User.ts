@@ -4,6 +4,7 @@ import bcrypt from 'bcrypt'
 import { Authentication } from './Authentication'
 import { Message } from './Message'
 import { Subscription } from './Subscription'
+import { Profile } from './Profile'
 
 class UserValues extends Model {
     id: number
@@ -15,6 +16,7 @@ class UserValues extends Model {
 
 class UserAssociations extends UserValues {
     authentication: Authentication
+    profile: Profile
 
     subscriptions: Subscription[]
     createSubscription: (parameters: object, options?: object) => Promise<Subscription>

@@ -11,7 +11,7 @@ router.post(
     middlewares.jwtAuthorization,
     communication.subscribePushNotifications.validation(),
     middlewares.checkValidation,
-    communication.subscribePushNotifications.default
+    communication.subscribePushNotifications.default as any
 )
 
 router.post(
@@ -19,7 +19,7 @@ router.post(
     middlewares.jwtAuthorization,
     communication.getMessages.validation(),
     middlewares.checkValidation,
-    communication.getMessages.default
+    communication.getMessages.default as any
 )
 
 router.post(
@@ -27,20 +27,20 @@ router.post(
     middlewares.jwtAuthorization,
     communication.sendMessage.validation(),
     middlewares.checkValidation,
-    communication.sendMessage.default
+    communication.sendMessage.default as any
 )
 
 router.post(
     '/sendFile',
     middlewares.jwtAuthorization,
-    middlewares.handleMulterFile(),
-    communication.sendFile.default
+    middlewares.handleMulterFile() as any,
+    communication.sendFile.default as any
 )
 
 router.get(
     '/getUnreadMessagesInfo',
     middlewares.jwtAuthorization,
-    communication.getUnreadMessagesInfo.default
+    communication.getUnreadMessagesInfo.default as any
 )
 
 router.post(
@@ -48,7 +48,7 @@ router.post(
     middlewares.jwtAuthorization,
     communication.getAnalysis.validation(),
     middlewares.checkValidation,
-    communication.getAnalysis.default
+    communication.getAnalysis.default as any
 )
 
 export default router

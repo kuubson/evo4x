@@ -4,11 +4,13 @@ import { Connection, Authentication } from 'database/database'
 
 import utils from 'utils'
 
-const authenticateEmail = async (req, res, next) => {
+import { Route } from 'types/express'
+
+const authenticateEmail: Route = async (req, res, next) => {
     try {
         await Connection.transaction(async transaction => {
             const { emailToken } = req.body
-            return jwt.verify(emailToken, process.env.JWT_KEY, async error => {
+            return jwt.verify(emailToken, process.env.JWT_KEY!, async (error: any) => {
                 try {
                     const authentication = await Authentication.findOne({
                         where: {

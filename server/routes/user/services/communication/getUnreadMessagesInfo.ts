@@ -1,11 +1,13 @@
 import { Message } from 'database/database'
 
-const getUnreadMessagesInfo = async (req, res, next) => {
+import { ProtectedRoute } from 'types/express'
+
+const getUnreadMessagesInfo: ProtectedRoute = async (req, res, next) => {
     try {
         const { id } = req.user
         const { lastUnreadMessageIndex, unreadMessagesAmount } = await Message.findAll().then(
             messages => {
-                let lastUnreadMessageIndex
+                let lastUnreadMessageIndex: number | undefined
                 let unreadMessagesAmount = 0
                 messages.map(({ readBy }, index) => {
                     const readByIds = readBy.split(',').filter(v => v)

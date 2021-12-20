@@ -1,22 +1,28 @@
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 
-import { Admin } from 'database/database'
+import { User, Authentication } from 'database/database'
 
 import utils from 'utils'
 
-const login = async (req, res, next) => {
+import { Route } from 'types/express'
+
+const login: Route = async (req, res, next) => {
     try {
         const { email, password } = req.body
-        const admin = await Admin.findOne({
+        const user = await User.findOne({
             where: {
                 email
-            }
+            },
+            include: [Authentication]
         })
-        if (!admin || !bcrypt.compareSync(password, admin.password)) {
+        if (!user || !bcrypt.compareSync(password, user.password)) {
             throw new utils.ApiError('The email address or password provided is incorrect', 404)
         }
-        const token = jwt.sign({ role: 'admin', email }, process.env.JWT_KEY)
+        if (!user.authentication.authenticated) {
+            throw new utils.ApiError('The email address provided must first be authenticated', 409)
+        }
+        const token = jwt.sign({ role: 'user', email }, process.env.JWT_KEY!)
         res.cookie('token', token, {
             secure: process.env.NODE_ENV === 'production',
             httpOnly: true,

@@ -5,9 +5,9 @@ import middlewares from 'middlewares'
 
 import utils from 'utils'
 
-import { MulterRoute } from 'types/multer'
+import { MulterMiddleware } from 'types/multer'
 
-const handleMulterFile = (): MulterRoute => (req, res, next) =>
+const handleMulterFile = (): MulterMiddleware => (req, res, next) =>
     middlewares.multerFile.single('file')(req, res, () => {
         const deleteFile = () => {
             try {
