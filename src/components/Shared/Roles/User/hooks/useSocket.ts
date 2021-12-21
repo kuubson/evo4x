@@ -10,7 +10,7 @@ const useSocket = (chat: boolean | undefined, currentUser: User | undefined) => 
         unreadMessagesAmount,
         setLastUnreadMessageIndex,
         setUnreadMessagesAmount
-    } = hooks.useMessages()
+    } = hooks.useMessagesInfo()
     useEffect(() => {
         if (!socket) {
             setSocket(io('/user'))

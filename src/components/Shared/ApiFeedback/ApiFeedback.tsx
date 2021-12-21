@@ -1,7 +1,6 @@
-import React from 'react'
 import styled from 'styled-components/macro'
 
-import hooks from 'hooks'
+import apiFeedbackHooks from './hooks'
 
 import sharedStyled from 'components/Shared/styled'
 
@@ -23,7 +22,7 @@ const ApiFeedbackContainer = styled(sharedStyled.Button)`
 `
 
 const ApiFeedback = () => {
-    const { apiFeedback } = hooks.useApiFeedback()
+    const { apiFeedback } = apiFeedbackHooks.useApiFeedback()
     return apiFeedback ? <ApiFeedbackContainer as="p">{apiFeedback}</ApiFeedbackContainer> : null
 }
 

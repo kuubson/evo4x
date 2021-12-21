@@ -1,19 +1,15 @@
 import useSocket from './useSocket'
 import useQueryParams from './useQueryParams'
-import useLoader from './useLoader'
-import useApiFeedback from './useApiFeedback'
 import useRole from './useRole'
 import useFormHandler from './useFormHandler'
-import useMessages from './useMessages'
+import useMessagesInfo from './useMessagesInfo'
 
 const hooks = {
     useSocket,
     useQueryParams,
-    useLoader,
-    useApiFeedback,
     useRole,
     useFormHandler,
-    useMessages
+    useMessagesInfo
 }
 
 export default hooks

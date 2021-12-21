@@ -2,9 +2,11 @@ import { useAppDispatch, useAppSelector } from 'redux/hooks'
 
 import actions from 'redux/actions'
 
-const useMessages = () => {
+const useMessagesInfo = () => {
     const dispatch = useAppDispatch()
-    const { lastUnreadMessageIndex, unreadMessagesAmount } = useAppSelector(state => state.messages)
+    const { lastUnreadMessageIndex, unreadMessagesAmount } = useAppSelector(
+        state => state.messagesInfo
+    )
     const setLastUnreadMessageIndex = (payload: number) =>
         dispatch({ type: actions.SET_LAST_UNREAD_MESSAGE_INDEX, payload })
     const setUnreadMessagesAmount = (payload: number) =>
@@ -17,4 +19,4 @@ const useMessages = () => {
     }
 }
 
-export default useMessages
+export default useMessagesInfo

@@ -1,7 +1,6 @@
-import React from 'react'
 import styled from 'styled-components/macro'
 
-import hooks from 'hooks'
+import loaderHooks from './hooks'
 
 import sharedStyled from 'components/Shared/styled'
 import Dashboard from './styled/Dashboard'
@@ -14,7 +13,7 @@ const LoaderContainer = styled(sharedStyled.BlackLayer)`
 `
 
 const Loader = () => {
-    const { loading } = hooks.useLoader()
+    const { loading } = loaderHooks.useLoader()
     return (
         <LoaderContainer showLayer={loading}>
             <Dashboard.Logo src={Logo} $loading={loading} />

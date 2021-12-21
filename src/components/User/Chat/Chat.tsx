@@ -34,7 +34,7 @@ const Chat = () => {
     const [message, setMessage] = useState('')
     const [hasMoreMessages, setHasMoreMessages] = useState(true)
     const [currentUser, setCurrentUser] = useState<User | undefined>()
-    const { lastUnreadMessageIndex, setUnreadMessagesAmount } = hooks.useMessages()
+    const { lastUnreadMessageIndex, setUnreadMessagesAmount } = hooks.useMessagesInfo()
     const [showFileInput, setShowFileInput] = useState(true)
     const [uploadPercentage, setUploadPercentage] = useState(0)
     const fileUpload = !!uploadPercentage

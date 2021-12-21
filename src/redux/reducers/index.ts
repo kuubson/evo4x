@@ -6,7 +6,7 @@ import socket from './socket'
 import loader from './loader'
 import apiFeedback from './apiFeedback'
 import role from './role'
-import messages from './messages'
+import messagesInfo from './messagesInfo'
 
 const roleConfig = {
     key: 'role',
@@ -14,7 +14,7 @@ const roleConfig = {
 }
 
 const messagesConfig = {
-    key: 'messages',
+    key: 'messagesInfo',
     storage
 }
 
@@ -23,7 +23,7 @@ const rootReducer = combineReducers({
     loader,
     apiFeedback,
     role: persistReducer(roleConfig, role),
-    messages: persistReducer(messagesConfig, messages)
+    messagesInfo: persistReducer(messagesConfig, messagesInfo)
 })
 
 const reducer = configureStore({

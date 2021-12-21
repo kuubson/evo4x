@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components/macro'
-import io from 'socket.io-client'
 
 import hooks from 'hooks'
 import adminHooks from './hooks'
 
 import Navbar from 'components/Shared/Navbar/Navbar'
 
-import userHelpers from 'components/Shared/Roles/User/helpers'
+import adminUtils from './utils'
+
 import adminHelpers from './helpers'
 
 const AdminContainer = styled.section`
@@ -26,19 +26,7 @@ const Admin: React.FC = ({ children }) => {
     }, [])
     return role === 'admin' ? (
         <AdminContainer>
-            <Navbar
-                links={[
-                    {
-                        link: 'Analysis',
-                        pathname: '/admin/analysis'
-                    },
-                    {
-                        link: 'Logout',
-                        onClick: () => userHelpers.logout(clearSocket)
-                    }
-                ]}
-                hamburger
-            />
+            <Navbar links={adminUtils.links(clearSocket)} hamburger />
             {children}
         </AdminContainer>
     ) : null

@@ -22,7 +22,7 @@ type UnreadMessagesAmountAction = {
 
 type Action = LastUnreadMessageIndexAction | UnreadMessagesAmountAction
 
-const messages = (state = initialState, { payload, type }: Action) => {
+const messagesInfo = (state = initialState, { payload, type }: Action) => {
     switch (type) {
         case actions.SET_LAST_UNREAD_MESSAGE_INDEX:
             return {
@@ -39,4 +39,4 @@ const messages = (state = initialState, { payload, type }: Action) => {
     }
 }
 
-export default messages
+export default messagesInfo
