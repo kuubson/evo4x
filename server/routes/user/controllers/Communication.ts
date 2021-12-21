@@ -2,7 +2,7 @@ import { Router } from 'express'
 
 import middlewares from 'middlewares'
 
-import communication from '../services/communication'
+import communication from 'routes/user/services/communication'
 
 const router = Router()
 

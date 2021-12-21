@@ -2,7 +2,7 @@ import { Router } from 'express'
 
 import middlewares from 'middlewares'
 
-import profile from '../services/profile'
+import profile from 'routes/user/services/profile'
 
 const router = Router()
 

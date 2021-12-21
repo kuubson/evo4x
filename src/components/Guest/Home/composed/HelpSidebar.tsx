@@ -7,7 +7,7 @@ import ApiFeedback from 'components/Shared/ApiFeedback/ApiFeedback'
 
 import sharedStyled from 'components/Shared/styled'
 import RegistrationModalDashboard from 'components/Guest/Modals/RegistrationModal/styled/Dashboard'
-import StyledHelpSidebar from '../styled/HelpSidebar'
+import StyledHelpSidebar from 'components/Guest/Home/styled/HelpSidebar'
 
 import RegistrationModalComposed from 'components/Guest/Modals/RegistrationModal/composed'
 

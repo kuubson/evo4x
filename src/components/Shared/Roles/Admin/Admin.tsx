@@ -3,12 +3,12 @@ import styled from 'styled-components/macro'
 import io from 'socket.io-client'
 
 import hooks from 'hooks'
+import adminHooks from './hooks'
 
 import Navbar from 'components/Shared/Navbar/Navbar'
 
-import utils from 'utils'
-
-import { logout } from './utils'
+import adminHelpers from './helpers'
+import userHelpers from 'components/Shared/Roles/User/helpers'
 
 const AdminContainer = styled.section`
     height: 100%;
@@ -19,15 +19,13 @@ const AdminContainer = styled.section`
 `
 
 const Admin: React.FC = ({ children }) => {
-    const { socket, setSocket } = hooks.useSocket()
+    const { socket, setSocket } = adminHooks.useSocket()
     const { role } = hooks.useRole()
     useEffect(() => {
-        if (role !== 'admin') {
-            utils.history.push('/')
-        }
         if (!socket) {
             setSocket(io('/admin'))
         }
+        adminHelpers.checkRole(role)
     }, [])
     return role === 'admin' ? (
         <AdminContainer>
@@ -39,7 +37,7 @@ const Admin: React.FC = ({ children }) => {
                     },
                     {
                         link: 'Logout',
-                        onClick: () => logout(socket, setSocket)
+                        onClick: () => userHelpers.logout(socket, setSocket)
                     }
                 ]}
                 hamburger

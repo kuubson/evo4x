@@ -1,8 +1,8 @@
 import React from 'react'
 
-import hooks from '../hooks'
+import chatHooks from 'components/User/Chat/hooks'
 
-import StyledMessage from '../styled/Message'
+import StyledMessage from 'components/User/Chat/styled/Message'
 
 import utils from 'utils'
 
@@ -37,7 +37,7 @@ const Message: React.FC<IMessage> = ({
             {withLastUserMessage && showAvatar()}
         </StyledMessage.Content>
     )
-    const { renderMessage } = hooks.useMessages({
+    const { renderMessage } = chatHooks.useMessages({
         type,
         content,
         createdAt,

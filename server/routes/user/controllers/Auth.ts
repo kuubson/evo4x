@@ -2,7 +2,7 @@ import { Router } from 'express'
 
 import middlewares from 'middlewares'
 
-import auth from '../services/auth'
+import auth from 'routes/user/services/auth'
 
 const router = Router()
 

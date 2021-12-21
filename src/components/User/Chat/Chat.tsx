@@ -13,7 +13,7 @@ import Composed from './composed'
 
 import utils from 'utils'
 
-import { pushToTheBottom } from './utils'
+import chatHelpers from './helpers'
 
 const ChatContainer = styled.section`
     height: 100%;
@@ -73,7 +73,7 @@ const Chat = () => {
                 const { user, messages } = response.data
                 setCurrentUser(user)
                 setMessages(messages)
-                pushToTheBottom(messagesRef, true)
+                chatHelpers.pushToTheBottom(messagesRef, true)
                 if (messages.length >= lastUnreadMessageIndex!) {
                     setUnreadMessagesAmount(0)
                 }
@@ -87,7 +87,7 @@ const Chat = () => {
     useEffect(() => {
         const handleOnSendMessage = (message: Message) => {
             setMessages(messages => [...messages, message])
-            pushToTheBottom(messagesRef)
+            chatHelpers.pushToTheBottom(messagesRef)
             socket!.emit('readMessages')
         }
         if (socket) {
@@ -126,7 +126,7 @@ const Chat = () => {
                 user: currentUser
             }
             setMessages(messages => [...messages, _message] as Message[])
-            pushToTheBottom(messagesRef)
+            chatHelpers.pushToTheBottom(messagesRef)
             setTimeout(() => setMessage(''), 0)
             try {
                 const url = '/api/user/communication/sendMessage'
@@ -215,7 +215,7 @@ const Chat = () => {
                         user: currentUser
                     }
                     setMessages([...messages, message] as Message[])
-                    pushToTheBottom(messagesRef)
+                    chatHelpers.pushToTheBottom(messagesRef)
                     resetFileInput()
                     socket!.emit('sendMessage', message)
                 }

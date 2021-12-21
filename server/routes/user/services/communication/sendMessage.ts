@@ -3,7 +3,8 @@ import { check } from 'express-validator'
 import { Connection } from 'database/database'
 
 import utils from 'utils'
-import userUtils from 'routes/user/utils'
+
+import userHelpers from 'routes/user/helpers'
 
 import { ProtectedRoute } from 'types/express'
 
@@ -22,7 +23,7 @@ const sendMessage: ProtectedRoute = async (req, res, next) => {
                     transaction
                 }
             )
-            userUtils.sendNotificationsForOtherUsers(id, {
+            userHelpers.sendNotificationsForOtherUsers(id, {
                 tag: id,
                 title: `From ${name}`,
                 body: content,

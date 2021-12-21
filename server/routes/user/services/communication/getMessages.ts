@@ -1,7 +1,8 @@
 import { User, Profile, Message } from 'database/database'
 
 import utils from 'utils'
-import userUtils from 'routes/user/utils'
+
+import userHelpers from 'routes/user/helpers'
 
 import { ProtectedRoute } from 'types/express'
 
@@ -32,7 +33,7 @@ const getMessages: ProtectedRoute = async (req, res, next) => {
                 }
             ]
         }).then(messages => messages.sort((a, b) => a.id - b.id))
-        await userUtils.updateReadByProperty(id, messages)
+        await userHelpers.updateReadByProperty(id, messages)
         res.send({
             user: {
                 id,

@@ -7,7 +7,7 @@ import Composed from './composed'
 
 import utils from 'utils'
 
-import { pushToTheBottom } from 'components/User/Chat/utils'
+import chatHelpers from 'components/User/Chat/helpers'
 
 const AnalysisContainer = styled.section`
     height: 100%;
@@ -51,7 +51,7 @@ const Analysis = () => {
             if (response) {
                 const { analysis } = response.data
                 setAnalysis(analysis)
-                pushToTheBottom(analysisRef)
+                chatHelpers.pushToTheBottom(analysisRef)
             }
         }
     }

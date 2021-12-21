@@ -2,8 +2,9 @@ import { Analysis } from 'database/database'
 
 import utils from 'utils'
 
+import userHelpers from 'routes/user/helpers'
+
 import { ProtectedRoute } from 'types/express'
-import userUtils from 'routes/user/utils'
 
 const getAnalysis: ProtectedRoute = async (req, res, next) => {
     try {
@@ -16,10 +17,10 @@ const getAnalysis: ProtectedRoute = async (req, res, next) => {
                 exclude: ['adminId']
             }
         })
-        const updatedAnalysis = await userUtils.updateReadByProperty(id, analysis)
+        const updatedAnalysis = await userHelpers.updateReadByProperty(id, analysis)
         const analysisWithViews = updatedAnalysis.map(analysis => ({
             ...analysis.dataValues,
-            views: userUtils.countAnalysisViews(analysis)
+            views: userHelpers.countAnalysisViews(analysis)
         }))
         res.send({
             analysis: analysisWithViews

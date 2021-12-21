@@ -1,7 +1,7 @@
 import { Application, Response, Request, NextFunction } from 'express'
 import csurf from 'csurf'
 
-import utils from '../utils'
+import utils from 'utils'
 
 const csrf = async (app: Application) => {
     app.use(

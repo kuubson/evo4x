@@ -5,7 +5,8 @@ import { User, Profile, Message } from 'database/database'
 import { User as UserClass } from 'database/models/User'
 
 import utils from 'utils'
-import userUtils from 'routes/user/utils'
+
+import userHelpers from 'routes/user/helpers'
 
 interface ISocket extends Socket {
     user?: UserClass
@@ -48,7 +49,7 @@ const user = (io: Server) => {
         socket.on('sendMessage', data => socket.broadcast.emit('sendMessage', data))
         socket.on('readMessages', async () => {
             const messages = await Message.findAll()
-            await userUtils.updateReadByProperty(id, messages)
+            await userHelpers.updateReadByProperty(id, messages)
         })
     })
 }

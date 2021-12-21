@@ -3,7 +3,8 @@ import cloudinary from 'cloudinary'
 import { Connection } from 'database/database'
 
 import utils from 'utils'
-import userUtils from 'routes/user/utils'
+
+import userHelpers from 'routes/user/helpers'
 
 import { ProtectedMulterRoute } from 'types/express'
 
@@ -65,7 +66,7 @@ const sendFile: ProtectedMulterRoute = async (req, res, next) => {
                     transaction
                 }
             )
-            userUtils.sendNotificationsForOtherUsers(id, {
+            userHelpers.sendNotificationsForOtherUsers(id, {
                 tag: id,
                 title: `From ${name}`,
                 body: message,

@@ -3,7 +3,7 @@ import styled from 'styled-components/macro'
 
 import hooks from 'hooks'
 
-import utils from 'utils'
+import guestHelpers from './helpers'
 
 const GuestContainer = styled.section`
     height: 100%;
@@ -12,9 +12,7 @@ const GuestContainer = styled.section`
 const Guest: React.FC = ({ children }) => {
     const { role } = hooks.useRole()
     useEffect(() => {
-        if (role === 'user') {
-            utils.history.push('/user/profile')
-        }
+        guestHelpers.checkRole(role)
     }, [])
     return <GuestContainer>{children}</GuestContainer>
 }

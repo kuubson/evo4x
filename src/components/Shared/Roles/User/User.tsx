@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
-import io from 'socket.io-client'
 
 import hooks from 'hooks'
+import userHooks from './hooks'
 
 import Navbar from 'components/Shared/Navbar/Navbar'
 
-import utils from 'utils'
-
-import { logout } from './utils'
+import userHelpers from './helpers'
 
 const UserContainer = styled.section`
     height: 100%;
@@ -22,59 +20,14 @@ interface IUser {
     chat?: boolean
 }
 
-type Response = {
-    user: User
-    lastUnreadMessageIndex: number
-    unreadMessagesAmount: number
-}
-
 const User: React.FC<IUser> = ({ children, chat }) => {
-    const { socket, setSocket } = hooks.useSocket()
+    const { unreadMessagesAmount } = hooks.useMessages()
+    const { currentUser } = userHooks.useCurrentUser()
+    const { socket, setSocket } = userHooks.useSocket(chat, currentUser)
     const { role } = hooks.useRole()
-    const [currentUser, setCurrentUser] = useState<User>()
-    const {
-        lastUnreadMessageIndex,
-        unreadMessagesAmount,
-        setLastUnreadMessageIndex,
-        setUnreadMessagesAmount
-    } = hooks.useMessages()
     useEffect(() => {
-        if (role !== 'user') {
-            utils.history.push('/?failedAuthentication=true')
-        }
-        if (!socket) {
-            setSocket(io('/user'))
-        }
-        const getUnreadMessagesInfo = async () => {
-            const url = '/api/user/communication/getUnreadMessagesInfo'
-            const response = await utils.axios.get<Response>(url)
-            if (response) {
-                const { user, lastUnreadMessageIndex, unreadMessagesAmount } = response.data
-                setCurrentUser(user)
-                setLastUnreadMessageIndex(lastUnreadMessageIndex)
-                setUnreadMessagesAmount(unreadMessagesAmount)
-            }
-        }
-        getUnreadMessagesInfo()
+        userHelpers.checkRole(role)
     }, [])
-    useEffect(() => {
-        const handleOnSendMessage = ({ user }: Message) => {
-            if (!chat && user.id !== currentUser!.id) {
-                setUnreadMessagesAmount(unreadMessagesAmount + 1)
-                !lastUnreadMessageIndex
-                    ? setLastUnreadMessageIndex(1)
-                    : setLastUnreadMessageIndex(lastUnreadMessageIndex + 1)
-            }
-        }
-        if (socket) {
-            socket.on('sendMessage', handleOnSendMessage)
-        }
-        return () => {
-            if (socket) {
-                socket.off('sendMessage', handleOnSendMessage)
-            }
-        }
-    }, [socket, currentUser, unreadMessagesAmount])
     return role === 'user' ? (
         <UserContainer>
             <Navbar
@@ -118,7 +71,7 @@ const User: React.FC<IUser> = ({ children, chat }) => {
                     },
                     {
                         link: 'Logout',
-                        onClick: () => logout(socket, setSocket)
+                        onClick: () => userHelpers.logout(socket, setSocket)
                     }
                 ]}
                 hamburger
