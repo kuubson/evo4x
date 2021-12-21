@@ -5,6 +5,7 @@ import { User, Profile, Message } from 'database/database'
 import { User as UserClass } from 'database/models/User'
 
 import utils from 'utils'
+import userUtils from 'routes/user/utils'
 
 interface ISocket extends Socket {
     user?: UserClass
@@ -46,21 +47,8 @@ const user = (io: Server) => {
         const id = socket.user!.id
         socket.on('sendMessage', data => socket.broadcast.emit('sendMessage', data))
         socket.on('readMessages', async () => {
-            await Message.findAll().then(
-                async messages =>
-                    await Promise.all(
-                        messages.map(async message => {
-                            const readByIds = message.readBy.split(',').filter(v => v)
-                            const ID = id.toString()
-                            if (!readByIds.includes(ID)) {
-                                readByIds.push(ID)
-                            }
-                            await message.update({
-                                readBy: readByIds.join(',')
-                            })
-                        })
-                    )
-            )
+            const messages = await Message.findAll()
+            await userUtils.updateReadByProperty(id, messages)
         })
     })
 }

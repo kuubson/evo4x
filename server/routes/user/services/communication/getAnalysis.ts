@@ -3,6 +3,7 @@ import { Analysis } from 'database/database'
 import utils from 'utils'
 
 import { ProtectedRoute } from 'types/express'
+import userUtils from 'routes/user/utils'
 
 const getAnalysis: ProtectedRoute = async (req, res, next) => {
     try {
@@ -11,33 +12,17 @@ const getAnalysis: ProtectedRoute = async (req, res, next) => {
         const analysis = await Analysis.findAll({
             limit,
             offset,
-            order: [['id', 'DESC']],
             attributes: {
                 exclude: ['adminId']
             }
-        }).then(
-            async analysis =>
-                await Promise.all(
-                    analysis
-                        .sort((a, b) => a.id - b.id)
-                        .map(async analysis => {
-                            const readByIds = analysis.readBy.split(',').filter(v => v)
-                            const ID = id.toString()
-                            if (!readByIds.includes(ID)) {
-                                readByIds.push(ID)
-                            }
-                            await analysis.update({
-                                readBy: readByIds.join(',')
-                            })
-                            return {
-                                ...analysis.dataValues,
-                                views: readByIds.length
-                            }
-                        })
-                )
-        )
+        })
+        const updatedAnalysis = await userUtils.updateReadByProperty(id, analysis)
+        const analysisWithViews = updatedAnalysis.map(analysis => ({
+            ...analysis.dataValues,
+            views: userUtils.countAnalysisViews(analysis)
+        }))
         res.send({
-            analysis
+            analysis: analysisWithViews
         })
     } catch (error) {
         next(error)

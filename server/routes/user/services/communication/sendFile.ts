@@ -1,18 +1,17 @@
-import fs from 'fs'
 import cloudinary from 'cloudinary'
-import webpush from 'web-push'
 
-import { Connection, User, Subscription } from 'database/database'
+import { Connection } from 'database/database'
 
 import utils from 'utils'
+import userUtils from 'routes/user/utils'
 
 import { ProtectedMulterRoute } from 'types/express'
 
 const sendFile: ProtectedMulterRoute = async (req, res, next) => {
-    const { filename, path } = req.file
     try {
         await Connection.transaction(async transaction => {
             const { id, name } = req.user
+            const { filename, path } = req.file
             let type, content, cloudinaryId
             switch (true) {
                 case /jpg|jpeg|png|gif/i.test(filename):
@@ -27,7 +26,7 @@ const sendFile: ProtectedMulterRoute = async (req, res, next) => {
                 default:
                     throw new utils.ApiError('There was a problem sending the file', 500)
             }
-            let message: string
+            let message = ''
             if (type === 'IMAGE') {
                 message = `${name} has sent a new image`
                 const { public_id, secure_url } = await cloudinary.v2.uploader.upload(path, {
@@ -54,9 +53,7 @@ const sendFile: ProtectedMulterRoute = async (req, res, next) => {
                 content = secure_url
                 cloudinaryId = public_id
             }
-            try {
-                fs.existsSync(path) && fs.unlinkSync(path)
-            } catch (error) {}
+            utils.deleteTemporaryFile(path)
             await req.user.createMessage(
                 {
                     type,
@@ -68,53 +65,23 @@ const sendFile: ProtectedMulterRoute = async (req, res, next) => {
                     transaction
                 }
             )
-            await User.findAll({
-                where: {
-                    id: {
-                        [utils.Op.ne]: id
-                    }
-                },
-                include: [Subscription]
-            }).then(users =>
-                users.map(user => {
-                    user.subscriptions.map(subscription => {
-                        webpush
-                            .sendNotification(
-                                {
-                                    endpoint: subscription.endpoint,
-                                    keys: {
-                                        p256dh: subscription.p256dh,
-                                        auth: subscription.auth
-                                    }
-                                },
-                                JSON.stringify({
-                                    tag: id,
-                                    title: `From ${name}`,
-                                    body: message,
-                                    icon: `${utils.baseUrl(req)}/Logo.png`,
-                                    data: {
-                                        userName: name,
-                                        url: `${utils.baseUrl(req)}/user/chat`
-                                    }
-                                })
-                            )
-                            .catch(async ({ statusCode }) => {
-                                if (statusCode === 410) {
-                                    await subscription.destroy()
-                                }
-                            })
-                    })
-                })
-            )
+            userUtils.sendNotificationsForOtherUsers(id, {
+                tag: id,
+                title: `From ${name}`,
+                body: message,
+                icon: `${utils.baseUrl(req)}/Logo.png`,
+                data: {
+                    userName: name,
+                    url: `${utils.baseUrl(req)}/user/chat`
+                }
+            })
             res.send({
                 type,
                 content
             })
         })
     } catch (error) {
-        try {
-            fs.existsSync(path) && fs.unlinkSync(path)
-        } catch (error) {}
+        utils.deleteTemporaryFile(req.file.path)
         next(error)
     }
 }

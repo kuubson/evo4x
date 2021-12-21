@@ -9,21 +9,16 @@ import { MulterMiddleware } from 'types/multer'
 
 const handleMulterFile = (): MulterMiddleware => (req, res, next) =>
     middlewares.multerFile.single('file')(req, res, () => {
-        const deleteFile = () => {
-            try {
-                fs.existsSync(req.file.path) && fs.unlinkSync(req.file.path)
-            } catch (error) {}
-        }
         switch (true) {
             case !req.file as boolean:
                 next(new utils.ApiError('There was a problem sending the file', 500))
                 break
             case req.allowedExtenstionsError:
-                deleteFile()
+                utils.deleteTemporaryFile(req.file.path)
                 next(new utils.ApiError('You cannot send a file with this extension', 500))
                 break
             case req.sizeLimit:
-                deleteFile()
+                utils.deleteTemporaryFile(req.file.path)
                 next(new utils.ApiError('You cannot send this large file', 500))
                 break
             default:
@@ -35,7 +30,7 @@ const handleMulterFile = (): MulterMiddleware => (req, res, next) =>
                         .jpeg({ quality: 75 })
                         .toBuffer((error, buffer) => {
                             if (error) {
-                                deleteFile()
+                                utils.deleteTemporaryFile(req.file.path)
                                 next(
                                     new utils.ApiError('There was a problem sending the file', 500)
                                 )

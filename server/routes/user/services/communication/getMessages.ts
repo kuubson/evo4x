@@ -1,6 +1,7 @@
 import { User, Profile, Message } from 'database/database'
 
 import utils from 'utils'
+import userUtils from 'routes/user/utils'
 
 import { ProtectedRoute } from 'types/express'
 
@@ -14,7 +15,7 @@ const getMessages: ProtectedRoute = async (req, res, next) => {
         const messages = await Message.findAll({
             limit,
             offset,
-            order: [['id', 'DESC']],
+            order: [['createdAt', 'DESC']],
             attributes: {
                 exclude: ['userId']
             },
@@ -30,24 +31,8 @@ const getMessages: ProtectedRoute = async (req, res, next) => {
                     ]
                 }
             ]
-        }).then(
-            async messages =>
-                await Promise.all(
-                    messages
-                        .sort((a, b) => a.id - b.id)
-                        .map(async message => {
-                            const readByIds = message.readBy.split(',').filter(v => v)
-                            const ID = id.toString()
-                            if (!readByIds.includes(ID)) {
-                                readByIds.push(ID)
-                            }
-                            await message.update({
-                                readBy: readByIds.join(',')
-                            })
-                            return message
-                        })
-                )
-        )
+        }).then(messages => messages.sort((a, b) => a.id - b.id))
+        await userUtils.updateReadByProperty(id, messages)
         res.send({
             messages,
             user: {
