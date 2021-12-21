@@ -13,6 +13,10 @@ const AnalysisContainer = styled.section`
     height: 100%;
 `
 
+type Response = {
+    analysis: Analysis[]
+}
+
 const Analysis = () => {
     const analysisRef = useRef<HTMLDivElement>(null)
     const [analysis, setAnalysis] = useState<Analysis[]>([])
@@ -26,7 +30,7 @@ const Analysis = () => {
         if (e) {
             const target = e.target as any
             if (target.scrollTop <= 0 && hasMoreAnalysis) {
-                const response = await utils.axios.post(url, {
+                const response = await utils.axios.post<Response>(url, {
                     limit,
                     offset
                 })
@@ -40,7 +44,7 @@ const Analysis = () => {
             }
         }
         if (!e) {
-            const response = await utils.axios.post(url, {
+            const response = await utils.axios.post<Response>(url, {
                 limit,
                 offset
             })

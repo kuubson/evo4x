@@ -34,14 +34,14 @@ const getMessages: ProtectedRoute = async (req, res, next) => {
         }).then(messages => messages.sort((a, b) => a.id - b.id))
         await userUtils.updateReadByProperty(id, messages)
         res.send({
-            messages,
             user: {
                 id,
                 profile: {
                     name,
                     avatar
                 }
-            }
+            },
+            messages
         })
     } catch (error) {
         next(error)

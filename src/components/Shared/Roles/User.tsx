@@ -22,6 +22,12 @@ interface IUser {
     chat?: boolean
 }
 
+type Response = {
+    user: User
+    lastUnreadMessageIndex: number
+    unreadMessagesAmount: number
+}
+
 const User: React.FC<IUser> = ({ children, chat }) => {
     const { socket, setSocket } = hooks.useSocket()
     const { role } = hooks.useRole()
@@ -41,7 +47,7 @@ const User: React.FC<IUser> = ({ children, chat }) => {
         }
         const getUnreadMessagesInfo = async () => {
             const url = '/api/user/communication/getUnreadMessagesInfo'
-            const response = await utils.axios.get(url)
+            const response = await utils.axios.get<Response>(url)
             if (response) {
                 const { user, lastUnreadMessageIndex, unreadMessagesAmount } = response.data
                 setCurrentUser(user)

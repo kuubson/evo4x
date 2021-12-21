@@ -20,6 +20,11 @@ const ChatContainer = styled.section`
     position: relative;
 `
 
+type Response = {
+    user: User
+    messages: Message[]
+}
+
 const Chat = () => {
     const { socket } = hooks.useSocket()
     const messagesRef = useRef<HTMLDivElement>(null)
@@ -42,7 +47,7 @@ const Chat = () => {
         if (e) {
             const target = e.target as any
             if (target.scrollTop <= 0 && hasMoreMessages) {
-                const response = await utils.axios.post(url, {
+                const response = await utils.axios.post<Response>(url, {
                     limit,
                     offset
                 })
@@ -59,15 +64,15 @@ const Chat = () => {
             }
         }
         if (!e) {
-            const response = await utils.axios.post(url, {
+            const response = await utils.axios.post<Response>(url, {
                 limit,
                 offset
             })
             if (response) {
                 setIsLoading(false)
-                const { messages, user } = response.data
-                setMessages(messages)
+                const { user, messages } = response.data
                 setCurrentUser(user)
+                setMessages(messages)
                 pushToTheBottom(messagesRef, true)
                 if (messages.length >= lastUnreadMessageIndex!) {
                     setUnreadMessagesAmount(0)
@@ -96,7 +101,7 @@ const Chat = () => {
     }, [socket])
     const getUnreadMessages = async () => {
         const url = '/api/user/communication/getMessages'
-        const response = await utils.axios.post(url, {
+        const response = await utils.axios.post<Response>(url, {
             limit: lastUnreadMessageIndex,
             offset: 0
         })

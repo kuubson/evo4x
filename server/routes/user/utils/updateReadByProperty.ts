@@ -3,9 +3,9 @@ import { Analysis } from 'database/models/Analysis'
 
 type Items = MessageClass[] | Analysis[]
 
-type MessageReadByPropertySetter = (userId: number, items: Items) => Promise<Items>
+type ReadByPropertySetter = (userId: number, items: Items) => Promise<Items>
 
-const updateReadByProperty: MessageReadByPropertySetter = async (userId, items) => {
+const updateReadByProperty: ReadByPropertySetter = async (userId, items) => {
     return await Promise.all(
         items.map(async item => {
             const readByIds = item.readBy.split(',').filter(v => v)
