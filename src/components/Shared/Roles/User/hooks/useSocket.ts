@@ -4,7 +4,7 @@ import io from 'socket.io-client'
 import hooks from 'hooks'
 
 const useSocket = (chat: boolean | undefined, currentUser: User | undefined) => {
-    const { socket, setSocket } = hooks.useSocket()
+    const { socket, setSocket, clearSocket } = hooks.useSocket()
     const {
         lastUnreadMessageIndex,
         unreadMessagesAmount,
@@ -35,9 +35,9 @@ const useSocket = (chat: boolean | undefined, currentUser: User | undefined) => 
             }
         }
     }, [socket, currentUser, unreadMessagesAmount])
+
     return {
-        socket,
-        setSocket
+        clearSocket
     }
 }
 

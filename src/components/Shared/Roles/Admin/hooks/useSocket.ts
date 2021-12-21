@@ -1,18 +1,17 @@
 import { useEffect } from 'react'
-import io, { Socket } from 'socket.io-client'
+import io from 'socket.io-client'
 
 import hooks from 'hooks'
 
 const useSocket = () => {
-    const { socket, setSocket } = hooks.useSocket()
+    const { socket, setSocket, clearSocket } = hooks.useSocket()
     useEffect(() => {
         if (!socket) {
             setSocket(io('/admin'))
         }
     }, [])
     return {
-        socket,
-        setSocket
+        clearSocket
     }
 }
 

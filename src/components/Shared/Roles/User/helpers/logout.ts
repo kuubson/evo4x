@@ -1,15 +1,12 @@
-import { Socket } from 'socket.io-client'
-
 import utils from 'utils'
 
-type SocketSetter = (payload: Socket | undefined) => object
+type LogoutHandler = (clearSocket: () => void) => void
 
-const logout = async (socket: Socket | undefined, setSocket: SocketSetter) => {
+const logout: LogoutHandler = async clearSocket => {
     const url = '/api/global/auth/logout'
     const response = await utils.axios.get(url)
     if (response) {
-        socket!.disconnect()
-        setSocket(undefined)
+        clearSocket()
         utils.setRole('guest')
         utils.history.push('/')
     }

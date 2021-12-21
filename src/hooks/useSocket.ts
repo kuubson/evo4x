@@ -12,9 +12,16 @@ const useSocket = () => {
             type: actions.SET_SOCKET,
             payload
         })
+    const clearSocket = () => {
+        if (socket) {
+            socket.disconnect()
+            setSocket(undefined)
+        }
+    }
     return {
         socket,
-        setSocket
+        setSocket,
+        clearSocket
     }
 }
 

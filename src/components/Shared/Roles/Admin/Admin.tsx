@@ -7,8 +7,8 @@ import adminHooks from './hooks'
 
 import Navbar from 'components/Shared/Navbar/Navbar'
 
-import adminHelpers from './helpers'
 import userHelpers from 'components/Shared/Roles/User/helpers'
+import adminHelpers from './helpers'
 
 const AdminContainer = styled.section`
     height: 100%;
@@ -19,12 +19,9 @@ const AdminContainer = styled.section`
 `
 
 const Admin: React.FC = ({ children }) => {
-    const { socket, setSocket } = adminHooks.useSocket()
+    const { clearSocket } = adminHooks.useSocket()
     const { role } = hooks.useRole()
     useEffect(() => {
-        if (!socket) {
-            setSocket(io('/admin'))
-        }
         adminHelpers.checkRole(role)
     }, [])
     return role === 'admin' ? (
@@ -37,7 +34,7 @@ const Admin: React.FC = ({ children }) => {
                     },
                     {
                         link: 'Logout',
-                        onClick: () => userHelpers.logout(socket, setSocket)
+                        onClick: () => userHelpers.logout(clearSocket)
                     }
                 ]}
                 hamburger
