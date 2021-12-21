@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import styled, { css } from 'styled-components/macro'
 import fileSaver from 'file-saver'
 
-import StyledMessage from 'components/User/Chat/styled/Message'
+import StyledMessage from '../styled/Message'
 
 type MessageContainerType = {
     withLastUserMessage?: boolean

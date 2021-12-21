@@ -32,3 +32,5 @@ type Analysis = {
     createdAt: Date
     views: number
 }
+
+type Issue = 'email' | 'link' | 'password' | 'changePassword' | ''

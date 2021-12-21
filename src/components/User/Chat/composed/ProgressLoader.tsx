@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 import styled from 'styled-components/macro'
 
-import StyledProgressLoader from 'components/User/Chat/styled/ProgressLoader'
+import StyledProgressLoader from '../styled/ProgressLoader'
 
 const ProgressLoaderContainer = styled.div`
     margin-right: 10px;

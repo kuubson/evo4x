@@ -2,7 +2,7 @@ import React from 'react'
 
 import chatHooks from 'components/User/Chat/hooks'
 
-import StyledMessage from 'components/User/Chat/styled/Message'
+import StyledMessage from '../styled/Message'
 
 import utils from 'utils'
 

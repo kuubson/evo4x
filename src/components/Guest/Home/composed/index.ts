@@ -1,4 +1,4 @@
-import HelpSidebar from './HelpSidebar'
+import HelpSidebar from './HelpSidebar/HelpSidebar'
 
 const Composed = {
     HelpSidebar

@@ -7,11 +7,13 @@ import ApiFeedback from 'components/Shared/ApiFeedback/ApiFeedback'
 
 import sharedStyled from 'components/Shared/styled'
 import RegistrationModalDashboard from 'components/Guest/Modals/RegistrationModal/styled/Dashboard'
-import StyledHelpSidebar from 'components/Guest/Home/styled/HelpSidebar'
+import StyledHelpSidebar from '../../styled/HelpSidebar'
 
 import RegistrationModalComposed from 'components/Guest/Modals/RegistrationModal/composed'
 
-import utils from 'utils'
+import helpSidebarUtils from './utils'
+
+import helpSidebarHelpers from './helpers'
 
 const HelpSidebarContainer = styled(sharedStyled.BlackLayer)``
 
@@ -28,17 +30,16 @@ const HelpSidebar: React.FC<IHelpSidebar> = ({
     hideSidebar,
     showLoginModal
 }) => {
-    const { passwordToken, failedAuthentication } = hooks.useQueryParams()
+    const params = hooks.useQueryParams()
+    const [issue, setIssue] = useState<Issue>('')
     useEffect(() => {
-        if (passwordToken) {
-            setIssue('changePassword')
-            toggleSidebar()
-        }
-        if (failedAuthentication) {
-            showLoginModal()
-        }
+        helpSidebarHelpers.handleQueryParams({
+            params,
+            setIssue,
+            toggleSidebar,
+            showLoginModal
+        })
     }, [])
-    const [issue, setIssue] = useState('')
     const [form, setForm] = useState({
         email: '',
         emailError: '',
@@ -50,68 +51,6 @@ const HelpSidebar: React.FC<IHelpSidebar> = ({
     const { email, emailError, password, passwordError, repeatedPassword, repeatedPasswordError } =
         form
     const formHandler = hooks.useFormHandler(setForm)
-    const validate = () => {
-        let validated = true
-        setForm(form => ({
-            ...form,
-            emailError: '',
-            passwordError: '',
-            repeatedPasswordError: ''
-        }))
-        if (issue === 'changePassword') {
-            if (!formHandler.validatePassword(password, '', false)) validated = false
-            if (!formHandler.validateRepeatedPassword(repeatedPassword, password)) validated = false
-        } else {
-            if (!formHandler.validateEmail(email)) validated = false
-        }
-        return validated
-    }
-    const handleHelpSidebar = async (e: React.FormEvent) => {
-        e.preventDefault()
-        if (validate()) {
-            try {
-                if (issue === 'changePassword') {
-                    const url = '/api/user/auth/changePassword'
-                    const response = await utils.axios.post(url, {
-                        password,
-                        repeatedPassword,
-                        passwordToken
-                    })
-                    if (response) {
-                        setIssue('')
-                        hideSidebar()
-                        showLoginModal()
-                    }
-                } else {
-                    const url = `/api/user/auth/${
-                        issue === 'password' ? 'requestPasswordChange' : 'resendEmail'
-                    }`
-                    await utils.axios.post(url, {
-                        email
-                    })
-                }
-            } catch (error) {
-                utils.handleApiValidation(error, setForm)
-            }
-        }
-    }
-    const issues = [
-        {
-            issue: 'Have not you received any e-mail?',
-            active: issue === 'email',
-            handleOnClick: () => setIssue('email')
-        },
-        {
-            issue: 'Has the link to authenticate your email address expired?',
-            active: issue === 'link',
-            handleOnClick: () => setIssue('link')
-        },
-        {
-            issue: 'Did you forget the password?',
-            active: issue === 'password',
-            handleOnClick: () => setIssue('password')
-        }
-    ]
     return (
         <HelpSidebarContainer showLayer={showSidebar}>
             <StyledHelpSidebar.Content showSidebar={showSidebar}>
@@ -123,13 +62,34 @@ const HelpSidebar: React.FC<IHelpSidebar> = ({
                 >
                     ✕
                 </RegistrationModalDashboard.CloseButton>
-                {issues.map(({ issue, active, handleOnClick }) => (
-                    <StyledHelpSidebar.Issue key={issue} active={active} onClick={handleOnClick}>
-                        {issue}
-                    </StyledHelpSidebar.Issue>
-                ))}
+                {helpSidebarUtils
+                    .issues(issue, setIssue)
+                    .map(({ issue, active, handleOnClick }) => (
+                        <StyledHelpSidebar.Issue
+                            key={issue}
+                            active={active}
+                            onClick={handleOnClick}
+                        >
+                            {issue}
+                        </StyledHelpSidebar.Issue>
+                    ))}
                 {issue && (
-                    <StyledHelpSidebar.Form onSubmit={handleHelpSidebar} noValidate>
+                    <StyledHelpSidebar.Form
+                        onSubmit={event =>
+                            helpSidebarHelpers.handleHelpSidebar({
+                                event,
+                                form,
+                                passwordToken: params.passwordToken,
+                                setForm,
+                                formHandler,
+                                issue,
+                                setIssue,
+                                hideSidebar,
+                                showLoginModal
+                            })
+                        }
+                        noValidate
+                    >
                         {issue === 'changePassword' ? (
                             <>
                                 <RegistrationModalComposed.Input
