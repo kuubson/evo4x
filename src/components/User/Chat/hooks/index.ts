@@ -1,7 +1,9 @@
+import useSocket from './useSocket'
 import useMessages from './useMessages'
 
-const hooks = {
+const chatHooks = {
+    useSocket,
     useMessages
 }
 
-export default hooks
+export default chatHooks

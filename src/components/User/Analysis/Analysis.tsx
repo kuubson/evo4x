@@ -1,86 +1,68 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
 
 import ChatDashboard from 'components/User/Chat/styled/Dashboard'
 
 import Composed from './composed'
 
-import utils from 'utils'
-
-import chatHelpers from 'components/User/Chat/helpers'
+import analysisHelpers from './helpers'
 
 const AnalysisContainer = styled.section`
     height: 100%;
 `
 
-type Response = {
-    analysis: Analysis[]
-}
-
 const Analysis = () => {
     const analysisRef = useRef<HTMLDivElement>(null)
     const [analysis, setAnalysis] = useState<Analysis[]>([])
     const [hasMoreAnalysis, setHasMoreAnalysis] = useState(true)
-    const getAnalysis = async (
-        limit: number,
-        offset: number,
-        e: React.UIEvent<HTMLDivElement> | undefined
-    ) => {
-        const url = '/api/user/communication/getAnalysis'
-        if (e) {
-            const target = e.target as any
-            if (target.scrollTop <= 0 && hasMoreAnalysis) {
-                const response = await utils.axios.post<Response>(url, {
-                    limit,
-                    offset
-                })
-                if (response) {
-                    const { analysis } = response.data
-                    setHasMoreAnalysis(analysis.length !== 0)
-                    const lastScroll = target.scrollHeight
-                    setAnalysis(_analysis => [...analysis, ..._analysis])
-                    target.scrollTop = target.scrollHeight - lastScroll
-                }
-            }
-        }
-        if (!e) {
-            const response = await utils.axios.post<Response>(url, {
-                limit,
-                offset
-            })
-            if (response) {
-                const { analysis } = response.data
-                setAnalysis(analysis)
-                chatHelpers.pushToTheBottom(analysisRef)
-            }
-        }
-    }
+    const getAnalysis = async ({ event, limit, offset }: MessagesOrAnalysisGetterProps) =>
+        analysisHelpers.getAnalysis({
+            event,
+            limit,
+            offset,
+            analysisRef,
+            setAnalysis,
+            hasMoreAnalysis,
+            setHasMoreAnalysis
+        })
     useEffect(() => {
-        getAnalysis(20, 0, undefined)
+        getAnalysis({
+            event: undefined,
+            limit: 20,
+            offset: 0
+        })
     }, [])
+    const renderAnalysis = () =>
+        analysis.map(({ id, type, content, createdAt, views }, index) => {
+            const nextAnalysis = analysis[index + 1]
+            return (
+                <Composed.Analysis
+                    key={id}
+                    analysis={{
+                        id,
+                        type,
+                        content,
+                        createdAt,
+                        views
+                    }}
+                    nextAnalysis={nextAnalysis}
+                />
+            )
+        })
     return (
         <AnalysisContainer>
             <ChatDashboard.Content withAnalysis>
                 <ChatDashboard.Messages
                     ref={analysisRef}
-                    onScroll={e => getAnalysis(20, analysis.length, e)}
+                    onScroll={event =>
+                        getAnalysis({
+                            event,
+                            limit: 20,
+                            offset: analysis.length
+                        })
+                    }
                 >
-                    {analysis.map(({ id, type, content, createdAt, views }, index) => {
-                        const nextAnalysis = analysis[index + 1]
-                        return (
-                            <Composed.Analysis
-                                key={id}
-                                analysis={{
-                                    id,
-                                    type,
-                                    content,
-                                    createdAt,
-                                    views
-                                }}
-                                nextAnalysis={nextAnalysis}
-                            />
-                        )
-                    })}
+                    {renderAnalysis()}
                 </ChatDashboard.Messages>
             </ChatDashboard.Content>
         </AnalysisContainer>

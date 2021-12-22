@@ -6,3 +6,9 @@ type NavbarLink = {
 }
 
 type Issue = 'email' | 'link' | 'password' | 'changePassword' | ''
+
+type MessagesOrAnalysisGetterProps = {
+    event: React.UIEvent<HTMLDivElement> | undefined
+    limit: number
+    offset: number
+}

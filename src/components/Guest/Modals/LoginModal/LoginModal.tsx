@@ -30,17 +30,14 @@ const LoginModal: React.FC<ILoginModal> = ({ showModal, toggleModal, role, setRo
     })
     const formHandler = hooks.useFormHandler(setForm)
     const { email, emailError, password, passwordError } = form
+    const closeModal = () => {
+        setRole('user')
+        toggleModal()
+    }
     return (
         <LoginModalContainer showLayer={showModal}>
             <RegistrationModalDashboard.Content showModal={showModal}>
-                <RegistrationModalDashboard.CloseButton
-                    onClick={() =>
-                        loginModalHelpers.closeModal({
-                            setRole,
-                            toggleModal
-                        })
-                    }
-                >
+                <RegistrationModalDashboard.CloseButton onClick={closeModal}>
                     ✕
                 </RegistrationModalDashboard.CloseButton>
                 <RegistrationModalDashboard.Header>

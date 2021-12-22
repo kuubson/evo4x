@@ -3,7 +3,12 @@ import io from 'socket.io-client'
 
 import hooks from 'hooks'
 
-const useSocket = (chat: boolean | undefined, currentUser: User | undefined) => {
+type SocketHook = {
+    chat: boolean | undefined
+    currentUser: User | undefined
+}
+
+const useSocket = ({ chat, currentUser }: SocketHook) => {
     const { socket, setSocket, clearSocket } = hooks.useSocket()
     const {
         lastUnreadMessageIndex,
@@ -35,7 +40,6 @@ const useSocket = (chat: boolean | undefined, currentUser: User | undefined) => 
             }
         }
     }, [socket, currentUser, unreadMessagesAmount])
-
     return {
         clearSocket
     }

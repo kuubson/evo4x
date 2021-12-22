@@ -25,7 +25,10 @@ interface IUser {
 const User: React.FC<IUser> = ({ children, chat }) => {
     const { unreadMessagesAmount } = hooks.useMessagesInfo()
     const { currentUser } = userHooks.useCurrentUser()
-    const { clearSocket } = userHooks.useSocket(chat, currentUser)
+    const { clearSocket } = userHooks.useSocket({
+        chat,
+        currentUser
+    })
     const { role } = hooks.useRole()
     useEffect(() => {
         userHelpers.checkRole(role)
