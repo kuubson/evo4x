@@ -28,8 +28,8 @@ const LoginModal: React.FC<ILoginModal> = ({ showModal, toggleModal, role, setRo
         password: '',
         passwordError: ''
     })
-    const { email, emailError, password, passwordError } = form
     const formHandler = hooks.useFormHandler(setForm)
+    const { email, emailError, password, passwordError } = form
     return (
         <LoginModalContainer showLayer={showModal}>
             <RegistrationModalDashboard.Content showModal={showModal}>

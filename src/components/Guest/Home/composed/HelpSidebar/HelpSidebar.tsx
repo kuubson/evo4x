@@ -48,9 +48,9 @@ const HelpSidebar: React.FC<IHelpSidebar> = ({
         repeatedPassword: '',
         repeatedPasswordError: ''
     })
+    const formHandler = hooks.useFormHandler(setForm)
     const { email, emailError, password, passwordError, repeatedPassword, repeatedPasswordError } =
         form
-    const formHandler = hooks.useFormHandler(setForm)
     return (
         <HelpSidebarContainer showLayer={showSidebar}>
             <StyledHelpSidebar.Content showSidebar={showSidebar}>

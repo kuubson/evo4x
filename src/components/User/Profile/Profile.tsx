@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
 
 import hooks from 'hooks'
@@ -10,7 +10,7 @@ import Dashboard from './styled/Dashboard'
 
 import RegistrationModalComposed from 'components/Guest/Modals/RegistrationModal/composed'
 
-import utils from 'utils'
+import profileHelpers from './helpers'
 
 const ProfileContainer = styled.section`
     min-height: 100%;
@@ -27,106 +27,33 @@ const Profile = () => {
         story: '',
         storyError: ''
     })
+    const formHandler = hooks.useFormHandler(setForm)
+    const { name, nameError, story, storyError } = form
     const [avatar, setAvatar] = useState('')
     const [showAvatarInput, setShowAvatarInput] = useState(true)
     useEffect(() => {
-        const getProfile = async () => {
-            try {
-                const url = '/api/user/profile/getProfile'
-                const response = await utils.axios.get(url)
-                if (response) {
-                    const { name, story, avatar } = response.data
-                    setForm(form => ({
-                        ...form,
-                        name,
-                        story
-                    }))
-                    setAvatar(avatar)
-                }
-            } catch (error) {
-                setAvatar(utils.defaultAvatar(''))
-            }
-        }
-        getProfile()
+        profileHelpers.getProfile({
+            setForm,
+            setAvatar
+        })
     }, [])
-    const { name, nameError, story, storyError } = form
-    const formHandler = hooks.useFormHandler(setForm)
-    const validate = () => {
-        let validated = true
-        setForm(form => ({
-            ...form,
-            nameError: '',
-            storyError: ''
-        }))
-        if (!formHandler.validateProperty('name', name)) validated = false
-        return validated
-    }
     const withDefaultAvatar = avatar.includes('ui-avatars')
-    const updateProfile = async (e: React.FormEvent) => {
-        e.preventDefault()
-        if (validate()) {
-            try {
-                const url = '/api/user/profile/updateProfile'
-                const updatedAvatar = withDefaultAvatar ? utils.defaultAvatar(name) : avatar
-                await utils.axios.post(url, {
-                    name,
-                    story,
-                    avatar: updatedAvatar
-                })
-                setAvatar(updatedAvatar)
-            } catch (error) {
-                utils.handleApiValidation(error, setForm)
-            }
-        }
-    }
-    const changeAvatar = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.currentTarget.files![0]
-        if (file) {
-            const path = e.target.value
-            const { name, size } = file
-            const imageExtensions = /\.(jpg|jpeg|png|gif)$/i
-            const isImage = imageExtensions.test(path) || imageExtensions.test(name)
-            const resetFileInput = () => {
-                setShowAvatarInput(false)
-                setShowAvatarInput(true)
-            }
-            if (!isImage) {
-                resetFileInput()
-                return utils.setApiFeedback('You cannot upload this file as an avatar')
-            }
-            if (isImage) {
-                if (size > 31457280) {
-                    resetFileInput() // 30MB
-                    return utils.setApiFeedback('You cannot upload this large file')
-                }
-            }
-            const form = new FormData()
-            form.append('file', file)
-            try {
-                const url = '/api/user/profile/changeAvatar'
-                const response = await utils.axios.post(url, form)
-                if (response) {
-                    const { avatar } = response.data
-                    setAvatar(avatar)
-                    resetFileInput()
-                }
-            } catch (error) {
-                resetFileInput()
-            }
-        }
-    }
-    const removeAvatar = async () => {
-        const url = '/api/user/profile/removeAvatar'
-        const response = await utils.axios.get(url)
-        if (response) {
-            const { avatar } = response.data
-            setAvatar(avatar)
-        }
-    }
     return (
         <ProfileContainer>
             <Dashboard.Content>
-                <Dashboard.Info onSubmit={updateProfile}>
+                <Dashboard.Info
+                    onSubmit={event =>
+                        profileHelpers.updateProfile({
+                            event,
+                            form,
+                            avatar,
+                            withDefaultAvatar,
+                            setForm,
+                            setAvatar,
+                            formHandler
+                        })
+                    }
+                >
                     <RegistrationModalComposed.Input
                         id="name"
                         name="name"
@@ -157,12 +84,28 @@ const Profile = () => {
                             Change avatar
                         </Dashboard.Button>
                         {!withDefaultAvatar && (
-                            <Dashboard.Button onClick={removeAvatar}>
+                            <Dashboard.Button
+                                onClick={() =>
+                                    profileHelpers.removeAvatar({
+                                        setAvatar
+                                    })
+                                }
+                            >
                                 Remove avatar
                             </Dashboard.Button>
                         )}
                     </Dashboard.Buttons>
-                    {showAvatarInput && <ChatDashboard.FileInput onChange={changeAvatar} />}
+                    {showAvatarInput && (
+                        <ChatDashboard.FileInput
+                            onChange={event =>
+                                profileHelpers.changeAvatar({
+                                    event,
+                                    setAvatar,
+                                    setShowAvatarInput
+                                })
+                            }
+                        />
+                    )}
                 </Dashboard.AvatarContainer>
             </Dashboard.Content>
         </ProfileContainer>

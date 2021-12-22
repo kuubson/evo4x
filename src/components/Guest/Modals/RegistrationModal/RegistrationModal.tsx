@@ -30,6 +30,7 @@ const RegistrationModal: React.FC<IRegistrationModal> = ({ showModal, toggleModa
         repeatedPassword: '',
         repeatedPasswordError: ''
     })
+    const formHandler = hooks.useFormHandler(setForm)
     const {
         name,
         nameError,
@@ -40,7 +41,6 @@ const RegistrationModal: React.FC<IRegistrationModal> = ({ showModal, toggleModa
         repeatedPassword,
         repeatedPasswordError
     } = form
-    const formHandler = hooks.useFormHandler(setForm)
     const formCompleted = !!name && !!email && !!password && !!repeatedPassword
     return (
         <RegistrationModalContainer showLayer={showModal}>
