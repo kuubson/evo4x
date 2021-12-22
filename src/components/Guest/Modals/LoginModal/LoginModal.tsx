@@ -10,7 +10,7 @@ import RegistrationModalDashboard from 'components/Guest/Modals/RegistrationModa
 
 import RegistrationModalComposed from 'components/Guest/Modals/RegistrationModal/composed'
 
-import utils from 'utils'
+import loginModalHelpers from './helpers'
 
 const LoginModalContainer = styled(sharedStyled.BlackLayer)``
 
@@ -30,50 +30,34 @@ const LoginModal: React.FC<ILoginModal> = ({ showModal, toggleModal, role, setRo
     })
     const { email, emailError, password, passwordError } = form
     const formHandler = hooks.useFormHandler(setForm)
-    const validate = () => {
-        let validated = true
-        setForm(form => ({
-            ...form,
-            emailError: '',
-            passwordError: ''
-        }))
-        if (!formHandler.validateEmail(email)) validated = false
-        if (!formHandler.validatePassword(password, '', true)) validated = false
-        return validated
-    }
-    const login = async (e: React.FormEvent) => {
-        e.preventDefault()
-        if (validate()) {
-            try {
-                const url = `/api/${role}/auth/login`
-                const response = await utils.axios.post(url, {
-                    email,
-                    password
-                })
-                if (response) {
-                    utils.setRole(role)
-                    utils.history.push(role === 'admin' ? '/admin/analysis' : '/user/profile')
-                }
-            } catch (error) {
-                utils.handleApiValidation(error, setForm)
-            }
-        }
-    }
     return (
         <LoginModalContainer showLayer={showModal}>
             <RegistrationModalDashboard.Content showModal={showModal}>
                 <RegistrationModalDashboard.CloseButton
-                    onClick={() => {
-                        setRole('user')
-                        toggleModal()
-                    }}
+                    onClick={() =>
+                        loginModalHelpers.closeModal({
+                            setRole,
+                            toggleModal
+                        })
+                    }
                 >
                     ✕
                 </RegistrationModalDashboard.CloseButton>
                 <RegistrationModalDashboard.Header>
                     "Get rich or die trying"
                 </RegistrationModalDashboard.Header>
-                <RegistrationModalDashboard.Form onSubmit={login} noValidate>
+                <RegistrationModalDashboard.Form
+                    onSubmit={event =>
+                        loginModalHelpers.login({
+                            event,
+                            role,
+                            form,
+                            setForm,
+                            formHandler
+                        })
+                    }
+                    noValidate
+                >
                     <RegistrationModalComposed.Input
                         id="loginEmail"
                         name="email"

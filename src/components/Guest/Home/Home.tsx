@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
 
 import hooks from 'hooks'
@@ -12,7 +12,9 @@ import Dashboard from './styled/Dashboard'
 
 import Composed from './composed'
 
-import utils from 'utils'
+import homeUtils from './utils'
+
+import homeHelpers from './helpers'
 
 import Logo from 'assets/images/Logo.png'
 
@@ -43,29 +45,19 @@ const HomeContainer = styled.section`
 `
 
 const Home = () => {
-    const { emailToken } = hooks.useQueryParams()
-    useEffect(() => {
-        const authenticateEmail = async () => {
-            try {
-                handleToggler(setShowLoginModal)
-                const url = '/api/user/auth/authenticateEmail'
-                await utils.axios.post(url, {
-                    emailToken
-                })
-            } catch (error) {
-                utils.handleApiError(error)
-            }
-        }
-        if (emailToken) {
-            authenticateEmail()
-        }
-    }, [emailToken])
     const [role, setRole] = useState<Role>('user')
     const [showHelpSidebar, setShowHelpSidebar] = useState(false)
     const [showRegistrationModal, setShowRegistrationModal] = useState(false)
     const [showLoginModal, setShowLoginModal] = useState(false)
-    const handleToggler = (dispatcher: React.Dispatch<React.SetStateAction<boolean>>) =>
-        dispatcher(state => !state)
+    const handleToggler = (dispatcher: DispatchBoolean) => dispatcher(state => !state)
+    const { emailToken } = hooks.useQueryParams()
+    useEffect(() => {
+        homeHelpers.authenticateEmail({
+            emailToken,
+            handleToggler,
+            setShowLoginModal
+        })
+    }, [emailToken])
     return (
         <HomeContainer>
             <Composed.HelpSidebar
@@ -85,19 +77,11 @@ const Home = () => {
                 setRole={setRole}
             />
             <Navbar
-                links={[
-                    {
-                        link: 'Indicators'
-                    },
-                    {
-                        link: 'Login',
-                        onClick: () => handleToggler(setShowLoginModal)
-                    },
-                    {
-                        link: 'Help',
-                        onClick: () => handleToggler(setShowHelpSidebar)
-                    }
-                ]}
+                links={homeUtils.links({
+                    handleToggler,
+                    setShowLoginModal,
+                    setShowHelpSidebar
+                })}
             />
             <Dashboard.Advantages>
                 <Dashboard.Advantage>
@@ -124,10 +108,12 @@ const Home = () => {
                 <Dashboard.Logo src={Logo} alt="evo4x" />
             </Dashboard.Header>
             <Dashboard.HiddenButton
-                onDoubleClick={() => {
-                    setRole('admin')
-                    handleToggler(setShowLoginModal)
-                }}
+                onDoubleClick={() =>
+                    homeHelpers.showLoginModalForAdmin({
+                        setRole,
+                        setShowLoginModal
+                    })
+                }
             />
         </HomeContainer>
     )

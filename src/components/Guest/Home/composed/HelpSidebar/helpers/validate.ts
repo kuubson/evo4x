@@ -1,9 +1,9 @@
-import { Form } from '../helpers/handleHelpSidebar'
+import { Form } from './handleHelpSidebar'
 
 type Validator = {
     form: Form
     setForm: React.Dispatch<React.SetStateAction<Form>>
-    issue: string
+    issue: Issue
     formHandler: any
 }
 

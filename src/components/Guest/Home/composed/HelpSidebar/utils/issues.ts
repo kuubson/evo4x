@@ -1,6 +1,6 @@
 import React from 'react'
 
-const issues = (issue: string, setIssue: React.Dispatch<React.SetStateAction<Issue>>) => [
+const issues = (issue: Issue, setIssue: React.Dispatch<React.SetStateAction<Issue>>) => [
     {
         issue: 'Have not you received any e-mail?',
         active: issue === 'email',
