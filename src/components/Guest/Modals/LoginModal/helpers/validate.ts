@@ -1,4 +1,4 @@
-import { Form } from '../helpers/login'
+import { Form } from './login'
 
 type Validator = {
     form: Form

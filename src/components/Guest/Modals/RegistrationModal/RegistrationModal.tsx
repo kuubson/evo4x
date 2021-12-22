@@ -10,7 +10,7 @@ import Dashboard from './styled/Dashboard'
 
 import Composed from './composed'
 
-import utils from 'utils'
+import registrationModalHelpers from './helpers'
 
 const RegistrationModalContainer = styled(sharedStyled.BlackLayer)``
 
@@ -41,37 +41,6 @@ const RegistrationModal: React.FC<IRegistrationModal> = ({ showModal, toggleModa
         repeatedPasswordError
     } = form
     const formHandler = hooks.useFormHandler(setForm)
-    const validate = () => {
-        let validated = true
-        setForm(form => ({
-            ...form,
-            nameError: '',
-            emailError: '',
-            passwordError: '',
-            repeatedPasswordError: ''
-        }))
-        if (!formHandler.validateProperty('name', name)) validated = false
-        if (!formHandler.validateEmail(email)) validated = false
-        if (!formHandler.validatePassword(password, repeatedPassword, false)) validated = false
-        if (!formHandler.validateRepeatedPassword(repeatedPassword, password)) validated = false
-        return validated
-    }
-    const register = async (e: React.FormEvent) => {
-        e.preventDefault()
-        if (validate()) {
-            try {
-                const url = '/api/user/auth/register'
-                await utils.axios.post(url, {
-                    name,
-                    email,
-                    password,
-                    repeatedPassword
-                })
-            } catch (error) {
-                utils.handleApiValidation(error, setForm)
-            }
-        }
-    }
     const formCompleted = !!name && !!email && !!password && !!repeatedPassword
     return (
         <RegistrationModalContainer showLayer={showModal}>
@@ -81,7 +50,17 @@ const RegistrationModal: React.FC<IRegistrationModal> = ({ showModal, toggleModa
                     {`"You either win or learn - 
                     not win or lose"`}
                 </Dashboard.Header>
-                <Dashboard.Form onSubmit={register} noValidate>
+                <Dashboard.Form
+                    onSubmit={event =>
+                        registrationModalHelpers.register({
+                            event,
+                            form,
+                            setForm,
+                            formHandler
+                        })
+                    }
+                    noValidate
+                >
                     <Composed.Input
                         id="name"
                         name="name"
