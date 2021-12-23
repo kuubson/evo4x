@@ -16,13 +16,13 @@ const sendFile: ProtectedMulterRoute = async (req, res, next) => {
             const { filename, path } = req.file
             let type, content, cloudinaryId
             switch (true) {
-                case /jpg|jpeg|png|gif/i.test(filename):
+                case utils.filesRegex.images.test(filename):
                     type = 'IMAGE'
                     break
-                case /mp4/i.test(filename):
+                case utils.filesRegex.videos.test(filename):
                     type = 'VIDEO'
                     break
-                case /txt|rtf|doc|docx|xlsx|ppt|pptx|pdf/i.test(filename):
+                case utils.filesRegex.files.test(filename):
                     type = 'FILE'
                     break
                 default:

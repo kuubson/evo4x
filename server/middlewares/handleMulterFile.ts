@@ -1,9 +1,8 @@
-import fs from 'fs'
-import sharp from 'sharp'
-
 import middlewares from 'middlewares'
 
 import utils from 'utils'
+
+import helpers from 'helpers'
 
 import { MulterMiddleware } from 'types/multer'
 
@@ -23,23 +22,8 @@ const handleMulterFile = (): MulterMiddleware => (req, res, next) =>
                 break
             default:
                 const { filename, path } = req.file
-                const handleSharp = async () =>
-                    await sharp(path)
-                        .rotate()
-                        .resize(800)
-                        .jpeg({ quality: 75 })
-                        .toBuffer((error, buffer) => {
-                            if (error) {
-                                utils.deleteTemporaryFile(req.file.path)
-                                next(
-                                    new utils.ApiError('There was a problem sending the file', 500)
-                                )
-                            }
-                            fs.writeFileSync(path, buffer)
-                            next()
-                        })
-                if (/jpg|jpeg|png|gif/i.test(filename)) {
-                    handleSharp()
+                if (utils.filesRegex.images.test(filename)) {
+                    helpers.reduceImageSize(path, next)
                 } else {
                     next()
                 }

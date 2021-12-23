@@ -54,7 +54,6 @@ const Home = () => {
     useEffect(() => {
         homeHelpers.authenticateEmail({
             emailToken,
-            handleToggler,
             setShowLoginModal
         })
     }, [emailToken])

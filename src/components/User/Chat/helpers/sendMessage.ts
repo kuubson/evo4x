@@ -46,9 +46,9 @@ const sendMessage = async ({
                 socket!.emit('sendMessage', _message)
             }
         } catch (error) {
+            utils.handleApiError(error)
             const conversation = messages
             setMessages(conversation)
-            utils.handleApiError(error)
         }
     }
 }

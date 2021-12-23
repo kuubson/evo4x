@@ -102,6 +102,7 @@ const sendFile = async ({
                 socket!.emit('sendMessage', message)
             }
         } catch (error) {
+            utils.handleApiError(error)
             resetFileInput()
             clearInterval(intervalId)
             setUploadPercentage(0)
