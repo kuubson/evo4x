@@ -4,9 +4,9 @@ import { User } from './User'
 
 class MessageValues extends Model {
     id: number
-    name: string
     type: 'MESSAGE' | 'IMAGE' | 'VIDEO' | 'FILE'
     content: string
+    filename: string
     readBy: string
     cloudinaryId: string
 }
@@ -30,11 +30,11 @@ const MessageModel = (sequelize: Sequelize) => {
                 type: TEXT,
                 allowNull: false
             },
-            readBy: {
+            filename: {
                 type: TEXT,
                 defaultValue: ''
             },
-            filename: {
+            readBy: {
                 type: TEXT,
                 defaultValue: ''
             },
