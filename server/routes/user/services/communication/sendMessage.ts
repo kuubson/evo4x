@@ -11,7 +11,8 @@ import { ProtectedRoute } from 'types/express'
 const sendMessage: ProtectedRoute = async (req, res, next) => {
     try {
         await Connection.transaction(async transaction => {
-            const { id, name } = req.user
+            const { id } = req.user
+            const { name } = req.user.profile
             const { content } = req.body
             await req.user.createMessage(
                 {

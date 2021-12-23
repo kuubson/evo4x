@@ -11,7 +11,8 @@ import { ProtectedMulterRoute } from 'types/express'
 const sendFile: ProtectedMulterRoute = async (req, res, next) => {
     try {
         await Connection.transaction(async transaction => {
-            const { id, name } = req.user
+            const { id } = req.user
+            const { name } = req.user.profile
             const { filename, path } = req.file
             let type, content, cloudinaryId
             switch (true) {
