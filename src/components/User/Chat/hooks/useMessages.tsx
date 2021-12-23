@@ -19,7 +19,7 @@ const MessageContainer = styled.div<MessageContainerType>`
             : null}
 `
 
-type UseMessagesHook = {
+type MessagesHook = {
     type: MessageTypes
     content: string
     filename: string | undefined
@@ -43,7 +43,7 @@ const useMessages = ({
     withCurrentUser,
     withLastUserMessage,
     withLastAndNextMessage
-}: UseMessagesHook) => {
+}: MessagesHook) => {
     const [showDetails, setShowDetails] = useState(false)
     const [imageError, setImageError] = useState(false)
     const [videoError, setVideoError] = useState(false)

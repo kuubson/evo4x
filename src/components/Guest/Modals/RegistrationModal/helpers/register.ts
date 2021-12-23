@@ -13,14 +13,14 @@ export type Form = {
     repeatedPasswordError: string
 }
 
-type RegisterHandler = {
+type RegistrationHandler = {
     event: React.FormEvent
     form: Form
     setForm: React.Dispatch<React.SetStateAction<Form>>
     formHandler: any
 }
 
-const register = async ({ event, form, setForm, formHandler }: RegisterHandler) => {
+const register = async ({ event, form, setForm, formHandler }: RegistrationHandler) => {
     event.preventDefault()
     if (
         registerModalHelpers.validate({

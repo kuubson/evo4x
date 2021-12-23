@@ -1,12 +1,12 @@
 import { Form } from './getProfile'
 
-type Validator = {
+type ProfileValidator = {
     form: Form
     setForm: React.Dispatch<React.SetStateAction<Form>>
     formHandler: any
 }
 
-const validateProfile = ({ form, setForm, formHandler }: Validator) => {
+const validateProfile = ({ form, setForm, formHandler }: ProfileValidator) => {
     let validated = true
     setForm(form => ({
         ...form,

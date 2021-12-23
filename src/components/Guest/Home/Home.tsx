@@ -57,6 +57,10 @@ const Home = () => {
             setShowLoginModal
         })
     }, [emailToken])
+    const showLoginModalForAdmin = () => {
+        setRole('admin')
+        setShowLoginModal(true)
+    }
     return (
         <HomeContainer>
             <Composed.HelpSidebar
@@ -106,14 +110,7 @@ const Home = () => {
             <Dashboard.Header>
                 <Dashboard.Logo src={Logo} alt="evo4x" />
             </Dashboard.Header>
-            <Dashboard.HiddenButton
-                onDoubleClick={() =>
-                    homeHelpers.showLoginModalForAdmin({
-                        setRole,
-                        setShowLoginModal
-                    })
-                }
-            />
+            <Dashboard.HiddenButton onDoubleClick={showLoginModalForAdmin} />
         </HomeContainer>
     )
 }
