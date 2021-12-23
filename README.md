@@ -3,7 +3,7 @@
 ## Technologies
 
 -   HTML, CSS, JS, TS
--   React.js + Redux (Hooks, Styled Components, PWA, Web Push Notifications, PayPal, Stripe)
+-   React.js + Redux (Hooks, Styled Components, PWA, Web Push Notifications, PayPal)
 -   Node.js + Express (passport.js, JWT, socket.io, multer, cloudinary)
 -   MySQL (ORM Sequelize)
 
