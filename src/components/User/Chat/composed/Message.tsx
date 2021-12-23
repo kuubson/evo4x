@@ -13,7 +13,7 @@ interface IMessage {
 }
 
 const Message: React.FC<IMessage> = ({
-    message: { type, content, createdAt, user },
+    message: { type, content, filename, createdAt, user },
     nextMessage,
     currentUser
 }) => {
@@ -40,6 +40,7 @@ const Message: React.FC<IMessage> = ({
     const { renderMessage } = chatHooks.useMessages({
         type,
         content,
+        filename,
         createdAt,
         showAvatar,
         showError,

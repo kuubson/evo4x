@@ -4,6 +4,7 @@ import { User } from './User'
 
 class MessageValues extends Model {
     id: number
+    name: string
     type: 'MESSAGE' | 'IMAGE' | 'VIDEO' | 'FILE'
     content: string
     readBy: string
@@ -30,6 +31,10 @@ const MessageModel = (sequelize: Sequelize) => {
                 allowNull: false
             },
             readBy: {
+                type: TEXT,
+                defaultValue: ''
+            },
+            filename: {
                 type: TEXT,
                 defaultValue: ''
             },

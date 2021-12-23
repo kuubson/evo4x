@@ -33,18 +33,12 @@ const Analysis = () => {
         })
     }, [])
     const renderAnalysis = () =>
-        analysis.map(({ id, type, content, createdAt, views }, index) => {
+        analysis.map((currentAnalysis, index) => {
             const nextAnalysis = analysis[index + 1]
             return (
                 <Composed.Analysis
-                    key={id}
-                    analysis={{
-                        id,
-                        type,
-                        content,
-                        createdAt,
-                        views
-                    }}
+                    key={currentAnalysis.id}
+                    analysis={currentAnalysis}
                     nextAnalysis={nextAnalysis}
                 />
             )

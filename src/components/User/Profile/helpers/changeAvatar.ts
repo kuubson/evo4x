@@ -9,10 +9,9 @@ type AvatarChanger = {
 const changeAvatar = async ({ event, setAvatar, setShowAvatarInput }: AvatarChanger) => {
     const file = event.currentTarget.files![0]
     if (file) {
-        const path = event.target.value
-        const { name, size } = file
         const { regex, sizes } = utils.filesInfo
-        const isImage = regex.images.test(path) || regex.images.test(name)
+        const { name, size } = file
+        const isImage = regex.images.test(name)
         const resetFileInput = () => {
             setShowAvatarInput(false)
             setShowAvatarInput(true)

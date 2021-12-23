@@ -16,9 +16,8 @@ const storage = multer.diskStorage({
         } catch (error) {}
     },
     filename: (_, { originalname }, callback) => {
-        const extension = path.extname(originalname)
-        const hash = crypto.randomBytes(30).toString('hex')
-        callback(null, `filefilename${originalname}filename${hash}${extension}`)
+        const name = `${crypto.randomBytes(60).toString('hex')}${path.extname(originalname)}`
+        callback(null, name)
     }
 })
 

@@ -30,12 +30,11 @@ const sendFile = async ({
     let percentage = 0
     const file = event.currentTarget.files![0]
     if (file) {
-        const path = event.target.value
-        const { name, size } = file
         const { regex, sizes } = utils.filesInfo
-        const isImage = regex.images.test(path) || regex.images.test(name)
-        const isVideo = regex.videos.test(path) || regex.videos.test(name)
-        const isFile = regex.files.test(path) || regex.files.test(name)
+        const { name, size } = file
+        const isImage = regex.images.test(name)
+        const isVideo = regex.videos.test(name)
+        const isFile = regex.files.test(name)
         const resetFileInput = () => {
             setShowFileInput(false)
             setTimeout(() => {
@@ -91,6 +90,7 @@ const sendFile = async ({
                     id,
                     type,
                     content,
+                    filename: name,
                     createdAt: new Date(),
                     user: currentUser
                 }
