@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+
 import styled from 'styled-components/macro'
 
-import hooks from 'hooks'
+import profileHooks from './hooks'
 
 import ApiFeedback from 'components/Shared/ApiFeedback/ApiFeedback'
 
@@ -9,8 +10,6 @@ import ChatDashboard from 'components/User/Chat/styled/Dashboard'
 import Dashboard from './styled/Dashboard'
 
 import RegistrationModalComposed from 'components/Guest/Modals/RegistrationModal/composed'
-
-import profileHelpers from './helpers'
 
 const ProfileContainer = styled.section`
     min-height: 100%;
@@ -21,39 +20,22 @@ const ProfileContainer = styled.section`
 `
 
 const Profile = () => {
-    const [form, setForm] = useState({
-        name: '',
-        nameError: '',
-        story: '',
-        storyError: ''
-    })
-    const formHandler = hooks.useFormHandler(setForm)
-    const { name, nameError, story, storyError } = form
-    const [avatar, setAvatar] = useState('')
     const [showAvatarInput, setShowAvatarInput] = useState(true)
-    useEffect(() => {
-        profileHelpers.getProfile({
-            setForm,
-            setAvatar
-        })
-    }, [])
-    const withDefaultAvatar = avatar.includes('ui-avatars')
+    const {
+        profile: { name, nameError, story, storyError },
+        profileHandler,
+        avatar,
+        updateProfile,
+        removeAvatar,
+        changeAvatar,
+        withDefaultAvatar
+    } = profileHooks.useProfile({
+        setShowAvatarInput
+    })
     return (
         <ProfileContainer>
             <Dashboard.Content>
-                <Dashboard.Info
-                    onSubmit={event =>
-                        profileHelpers.updateProfile({
-                            event,
-                            form,
-                            avatar,
-                            withDefaultAvatar,
-                            setForm,
-                            setAvatar,
-                            formHandler
-                        })
-                    }
-                >
+                <Dashboard.Info onSubmit={updateProfile}>
                     <RegistrationModalComposed.Input
                         id="name"
                         name="name"
@@ -62,7 +44,7 @@ const Profile = () => {
                         value={name}
                         placeholder="Type your name"
                         error={nameError}
-                        onChange={formHandler.handleInputValue}
+                        onChange={profileHandler.handleInputValue}
                     />
                     <RegistrationModalComposed.Input
                         id="story"
@@ -72,7 +54,7 @@ const Profile = () => {
                         value={story}
                         placeholder="Type the story of your trading"
                         error={storyError}
-                        onChange={formHandler.handleInputValue}
+                        onChange={profileHandler.handleInputValue}
                     />
                     <Dashboard.Button>Update profile</Dashboard.Button>
                     <ApiFeedback />
@@ -84,28 +66,12 @@ const Profile = () => {
                             Change avatar
                         </Dashboard.Button>
                         {!withDefaultAvatar && (
-                            <Dashboard.Button
-                                onClick={() =>
-                                    profileHelpers.removeAvatar({
-                                        setAvatar
-                                    })
-                                }
-                            >
+                            <Dashboard.Button onClick={removeAvatar}>
                                 Remove avatar
                             </Dashboard.Button>
                         )}
                     </Dashboard.Buttons>
-                    {showAvatarInput && (
-                        <ChatDashboard.FileInput
-                            onChange={event =>
-                                profileHelpers.changeAvatar({
-                                    event,
-                                    setAvatar,
-                                    setShowAvatarInput
-                                })
-                            }
-                        />
-                    )}
+                    {showAvatarInput && <ChatDashboard.FileInput onChange={changeAvatar} />}
                 </Dashboard.AvatarContainer>
             </Dashboard.Content>
         </ProfileContainer>

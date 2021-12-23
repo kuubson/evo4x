@@ -1,20 +1,18 @@
-import { Form } from './getProfile'
-
 type ProfileValidator = {
-    form: Form
-    setForm: React.Dispatch<React.SetStateAction<Form>>
-    formHandler: any
+    profile: Profile
+    setProfile: React.Dispatch<React.SetStateAction<Profile>>
+    profileHandler: any
 }
 
-const validateProfile = ({ form, setForm, formHandler }: ProfileValidator) => {
+const validateProfile = ({ profile, setProfile, profileHandler }: ProfileValidator) => {
     let validated = true
-    setForm(form => ({
-        ...form,
+    setProfile(profile => ({
+        ...profile,
         nameError: '',
         storyError: ''
     }))
-    const { name } = form
-    if (!formHandler.validateProperty('name', name)) validated = false
+    const { name } = profile
+    if (!profileHandler.validateProperty('name', name)) validated = false
     return validated
 }
 
