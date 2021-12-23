@@ -1,15 +1,15 @@
 import React from 'react'
 
-import chatHooks from 'components/User/Chat/hooks'
-
 import ChatStyledMessage from 'components/User/Chat/styled/Message'
+
+import ChatComposed from 'components/User/Chat/composed'
 
 interface IAnalysis {
     analysis: Analysis
     nextAnalysis: Analysis
 }
 
-const Message: React.FC<IAnalysis> = ({
+const Analysis: React.FC<IAnalysis> = ({
     analysis: { type, content, filename, createdAt, views },
     nextAnalysis
 }) => {
@@ -23,18 +23,19 @@ const Message: React.FC<IAnalysis> = ({
             {error}
         </ChatStyledMessage.Content>
     )
-    const { renderMessage: renderAnalysis } = chatHooks.useRender({
-        type,
-        content,
-        filename,
-        createdAt,
-        views,
-        showError,
-        withCurrentUser: true,
-        withLastUserMessage,
-        withLastAndNextMessage: !!withLastUserMessage && !!nextAnalysis
-    })
-    return renderAnalysis()
+    return (
+        <ChatComposed.Message
+            type={type}
+            content={content}
+            filename={filename}
+            createdAt={createdAt}
+            views={views}
+            showError={showError}
+            withCurrentUser={true}
+            withLastUserMessage={withLastUserMessage}
+            withLastAndNextMessage={!!withLastUserMessage && !!nextAnalysis}
+        />
+    )
 }
 
-export default Message
+export default Analysis

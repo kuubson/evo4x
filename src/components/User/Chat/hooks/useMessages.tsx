@@ -60,7 +60,7 @@ const useMessages = ({ setShowFileInput, setUploadPercentage }: MessagesHook) =>
         return messages.map((message, index) => {
             const nextMessage = messages[index + 1]
             return (
-                <Composed.Message
+                <Composed.MessageContainer
                     key={message.id}
                     message={message}
                     nextMessage={nextMessage}
