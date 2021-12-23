@@ -16,13 +16,13 @@ const sendFile: ProtectedMulterRoute = async (req, res, next) => {
             const { filename, path } = req.file
             let type, content, cloudinaryId
             switch (true) {
-                case utils.filesRegex.images.test(filename):
+                case utils.filesInfo.regex.images.test(filename):
                     type = 'IMAGE'
                     break
-                case utils.filesRegex.videos.test(filename):
+                case utils.filesInfo.regex.videos.test(filename):
                     type = 'VIDEO'
                     break
-                case utils.filesRegex.files.test(filename):
+                case utils.filesInfo.regex.files.test(filename):
                     type = 'FILE'
                     break
                 default:
@@ -84,7 +84,12 @@ const sendFile: ProtectedMulterRoute = async (req, res, next) => {
         })
     } catch (error) {
         utils.deleteTemporaryFile(req.file.path)
-        next(error)
+        const emptyTextFile = (error as any).message === 'Empty file'
+        if (emptyTextFile) {
+            next(new utils.ApiError('The selected text file is empty', 422))
+        } else {
+            next(error)
+        }
     }
 }
 

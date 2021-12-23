@@ -22,7 +22,7 @@ const handleMulterFile = (): MulterMiddleware => (req, res, next) =>
                 break
             default:
                 const { filename, path } = req.file
-                if (utils.filesRegex.images.test(filename)) {
+                if (utils.filesInfo.regex.images.test(filename)) {
                     helpers.reduceImageSize(path, next)
                 } else {
                     next()

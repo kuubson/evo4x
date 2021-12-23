@@ -25,27 +25,27 @@ const storage = multer.diskStorage({
 const multerFile = multer({
     storage,
     fileFilter: (req: MulterRequest, { mimetype, originalname }, callback) => {
-        const { filesRegex } = utils
-        const isImage = filesRegex.images.test(mimetype) || filesRegex.images.test(originalname)
-        const isVideo = filesRegex.videos.test(mimetype) || filesRegex.videos.test(originalname)
-        const isFile = filesRegex.files.test(mimetype) || filesRegex.files.test(originalname)
+        const { regex, sizes } = utils.filesInfo
+        const isImage = regex.images.test(mimetype) || regex.images.test(originalname)
+        const isVideo = regex.videos.test(mimetype) || regex.videos.test(originalname)
+        const isFile = regex.files.test(mimetype) || regex.files.test(originalname)
         if (!isImage && !isVideo && !isFile) {
             req.allowedExtenstionsError = true
         }
         const size = parseInt(req.headers['content-length']!)
         if (isImage) {
-            if (size > 31457280) {
-                req.sizeLimit = true // 30MB
+            if (size > sizes.imageMaxSize) {
+                req.sizeLimit = true
             }
         }
         if (isVideo) {
-            if (size > 52428800) {
-                req.sizeLimit = true // 50MB
+            if (size > sizes.maxVideoSize) {
+                req.sizeLimit = true
             }
         }
         if (isFile) {
-            if (size > 10485760) {
-                req.sizeLimit = true // 10MB
+            if (size > sizes.maxFileSize) {
+                req.sizeLimit = true
             }
         }
         return callback(null, true)

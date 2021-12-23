@@ -6,7 +6,7 @@ import transporter from './transporter'
 import cookie from './cookie'
 import emailTemplate from './emailTemplate'
 import deleteTemporaryFile from './deleteTemporaryFile'
-import filesRegex from './filesRegex'
+import filesInfo from './filesInfo'
 import validator from './validator'
 import checkSanitization from './checkSanitization'
 import defaultAvatar from './defaultAvatar'
@@ -20,7 +20,7 @@ const utils = {
     cookie,
     emailTemplate,
     deleteTemporaryFile,
-    filesRegex,
+    filesInfo,
     validator,
     checkSanitization,
     defaultAvatar

@@ -5,7 +5,7 @@ export default styled.div`
     height: 80px;
     background: ${({ theme }) => theme.primaryColor};
     border-radius: 10px;
-    margin-top: 15px;
+    margin-top: 10px;
     margin-right: 20px;
     border: 1px solid black;
     display: flex;

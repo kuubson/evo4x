@@ -32,12 +32,10 @@ const sendFile = async ({
     if (file) {
         const path = event.target.value
         const { name, size } = file
-        const imageExtensions = /\.(jpg|jpeg|png|gif)$/i
-        const videoExtensions = /\.(mp4)$/i
-        const fileExtensions = /\.(txt|rtf|doc|docx|xlsx|ppt|pptx|pdf)$/i
-        const isImage = imageExtensions.test(path) || imageExtensions.test(name)
-        const isVideo = videoExtensions.test(path) || videoExtensions.test(name)
-        const isFile = fileExtensions.test(path) || fileExtensions.test(name)
+        const { regex, sizes } = utils.filesInfo
+        const isImage = regex.images.test(path) || regex.images.test(name)
+        const isVideo = regex.videos.test(path) || regex.videos.test(name)
+        const isFile = regex.files.test(path) || regex.files.test(name)
         const resetFileInput = () => {
             setShowFileInput(false)
             setTimeout(() => {
@@ -52,20 +50,20 @@ const sendFile = async ({
             return utils.setApiFeedback('You cannot send a file with this extension')
         }
         if (isImage) {
-            if (size > 31457280) {
-                resetFileInput() // 30MB
+            if (size > sizes.imageMaxSize) {
+                resetFileInput()
                 largeSizeError()
             }
         }
         if (isVideo) {
-            if (size > 52428800) {
-                resetFileInput() // 50MB
+            if (size > sizes.maxVideoSize) {
+                resetFileInput()
                 largeSizeError()
             }
         }
         if (isFile) {
-            if (size > 10485760) {
-                resetFileInput() // 10MB
+            if (size > sizes.maxFileSize) {
+                resetFileInput()
                 largeSizeError()
             }
         }

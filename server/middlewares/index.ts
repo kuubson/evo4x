@@ -42,8 +42,8 @@ const init = (app: Application, server: Server) => {
             contentSecurityPolicy: false
         })
     )
-    app.use(express.json())
-    app.use(express.urlencoded({ extended: true }))
+    app.use(express.json({ limit: '200kb' }))
+    app.use(express.urlencoded({ extended: true, limit: '200kb' }))
     app.use(cookieParser())
     app.use(passport.initialize())
     initCSRF(app)
