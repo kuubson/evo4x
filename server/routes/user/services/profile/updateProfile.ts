@@ -1,6 +1,6 @@
 import { check } from 'express-validator'
 
-import utils from 'utils'
+import helpers from 'helpers'
 
 import { ProtectedRoute } from 'types/express'
 
@@ -21,7 +21,7 @@ const updateProfile: ProtectedRoute = async (req, res, next) => {
 }
 
 export const validation = () => [
-    utils.validator.validateProperty('name'),
+    helpers.validator.validateProperty('name'),
     check('story').trim().isString().bail(),
     check('avatar').isURL()
 ]

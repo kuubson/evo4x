@@ -4,6 +4,8 @@ import { Connection, User, Authentication, Profile } from 'database/database'
 
 import utils from 'utils'
 
+import helpers from 'helpers'
+
 import { Route } from 'types/express'
 
 const register: Route = async (req, res, next) => {
@@ -47,7 +49,7 @@ const register: Route = async (req, res, next) => {
                     `${utils.baseUrl(req)}/?emailToken=${emailToken}`
                 )
             }
-            utils.transporter.sendMail(mailOptions, (error, info) => {
+            helpers.transporter.sendMail(mailOptions, (error, info) => {
                 try {
                     if (error || !info) {
                         throw new utils.ApiError(
@@ -70,10 +72,10 @@ const register: Route = async (req, res, next) => {
 }
 
 export const validation = () => [
-    utils.validator.validateProperty('name'),
-    utils.validator.validateEmail(),
-    utils.validator.validatePassword(),
-    utils.validator.validateRepeatedPassword()
+    helpers.validator.validateProperty('name'),
+    helpers.validator.validateEmail(),
+    helpers.validator.validatePassword(),
+    helpers.validator.validateRepeatedPassword()
 ]
 
 export default register

@@ -4,6 +4,7 @@ import { Connection } from 'database/database'
 
 import utils from 'utils'
 
+import helpers from 'helpers'
 import userHelpers from 'routes/user/helpers'
 
 import { ProtectedMulterRoute } from 'types/express'
@@ -56,7 +57,7 @@ const sendFile: ProtectedMulterRoute = async (req, res, next) => {
                 content = secure_url
                 cloudinaryId = public_id
             }
-            utils.deleteTemporaryFile(path)
+            helpers.deleteTemporaryFile(path)
             await req.user.createMessage(
                 {
                     type,
@@ -85,7 +86,7 @@ const sendFile: ProtectedMulterRoute = async (req, res, next) => {
             })
         })
     } catch (error) {
-        utils.deleteTemporaryFile(req.file.path)
+        helpers.deleteTemporaryFile(req.file.path)
         const emptyTextFile = (error as any).message === 'Empty file'
         if (emptyTextFile) {
             next(new utils.ApiError('The selected text file is empty', 422))

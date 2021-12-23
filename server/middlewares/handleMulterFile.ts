@@ -13,11 +13,11 @@ const handleMulterFile = (): MulterMiddleware => (req, res, next) =>
                 next(new utils.ApiError('There was a problem sending the file', 500))
                 break
             case req.allowedExtenstionsError:
-                utils.deleteTemporaryFile(req.file.path)
+                helpers.deleteTemporaryFile(req.file.path)
                 next(new utils.ApiError('You cannot send a file with this extension', 500))
                 break
             case req.sizeLimit:
-                utils.deleteTemporaryFile(req.file.path)
+                helpers.deleteTemporaryFile(req.file.path)
                 next(new utils.ApiError('You cannot send this large file', 500))
                 break
             default:

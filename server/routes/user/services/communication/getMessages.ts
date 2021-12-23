@@ -1,7 +1,6 @@
 import { User, Profile, Message } from 'database/database'
 
-import utils from 'utils'
-
+import helpers from 'helpers'
 import userHelpers from 'routes/user/helpers'
 
 import { ProtectedRoute } from 'types/express'
@@ -50,8 +49,8 @@ const getMessages: ProtectedRoute = async (req, res, next) => {
 }
 
 export const validation = () => [
-    utils.validator.validateInteger('limit'),
-    utils.validator.validateInteger('offset')
+    helpers.validator.validateInteger('limit'),
+    helpers.validator.validateInteger('offset')
 ]
 
 export default getMessages

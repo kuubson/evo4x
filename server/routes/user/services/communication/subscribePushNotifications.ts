@@ -1,6 +1,6 @@
 import { Connection } from 'database/database'
 
-import utils from 'utils'
+import helpers from 'helpers'
 
 import { ProtectedRoute } from 'types/express'
 
@@ -32,9 +32,9 @@ const subscribePushNotifications: ProtectedRoute = async (req, res, next) => {
 }
 
 export const validation = () => [
-    utils.validator.validateProperty('endpoint'),
-    utils.validator.validateProperty('keys.p256dh'),
-    utils.validator.validateProperty('keys.auth')
+    helpers.validator.validateProperty('endpoint'),
+    helpers.validator.validateProperty('keys.p256dh'),
+    helpers.validator.validateProperty('keys.auth')
 ]
 
 export default subscribePushNotifications

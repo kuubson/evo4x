@@ -4,6 +4,8 @@ import { Connection, Authentication } from 'database/database'
 
 import utils from 'utils'
 
+import helpers from 'helpers'
+
 import { Route } from 'types/express'
 
 const authenticateEmail: Route = async (req, res, next) => {
@@ -56,6 +58,6 @@ const authenticateEmail: Route = async (req, res, next) => {
     }
 }
 
-export const validation = () => [utils.validator.validateProperty('emailToken').isJWT()]
+export const validation = () => [helpers.validator.validateProperty('emailToken').isJWT()]
 
 export default authenticateEmail

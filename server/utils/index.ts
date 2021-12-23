@@ -2,28 +2,20 @@ import { Op } from 'sequelize'
 import ApiError from './ApiError'
 import handleError from './handleError'
 import baseUrl from './baseUrl'
-import transporter from './transporter'
 import cookie from './cookie'
 import emailTemplate from './emailTemplate'
-import deleteTemporaryFile from './deleteTemporaryFile'
-import filesInfo from './filesInfo'
-import validator from './validator'
-import checkSanitization from './checkSanitization'
 import defaultAvatar from './defaultAvatar'
+import filesInfo from './filesInfo'
 
 const utils = {
     Op,
     ApiError,
     handleError,
     baseUrl,
-    transporter,
     cookie,
     emailTemplate,
-    deleteTemporaryFile,
-    filesInfo,
-    validator,
-    checkSanitization,
-    defaultAvatar
+    defaultAvatar,
+    filesInfo
 }
 
 export default utils

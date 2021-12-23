@@ -5,6 +5,8 @@ import { Admin } from 'database/database'
 
 import utils from 'utils'
 
+import helpers from 'helpers'
+
 import { Route } from 'types/express'
 
 const login: Route = async (req, res, next) => {
@@ -31,8 +33,8 @@ const login: Route = async (req, res, next) => {
 }
 
 export const validation = () => [
-    utils.validator.validateEmail(),
-    utils.validator.validatePassword(true)
+    helpers.validator.validateEmail(),
+    helpers.validator.validatePassword(true)
 ]
 
 export default login

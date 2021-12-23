@@ -1,6 +1,6 @@
 import { check } from 'express-validator'
 
-import utils from 'utils'
+import helpers from 'helpers'
 
 const validateProperty = (property: string) =>
     check(`${property}`)
@@ -10,7 +10,7 @@ const validateProperty = (property: string) =>
         .bail()
         .isString()
         .bail()
-        .custom(utils.checkSanitization)
+        .custom(helpers.checkSanitization)
         .withMessage('This field contains incorrect characters')
         .bail()
 const validateInteger = (property: string) => {

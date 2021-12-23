@@ -5,6 +5,8 @@ import { Connection, User } from 'database/database'
 
 import utils from 'utils'
 
+import helpers from 'helpers'
+
 import { Route } from 'types/express'
 
 const changePassword: Route = async (req, res, next) => {
@@ -64,9 +66,9 @@ const changePassword: Route = async (req, res, next) => {
 }
 
 export const validation = () => [
-    utils.validator.validatePassword(),
-    utils.validator.validateRepeatedPassword(),
-    utils.validator.validateProperty('passwordToken').isJWT()
+    helpers.validator.validatePassword(),
+    helpers.validator.validateRepeatedPassword(),
+    helpers.validator.validateProperty('passwordToken').isJWT()
 ]
 
 export default changePassword

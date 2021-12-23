@@ -4,6 +4,8 @@ import { Connection } from 'database/database'
 
 import utils from 'utils'
 
+import helpers from 'helpers'
+
 import { ProtectedMulterRoute } from 'types/express'
 
 const changeAvatar: ProtectedMulterRoute = async (req, res, next) => {
@@ -19,7 +21,7 @@ const changeAvatar: ProtectedMulterRoute = async (req, res, next) => {
             const { public_id, secure_url } = await cloudinary.v2.uploader.upload(path, {
                 use_filename: true
             })
-            utils.deleteTemporaryFile(req.file.path)
+            helpers.deleteTemporaryFile(req.file.path)
             await profile.update(
                 {
                     avatar: secure_url,
@@ -35,7 +37,7 @@ const changeAvatar: ProtectedMulterRoute = async (req, res, next) => {
             })
         })
     } catch (error) {
-        utils.deleteTemporaryFile(req.file.path)
+        helpers.deleteTemporaryFile(req.file.path)
         next(error)
     }
 }

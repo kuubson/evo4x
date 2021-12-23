@@ -4,6 +4,8 @@ import { Connection, User, Authentication } from 'database/database'
 
 import utils from 'utils'
 
+import helpers from 'helpers'
+
 import { Route } from 'types/express'
 
 const resendEmail: Route = async (req, res, next) => {
@@ -42,7 +44,7 @@ const resendEmail: Route = async (req, res, next) => {
                     `${utils.baseUrl(req)}/?emailToken=${emailToken}`
                 )
             }
-            utils.transporter.sendMail(mailOptions, (error, info) => {
+            helpers.transporter.sendMail(mailOptions, (error, info) => {
                 try {
                     if (error || !info) {
                         throw new utils.ApiError(
@@ -64,6 +66,6 @@ const resendEmail: Route = async (req, res, next) => {
     }
 }
 
-export const validation = () => [utils.validator.validateEmail()]
+export const validation = () => [helpers.validator.validateEmail()]
 
 export default resendEmail

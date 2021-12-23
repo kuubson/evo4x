@@ -4,6 +4,8 @@ import sharp from 'sharp'
 
 import utils from 'utils'
 
+import helpers from 'helpers'
+
 const reduceImageSize = async (path: string, next: NextFunction) =>
     await sharp(path)
         .rotate()
@@ -11,7 +13,7 @@ const reduceImageSize = async (path: string, next: NextFunction) =>
         .jpeg({ quality: 75 })
         .toBuffer((error, buffer) => {
             if (error) {
-                utils.deleteTemporaryFile(path)
+                helpers.deleteTemporaryFile(path)
                 next(new utils.ApiError('There was a problem sending the file', 500))
             }
             fs.writeFileSync(path, buffer)

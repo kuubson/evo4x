@@ -4,6 +4,8 @@ import { Admin, User } from 'database/database'
 
 import utils from 'utils'
 
+import helpers from 'helpers'
+
 import { Route } from 'types/express'
 
 const checkRole: Route = async (req, res, next) => {
@@ -64,6 +66,6 @@ const checkRole: Route = async (req, res, next) => {
     })
 }
 
-export const validation = () => [utils.validator.validateProperty('token').optional()]
+export const validation = () => [helpers.validator.validateProperty('token').optional()]
 
 export default checkRole

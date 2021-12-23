@@ -4,6 +4,8 @@ import { Connection, User, Authentication } from 'database/database'
 
 import utils from 'utils'
 
+import helpers from 'helpers'
+
 import { Route } from 'types/express'
 
 const requestPasswordChange: Route = async (req, res, next) => {
@@ -45,7 +47,7 @@ const requestPasswordChange: Route = async (req, res, next) => {
                     `${utils.baseUrl(req)}/?passwordToken=${passwordToken}`
                 )
             }
-            utils.transporter.sendMail(mailOptions, (error, info) => {
+            helpers.transporter.sendMail(mailOptions, (error, info) => {
                 try {
                     if (error || !info) {
                         throw new utils.ApiError(
@@ -67,6 +69,6 @@ const requestPasswordChange: Route = async (req, res, next) => {
     }
 }
 
-export const validation = () => [utils.validator.validateEmail()]
+export const validation = () => [helpers.validator.validateEmail()]
 
 export default requestPasswordChange
