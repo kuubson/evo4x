@@ -24,7 +24,7 @@ const useProfile = ({ setShowAvatarInput }: ProfileHook) => {
         })
     }, [])
     const withDefaultAvatar = avatar.includes('ui-avatars')
-    const updateProfile = (event: React.FormEvent) =>
+    const updateProfile = (event: React.FormEvent) => {
         profileHelpers.updateProfile({
             event,
             profile,
@@ -34,24 +34,27 @@ const useProfile = ({ setShowAvatarInput }: ProfileHook) => {
             setAvatar,
             profileHandler
         })
-    const removeAvatar = () =>
-        profileHelpers.removeAvatar({
-            setAvatar
-        })
-    const changeAvatar = (event: React.ChangeEvent<HTMLInputElement>) =>
+    }
+    const changeAvatar = (event: React.ChangeEvent<HTMLInputElement>) => {
         profileHelpers.changeAvatar({
             event,
             setAvatar,
             setShowAvatarInput
         })
+    }
+    const removeAvatar = () => {
+        profileHelpers.removeAvatar({
+            setAvatar
+        })
+    }
     return {
         profile,
         profileHandler,
         avatar,
+        withDefaultAvatar,
         updateProfile,
-        removeAvatar,
         changeAvatar,
-        withDefaultAvatar
+        removeAvatar
     }
 }
 

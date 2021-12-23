@@ -23,7 +23,7 @@ const Message: React.FC<IAnalysis> = ({
             {error}
         </ChatStyledMessage.Content>
     )
-    const { renderMessage: renderAnalysis } = chatHooks.useMessages({
+    const { renderMessage: renderAnalysis } = chatHooks.useRender({
         type,
         content,
         filename,

@@ -1,120 +1,120 @@
-import { useEffect, useState } from 'react'
-import styled, { css } from 'styled-components/macro'
-import fileSaver from 'file-saver'
+import { useRef, useEffect, useState } from 'react'
 
-import StyledMessage from '../styled/Message'
+import chatHooks from '.'
+import hooks from 'hooks'
 
-type MessageContainerType = {
-    withLastUserMessage?: boolean
-}
+import Composed from '../composed'
 
-const MessageContainer = styled.div<MessageContainerType>`
-    display: flex;
-    flex-direction: column;
-    ${({ withLastUserMessage }) =>
-        withLastUserMessage
-            ? css`
-                  margin-bottom: 15px;
-              `
-            : null}
-`
+import utils from 'utils'
+
+import chatHelpers from 'components/User/Chat/helpers'
 
 type MessagesHook = {
-    type: MessageTypes
-    content: string
-    filename: string | undefined
-    createdAt: Date
-    views?: number
-    showAvatar?: () => JSX.Element
-    showError: (error: string) => JSX.Element
-    withCurrentUser: boolean
-    withLastUserMessage: boolean
-    withLastAndNextMessage: boolean
+    setShowFileInput: DispatchBoolean
+    setUploadPercentage: DispatchNumber
 }
 
-const useMessages = ({
-    type,
-    content,
-    filename,
-    createdAt,
-    views,
-    showAvatar,
-    showError,
-    withCurrentUser,
-    withLastUserMessage,
-    withLastAndNextMessage
-}: MessagesHook) => {
-    const [showDetails, setShowDetails] = useState(false)
-    const [imageError, setImageError] = useState(false)
-    const [videoError, setVideoError] = useState(false)
-    useEffect(() => {
-        if (showDetails) {
-            setTimeout(() => setShowDetails(false), 3000)
-        }
-    }, [showDetails])
-    const date = new Date(createdAt)
-    const withFile = type === 'FILE'
-    const handleFileLoadingError = () => {
-        type === 'IMAGE' ? setImageError(true) : setVideoError(true)
+const useMessages = ({ setShowFileInput, setUploadPercentage }: MessagesHook) => {
+    const { lastUnreadMessageIndex, setUnreadMessagesAmount } = hooks.useMessagesInfo()
+    const messagesRef = useRef<HTMLDivElement>(null)
+    const [messages, setMessages] = useState<Message[]>([])
+    const [message, setMessage] = useState('')
+    const [hasMoreMessages, setHasMoreMessages] = useState(true)
+    const { socket } = chatHooks.useSocket({
+        messagesRef,
+        setMessages
+    })
+    const [isLoading, setIsLoading] = useState(true)
+    const [currentUser, setCurrentUser] = useState<User | undefined>()
+    const getMessages = async ({ event, limit, offset }: MessagesOrAnalysisGetterProps) => {
+        chatHelpers.getMessages({
+            event,
+            limit,
+            offset,
+            messagesRef,
+            hasMoreMessages,
+            lastUnreadMessageIndex,
+            setMessages,
+            setHasMoreMessages,
+            setIsLoading,
+            setCurrentUser,
+            setUnreadMessagesAmount
+        })
     }
-    const renderMessage = () => (
-        <MessageContainer
-            onClick={() => setShowDetails(true)}
-            withLastUserMessage={withLastAndNextMessage}
-        >
-            {type === 'IMAGE' ? (
-                imageError ? (
-                    showError('Image has failed to load')
-                ) : (
-                    <StyledMessage.AssetContainer withCurrentUser={withCurrentUser}>
-                        <StyledMessage.Image src={content} onError={handleFileLoadingError} />
-                        {withLastUserMessage && showAvatar && showAvatar()}
-                    </StyledMessage.AssetContainer>
-                )
-            ) : type === 'VIDEO' ? (
-                videoError ? (
-                    showError('Video has failed to load')
-                ) : (
-                    <StyledMessage.AssetContainer withCurrentUser={withCurrentUser}>
-                        <StyledMessage.Video
-                            src={content}
-                            onError={handleFileLoadingError}
-                            controls
-                        />
-                        {withLastUserMessage && showAvatar && showAvatar()}
-                    </StyledMessage.AssetContainer>
-                )
-            ) : (
-                <StyledMessage.Content
-                    onClick={() => {
-                        if (withFile) {
-                            fileSaver.saveAs(content, filename)
-                        }
-                    }}
-                    withCurrentUser={withCurrentUser}
-                    withLastUserMessage={withLastUserMessage}
-                    withFile={withFile}
-                >
-                    {withFile ? filename : content}
-                    {withLastUserMessage && showAvatar && showAvatar()}
-                </StyledMessage.Content>
-            )}
-            {(withLastUserMessage || showDetails) && (
-                <StyledMessage.Date
-                    withCurrentUser={withCurrentUser}
-                    withLastUserMessage={withLastUserMessage}
-                    showDetails={showDetails}
-                >
-                    {new Date().toDateString() === date.toDateString()
-                        ? date.toLocaleTimeString()
-                        : date.toLocaleString()}
-                    {views && `, ${views}👁️`}
-                </StyledMessage.Date>
-            )}
-        </MessageContainer>
-    )
+    useEffect(() => {
+        getMessages({
+            event: undefined,
+            limit: 20,
+            offset: 0
+        })
+        utils.subscribePushNotifications('/api/user/communication/subscribePushNotifications')
+    }, [])
+    const getUnreadMessages = () =>
+        chatHelpers.getUnreadMessages({
+            messagesRef,
+            lastUnreadMessageIndex,
+            setMessages,
+            setUnreadMessagesAmount
+        })
+    const renderMessages = () => {
+        return messages.map((message, index) => {
+            const nextMessage = messages[index + 1]
+            return (
+                <Composed.Message
+                    key={message.id}
+                    message={message}
+                    nextMessage={nextMessage}
+                    currentUser={currentUser}
+                />
+            )
+        })
+    }
+    const sendMessage = () => {
+        chatHelpers.sendMessage({
+            socket,
+            messagesRef,
+            messages,
+            message,
+            currentUser,
+            setMessage,
+            setMessages
+        })
+    }
+    const handleSubmittingTextarea = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+        chatHelpers.handleSubmittingTextarea({
+            event,
+            sendMessage
+        })
+    }
+    const sendFile = (event: React.ChangeEvent<HTMLInputElement>) => {
+        chatHelpers.sendFile({
+            event,
+            socket,
+            messagesRef,
+            messages,
+            currentUser,
+            setMessages,
+            setShowFileInput,
+            setUploadPercentage
+        })
+    }
+    const areThereMessages = !!messages.length
+    const areThereUnreadMessages =
+        !isLoading && lastUnreadMessageIndex && messages.length < lastUnreadMessageIndex
     return {
-        renderMessage
+        messagesRef,
+        messages,
+        message,
+        isLoading,
+        areThereMessages,
+        areThereUnreadMessages,
+        setMessage,
+        getMessages,
+        getUnreadMessages,
+        renderMessages,
+        sendMessage,
+        handleSubmittingTextarea,
+        sendFile
     }
 }
 

@@ -37,7 +37,7 @@ const Message: React.FC<IMessage> = ({
             {withLastUserMessage && showAvatar()}
         </StyledMessage.Content>
     )
-    const { renderMessage } = chatHooks.useMessages({
+    const { renderMessage } = chatHooks.useRender({
         type,
         content,
         filename,

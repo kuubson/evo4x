@@ -5,21 +5,21 @@ import profileHelpers from '.'
 type ProfileUpdater = {
     event: React.FormEvent
     profile: Profile
+    profileHandler: any
     avatar: string
     withDefaultAvatar: boolean
     setProfile: React.Dispatch<React.SetStateAction<Profile>>
     setAvatar: DispatchString
-    profileHandler: any
 }
 
 const updateProfile = async ({
     event,
     profile,
+    profileHandler,
     avatar,
     withDefaultAvatar,
     setProfile,
-    setAvatar,
-    profileHandler
+    setAvatar
 }: ProfileUpdater) => {
     event.preventDefault()
     if (

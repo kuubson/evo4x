@@ -25,10 +25,10 @@ const Profile = () => {
         profile: { name, nameError, story, storyError },
         profileHandler,
         avatar,
+        withDefaultAvatar,
         updateProfile,
-        removeAvatar,
         changeAvatar,
-        withDefaultAvatar
+        removeAvatar
     } = profileHooks.useProfile({
         setShowAvatarInput
     })
