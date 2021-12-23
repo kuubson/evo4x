@@ -30,14 +30,11 @@ const sendFile = async ({
     let percentage = 0
     const file = event.currentTarget.files![0]
     if (file) {
-        const path = event.target.value
+        const { regex, sizes } = utils.filesInfo
         const { name, size } = file
-        const imageExtensions = /\.(jpg|jpeg|png|gif)$/i
-        const videoExtensions = /\.(mp4)$/i
-        const fileExtensions = /\.(txt|rtf|doc|docx|xlsx|ppt|pptx|pdf)$/i
-        const isImage = imageExtensions.test(path) || imageExtensions.test(name)
-        const isVideo = videoExtensions.test(path) || videoExtensions.test(name)
-        const isFile = fileExtensions.test(path) || fileExtensions.test(name)
+        const isImage = regex.images.test(name)
+        const isVideo = regex.videos.test(name)
+        const isFile = regex.files.test(name)
         const resetFileInput = () => {
             setShowFileInput(false)
             setTimeout(() => {
@@ -52,20 +49,20 @@ const sendFile = async ({
             return utils.setApiFeedback('You cannot send a file with this extension')
         }
         if (isImage) {
-            if (size > 31457280) {
-                resetFileInput() // 30MB
+            if (size > sizes.imageMaxSize) {
+                resetFileInput()
                 largeSizeError()
             }
         }
         if (isVideo) {
-            if (size > 52428800) {
-                resetFileInput() // 50MB
+            if (size > sizes.maxVideoSize) {
+                resetFileInput()
                 largeSizeError()
             }
         }
         if (isFile) {
-            if (size > 10485760) {
-                resetFileInput() // 10MB
+            if (size > sizes.maxFileSize) {
+                resetFileInput()
                 largeSizeError()
             }
         }
@@ -93,6 +90,7 @@ const sendFile = async ({
                     id,
                     type,
                     content,
+                    filename: name,
                     createdAt: new Date(),
                     user: currentUser
                 }
@@ -102,6 +100,7 @@ const sendFile = async ({
                 socket!.emit('sendMessage', message)
             }
         } catch (error) {
+            utils.handleApiError(error)
             resetFileInput()
             clearInterval(intervalId)
             setUploadPercentage(0)

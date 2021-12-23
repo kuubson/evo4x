@@ -69,18 +69,12 @@ const Chat = () => {
         utils.subscribePushNotifications('/api/user/communication/subscribePushNotifications')
     }, [])
     const renderMessages = () =>
-        messages.map(({ id, type, content, createdAt, user }, index) => {
+        messages.map((message, index) => {
             const nextMessage = messages[index + 1]
             return (
                 <Composed.Message
-                    key={id}
-                    message={{
-                        id,
-                        type,
-                        content,
-                        createdAt,
-                        user
-                    }}
+                    key={message.id}
+                    message={message}
                     nextMessage={nextMessage}
                     currentUser={currentUser}
                 />

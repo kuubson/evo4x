@@ -22,6 +22,7 @@ const MessageContainer = styled.div<MessageContainerType>`
 type UseMessagesHook = {
     type: MessageTypes
     content: string
+    filename: string | undefined
     createdAt: Date
     views?: number
     showAvatar?: () => JSX.Element
@@ -34,6 +35,7 @@ type UseMessagesHook = {
 const useMessages = ({
     type,
     content,
+    filename,
     createdAt,
     views,
     showAvatar,
@@ -50,10 +52,11 @@ const useMessages = ({
             setTimeout(() => setShowDetails(false), 3000)
         }
     }, [showDetails])
-    const handleFileLoadingError = () =>
-        type === 'IMAGE' ? setImageError(true) : setVideoError(true)
     const date = new Date(createdAt)
     const withFile = type === 'FILE'
+    const handleFileLoadingError = () => {
+        type === 'IMAGE' ? setImageError(true) : setVideoError(true)
+    }
     const renderMessage = () => (
         <MessageContainer
             onClick={() => setShowDetails(true)}
@@ -85,14 +88,14 @@ const useMessages = ({
                 <StyledMessage.Content
                     onClick={() => {
                         if (withFile) {
-                            fileSaver.saveAs(content, content.split('filename')[1])
+                            fileSaver.saveAs(content, filename)
                         }
                     }}
                     withCurrentUser={withCurrentUser}
                     withLastUserMessage={withLastUserMessage}
                     withFile={withFile}
                 >
-                    {withFile ? content.split('filename')[1] : content}
+                    {withFile ? filename : content}
                     {withLastUserMessage && showAvatar && showAvatar()}
                 </StyledMessage.Content>
             )}

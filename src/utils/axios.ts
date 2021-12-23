@@ -16,9 +16,9 @@ apiAxios.interceptors.request.use(
     },
     error => {
         utils.setLoading(false)
+        utils.handleApiError(error)
         clearTimeout(timeoutId)
         timeoutId = undefined
-        utils.handleApiError(error)
         throw error
     }
 )
@@ -33,9 +33,9 @@ apiAxios.interceptors.response.use(
     },
     error => {
         utils.setLoading(false)
+        utils.handleApiError(error)
         clearTimeout(timeoutId)
         timeoutId = undefined
-        utils.handleApiError(error)
         throw error
     }
 )

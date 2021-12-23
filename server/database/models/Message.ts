@@ -6,6 +6,7 @@ class MessageValues extends Model {
     id: number
     type: 'MESSAGE' | 'IMAGE' | 'VIDEO' | 'FILE'
     content: string
+    filename: string
     readBy: string
     cloudinaryId: string
 }
@@ -28,6 +29,10 @@ const MessageModel = (sequelize: Sequelize) => {
             content: {
                 type: TEXT,
                 allowNull: false
+            },
+            filename: {
+                type: TEXT,
+                defaultValue: ''
             },
             readBy: {
                 type: TEXT,

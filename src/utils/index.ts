@@ -7,6 +7,7 @@ import setRole from './setRole'
 import setApiFeedback from './setApiFeedback'
 import detectMobileDevice from './detectMobileDevice'
 import history from './history'
+import filesInfo from './filesInfo'
 import defaultAvatar from './defaultAvatar'
 
 const utils = {
@@ -19,6 +20,7 @@ const utils = {
     setApiFeedback,
     detectMobileDevice,
     history,
+    filesInfo,
     defaultAvatar
 }
 

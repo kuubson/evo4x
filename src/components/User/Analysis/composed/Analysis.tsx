@@ -10,7 +10,7 @@ interface IAnalysis {
 }
 
 const Message: React.FC<IAnalysis> = ({
-    analysis: { type, content, createdAt, views },
+    analysis: { type, content, filename, createdAt, views },
     nextAnalysis
 }) => {
     const withLastUserMessage = !nextAnalysis
@@ -26,6 +26,7 @@ const Message: React.FC<IAnalysis> = ({
     const { renderMessage: renderAnalysis } = chatHooks.useMessages({
         type,
         content,
+        filename,
         createdAt,
         views,
         showError,

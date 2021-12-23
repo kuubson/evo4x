@@ -9,10 +9,9 @@ type AvatarChanger = {
 const changeAvatar = async ({ event, setAvatar, setShowAvatarInput }: AvatarChanger) => {
     const file = event.currentTarget.files![0]
     if (file) {
-        const path = event.target.value
+        const { regex, sizes } = utils.filesInfo
         const { name, size } = file
-        const imageExtensions = /\.(jpg|jpeg|png|gif)$/i
-        const isImage = imageExtensions.test(path) || imageExtensions.test(name)
+        const isImage = regex.images.test(name)
         const resetFileInput = () => {
             setShowAvatarInput(false)
             setShowAvatarInput(true)
@@ -22,8 +21,8 @@ const changeAvatar = async ({ event, setAvatar, setShowAvatarInput }: AvatarChan
             return utils.setApiFeedback('You cannot upload this file as an avatar')
         }
         if (isImage) {
-            if (size > 31457280) {
-                resetFileInput() // 30MB
+            if (size > sizes.imageMaxSize) {
+                resetFileInput()
                 return utils.setApiFeedback('You cannot upload this large file')
             }
         }
