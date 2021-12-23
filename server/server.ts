@@ -1,6 +1,8 @@
 import path from 'path'
+
 import dotenv from 'dotenv'
-dotenv.config({ path: path.resolve(__dirname, '../.env') })
+const envPath = process.env.NODE_ENV === 'production' ? '../../.env' : '../.env'
+dotenv.config({ path: path.resolve(__dirname, envPath) })
 
 import express from 'express'
 import http from 'http'
@@ -20,7 +22,7 @@ routes(app)
 
 middlewares.errorHandler(app)
 
-const buildPath = '../build'
+const buildPath = process.env.NODE_ENV === 'production' ? '../../build' : '../build'
 
 app.use(express.static(path.resolve(__dirname, buildPath)))
 
