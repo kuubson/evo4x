@@ -6,10 +6,25 @@ type Response = {
     unreadMessagesAmount: number
 }
 
-const getUnreadMessagesInfo = async () => {
+type UnreadMessagesInfoGetter = {
+    setCurrentUser: React.Dispatch<React.SetStateAction<User | undefined>>
+    setLastUnreadMessageIndex: any
+    setUnreadMessagesAmount: any
+}
+
+const getUnreadMessagesInfo = async ({
+    setCurrentUser,
+    setLastUnreadMessageIndex,
+    setUnreadMessagesAmount
+}: UnreadMessagesInfoGetter) => {
     const url = '/api/user/communication/getUnreadMessagesInfo'
     const response = await utils.axios.get<Response>(url)
-    return response.data
+    if (response) {
+        const { user, lastUnreadMessageIndex, unreadMessagesAmount } = response.data
+        setCurrentUser(user)
+        setLastUnreadMessageIndex(lastUnreadMessageIndex)
+        setUnreadMessagesAmount(unreadMessagesAmount)
+    }
 }
 
 export default getUnreadMessagesInfo

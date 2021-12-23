@@ -1,9 +1,6 @@
 import { useRef, useEffect, useState } from 'react'
 
-import chatHooks from '.'
 import hooks from 'hooks'
-
-import Composed from '../composed'
 
 import utils from 'utils'
 
@@ -15,17 +12,32 @@ type MessagesHook = {
 }
 
 const useMessages = ({ setShowFileInput, setUploadPercentage }: MessagesHook) => {
+    const { socket } = hooks.useSocket()
     const { lastUnreadMessageIndex, setUnreadMessagesAmount } = hooks.useMessagesInfo()
     const messagesRef = useRef<HTMLDivElement>(null)
     const [messages, setMessages] = useState<Message[]>([])
     const [message, setMessage] = useState('')
     const [hasMoreMessages, setHasMoreMessages] = useState(true)
-    const { socket } = chatHooks.useSocket({
-        messagesRef,
-        setMessages
-    })
     const [isLoading, setIsLoading] = useState(true)
     const [currentUser, setCurrentUser] = useState<User | undefined>()
+    const handleOnSendMessage = (message: Message) => {
+        chatHelpers.handleOnSendMessage({
+            socket,
+            messagesRef,
+            message,
+            setMessages
+        })
+    }
+    useEffect(() => {
+        if (socket) {
+            socket.on('sendMessage', handleOnSendMessage)
+        }
+        return () => {
+            if (socket) {
+                socket.off('sendMessage', handleOnSendMessage)
+            }
+        }
+    }, [socket])
     const getMessages = async ({ event, limit, offset }: MessagesOrAnalysisGetterProps) => {
         chatHelpers.getMessages({
             event,
@@ -49,24 +61,12 @@ const useMessages = ({ setShowFileInput, setUploadPercentage }: MessagesHook) =>
         })
         utils.subscribePushNotifications('/api/user/communication/subscribePushNotifications')
     }, [])
-    const getUnreadMessages = () =>
+    const getUnreadMessages = () => {
         chatHelpers.getUnreadMessages({
             messagesRef,
             lastUnreadMessageIndex,
             setMessages,
             setUnreadMessagesAmount
-        })
-    const renderMessages = () => {
-        return messages.map((message, index) => {
-            const nextMessage = messages[index + 1]
-            return (
-                <Composed.MessageContainer
-                    key={message.id}
-                    message={message}
-                    nextMessage={nextMessage}
-                    currentUser={currentUser}
-                />
-            )
         })
     }
     const sendMessage = () => {
@@ -106,12 +106,12 @@ const useMessages = ({ setShowFileInput, setUploadPercentage }: MessagesHook) =>
         messages,
         message,
         isLoading,
+        currentUser,
         areThereMessages,
         areThereUnreadMessages,
         setMessage,
         getMessages,
         getUnreadMessages,
-        renderMessages,
         sendMessage,
         handleSubmittingTextarea,
         sendFile

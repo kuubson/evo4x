@@ -26,12 +26,12 @@ const Chat = () => {
         messages,
         message,
         isLoading,
+        currentUser,
         areThereMessages,
         areThereUnreadMessages,
         setMessage,
         getMessages,
         getUnreadMessages,
-        renderMessages,
         sendMessage,
         handleSubmittingTextarea,
         sendFile
@@ -39,6 +39,19 @@ const Chat = () => {
         setShowFileInput,
         setUploadPercentage
     })
+    const renderMessages = () => {
+        return messages.map((message, index) => {
+            const nextMessage = messages[index + 1]
+            return (
+                <Composed.MessageContainer
+                    key={message.id}
+                    message={message}
+                    nextMessage={nextMessage}
+                    currentUser={currentUser}
+                />
+            )
+        })
+    }
     const fileUploadInProgress = !!uploadPercentage
     return (
         <ChatContainer>

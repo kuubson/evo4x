@@ -1,9 +1,7 @@
-import useCurrentUser from './useCurrentUser'
-import useSocket from './useSocket'
+import useUnreadMessagesInfo from './useUnreadMessagesInfo'
 
 const userHooks = {
-    useCurrentUser,
-    useSocket
+    useUnreadMessagesInfo
 }
 
 export default userHooks

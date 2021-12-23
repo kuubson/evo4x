@@ -15,8 +15,8 @@ const useProfile = ({ setShowAvatarInput }: ProfileHook) => {
         story: '',
         storyError: ''
     })
-    const [avatar, setAvatar] = useState('')
     const profileHandler = hooks.useFormHandler(setProfile)
+    const [avatar, setAvatar] = useState('')
     useEffect(() => {
         profileHelpers.getProfile({
             setProfile,

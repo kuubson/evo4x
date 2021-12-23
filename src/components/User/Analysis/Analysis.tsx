@@ -1,39 +1,18 @@
-import React, { useRef, useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
+
+import analysisHooks from './hooks'
 
 import ChatDashboard from 'components/User/Chat/styled/Dashboard'
 
 import Composed from './composed'
 
-import analysisHelpers from './helpers'
-
 const AnalysisContainer = styled.section`
     height: 100%;
 `
-
 const Analysis = () => {
-    const analysisRef = useRef<HTMLDivElement>(null)
-    const [analysis, setAnalysis] = useState<Analysis[]>([])
-    const [hasMoreAnalysis, setHasMoreAnalysis] = useState(true)
-    const getAnalysis = async ({ event, limit, offset }: MessagesOrAnalysisGetterProps) =>
-        analysisHelpers.getAnalysis({
-            event,
-            limit,
-            offset,
-            analysisRef,
-            setAnalysis,
-            hasMoreAnalysis,
-            setHasMoreAnalysis
-        })
-    useEffect(() => {
-        getAnalysis({
-            event: undefined,
-            limit: 20,
-            offset: 0
-        })
-    }, [])
-    const renderAnalysis = () =>
-        analysis.map((currentAnalysis, index) => {
+    const { analysisRef, analysis, getAnalysis } = analysisHooks.useAnalysis()
+    const renderAnalysis = () => {
+        return analysis.map((currentAnalysis, index) => {
             const nextAnalysis = analysis[index + 1]
             return (
                 <Composed.Analysis
@@ -43,6 +22,7 @@ const Analysis = () => {
                 />
             )
         })
+    }
     return (
         <AnalysisContainer>
             <ChatDashboard.Content withAnalysis>

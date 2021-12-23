@@ -19,8 +19,8 @@ const AdminContainer = styled.section`
 `
 
 const Admin: React.FC = ({ children }) => {
-    const { clearSocket } = adminHooks.useSocket()
     const { role } = hooks.useRole()
+    const { clearSocket } = adminHooks.useSocket()
     useEffect(() => {
         adminHelpers.checkRole(role)
     }, [])
