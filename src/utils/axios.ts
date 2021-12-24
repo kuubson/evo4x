@@ -8,10 +8,7 @@ let timeoutId: any
 
 apiAxios.interceptors.request.use(
     request => {
-        !timeoutId &&
-            (timeoutId = setTimeout(() => {
-                utils.setLoading(true)
-            }, 500))
+        !timeoutId && (timeoutId = setTimeout(() => utils.setLoading(true), 500))
         return request
     },
     error => {

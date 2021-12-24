@@ -37,9 +37,7 @@ const sendFile = async ({
         const isFile = regex.files.test(name)
         const resetFileInput = () => {
             setShowFileInput(false)
-            setTimeout(() => {
-                setShowFileInput(true)
-            }, 0)
+            setTimeout(() => setShowFileInput(true), 0)
         }
         const largeSizeError = () => {
             return utils.setApiFeedback('You cannot send this large file')
@@ -80,9 +78,7 @@ const sendFile = async ({
             if (response) {
                 setUploadPercentage(100)
                 clearInterval(intervalId)
-                setTimeout(() => {
-                    setUploadPercentage(0)
-                }, 800)
+                setTimeout(() => setUploadPercentage(0), 800)
                 const { type, content } = response.data
                 const lastMessage = messages[messages.length - 1]
                 const id = lastMessage ? lastMessage.id + 1 : 0

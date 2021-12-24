@@ -22,6 +22,13 @@ const getAnalysis = async ({
     hasMoreAnalysis,
     setHasMoreAnalysis
 }: AnalysisGetter) => {
+    const loadCachedAnalysis = () => {
+        const savedAnalysis = JSON.parse(sessionStorage.getItem('analysis')!)
+        if (savedAnalysis && !!savedAnalysis.length) {
+            setAnalysis(savedAnalysis)
+            setTimeout(() => chatHelpers.pushToTheBottom(analysisRef, true), 0)
+        }
+    }
     const url = '/api/user/communication/getAnalysis'
     if (event) {
         const target = event.target as any
@@ -40,12 +47,14 @@ const getAnalysis = async ({
         }
     }
     if (!event) {
+        loadCachedAnalysis()
         const response = await utils.axios.post<Response>(url, {
             limit,
             offset
         })
         if (response) {
             const { analysis } = response.data
+            sessionStorage.setItem('analysis', JSON.stringify(analysis))
             setAnalysis(analysis)
             chatHelpers.pushToTheBottom(analysisRef)
         }

@@ -31,6 +31,16 @@ const getMessages = async ({
     setCurrentUser,
     setUnreadMessagesAmount
 }: MessagesGetter) => {
+    const loadCachedMessage = () => {
+        const currentUser = JSON.parse(sessionStorage.getItem('currentUser')!)
+        const savedMessages = JSON.parse(sessionStorage.getItem('messages')!)
+        if (savedMessages && !!savedMessages.length) {
+            setIsLoading(false)
+            setCurrentUser(currentUser)
+            setMessages(savedMessages)
+            setTimeout(() => chatHelpers.pushToTheBottom(messagesRef, true), 0)
+        }
+    }
     const url = '/api/user/communication/getMessages'
     if (event) {
         const target = event.target as any
@@ -52,6 +62,7 @@ const getMessages = async ({
         }
     }
     if (!event) {
+        loadCachedMessage()
         const response = await utils.axios.post<Response>(url, {
             limit,
             offset
@@ -59,6 +70,8 @@ const getMessages = async ({
         if (response) {
             setIsLoading(false)
             const { user, messages } = response.data
+            sessionStorage.setItem('currentUser', JSON.stringify(user))
+            sessionStorage.setItem('messages', JSON.stringify(messages))
             setCurrentUser(user)
             setMessages(messages)
             chatHelpers.pushToTheBottom(messagesRef, true)

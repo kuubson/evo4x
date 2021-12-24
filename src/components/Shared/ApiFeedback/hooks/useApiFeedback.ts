@@ -7,9 +7,7 @@ const useApiFeedback = () => {
     const { apiFeedback } = useAppSelector(state => state.apiFeedback)
     useEffect(() => {
         if (apiFeedback) {
-            setTimeout(() => {
-                utils.setApiFeedback('')
-            }, 5000)
+            setTimeout(() => utils.setApiFeedback(''), 5000)
         }
     }, [apiFeedback])
     return {

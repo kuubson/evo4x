@@ -23,6 +23,7 @@ const Analysis = () => {
             )
         })
     }
+    const areThereAnalysis = !!analysis.length
     return (
         <AnalysisContainer>
             <ChatDashboard.Content withAnalysis>
@@ -36,7 +37,11 @@ const Analysis = () => {
                         })
                     }
                 >
-                    {renderAnalysis()}
+                    {areThereAnalysis ? (
+                        renderAnalysis()
+                    ) : (
+                        <ChatDashboard.Warning>There are no analysis yet</ChatDashboard.Warning>
+                    )}
                 </ChatDashboard.Messages>
             </ChatDashboard.Content>
         </AnalysisContainer>
