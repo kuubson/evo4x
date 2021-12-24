@@ -6,12 +6,12 @@ import utils from 'utils'
 
 import chatHelpers from 'components/User/Chat/helpers'
 
-type MessagesHook = {
+type ChatHook = {
     setShowFileInput: DispatchBoolean
     setUploadPercentage: DispatchNumber
 }
 
-const useMessages = ({ setShowFileInput, setUploadPercentage }: MessagesHook) => {
+const useChat = ({ setShowFileInput, setUploadPercentage }: ChatHook) => {
     const { socket } = hooks.useSocket()
     const { lastUnreadMessageIndex, setUnreadMessagesAmount } = hooks.useMessagesInfo()
     const messagesRef = useRef<HTMLDivElement>(null)
@@ -98,17 +98,12 @@ const useMessages = ({ setShowFileInput, setUploadPercentage }: MessagesHook) =>
             setUploadPercentage
         })
     }
-    const areThereMessages = !!messages.length
-    const areThereUnreadMessages =
-        !isLoading && lastUnreadMessageIndex && messages.length < lastUnreadMessageIndex
     return {
         messagesRef,
         messages,
         message,
         isLoading,
         currentUser,
-        areThereMessages,
-        areThereUnreadMessages,
         setMessage,
         getMessages,
         getUnreadMessages,
@@ -118,4 +113,4 @@ const useMessages = ({ setShowFileInput, setUploadPercentage }: MessagesHook) =>
     }
 }
 
-export default useMessages
+export default useChat

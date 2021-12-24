@@ -21,9 +21,10 @@ interface IUser {
 }
 
 const User: React.FC<IUser> = ({ children, chat }) => {
+    const { clearSocket } = hooks.useSocket()
     const { role } = hooks.useRole()
     const { unreadMessagesAmount } = hooks.useMessagesInfo()
-    const { clearSocket } = userHooks.useUnreadMessagesInfo(chat)
+    userHooks.useHelpers(chat)
     return role === 'user' ? (
         <UserContainer>
             <Navbar links={userUtils.links(unreadMessagesAmount, clearSocket)} hamburger />

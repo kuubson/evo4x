@@ -43,17 +43,12 @@ const useHelpSidebar = ({ toggleSidebar, hideSidebar, showLoginModal }: HelpSide
             showLoginModal
         })
     }
-    const closeHelpSidebar = () => {
-        setTimeout(() => setIssue(''), 600)
-        toggleSidebar()
-    }
     return {
         form,
         formHandler,
         issue,
         setIssue,
-        handleHelpSidebar,
-        closeHelpSidebar
+        handleHelpSidebar
     }
 }
 

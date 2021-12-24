@@ -1,7 +1,7 @@
-import useMessages from './useMessages'
+import useChat from './useChat'
 
 const chatHooks = {
-    useMessages
+    useChat
 }
 
 export default chatHooks

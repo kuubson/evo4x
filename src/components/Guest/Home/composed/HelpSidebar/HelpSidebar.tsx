@@ -40,8 +40,7 @@ const HelpSidebar: React.FC<IHelpSidebar> = ({
         formHandler,
         issue,
         setIssue,
-        handleHelpSidebar,
-        closeHelpSidebar
+        handleHelpSidebar
     } = helpSidebarHooks.useHelpSidebar({
         toggleSidebar,
         hideSidebar,
@@ -53,6 +52,10 @@ const HelpSidebar: React.FC<IHelpSidebar> = ({
                 {issue}
             </StyledHelpSidebar.Issue>
         ))
+    }
+    const closeHelpSidebar = () => {
+        setTimeout(() => setIssue(''), 600)
+        toggleSidebar()
     }
     return (
         <HelpSidebarContainer showLayer={showSidebar}>

@@ -1,7 +1,7 @@
-import useSocket from './useSocket'
+import useHelpers from './useHelpers'
 
 const adminHooks = {
-    useSocket
+    useHelpers
 }
 
 export default adminHooks

@@ -1,7 +1,7 @@
 import useHelpers from './useHelpers'
 
-const userHooks = {
+const homeHooks = {
     useHelpers
 }
 
-export default userHooks
+export default homeHooks

@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import styled from 'styled-components/macro'
 
+import hooks from 'hooks'
 import chatHooks from './hooks'
 
 import ApiFeedback from 'components/Shared/ApiFeedback/ApiFeedback'
@@ -18,6 +19,7 @@ const ChatContainer = styled.section`
 `
 
 const Chat = () => {
+    const { lastUnreadMessageIndex } = hooks.useMessagesInfo()
     const textareaRef = useRef<HTMLTextAreaElement>(null)
     const [showFileInput, setShowFileInput] = useState(true)
     const [uploadPercentage, setUploadPercentage] = useState(0)
@@ -27,15 +29,13 @@ const Chat = () => {
         message,
         isLoading,
         currentUser,
-        areThereMessages,
-        areThereUnreadMessages,
         setMessage,
         getMessages,
         getUnreadMessages,
         sendMessage,
         handleSubmittingTextarea,
         sendFile
-    } = chatHooks.useMessages({
+    } = chatHooks.useChat({
         setShowFileInput,
         setUploadPercentage
     })
@@ -52,6 +52,9 @@ const Chat = () => {
             )
         })
     }
+    const areThereMessages = !!messages.length
+    const areThereUnreadMessages =
+        !isLoading && lastUnreadMessageIndex && messages.length < lastUnreadMessageIndex
     const fileUploadInProgress = !!uploadPercentage
     return (
         <ChatContainer>

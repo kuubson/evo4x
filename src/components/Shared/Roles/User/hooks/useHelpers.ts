@@ -5,8 +5,8 @@ import hooks from 'hooks'
 
 import userHelpers from 'components/Shared/Roles/User/helpers'
 
-const useUnreadMessagesInfo = (chat: boolean | undefined) => {
-    const { socket, setSocket, clearSocket } = hooks.useSocket()
+const useHelpers = (chat: boolean | undefined) => {
+    const { socket, setSocket } = hooks.useSocket()
     const { role } = hooks.useRole()
     const {
         lastUnreadMessageIndex,
@@ -35,20 +35,23 @@ const useUnreadMessagesInfo = (chat: boolean | undefined) => {
             }
         }
     }, [socket, currentUser, unreadMessagesAmount])
-    useEffect(() => {
-        if (!socket) {
-            setSocket(io('/user'))
-        }
-        userHelpers.checkRole(role)
+    const getUnreadMessagesInfo = () => {
         userHelpers.getUnreadMessagesInfo({
             setCurrentUser,
             setLastUnreadMessageIndex,
             setUnreadMessagesAmount
         })
-    }, [])
-    return {
-        clearSocket
     }
+    const checkRole = () => {
+        userHelpers.checkRole(role)
+    }
+    useEffect(() => {
+        if (!socket) {
+            setSocket(io('/user'))
+        }
+        checkRole()
+        getUnreadMessagesInfo()
+    }, [])
 }
 
-export default useUnreadMessagesInfo
+export default useHelpers

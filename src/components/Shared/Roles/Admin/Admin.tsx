@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components/macro'
 
 import hooks from 'hooks'
@@ -7,8 +7,6 @@ import adminHooks from './hooks'
 import Navbar from 'components/Shared/Navbar/Navbar'
 
 import adminUtils from './utils'
-
-import adminHelpers from './helpers'
 
 const AdminContainer = styled.section`
     height: 100%;
@@ -19,11 +17,9 @@ const AdminContainer = styled.section`
 `
 
 const Admin: React.FC = ({ children }) => {
+    const { clearSocket } = hooks.useSocket()
     const { role } = hooks.useRole()
-    const { clearSocket } = adminHooks.useSocket()
-    useEffect(() => {
-        adminHelpers.checkRole(role)
-    }, [])
+    adminHooks.useHelpers()
     return role === 'admin' ? (
         <AdminContainer>
             <Navbar links={adminUtils.links(clearSocket)} hamburger />
