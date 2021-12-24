@@ -13,7 +13,7 @@ const rotate = keyframes`
 `
 
 type Logo = {
-    $loading?: boolean
+    $loading: boolean
 }
 
 export default styled.img<Logo>`

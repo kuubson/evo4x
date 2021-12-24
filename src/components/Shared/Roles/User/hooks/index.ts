@@ -1,9 +1,7 @@
-import useCurrentUser from './useCurrentUser'
-import useSocket from './useSocket'
+import useHelpers from './useHelpers'
 
 const userHooks = {
-    useCurrentUser,
-    useSocket
+    useHelpers
 }
 
 export default userHooks

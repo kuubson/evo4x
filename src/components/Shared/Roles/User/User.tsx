@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components/macro'
 
 import hooks from 'hooks'
@@ -7,8 +7,6 @@ import userHooks from './hooks'
 import Navbar from 'components/Shared/Navbar/Navbar'
 
 import userUtils from './utils'
-
-import userHelpers from './helpers'
 
 const UserContainer = styled.section`
     height: 100%;
@@ -23,16 +21,10 @@ interface IUser {
 }
 
 const User: React.FC<IUser> = ({ children, chat }) => {
-    const { unreadMessagesAmount } = hooks.useMessagesInfo()
-    const { currentUser } = userHooks.useCurrentUser()
-    const { clearSocket } = userHooks.useSocket({
-        chat,
-        currentUser
-    })
+    const { clearSocket } = hooks.useSocket()
     const { role } = hooks.useRole()
-    useEffect(() => {
-        userHelpers.checkRole(role)
-    }, [])
+    const { unreadMessagesAmount } = hooks.useMessagesInfo()
+    userHooks.useHelpers(chat)
     return role === 'user' ? (
         <UserContainer>
             <Navbar links={userUtils.links(unreadMessagesAmount, clearSocket)} hamburger />

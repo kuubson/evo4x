@@ -1,54 +1,118 @@
-import React from 'react'
-
-import chatHooks from 'components/User/Chat/hooks'
+import React, { useEffect, useState } from 'react'
+import styled, { css } from 'styled-components/macro'
+import fileSaver from 'file-saver'
 
 import StyledMessage from '../styled/Message'
 
-import utils from 'utils'
+type MessageContainerType = {
+    withLastUserMessage: boolean
+}
+
+const MessageContainer = styled.div<MessageContainerType>`
+    display: flex;
+    flex-direction: column;
+    ${({ withLastUserMessage }) =>
+        withLastUserMessage
+            ? css`
+                  margin-bottom: 15px;
+              `
+            : null}
+`
 
 interface IMessage {
-    message: Message
-    nextMessage: Message
-    currentUser: User | undefined
+    type: MessageTypes
+    content: string
+    filename: string | undefined
+    createdAt: Date
+    views?: number
+    showAvatar?: () => JSX.Element
+    showError: (error: string) => JSX.Element
+    withCurrentUser: boolean
+    withLastUserMessage: boolean
+    withLastAndNextMessage: boolean
 }
 
 const Message: React.FC<IMessage> = ({
-    message: { type, content, filename, createdAt, user },
-    nextMessage,
-    currentUser
+    type,
+    content,
+    filename,
+    createdAt,
+    views,
+    showAvatar,
+    showError,
+    withCurrentUser,
+    withLastUserMessage,
+    withLastAndNextMessage
 }) => {
-    const withCurrentUser = user.id === currentUser?.id
-    const withLastUserMessage = (nextMessage && user.id !== nextMessage.user.id) || !nextMessage
-    const showAvatar = () => (
-        <StyledMessage.Avatar
-            src={user.profile!.avatar}
-            name={user.profile!.name}
-            onDoubleClick={() => utils.history.push(`/users/${user.id}`)}
-            withCurrentUser={withCurrentUser}
-        />
-    )
-    const showError = (error: string) => (
-        <StyledMessage.Content
-            withCurrentUser={withCurrentUser}
-            withLastUserMessage={withLastUserMessage}
-            withError
+    const [showDetails, setShowDetails] = useState(false)
+    const [imageError, setImageError] = useState(false)
+    const [videoError, setVideoError] = useState(false)
+    useEffect(() => {
+        if (showDetails) {
+            setTimeout(() => setShowDetails(false), 3000)
+        }
+    }, [showDetails])
+    const handleFileLoadingError = () => {
+        type === 'IMAGE' ? setImageError(true) : setVideoError(true)
+    }
+    const date = new Date(createdAt)
+    const withFile = type === 'FILE'
+    return (
+        <MessageContainer
+            onClick={() => setShowDetails(true)}
+            withLastUserMessage={withLastAndNextMessage}
         >
-            {error}
-            {withLastUserMessage && showAvatar()}
-        </StyledMessage.Content>
+            {type === 'IMAGE' ? (
+                imageError ? (
+                    showError('Image has failed to load')
+                ) : (
+                    <StyledMessage.AssetContainer withCurrentUser={withCurrentUser}>
+                        <StyledMessage.Image src={content} onError={handleFileLoadingError} />
+                        {withLastUserMessage && showAvatar && showAvatar()}
+                    </StyledMessage.AssetContainer>
+                )
+            ) : type === 'VIDEO' ? (
+                videoError ? (
+                    showError('Video has failed to load')
+                ) : (
+                    <StyledMessage.AssetContainer withCurrentUser={withCurrentUser}>
+                        <StyledMessage.Video
+                            src={content}
+                            onError={handleFileLoadingError}
+                            controls
+                        />
+                        {withLastUserMessage && showAvatar && showAvatar()}
+                    </StyledMessage.AssetContainer>
+                )
+            ) : (
+                <StyledMessage.Content
+                    onClick={() => {
+                        if (withFile) {
+                            fileSaver.saveAs(content, filename)
+                        }
+                    }}
+                    withCurrentUser={withCurrentUser}
+                    withLastUserMessage={withLastUserMessage}
+                    withFile={withFile}
+                >
+                    {withFile ? filename : content}
+                    {withLastUserMessage && showAvatar && showAvatar()}
+                </StyledMessage.Content>
+            )}
+            {(withLastUserMessage || showDetails) && (
+                <StyledMessage.Date
+                    withCurrentUser={withCurrentUser}
+                    withLastUserMessage={withLastUserMessage}
+                    showDetails={showDetails}
+                >
+                    {new Date().toDateString() === date.toDateString()
+                        ? date.toLocaleTimeString()
+                        : date.toLocaleString()}
+                    {views && `, ${views}👁️`}
+                </StyledMessage.Date>
+            )}
+        </MessageContainer>
     )
-    const { renderMessage } = chatHooks.useMessages({
-        type,
-        content,
-        filename,
-        createdAt,
-        showAvatar,
-        showError,
-        withCurrentUser,
-        withLastUserMessage,
-        withLastAndNextMessage: !!withLastUserMessage && !!nextMessage
-    })
-    return renderMessage()
 }
 
 export default Message

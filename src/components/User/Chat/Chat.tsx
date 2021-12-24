@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useState } from 'react'
 import styled from 'styled-components/macro'
 
 import hooks from 'hooks'
@@ -13,66 +13,37 @@ import Composed from './composed'
 
 import utils from 'utils'
 
-import chatHelpers from './helpers'
-
 const ChatContainer = styled.section`
     height: 100%;
     position: relative;
 `
 
 const Chat = () => {
-    const messagesRef = useRef<HTMLDivElement>(null)
+    const { lastUnreadMessageIndex } = hooks.useMessagesInfo()
     const textareaRef = useRef<HTMLTextAreaElement>(null)
-    const [isLoading, setIsLoading] = useState(true)
-    const [messages, setMessages] = useState<Message[]>([])
-    const [message, setMessage] = useState('')
-    const [hasMoreMessages, setHasMoreMessages] = useState(true)
-    const [currentUser, setCurrentUser] = useState<User | undefined>()
-    const { lastUnreadMessageIndex, setUnreadMessagesAmount } = hooks.useMessagesInfo()
-    const { socket } = chatHooks.useSocket({
-        messagesRef,
-        setMessages
-    })
     const [showFileInput, setShowFileInput] = useState(true)
     const [uploadPercentage, setUploadPercentage] = useState(0)
-    const fileUpload = !!uploadPercentage
-    const getMessages = async ({ event, limit, offset }: MessagesOrAnalysisGetterProps) =>
-        chatHelpers.getMessages({
-            event,
-            limit,
-            offset,
-            messagesRef,
-            hasMoreMessages,
-            lastUnreadMessageIndex,
-            setMessages,
-            setHasMoreMessages,
-            setIsLoading,
-            setCurrentUser,
-            setUnreadMessagesAmount
-        })
-    const sendMessage = () =>
-        chatHelpers.sendMessage({
-            socket,
-            messagesRef,
-            messages,
-            message,
-            currentUser,
-            setMessage,
-            setMessages
-        })
-    useEffect(() => {
-        getMessages({
-            event: undefined,
-            limit: 20,
-            offset: 0
-        })
-        utils.subscribePushNotifications('/api/user/communication/subscribePushNotifications')
-    }, [])
-    const renderMessages = () =>
-        messages.map((message, index) => {
+    const {
+        messagesRef,
+        messages,
+        message,
+        isLoading,
+        currentUser,
+        setMessage,
+        getMessages,
+        getUnreadMessages,
+        sendMessage,
+        handleSubmittingTextarea,
+        sendFile
+    } = chatHooks.useChat({
+        setShowFileInput,
+        setUploadPercentage
+    })
+    const renderMessages = () => {
+        return messages.map((message, index) => {
             const nextMessage = messages[index + 1]
             return (
-                <Composed.Message
+                <Composed.MessageContainer
                     key={message.id}
                     message={message}
                     nextMessage={nextMessage}
@@ -80,28 +51,15 @@ const Chat = () => {
                 />
             )
         })
-    const handleSendButton = () => {
-        sendMessage()
-        if (utils.detectMobileDevice()) {
-            textareaRef.current!.focus()
-        }
     }
     const areThereMessages = !!messages.length
     const areThereUnreadMessages =
         !isLoading && lastUnreadMessageIndex && messages.length < lastUnreadMessageIndex
+    const fileUploadInProgress = !!uploadPercentage
     return (
         <ChatContainer>
             {areThereUnreadMessages && (
-                <Dashboard.UnreadMessagesInfo
-                    onClick={() =>
-                        chatHelpers.getUnreadMessages({
-                            messagesRef,
-                            lastUnreadMessageIndex,
-                            setMessages,
-                            setUnreadMessagesAmount
-                        })
-                    }
-                >
+                <Dashboard.UnreadMessagesInfo onClick={getUnreadMessages}>
                     Unread messages
                 </Dashboard.UnreadMessagesInfo>
             )}
@@ -132,40 +90,27 @@ const Chat = () => {
                         ref={textareaRef}
                         value={message}
                         placeholder="Type your message"
-                        disabled={fileUpload}
+                        disabled={fileUploadInProgress}
                         onChange={e => setMessage(e.target.value)}
-                        onKeyPress={event =>
-                            chatHelpers.handleSubmittingTextarea({
-                                event,
-                                sendMessage
-                            })
-                        }
+                        onKeyPress={handleSubmittingTextarea}
                     />
                     <StyledTextarea.Buttons>
-                        {showFileInput && (
-                            <Dashboard.FileInput
-                                onChange={event =>
-                                    chatHelpers.sendFile({
-                                        event,
-                                        socket,
-                                        messagesRef,
-                                        messages,
-                                        currentUser,
-                                        setMessages,
-                                        setShowFileInput,
-                                        setUploadPercentage
-                                    })
-                                }
-                            />
-                        )}
-                        {fileUpload ? (
+                        {showFileInput && <Dashboard.FileInput onChange={sendFile} />}
+                        {fileUploadInProgress ? (
                             <Composed.ProgressLoader percentage={uploadPercentage} />
                         ) : (
                             <StyledTextarea.Button as="label" htmlFor="file">
                                 Upload 📁
                             </StyledTextarea.Button>
                         )}
-                        <StyledTextarea.Button onClick={handleSendButton}>
+                        <StyledTextarea.Button
+                            onClick={() => {
+                                sendMessage()
+                                if (utils.detectMobileDevice()) {
+                                    textareaRef.current!.focus()
+                                }
+                            }}
+                        >
                             Send ✉️
                         </StyledTextarea.Button>
                     </StyledTextarea.Buttons>

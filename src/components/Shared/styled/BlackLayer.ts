@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components/macro'
 
 type BlackLayer = {
-    showLayer?: boolean
+    showLayer: boolean
 }
 
 export default styled.section<BlackLayer>`

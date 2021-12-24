@@ -2,7 +2,7 @@ import utils from 'utils'
 
 type SubmittingTextareaHandler = {
     event: React.KeyboardEvent<HTMLTextAreaElement>
-    sendMessage: () => Promise<void>
+    sendMessage: () => void
 }
 
 const handleSubmittingTextarea = ({ event, sendMessage }: SubmittingTextareaHandler) => {

@@ -8,7 +8,7 @@ import utils from 'utils'
 
 import userHelpers from 'routes/user/helpers'
 
-interface ISocket extends Socket {
+type ISocket = Socket & {
     user?: UserClass
 }
 

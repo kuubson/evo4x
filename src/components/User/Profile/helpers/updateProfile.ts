@@ -2,38 +2,36 @@ import utils from 'utils'
 
 import profileHelpers from '.'
 
-import { Form } from './getProfile'
-
 type ProfileUpdater = {
     event: React.FormEvent
-    form: Form
+    profile: ProfileForm
+    profileHandler: any
     avatar: string
     withDefaultAvatar: boolean
-    setForm: React.Dispatch<React.SetStateAction<Form>>
+    setProfile: React.Dispatch<React.SetStateAction<ProfileForm>>
     setAvatar: DispatchString
-    formHandler: any
 }
 
 const updateProfile = async ({
     event,
-    form,
+    profile,
+    profileHandler,
     avatar,
     withDefaultAvatar,
-    setForm,
-    setAvatar,
-    formHandler
+    setProfile,
+    setAvatar
 }: ProfileUpdater) => {
     event.preventDefault()
     if (
         profileHelpers.validateProfile({
-            form,
-            setForm,
-            formHandler
+            profile,
+            setProfile,
+            profileHandler
         })
     ) {
         try {
             const url = '/api/user/profile/updateProfile'
-            const { name, story } = form
+            const { name, story } = profile
             const updatedAvatar = withDefaultAvatar ? utils.defaultAvatar(name) : avatar
             await utils.axios.post(url, {
                 name,
@@ -42,7 +40,7 @@ const updateProfile = async ({
             })
             setAvatar(updatedAvatar)
         } catch (error) {
-            utils.handleApiValidation(error, setForm)
+            utils.handleApiValidation(error, setProfile)
         }
     }
 }

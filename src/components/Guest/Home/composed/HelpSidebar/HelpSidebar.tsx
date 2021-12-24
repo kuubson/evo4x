@@ -1,19 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import styled from 'styled-components/macro'
 
-import hooks from 'hooks'
+import helpSidebarHooks from './hooks'
 
 import ApiFeedback from 'components/Shared/ApiFeedback/ApiFeedback'
 
 import sharedStyled from 'components/Shared/styled'
+import StyledHelpSidebar from 'components/Guest/Home/styled/HelpSidebar'
 import RegistrationModalDashboard from 'components/Guest/Modals/RegistrationModal/styled/Dashboard'
-import StyledHelpSidebar from '../../styled/HelpSidebar'
 
 import RegistrationModalComposed from 'components/Guest/Modals/RegistrationModal/composed'
 
 import helpSidebarUtils from './utils'
-
-import helpSidebarHelpers from './helpers'
 
 const HelpSidebarContainer = styled(sharedStyled.BlackLayer)``
 
@@ -30,66 +28,44 @@ const HelpSidebar: React.FC<IHelpSidebar> = ({
     hideSidebar,
     showLoginModal
 }) => {
-    const params = hooks.useQueryParams()
-    const [issue, setIssue] = useState<Issue>('')
-    useEffect(() => {
-        helpSidebarHelpers.handleQueryParams({
-            params,
-            setIssue,
-            toggleSidebar,
-            showLoginModal
-        })
-    }, [])
-    const [form, setForm] = useState({
-        email: '',
-        emailError: '',
-        password: '',
-        passwordError: '',
-        repeatedPassword: '',
-        repeatedPasswordError: ''
+    const {
+        form: {
+            email,
+            emailError,
+            password,
+            passwordError,
+            repeatedPassword,
+            repeatedPasswordError
+        },
+        formHandler,
+        issue,
+        setIssue,
+        handleHelpSidebar
+    } = helpSidebarHooks.useHelpSidebar({
+        toggleSidebar,
+        hideSidebar,
+        showLoginModal
     })
-    const formHandler = hooks.useFormHandler(setForm)
-    const { email, emailError, password, passwordError, repeatedPassword, repeatedPasswordError } =
-        form
+    const renderIssues = () => {
+        return helpSidebarUtils.issues(issue, setIssue).map(({ issue, active, handleOnClick }) => (
+            <StyledHelpSidebar.Issue key={issue} active={active} onClick={handleOnClick}>
+                {issue}
+            </StyledHelpSidebar.Issue>
+        ))
+    }
+    const closeHelpSidebar = () => {
+        setTimeout(() => setIssue(''), 600)
+        toggleSidebar()
+    }
     return (
         <HelpSidebarContainer showLayer={showSidebar}>
             <StyledHelpSidebar.Content showSidebar={showSidebar}>
-                <RegistrationModalDashboard.CloseButton
-                    onClick={() => {
-                        setTimeout(() => setIssue(''), 600)
-                        toggleSidebar()
-                    }}
-                >
+                <RegistrationModalDashboard.CloseButton onClick={closeHelpSidebar}>
                     ✕
                 </RegistrationModalDashboard.CloseButton>
-                {helpSidebarUtils
-                    .issues(issue, setIssue)
-                    .map(({ issue, active, handleOnClick }) => (
-                        <StyledHelpSidebar.Issue
-                            key={issue}
-                            active={active}
-                            onClick={handleOnClick}
-                        >
-                            {issue}
-                        </StyledHelpSidebar.Issue>
-                    ))}
+                {renderIssues()}
                 {issue && (
-                    <StyledHelpSidebar.Form
-                        onSubmit={event =>
-                            helpSidebarHelpers.handleHelpSidebar({
-                                event,
-                                form,
-                                passwordToken: params.passwordToken,
-                                setForm,
-                                formHandler,
-                                issue,
-                                setIssue,
-                                hideSidebar,
-                                showLoginModal
-                            })
-                        }
-                        noValidate
-                    >
+                    <StyledHelpSidebar.Form onSubmit={handleHelpSidebar} noValidate>
                         {issue === 'changePassword' ? (
                             <>
                                 <RegistrationModalComposed.Input

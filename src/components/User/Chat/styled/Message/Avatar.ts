@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components/macro'
 
 type Avatar = {
-    src?: string
-    name?: string
-    withCurrentUser?: boolean
+    src: string
+    name: string
+    withCurrentUser: boolean
 }
 
 export default styled.div<Avatar>`

@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components/macro'
 
 type Content = {
-    showModal?: boolean
+    showModal: boolean
 }
 
 export default styled.dialog<Content>`

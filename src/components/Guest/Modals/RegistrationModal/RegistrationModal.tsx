@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components/macro'
 
-import hooks from 'hooks'
+import registrationModalHooks from './hooks'
 
 import ApiFeedback from 'components/Shared/ApiFeedback/ApiFeedback'
 
@@ -9,8 +9,6 @@ import sharedStyled from 'components/Shared/styled'
 import Dashboard from './styled/Dashboard'
 
 import Composed from './composed'
-
-import registrationModalHelpers from './helpers'
 
 const RegistrationModalContainer = styled(sharedStyled.BlackLayer)``
 
@@ -20,27 +18,20 @@ interface IRegistrationModal {
 }
 
 const RegistrationModal: React.FC<IRegistrationModal> = ({ showModal, toggleModal }) => {
-    const [form, setForm] = useState({
-        name: '',
-        nameError: '',
-        email: '',
-        emailError: '',
-        password: '',
-        passwordError: '',
-        repeatedPassword: '',
-        repeatedPasswordError: ''
-    })
-    const formHandler = hooks.useFormHandler(setForm)
     const {
-        name,
-        nameError,
-        email,
-        emailError,
-        password,
-        passwordError,
-        repeatedPassword,
-        repeatedPasswordError
-    } = form
+        form: {
+            name,
+            nameError,
+            email,
+            emailError,
+            password,
+            passwordError,
+            repeatedPassword,
+            repeatedPasswordError
+        },
+        formHandler,
+        register
+    } = registrationModalHooks.useForm()
     const formCompleted = !!name && !!email && !!password && !!repeatedPassword
     return (
         <RegistrationModalContainer showLayer={showModal}>
@@ -50,17 +41,7 @@ const RegistrationModal: React.FC<IRegistrationModal> = ({ showModal, toggleModa
                     {`"You either win or learn - 
                     not win or lose"`}
                 </Dashboard.Header>
-                <Dashboard.Form
-                    onSubmit={event =>
-                        registrationModalHelpers.register({
-                            event,
-                            form,
-                            setForm,
-                            formHandler
-                        })
-                    }
-                    noValidate
-                >
+                <Dashboard.Form onSubmit={register} noValidate>
                     <Composed.Input
                         id="name"
                         name="name"

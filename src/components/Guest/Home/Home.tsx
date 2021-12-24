@@ -1,10 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import styled from 'styled-components/macro'
 
-import hooks from 'hooks'
+import homeHooks from './hooks'
 
 import Navbar from 'components/Shared/Navbar/Navbar'
-
 import RegistrationModal from 'components/Guest/Modals/RegistrationModal/RegistrationModal'
 import LoginModal from 'components/Guest/Modals/LoginModal/LoginModal'
 
@@ -13,8 +12,6 @@ import Dashboard from './styled/Dashboard'
 import Composed from './composed'
 
 import homeUtils from './utils'
-
-import homeHelpers from './helpers'
 
 import Logo from 'assets/images/Logo.png'
 
@@ -49,14 +46,9 @@ const Home = () => {
     const [showHelpSidebar, setShowHelpSidebar] = useState(false)
     const [showRegistrationModal, setShowRegistrationModal] = useState(false)
     const [showLoginModal, setShowLoginModal] = useState(false)
-    const handleToggler = (dispatcher: DispatchBoolean) => dispatcher(state => !state)
-    const { emailToken } = hooks.useQueryParams()
-    useEffect(() => {
-        homeHelpers.authenticateEmail({
-            emailToken,
-            setShowLoginModal
-        })
-    }, [emailToken])
+    const { handleToggler } = homeHooks.useHelpers({
+        setShowLoginModal
+    })
     const showLoginModalForAdmin = () => {
         setRole('admin')
         setShowLoginModal(true)
@@ -74,10 +66,10 @@ const Home = () => {
                 toggleModal={() => handleToggler(setShowRegistrationModal)}
             />
             <LoginModal
-                showModal={showLoginModal}
-                toggleModal={() => handleToggler(setShowLoginModal)}
                 role={role}
                 setRole={setRole}
+                showModal={showLoginModal}
+                toggleModal={() => handleToggler(setShowLoginModal)}
             />
             <Navbar
                 links={homeUtils.links({

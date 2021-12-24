@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components/macro'
 
 type Link = {
-    active?: boolean
-    counter?: number
+    active: boolean
+    counter: number | undefined
     withHamburger?: boolean
 }
 

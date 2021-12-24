@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components/macro'
 
 type Date = {
-    withCurrentUser?: boolean
-    withLastUserMessage?: boolean
-    showDetails?: boolean
+    withCurrentUser: boolean
+    withLastUserMessage: boolean
+    showDetails: boolean
 }
 
 export default styled.div<Date>`

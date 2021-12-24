@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components/macro'
 
-import hooks from 'hooks'
+import loginModalHooks from './hooks'
 
 import ApiFeedback from 'components/Shared/ApiFeedback/ApiFeedback'
 
@@ -10,26 +10,23 @@ import RegistrationModalDashboard from 'components/Guest/Modals/RegistrationModa
 
 import RegistrationModalComposed from 'components/Guest/Modals/RegistrationModal/composed'
 
-import loginModalHelpers from './helpers'
-
 const LoginModalContainer = styled(sharedStyled.BlackLayer)``
 
 interface ILoginModal {
-    showModal: boolean
-    toggleModal: () => void
     role: Role
     setRole: React.Dispatch<React.SetStateAction<Role>>
+    showModal: boolean
+    toggleModal: () => void
 }
 
-const LoginModal: React.FC<ILoginModal> = ({ showModal, toggleModal, role, setRole }) => {
-    const [form, setForm] = useState({
-        email: '',
-        emailError: '',
-        password: '',
-        passwordError: ''
+const LoginModal: React.FC<ILoginModal> = ({ role, setRole, showModal, toggleModal }) => {
+    const {
+        form: { email, emailError, password, passwordError },
+        formHandler,
+        login
+    } = loginModalHooks.useForm({
+        role
     })
-    const formHandler = hooks.useFormHandler(setForm)
-    const { email, emailError, password, passwordError } = form
     const closeModal = () => {
         setRole('user')
         toggleModal()
@@ -43,18 +40,7 @@ const LoginModal: React.FC<ILoginModal> = ({ showModal, toggleModal, role, setRo
                 <RegistrationModalDashboard.Header>
                     "Get rich or die trying"
                 </RegistrationModalDashboard.Header>
-                <RegistrationModalDashboard.Form
-                    onSubmit={event =>
-                        loginModalHelpers.login({
-                            event,
-                            role,
-                            form,
-                            setForm,
-                            formHandler
-                        })
-                    }
-                    noValidate
-                >
+                <RegistrationModalDashboard.Form onSubmit={login} noValidate>
                     <RegistrationModalComposed.Input
                         id="loginEmail"
                         name="email"

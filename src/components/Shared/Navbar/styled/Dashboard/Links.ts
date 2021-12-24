@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components/macro'
 
 type Links = {
-    hamburger?: boolean
+    hamburger: boolean | undefined
 }
 
 export default styled.ul<Links>`

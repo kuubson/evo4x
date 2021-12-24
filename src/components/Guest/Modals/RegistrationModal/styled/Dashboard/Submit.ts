@@ -14,7 +14,7 @@ export default styled(sharedStyled.Button)<Submit>`
     transition: all 0.3s ease-in-out;
     transition-property: max-height, margin, padding;
     ${({ scaleIn }) =>
-        scaleIn || scaleIn === undefined
+        scaleIn
             ? css`
                   max-height: 43px;
                   margin: 40px auto 0px auto;
