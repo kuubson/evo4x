@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components/macro'
 
 type Content = {
-    withCurrentUser?: boolean
-    withLastUserMessage?: boolean
+    withCurrentUser: boolean
+    withLastUserMessage: boolean
     withFile?: boolean
     withError?: boolean
 }

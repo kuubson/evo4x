@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components/macro'
 
 type Content = {
-    showSidebar?: boolean
+    showSidebar: boolean
 }
 
 export default styled.aside<Content>`

@@ -5,7 +5,7 @@ import fileSaver from 'file-saver'
 import StyledMessage from '../styled/Message'
 
 type MessageContainerType = {
-    withLastUserMessage?: boolean
+    withLastUserMessage: boolean
 }
 
 const MessageContainer = styled.div<MessageContainerType>`

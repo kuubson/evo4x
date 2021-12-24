@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components/macro'
 
 type AssetContainer = {
-    withCurrentUser?: boolean
+    withCurrentUser: boolean
 }
 
 export default styled.div<AssetContainer>`

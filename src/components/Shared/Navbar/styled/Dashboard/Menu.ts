@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components/macro'
 
 type Menu = {
-    withHamburger?: boolean
+    withHamburger: boolean | undefined
 }
 
 export default styled.ul<Menu>`

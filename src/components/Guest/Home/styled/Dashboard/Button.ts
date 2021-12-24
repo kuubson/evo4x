@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components/macro'
 
 type Button = {
-    $fill?: boolean
+    $fill: boolean
 }
 
 export default styled.button<Button>`

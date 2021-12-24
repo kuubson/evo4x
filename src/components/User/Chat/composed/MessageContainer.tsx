@@ -22,8 +22,8 @@ const MessageContainer: React.FC<IMessage> = ({
     const showAvatar = () => (
         <StyledMessage.Avatar
             src={user.profile!.avatar}
-            name={user.profile!.name}
             onDoubleClick={() => utils.history.push(`/users/${user.id}`)}
+            name={user.profile!.name}
             withCurrentUser={withCurrentUser}
         />
     )

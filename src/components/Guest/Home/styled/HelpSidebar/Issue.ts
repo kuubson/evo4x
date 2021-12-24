@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components/macro'
 import sharedStyled from 'components/Shared/styled'
 
 type Issue = {
-    active?: boolean
+    active: boolean
 }
 
 export default styled(sharedStyled.Button)<Issue>`
