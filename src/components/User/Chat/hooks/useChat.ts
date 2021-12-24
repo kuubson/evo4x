@@ -4,7 +4,7 @@ import hooks from 'hooks'
 
 import utils from 'utils'
 
-import chatHelpers from 'components/User/Chat/helpers'
+import chatHelpers from '../helpers'
 
 type ChatHook = {
     setShowFileInput: DispatchBoolean

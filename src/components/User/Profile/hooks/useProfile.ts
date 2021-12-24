@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 import hooks from 'hooks'
 
-import profileHelpers from 'components/User/Profile/helpers'
+import profileHelpers from '../helpers'
 
 type ProfileHook = {
     setShowAvatarInput: DispatchBoolean

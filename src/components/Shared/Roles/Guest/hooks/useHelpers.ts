@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 
 import hooks from 'hooks'
 
-import guestHelpers from 'components/Shared/Roles/Guest/helpers'
+import guestHelpers from '../helpers'
 
 const useHelpers = () => {
     const { role } = hooks.useRole()

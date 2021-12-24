@@ -6,12 +6,12 @@ import helpSidebarHooks from './hooks'
 import ApiFeedback from 'components/Shared/ApiFeedback/ApiFeedback'
 
 import sharedStyled from 'components/Shared/styled'
-import RegistrationModalDashboard from 'components/Guest/Modals/RegistrationModal/styled/Dashboard'
 import StyledHelpSidebar from 'components/Guest/Home/styled/HelpSidebar'
+import RegistrationModalDashboard from 'components/Guest/Modals/RegistrationModal/styled/Dashboard'
 
 import RegistrationModalComposed from 'components/Guest/Modals/RegistrationModal/composed'
 
-import helpSidebarUtils from 'components/Guest/Home/composed/HelpSidebar/utils'
+import helpSidebarUtils from './utils'
 
 const HelpSidebarContainer = styled(sharedStyled.BlackLayer)``
 

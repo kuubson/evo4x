@@ -1,4 +1,4 @@
-import userHelpers from 'components/Shared/Roles/User/helpers'
+import userHelpers from '../helpers'
 
 const links = (unreadMessagesAmount: number, clearSocket: () => void) => [
     {

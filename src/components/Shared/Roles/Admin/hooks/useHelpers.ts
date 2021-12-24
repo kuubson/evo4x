@@ -3,7 +3,7 @@ import io from 'socket.io-client'
 
 import hooks from 'hooks'
 
-import adminHelpers from 'components/Shared/Roles/Admin/helpers'
+import adminHelpers from '../helpers'
 
 const useHelpers = () => {
     const { socket, setSocket, clearSocket } = hooks.useSocket()

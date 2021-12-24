@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from 'react'
 
-import analysisHelpers from 'components/User/Analysis/helpers'
+import analysisHelpers from '../helpers'
 
 const useAnalysis = () => {
     const analysisRef = useRef<HTMLDivElement>(null)

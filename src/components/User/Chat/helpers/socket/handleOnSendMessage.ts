@@ -1,6 +1,6 @@
 import { Socket } from 'socket.io-client'
 
-import chatHelpers from 'components/User/Chat/helpers'
+import chatHelpers from '../../helpers'
 
 type OnSendMessageHandler = {
     socket: Socket | undefined

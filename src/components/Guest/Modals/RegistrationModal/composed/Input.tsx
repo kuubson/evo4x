@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components/macro'
 
-import Dashboard from 'components/Guest/Modals/RegistrationModal/styled/Dashboard'
+import Dashboard from '../styled/Dashboard'
 
 const InputContainer = styled.div`
     width: 100%;

@@ -1,6 +1,6 @@
 import utils from 'utils'
 
-import chatHelpers from 'components/User/Chat/helpers'
+import chatHelpers from '.'
 
 type MessagesGetter = MessagesOrAnalysisGetterProps & {
     messagesRef: React.RefObject<HTMLDivElement>

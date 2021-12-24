@@ -6,10 +6,8 @@ import axios from 'axios'
 import { Guest, Admin, User } from 'components/Shared/Roles'
 import Loader from 'components/Shared/Loader/Loader'
 
-import Home from 'components/Guest/Home/Home'
-
 import AdminAnalysis from 'components/Admin/Analysis/Analysis'
-
+import Home from 'components/Guest/Home/Home'
 import Profile from 'components/User/Profile/Profile'
 import Chat from 'components/User/Chat/Chat'
 import Analysis from 'components/User/Analysis/Analysis'

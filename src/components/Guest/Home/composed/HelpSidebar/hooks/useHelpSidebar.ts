@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 import hooks from 'hooks'
 
-import helpSidebarHelpers from 'components/Guest/Home/composed/HelpSidebar/helpers'
+import helpSidebarHelpers from '../helpers'
 
 type HelpSidebarHook = {
     toggleSidebar: () => void

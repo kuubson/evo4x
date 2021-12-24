@@ -3,7 +3,7 @@ import io from 'socket.io-client'
 
 import hooks from 'hooks'
 
-import userHelpers from 'components/Shared/Roles/User/helpers'
+import userHelpers from '../helpers'
 
 const useHelpers = (chat: boolean | undefined) => {
     const { socket, setSocket } = hooks.useSocket()

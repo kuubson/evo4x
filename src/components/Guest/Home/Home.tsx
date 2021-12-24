@@ -4,7 +4,6 @@ import styled from 'styled-components/macro'
 import homeHooks from './hooks'
 
 import Navbar from 'components/Shared/Navbar/Navbar'
-
 import RegistrationModal from 'components/Guest/Modals/RegistrationModal/RegistrationModal'
 import LoginModal from 'components/Guest/Modals/LoginModal/LoginModal'
 

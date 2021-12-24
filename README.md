@@ -13,6 +13,36 @@ This one is my own vision of an app for a trading community that provides easy s
 
 Code isn't public because application has potential of being launched to the public in the future.
 
+## Code workflow
+
+### Imports order
+
+-   **Packages from package.json**
+-   **hooks**
+    -   global hooks (**'hooks'** path)
+    -   hooks from other components (**absolute path**)
+    -   hooks for certain component (**'.'** or **'../'** or **'../../'** path)
+-   **components**
+    -   shared components (**'components/Shared'** path)
+    -   other components (**absolute path**)
+-   **styled components**
+    -   shared styled components (**'components/Shared/styled'** path)
+    -   Styled*ComponentName* (**'../styled/_ComponentName_'** or **absolute path**)
+    -   _ComponentNameDashboard_ (**absolute path**)
+    -   Dashboard (**'../'** or **'../../'** path)
+-   **composed**
+    -   _ComponentNameComposed_ (**absolute path**)
+    -   Composed (**'.'** or **'../'** or **'../../'** path)
+-   **utils**
+    -   global utils (**'utils'** path)
+    -   utils from other components (**absolute path**)
+    -   utils for certain component (**'.'** or **'../'** or **'../../'** path)
+-   **helpers**
+    -   global helpers (**'helpers'** path)
+    -   helpers from other components (**absolute path**)
+    -   helpers for certain component (**'.'** or **'../'** or **'../../'** path)
+-   **images**
+
 ## Some screenshots
 
 ### Home
