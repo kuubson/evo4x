@@ -4,11 +4,11 @@ import profileHelpers from '.'
 
 type ProfileUpdater = {
     event: React.FormEvent
-    profile: Profile
+    profile: ProfileForm
     profileHandler: any
     avatar: string
     withDefaultAvatar: boolean
-    setProfile: React.Dispatch<React.SetStateAction<Profile>>
+    setProfile: React.Dispatch<React.SetStateAction<ProfileForm>>
     setAvatar: DispatchString
 }
 

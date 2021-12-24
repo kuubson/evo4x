@@ -1,7 +1,7 @@
 import utils from 'utils'
 
 type ProfileGetter = {
-    setProfile: React.Dispatch<React.SetStateAction<Profile>>
+    setProfile: React.Dispatch<React.SetStateAction<ProfileForm>>
     setAvatar: DispatchString
 }
 

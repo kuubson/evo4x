@@ -1,6 +1,6 @@
 type ProfileValidator = {
-    profile: Profile
-    setProfile: React.Dispatch<React.SetStateAction<Profile>>
+    profile: ProfileForm
+    setProfile: React.Dispatch<React.SetStateAction<ProfileForm>>
     profileHandler: any
 }
 

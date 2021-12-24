@@ -7,10 +7,3 @@ type User = {
         avatar: string
     }
 }
-
-type Profile = {
-    name: string
-    nameError: string
-    story: string
-    storyError: string
-}
