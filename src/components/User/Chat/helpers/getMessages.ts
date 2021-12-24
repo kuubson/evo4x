@@ -34,7 +34,7 @@ const getMessages = async ({
     const loadCachedMessage = () => {
         const currentUser = JSON.parse(sessionStorage.getItem('currentUser')!)
         const savedMessages = JSON.parse(sessionStorage.getItem('messages')!)
-        if (savedMessages && !!savedMessages.length) {
+        if (savedMessages && currentUser) {
             setIsLoading(false)
             setCurrentUser(currentUser)
             setMessages(savedMessages)
