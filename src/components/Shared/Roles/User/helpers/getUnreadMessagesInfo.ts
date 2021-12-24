@@ -1,15 +1,15 @@
 import utils from 'utils'
 
-type Response = {
-    user: User
-    lastUnreadMessageIndex: number
-    unreadMessagesAmount: number
-}
-
 type UnreadMessagesInfoGetter = {
     setCurrentUser: React.Dispatch<React.SetStateAction<User | undefined>>
     setLastUnreadMessageIndex: any
     setUnreadMessagesAmount: any
+}
+
+type Response = {
+    user: User
+    lastUnreadMessageIndex: number
+    unreadMessagesAmount: number
 }
 
 const getUnreadMessagesInfo = async ({

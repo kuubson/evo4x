@@ -38,6 +38,12 @@ const updateProfile = async ({
                 story,
                 avatar: updatedAvatar
             })
+            const updatedProfile = {
+                name,
+                story,
+                avatar: updatedAvatar
+            }
+            profileHelpers.updateCachedProfile(updatedProfile)
             setAvatar(updatedAvatar)
         } catch (error) {
             utils.handleApiValidation(error, setProfile)

@@ -1,9 +1,15 @@
 import utils from 'utils'
 
+import profileHelpers from '.'
+
 type AvatarChanger = {
     event: React.ChangeEvent<HTMLInputElement>
     setAvatar: DispatchString
     setShowAvatarInput: DispatchBoolean
+}
+
+type Response = {
+    avatar: string
 }
 
 const changeAvatar = async ({ event, setAvatar, setShowAvatarInput }: AvatarChanger) => {
@@ -30,9 +36,10 @@ const changeAvatar = async ({ event, setAvatar, setShowAvatarInput }: AvatarChan
         form.append('file', file)
         try {
             const url = '/api/user/profile/changeAvatar'
-            const response = await utils.axios.post(url, form)
+            const response = await utils.axios.post<Response>(url, form)
             if (response) {
                 const { avatar } = response.data
+                profileHelpers.updateCachedAvatar(avatar)
                 setAvatar(avatar)
                 resetFileInput()
             }

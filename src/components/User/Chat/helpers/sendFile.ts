@@ -16,6 +16,11 @@ type FileSender = {
     setUploadPercentage: DispatchNumber
 }
 
+type Response = {
+    type: string
+    content: string
+}
+
 const sendFile = async ({
     event,
     socket,
@@ -74,7 +79,7 @@ const sendFile = async ({
                     setUploadPercentage(percentage => percentage + 1)
                 }
             }, 500)
-            const response = await axios.post(url, form)
+            const response = await axios.post<Response>(url, form)
             if (response) {
                 setUploadPercentage(100)
                 clearInterval(intervalId)
