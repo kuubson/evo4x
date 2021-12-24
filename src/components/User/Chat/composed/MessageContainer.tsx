@@ -6,13 +6,13 @@ import Composed from '.'
 
 import utils from 'utils'
 
-interface IMessage {
+interface IMessageContainer {
     message: Message
     nextMessage: Message
     currentUser: User | undefined
 }
 
-const MessageContainer: React.FC<IMessage> = ({
+const MessageContainer: React.FC<IMessageContainer> = ({
     message: { type, content, filename, createdAt, user },
     nextMessage,
     currentUser
