@@ -2,8 +2,6 @@ import cloudinary from 'cloudinary'
 
 import { Connection } from 'database/database'
 
-import utils from 'utils'
-
 import helpers from 'helpers'
 
 import { ProtectedMulterRoute } from 'types/express'
