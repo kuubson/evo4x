@@ -42,54 +42,58 @@ self.addEventListener('message', event => {
 })
 
 self.addEventListener('push', event => {
-    const { tag, title, body, image, icon, data } = event.data?.json()
-    const isFocused = () =>
-        self.clients
-            .matchAll({
-                type: 'window',
-                includeUncontrolled: true
-            })
-            .then(windows => {
-                let isFocused = false
-                for (let i = 0; i < windows.length; i++) {
-                    if (windows[i].focused) {
-                        isFocused = true
-                        break
-                    }
-                }
-                return isFocused
-            })
-    event.waitUntil(
-        self.registration
-            .getNotifications({
-                tag
-            })
-            .then(notifications => {
-                let notificationExists = false
-                let messagesAmount = 1
-                notifications.map(notification => {
-                    if (notification) {
-                        notificationExists = true
-                        messagesAmount = notification.data.messagesAmount + 1
-                        notification.close()
-                    }
+    if (event.data) {
+        const { tag, title, body, image, icon, data } = event.data.json()
+        const isFocused = () =>
+            self.clients
+                .matchAll({
+                    type: 'window',
+                    includeUncontrolled: true
                 })
-                return isFocused().then(isFocused =>
-                    !isFocused
-                        ? self.registration.showNotification(title, {
-                              tag,
-                              body: notificationExists ? `${messagesAmount} new messages` : body,
-                              image,
-                              icon,
-                              data: {
-                                  ...data,
-                                  messagesAmount
-                              }
-                          })
-                        : null
-                )
-            })
-    )
+                .then(windows => {
+                    let isFocused = false
+                    for (let i = 0; i < windows.length; i++) {
+                        if (windows[i].focused) {
+                            isFocused = true
+                            break
+                        }
+                    }
+                    return isFocused
+                })
+        event.waitUntil(
+            self.registration
+                .getNotifications({
+                    tag
+                })
+                .then(notifications => {
+                    let notificationExists = false
+                    let messagesAmount = 1
+                    notifications.map(notification => {
+                        if (notification) {
+                            notificationExists = true
+                            messagesAmount = notification.data.messagesAmount + 1
+                            notification.close()
+                        }
+                    })
+                    return isFocused().then(isFocused =>
+                        !isFocused
+                            ? self.registration.showNotification(title, {
+                                  tag,
+                                  body: notificationExists
+                                      ? `${messagesAmount} new messages`
+                                      : body,
+                                  image,
+                                  icon,
+                                  data: {
+                                      ...data,
+                                      messagesAmount
+                                  }
+                              })
+                            : null
+                    )
+                })
+        )
+    }
 })
 
 self.addEventListener('notificationclick', event => {

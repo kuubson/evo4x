@@ -49,7 +49,7 @@ const Navbar: React.FC<INavbar> = ({ links, hamburger }) => {
                 {links.map(({ link, pathname, counter, onClick }) => (
                     <Dashboard.Link
                         key={link}
-                        onClick={!!onClick ? onClick : () => utils.history.push(pathname!)}
+                        onClick={onClick ? onClick : () => utils.history.push(pathname!)}
                         active={pathname === location.pathname}
                         counter={counter}
                         withHamburger={withHamburger}
@@ -62,7 +62,7 @@ const Navbar: React.FC<INavbar> = ({ links, hamburger }) => {
                 {links.map(({ link, pathname, counter, onClick }) => (
                     <Dashboard.Link
                         key={link}
-                        onClick={!!onClick ? onClick : () => utils.history.push(pathname!)}
+                        onClick={onClick ? onClick : () => utils.history.push(pathname!)}
                         active={pathname === location.pathname}
                         counter={counter}
                     >
