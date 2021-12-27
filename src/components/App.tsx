@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
-import styled from 'styled-components/macro'
 import { Switch, Route, Redirect } from 'react-router-dom'
+import styled from 'styled-components/macro'
 import axios from 'axios'
 
 import { Guest, Admin, User } from 'components/Shared/Roles'
