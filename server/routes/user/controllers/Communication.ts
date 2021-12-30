@@ -1,6 +1,6 @@
 import { Router } from 'express'
 
-import middlewares from 'middlewares'
+import middlewares from 'middlewares/middlewares'
 
 import communication from 'routes/user/services/communication'
 

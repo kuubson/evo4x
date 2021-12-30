@@ -1,6 +1,6 @@
 import { Router } from 'express'
 
-import middlewares from 'middlewares'
+import middlewares from 'middlewares/middlewares'
 
 import profile from 'routes/user/services/profile'
 

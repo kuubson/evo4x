@@ -9,7 +9,6 @@ const connection = new Sequelize(DATABASE_NAME!, DATABASE_USERNAME!, DATABASE_PA
         charset: 'utf8mb4',
         collate: 'utf8mb4_unicode_ci'
     }
-    // logging: false
 })
 
 import AdminModel from './models/Admin'
@@ -43,7 +42,7 @@ Message.belongsTo(User)
 User.hasMany(Subscription)
 Subscription.belongsTo(User)
 
-const init = async () => {
+const initializeDatabase = async () => {
     try {
         // await connection.sync({ force: true })
         // await connection.sync({ alter: true })
@@ -56,7 +55,7 @@ const init = async () => {
         })
     }
 }
-init()
+initializeDatabase()
 
 export {
     connection as Connection,

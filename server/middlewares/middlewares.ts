@@ -14,14 +14,14 @@ webpush.setVapidDetails(
 
 import cloudinary from 'cloudinary'
 
-const initCloudinary = () => {
-    ;(cloudinary as any).config({
+const initializeCloudinary = () =>
+    (cloudinary as any).config({
         cloud_name: process.env.CLOUDINARY_NAME,
         api_key: process.env.CLOUDINARY_API_KEY,
         api_secret: process.env.CLOUDINARY_API_SECRET
     })
-}
-initCloudinary()
+
+initializeCloudinary()
 
 import initSocketIo from 'socketio/socketio'
 import initCSRF from './csrf'
@@ -35,7 +35,7 @@ import jwtAuthorization from './jwtAuthorization'
 import multerFile from './multerFile'
 import handleMulterFile from './handleMulterFile'
 
-const init = (app: Application, server: Server) => {
+const initializeMiddlewares = (app: Application, server: Server) => {
     initSocketIo(new SocketServer(server))
     app.use(
         helmet({
@@ -51,7 +51,7 @@ const init = (app: Application, server: Server) => {
 }
 
 const middlewares = {
-    init,
+    initializeMiddlewares,
     errorHandler,
     checkValidation,
     rateLimiter,
