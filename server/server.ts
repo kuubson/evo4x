@@ -21,7 +21,7 @@ routes(app)
 
 middlewares.errorHandler(app)
 
-const buildPath = process.env.NODE_ENV === 'production' ? '../../build' : '../build'
+const buildPath = process.env.NODE_ENV === 'production' ? '../../client/build' : '../client/build'
 
 app.use(express.static(path.resolve(__dirname, buildPath)))
 
