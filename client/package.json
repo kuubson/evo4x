@@ -56,8 +56,7 @@
     "scripts": {
         "start": "react-scripts start",
         "lint": "eslint .",
-        "build": "npm run lint && react-scripts build",
-        "heroku-prebuild": "cd server && npm install && npm run build"
+        "build": "npm run lint && react-scripts build"
     },
     "eslintConfig": {
         "extends": [
