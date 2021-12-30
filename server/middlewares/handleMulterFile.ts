@@ -1,4 +1,4 @@
-import middlewares from 'middlewares'
+import middlewares from 'middlewares/middlewares'
 
 import utils from 'utils'
 

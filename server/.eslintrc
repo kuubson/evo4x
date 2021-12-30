@@ -12,13 +12,14 @@
     },
     "plugins": ["@typescript-eslint", "prettier"],
     "rules": {
+        "prettier/prettier": 2,
         "no-empty": "off",
         "no-undef": "off",
         "require-yield": "off",
         "no-case-declarations": "off",
-        "prettier/prettier": 2,
         "@typescript-eslint/no-non-null-assertion": "off",
         "@typescript-eslint/no-explicit-any": "off",
         "@typescript-eslint/no-var-requires": "off"
-    }
+    },
+    "ignorePatterns": ["/dist"]
 }
