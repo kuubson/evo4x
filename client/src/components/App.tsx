@@ -7,7 +7,7 @@ import { Guest, User, Admin } from 'components/shared/roles'
 import Loader from 'components/shared/Loader/Loader'
 
 import Home from 'components/guest/Home/Home'
-import Profile from 'components/User/Profile/Profile'
+import Profile from 'components/user/Profile/Profile'
 // import Chat from 'components/User/Chat/Chat'
 // import Analysis from 'components/User/Analysis/Analysis'
 import AdminAnalysis from 'components/admin/Analysis/Analysis'
