@@ -4,7 +4,7 @@ import io from 'socket.io-client'
 
 import Navbar from 'components/shared/Navbar/Navbar'
 
-import { useSocket, useRole } from 'hooks'
+import * as hooks from 'hooks'
 import { useAdmin } from './hooks'
 
 import { history } from 'utils'
@@ -18,8 +18,8 @@ const AdminContainer = styled.section`
 `
 
 export const Admin: React.FC = ({ children }) => {
-    const { socket, setSocket } = useSocket()
-    const { role } = useRole()
+    const { socket, setSocket } = hooks.useSocket()
+    const { role } = hooks.useRole()
     const { links } = useAdmin()
     useEffect(() => {
         if (!socket) {

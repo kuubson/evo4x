@@ -1,9 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 type SliceState = {
-    lastUnreadMessageIndex: null | number
+    lastUnreadMessageIndex: number | null
     unreadMessagesAmount: number
 }
+
+type Payload = PayloadAction<number>
 
 const initialState: SliceState = {
     lastUnreadMessageIndex: null,
@@ -14,10 +16,10 @@ const messagesInfo = createSlice({
     name: 'messagesInfo',
     initialState,
     reducers: {
-        setLastUnreadMessageIndex: (state, { payload }: PayloadAction<number>) => {
+        setLastUnreadMessageIndex: (state, { payload }: Payload) => {
             state.lastUnreadMessageIndex = payload
         },
-        setUnreadMessagesAmount: (state, { payload }: PayloadAction<number>) => {
+        setUnreadMessagesAmount: (state, { payload }: Payload) => {
             state.unreadMessagesAmount = payload
         }
     }

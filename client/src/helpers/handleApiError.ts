@@ -1,4 +1,4 @@
-import { setRole, setApiFeedback } from 'helpers'
+import * as helpers from 'helpers'
 
 import { history } from 'utils'
 
@@ -10,16 +10,15 @@ export const handleApiError = (error: any) => {
         const status = error.response.status
         const { error: apiError } = error.response.data
         if (status === 401 || status === 403) {
-            setRole('guest')
             history.push('/?failedAuthentication=true')
         }
         if (!apiError) {
-            return setApiFeedback('The connection could not be established with the server')
+            return helpers.setApiFeedback('The connection could not be established with the server')
         }
-        return setApiFeedback(apiError)
+        return helpers.setApiFeedback(apiError)
     }
     if (error.request) {
-        return setApiFeedback('The server cannot temporarily process your request')
+        return helpers.setApiFeedback('The server cannot temporarily process your request')
     }
-    setApiFeedback('The app has encountered an unexpected error')
+    helpers.setApiFeedback('The app has encountered an unexpected error')
 }

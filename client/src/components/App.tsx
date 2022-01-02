@@ -3,14 +3,14 @@ import { unstable_HistoryRouter as HistoryRouter, Routes, Route, Navigate } from
 import styled from 'styled-components/macro'
 import axios from 'axios'
 
-import { Guest, Admin, User } from 'components/shared/roles'
+import { Guest, User, Admin } from 'components/shared/roles'
 import Loader from 'components/shared/Loader/Loader'
 
-// import AdminAnalysis from 'components/Admin/Analysis/Analysis'
 import Home from 'components/guest/Home/Home'
 // import Profile from 'components/User/Profile/Profile'
 // import Chat from 'components/User/Chat/Chat'
 // import Analysis from 'components/User/Analysis/Analysis'
+import AdminAnalysis from 'components/admin/Analysis/Analysis'
 
 import * as helpers from 'helpers'
 
@@ -82,15 +82,15 @@ const App = () => {
         //         </User>
         //     )
         // },
-        // {
-        //     id: 6,
-        //     path: '/admin/analysis',
-        //     element: () => (
-        //         <Admin>
-        //             <AdminAnalysis />
-        //         </Admin>
-        //     )
-        // },
+        {
+            id: 6,
+            path: '/admin/analysis',
+            element: () => (
+                <Admin>
+                    <AdminAnalysis />
+                </Admin>
+            )
+        },
         {
             id: 7,
             path: '*',

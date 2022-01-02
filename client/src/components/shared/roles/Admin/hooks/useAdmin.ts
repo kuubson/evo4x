@@ -3,7 +3,7 @@ import { useSocket } from 'hooks'
 import { logout } from 'helpers'
 
 export const useAdmin = () => {
-    const { clearSocket } = useSocket()
+    const { closeSocketConnection } = useSocket()
     const links = [
         {
             link: 'Analysis',
@@ -11,7 +11,7 @@ export const useAdmin = () => {
         },
         {
             link: 'Logout',
-            onClick: () => logout(clearSocket)
+            onClick: () => logout(closeSocketConnection)
         }
     ]
     return {

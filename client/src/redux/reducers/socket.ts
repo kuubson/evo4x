@@ -2,7 +2,7 @@ import { Socket } from 'socket.io-client'
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-type SocketType = null | Socket
+type SocketType = Socket | null
 
 type SliceState = {
     socket: SocketType

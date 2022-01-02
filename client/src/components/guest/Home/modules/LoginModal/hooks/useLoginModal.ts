@@ -2,9 +2,9 @@ import { useState } from 'react'
 
 import { useFormHandler } from 'hooks'
 
-import { setRole, handleApiValidation } from 'helpers'
+import * as helpers from 'helpers'
 
-import { history, axios } from 'utils'
+import * as utils from 'utils'
 
 type FormHook = {
     role: UserRoles
@@ -36,16 +36,16 @@ export const useLoginModal = ({ role }: FormHook) => {
             try {
                 const url = `/api/${role}/auth/login`
                 const { email, password } = form
-                const response = await axios.post(url, {
+                const response = await utils.axios.post(url, {
                     email,
                     password
                 })
                 if (response) {
-                    setRole(role)
-                    history.push(role === 'admin' ? '/admin/analysis' : '/user/profile')
+                    helpers.setRole(role)
+                    utils.history.push(role === 'admin' ? '/admin/analysis' : '/user/profile')
                 }
             } catch (error) {
-                handleApiValidation(error, setForm)
+                helpers.handleApiValidation(error, setForm)
             }
         }
     }

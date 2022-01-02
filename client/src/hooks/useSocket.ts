@@ -7,8 +7,8 @@ import { setSocket as setSocketAction } from 'redux/reducers/socket'
 export const useSocket = () => {
     const dispatch = useAppDispatch()
     const { socket } = useAppSelector(state => state.socket)
-    const setSocket = (payload: null | Socket) => dispatch(setSocketAction(payload))
-    const clearSocket = () => {
+    const setSocket = (payload: Socket | null) => dispatch(setSocketAction(payload))
+    const closeSocketConnection = () => {
         if (socket) {
             socket.disconnect()
             setSocket(null)
@@ -17,6 +17,6 @@ export const useSocket = () => {
     return {
         socket,
         setSocket,
-        clearSocket
+        closeSocketConnection
     }
 }
