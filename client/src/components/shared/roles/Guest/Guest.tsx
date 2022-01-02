@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components/macro'
 
-import * as hooks from 'hooks'
+import { useSocket, useRole } from 'hooks'
 
 import { logout } from 'helpers'
 
@@ -12,8 +12,8 @@ const GuestContainer = styled.section`
 `
 
 export const Guest: React.FC = ({ children }) => {
-    const { closeSocketConnection } = hooks.useSocket()
-    const { role } = hooks.useRole()
+    const { closeSocketConnection } = useSocket()
+    const { role } = useRole()
     useEffect(() => {
         switch (true) {
             case role === 'admin':

@@ -4,7 +4,7 @@ import io from 'socket.io-client'
 
 import Navbar from 'components/shared/Navbar/Navbar'
 
-import * as hooks from 'hooks'
+import { useSocket, useRole } from 'hooks'
 import { useUser } from './hooks'
 
 import { history } from 'utils'
@@ -22,8 +22,8 @@ interface IUser {
 }
 
 export const User: React.FC<IUser> = ({ children, chat }) => {
-    const { socket, setSocket } = hooks.useSocket()
-    const { role } = hooks.useRole()
+    const { socket, setSocket } = useSocket()
+    const { role } = useRole()
     const { links } = useUser(chat)
     useEffect(() => {
         if (!socket) {

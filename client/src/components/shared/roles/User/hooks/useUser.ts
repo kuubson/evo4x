@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-import * as hooks from 'hooks'
+import { useSocket, useMessagesInfo } from 'hooks'
 
 import { logout } from 'helpers'
 
@@ -13,13 +13,13 @@ type Response = {
 }
 
 export const useUser = (chat: boolean | undefined) => {
-    const { socket, closeSocketConnection } = hooks.useSocket()
+    const { socket, closeSocketConnection } = useSocket()
     const {
         lastUnreadMessageIndex,
         unreadMessagesAmount,
         setLastUnreadMessageIndex,
         setUnreadMessagesAmount
-    } = hooks.useMessagesInfo()
+    } = useMessagesInfo()
     const [currentUser, setCurrentUser] = useState<User>()
     useEffect(() => {
         const getUnreadMessagesInfo = async () => {

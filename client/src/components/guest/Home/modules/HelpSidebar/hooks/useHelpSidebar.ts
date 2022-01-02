@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-import * as hooks from 'hooks'
+import { useQueryParams, useFormHandler } from 'hooks'
 
 import { handleApiValidation } from 'helpers'
 
@@ -13,7 +13,7 @@ type HelpSidebarHook = {
 }
 
 export const useHelpSidebar = ({ toggleSidebar, hideSidebar, showLoginModal }: HelpSidebarHook) => {
-    const { failedAuthentication, passwordToken } = hooks.useQueryParams()
+    const { failedAuthentication, passwordToken } = useQueryParams()
     const [form, setForm] = useState({
         email: '',
         emailError: '',
@@ -22,7 +22,7 @@ export const useHelpSidebar = ({ toggleSidebar, hideSidebar, showLoginModal }: H
         repeatedPassword: '',
         repeatedPasswordError: ''
     })
-    const formHandler = hooks.useFormHandler(setForm)
+    const formHandler = useFormHandler(setForm)
     const [issue, setIssue] = useState<Issue>('')
     useEffect(() => {
         if (failedAuthentication) {

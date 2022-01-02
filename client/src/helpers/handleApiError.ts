@@ -1,4 +1,4 @@
-import * as helpers from 'helpers'
+import { setApiFeedback } from 'helpers'
 
 import { history } from 'utils'
 
@@ -13,12 +13,12 @@ export const handleApiError = (error: any) => {
             history.push('/?failedAuthentication=true')
         }
         if (!apiError) {
-            return helpers.setApiFeedback('The connection could not be established with the server')
+            return setApiFeedback('The connection could not be established with the server')
         }
-        return helpers.setApiFeedback(apiError)
+        return setApiFeedback(apiError)
     }
     if (error.request) {
-        return helpers.setApiFeedback('The server cannot temporarily process your request')
+        return setApiFeedback('The server cannot temporarily process your request')
     }
-    helpers.setApiFeedback('The app has encountered an unexpected error')
+    setApiFeedback('The app has encountered an unexpected error')
 }

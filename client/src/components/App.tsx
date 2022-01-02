@@ -12,7 +12,7 @@ import Home from 'components/guest/Home/Home'
 // import Analysis from 'components/User/Analysis/Analysis'
 import AdminAnalysis from 'components/admin/Analysis/Analysis'
 
-import * as helpers from 'helpers'
+import { setRole, handleApiError } from 'helpers'
 
 import { history } from 'utils'
 
@@ -28,10 +28,10 @@ const App = () => {
                 const response = await axios.get(url)
                 if (response) {
                     const { role } = response.data
-                    helpers.setRole(role)
+                    setRole(role)
                 }
             } catch (error) {
-                helpers.handleApiError(error)
+                handleApiError(error)
             }
         }
         checkRole()

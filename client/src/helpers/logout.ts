@@ -1,14 +1,14 @@
 import { setRole } from 'helpers'
 
-import * as utils from 'utils'
+import { axios, history } from 'utils'
 
 export const logout = async (closeSocketConnection: () => void) => {
     const url = '/api/global/auth/logout'
-    const response = await utils.axios.get(url)
+    const response = await axios.get(url)
     if (response) {
         closeSocketConnection()
         sessionStorage.clear()
         setRole('guest')
-        utils.history.push('/')
+        history.push('/')
     }
 }
