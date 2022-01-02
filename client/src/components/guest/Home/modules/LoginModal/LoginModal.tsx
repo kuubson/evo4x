@@ -7,13 +7,13 @@ import Input from '../RegistrationModal/components/Input'
 import { BlackLayer } from 'components/shared/styledComponents'
 import * as RegistrationModalDashboard from '../RegistrationModal/styled/Dashboard'
 
-import { useForm } from './hooks'
+import { useLoginModal } from './hooks'
 
 const LoginModalContainer = styled(BlackLayer)``
 
 interface ILoginModal {
-    role: Role
-    setRole: React.Dispatch<React.SetStateAction<Role>>
+    role: UserRoles
+    setRole: ReactDispatch<UserRoles>
     showModal: boolean
     toggleModal: () => void
 }
@@ -23,7 +23,7 @@ const LoginModal: React.FC<ILoginModal> = ({ role, setRole, showModal, toggleMod
         form: { email, emailError, password, passwordError },
         formHandler,
         login
-    } = useForm({
+    } = useLoginModal({
         role
     })
     const closeModal = () => {

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 type SliceState = {
-    role: Role
+    role: AllRoles
 }
 
 const initialState: SliceState = {
@@ -12,7 +12,7 @@ const roleSlice = createSlice({
     name: 'role',
     initialState,
     reducers: {
-        setRole: (state, { payload }: PayloadAction<Role>) => {
+        setRole: (state, { payload }: PayloadAction<AllRoles>) => {
             state.role = payload
         }
     }

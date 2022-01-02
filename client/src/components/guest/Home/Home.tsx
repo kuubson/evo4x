@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
 
 import Navbar from 'components/shared/Navbar/Navbar'
@@ -9,11 +8,9 @@ import LoginModal from './modules/LoginModal/LoginModal'
 
 import * as Dashboard from './styled/Dashboard'
 
-import { useQueryParams } from 'hooks'
+import { useHome } from './hooks'
 
-import { authenticateEmail } from './helpers'
-
-import { links } from './utils'
+import { handleDispatcher } from 'helpers'
 
 import Logo from 'assets/images/Logo.png'
 
@@ -44,18 +41,17 @@ const HomeContainer = styled.section`
 `
 
 const Home = () => {
-    const { emailToken } = useQueryParams()
-    const [role, setRole] = useState<Role>('user')
-    const [showHelpSidebar, setShowHelpSidebar] = useState(false)
-    const [showRegistrationModal, setShowRegistrationModal] = useState(false)
-    const [showLoginModal, setShowLoginModal] = useState(false)
-    useEffect(() => {
-        authenticateEmail({
-            emailToken,
-            setShowLoginModal
-        })
-    }, [emailToken])
-    const handleToggler = (dispatcher: ReactDispatch<boolean>) => dispatcher(state => !state)
+    const {
+        role,
+        setRole,
+        showHelpSidebar,
+        setShowHelpSidebar,
+        showRegistrationModal,
+        setShowRegistrationModal,
+        showLoginModal,
+        setShowLoginModal,
+        links
+    } = useHome()
     const showLoginModalForAdmin = () => {
         setRole('admin')
         setShowLoginModal(true)
@@ -64,27 +60,21 @@ const Home = () => {
         <HomeContainer>
             <HelpSidebar
                 showSidebar={showHelpSidebar}
-                toggleSidebar={() => handleToggler(setShowHelpSidebar)}
+                toggleSidebar={() => handleDispatcher(setShowHelpSidebar)}
                 hideSidebar={() => setShowHelpSidebar(false)}
                 showLoginModal={() => setShowLoginModal(true)}
             />
             <RegistrationModal
                 showModal={showRegistrationModal}
-                toggleModal={() => handleToggler(setShowRegistrationModal)}
+                toggleModal={() => handleDispatcher(setShowRegistrationModal)}
             />
             <LoginModal
                 role={role}
                 setRole={setRole}
                 showModal={showLoginModal}
-                toggleModal={() => handleToggler(setShowLoginModal)}
+                toggleModal={() => handleDispatcher(setShowLoginModal)}
             />
-            <Navbar
-                links={links({
-                    handleToggler,
-                    setShowLoginModal,
-                    setShowHelpSidebar
-                })}
-            />
+            <Navbar links={links} />
             <Dashboard.Advantages>
                 <Dashboard.Advantage>
                     <Dashboard.Dollar>$</Dashboard.Dollar>
@@ -100,7 +90,7 @@ const Home = () => {
                 </Dashboard.Advantage>
                 <Dashboard.Logo src={Logo} alt="evo4x" mobile />
                 <Dashboard.Button
-                    onClick={() => handleToggler(setShowRegistrationModal)}
+                    onClick={() => handleDispatcher(setShowRegistrationModal)}
                     $fill={showRegistrationModal}
                 >
                     join evo4x's community

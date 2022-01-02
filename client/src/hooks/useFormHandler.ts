@@ -14,7 +14,7 @@ type PasswordValidator = (password: string, repeatedPassword: string, withLogin:
 
 type RepeatedPasswordValidator = (repeatedPassword: string, password: string) => boolean
 
-type FormHandler = <T>(setForm: React.Dispatch<React.SetStateAction<T>>) => {
+type FormHandler = <T>(setForm: ReactDispatch<T>) => {
     handleInputValue: InputValueHandler
     handleInputError: InputErrorHandler
     validateProperty: PropertyValidator

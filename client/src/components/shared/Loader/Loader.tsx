@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro'
 
-import { useLoader } from './hooks'
+import { useLoader } from 'hooks'
 
 import { BlackLayer } from 'components/shared/styledComponents'
 import * as Dashboard from './styled/Dashboard'

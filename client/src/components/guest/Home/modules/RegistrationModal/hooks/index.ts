@@ -1,1 +1,1 @@
-export { useForm } from './useForm'
+export { useRegistrationModal } from './useRegistrationModal'

@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro'
 
-import { useApiFeedback } from './hooks'
+import { useApiFeedback } from 'hooks'
 
 import { Button } from 'components/shared/styledComponents'
 

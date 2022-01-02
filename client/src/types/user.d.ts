@@ -1,4 +1,6 @@
-type Role = 'admin' | 'user' | 'guest'
+type AllRoles = 'guest' | 'user' | 'admin'
+
+type UserRoles = 'user' | 'admin'
 
 type User = {
     id: string

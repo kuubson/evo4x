@@ -1,9 +1,4 @@
-import React from 'react'
-
-type ApiValidationHandler = <T>(
-    error: any,
-    setForm: React.Dispatch<React.SetStateAction<T>>
-) => void
+type ApiValidationHandler = <T>(error: any, setForm: ReactDispatch<T>) => void
 
 type Result = {
     parameter: string

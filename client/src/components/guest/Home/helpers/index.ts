@@ -1,1 +1,0 @@
-export { authenticateEmail } from './authenticateEmail'

@@ -10,8 +10,6 @@ import * as Dashboard from './styled/Dashboard'
 
 import { useHelpSidebar } from './hooks'
 
-import { issues } from './utils'
-
 const HelpSidebarContainer = styled(BlackLayer)``
 
 interface IHelpSidebar {
@@ -39,19 +37,13 @@ const HelpSidebar: React.FC<IHelpSidebar> = ({
         formHandler,
         issue,
         setIssue,
-        handleHelpSidebar
+        handleHelpSidebar,
+        issues
     } = useHelpSidebar({
         toggleSidebar,
         hideSidebar,
         showLoginModal
     })
-    const renderIssues = () => {
-        return issues(issue, setIssue).map(({ issue, active, handleOnClick }) => (
-            <Dashboard.Issue key={issue} active={active} onClick={handleOnClick}>
-                {issue}
-            </Dashboard.Issue>
-        ))
-    }
     const closeHelpSidebar = () => {
         setTimeout(() => setIssue(''), 600)
         toggleSidebar()
@@ -62,7 +54,11 @@ const HelpSidebar: React.FC<IHelpSidebar> = ({
                 <RegistrationModalDashboard.CloseButton onClick={closeHelpSidebar}>
                     ✕
                 </RegistrationModalDashboard.CloseButton>
-                {renderIssues()}
+                {issues.map(({ issue, active, handleOnClick }) => (
+                    <Dashboard.Issue key={issue} active={active} onClick={handleOnClick}>
+                        {issue}
+                    </Dashboard.Issue>
+                ))}
                 {issue && (
                     <Dashboard.Form onSubmit={handleHelpSidebar} noValidate>
                         {issue === 'changePassword' ? (

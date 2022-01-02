@@ -7,7 +7,7 @@ import Input from './components/Input'
 import { BlackLayer } from 'components/shared/styledComponents'
 import * as Dashboard from './styled/Dashboard'
 
-import { useForm } from './hooks'
+import { useRegistrationModal } from './hooks'
 
 const RegistrationModalContainer = styled(BlackLayer)``
 
@@ -30,7 +30,7 @@ const RegistrationModal: React.FC<IRegistrationModal> = ({ showModal, toggleModa
         },
         formHandler,
         register
-    } = useForm()
+    } = useRegistrationModal()
     const formCompleted = !!name && !!email && !!password && !!repeatedPassword
     return (
         <RegistrationModalContainer showLayer={showModal}>
