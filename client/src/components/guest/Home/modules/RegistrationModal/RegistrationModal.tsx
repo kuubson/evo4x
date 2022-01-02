@@ -16,7 +16,7 @@ interface IRegistrationModal {
     toggleModal: () => void
 }
 
-const RegistrationModal: React.FC<IRegistrationModal> = ({ showModal, toggleModal }) => {
+const RegistrationModal = ({ showModal, toggleModal }: IRegistrationModal) => {
     const {
         form: {
             name,

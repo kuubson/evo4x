@@ -13,7 +13,7 @@ interface IProgressLoader {
     percentage: number
 }
 
-const ProgressLoader: React.FC<IProgressLoader> = ({ percentage }) => {
+const ProgressLoader = ({ percentage }: IProgressLoader) => {
     const circle = useRef<SVGCircleElement>(null)
     const dimension = 50
     const strokeWidth = 2

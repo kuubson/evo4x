@@ -1,18 +1,14 @@
-import { useRef, useState } from 'react'
 import styled from 'styled-components/macro'
 
 import ApiFeedback from 'components/shared/ApiFeedback/ApiFeedback'
 
 import Message from './modules/Message/Message'
-import ProgressLoader from './modules/ProgressLoader/ProgressLoader'
+import Textarea from './modules/Textarea/Textarea'
 
 import * as Dashboard from './styled/Dashboard'
-import * as StyledTextarea from './styled/Textarea'
 
 import { useMessagesInfo } from 'hooks'
-import { useChat } from './hooks'
-
-import { detectMobileDevice } from 'helpers'
+import { useChat, useTextarea } from './hooks'
 
 const ChatContainer = styled.section`
     height: 100%;
@@ -21,9 +17,8 @@ const ChatContainer = styled.section`
 
 const Chat = () => {
     const { lastUnreadMessageIndex } = useMessagesInfo()
-    const textareaRef = useRef<HTMLTextAreaElement>(null)
-    const [showFileInput, setShowFileInput] = useState(true)
-    const [uploadPercentage, setUploadPercentage] = useState(0)
+    const { textareaRef, showFileInput, setShowFileInput, uploadPercentage, setUploadPercentage } =
+        useTextarea()
     const {
         messagesRef,
         messages,
@@ -42,7 +37,6 @@ const Chat = () => {
     const areThereMessages = !!messages.length
     const areThereUnreadMessages =
         !isLoading && lastUnreadMessageIndex && messages.length < lastUnreadMessageIndex
-    const fileUploadInProgress = !!uploadPercentage
     return (
         <ChatContainer>
             {areThereUnreadMessages && (
@@ -79,51 +73,15 @@ const Chat = () => {
                 <Dashboard.Error>
                     <ApiFeedback />
                 </Dashboard.Error>
-                <StyledTextarea.Container>
-                    <StyledTextarea.Content
-                        ref={textareaRef}
-                        value={message}
-                        placeholder="Type your message"
-                        disabled={fileUploadInProgress}
-                        onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) =>
-                            setMessage(event.target.value)
-                        }
-                        onKeyPress={event => {
-                            if (event.key === 'Enter') {
-                                switch (true) {
-                                    case detectMobileDevice():
-                                        return
-                                    case !event.currentTarget.value.trim():
-                                        event.preventDefault()
-                                        break
-                                    case !event.shiftKey:
-                                        sendMessage()
-                                        break
-                                }
-                            }
-                        }}
-                    />
-                    <StyledTextarea.Buttons>
-                        {showFileInput && <Dashboard.FileInput onChange={sendFile} />}
-                        {fileUploadInProgress ? (
-                            <ProgressLoader percentage={uploadPercentage} />
-                        ) : (
-                            <StyledTextarea.Button as="label" htmlFor="file">
-                                Upload 📁
-                            </StyledTextarea.Button>
-                        )}
-                        <StyledTextarea.Button
-                            onClick={() => {
-                                sendMessage()
-                                if (detectMobileDevice()) {
-                                    textareaRef.current!.focus()
-                                }
-                            }}
-                        >
-                            Send ✉️
-                        </StyledTextarea.Button>
-                    </StyledTextarea.Buttons>
-                </StyledTextarea.Container>
+                <Textarea
+                    message={message}
+                    setMessage={setMessage}
+                    textareaRef={textareaRef}
+                    showFileInput={showFileInput}
+                    uploadPercentage={uploadPercentage}
+                    sendMessage={sendMessage}
+                    sendFile={sendFile}
+                />
             </Dashboard.Content>
         </ChatContainer>
     )

@@ -12,11 +12,11 @@ interface IMessage {
     currentUser: User | undefined
 }
 
-const Message: React.FC<IMessage> = ({
+const Message = ({
     message: { type, content, filename, createdAt, user },
     nextMessage,
     currentUser
-}) => {
+}: IMessage) => {
     const withCurrentUser = user.id === currentUser?.id
     const withLastUserMessage = (nextMessage && user.id !== nextMessage.user.id) || !nextMessage
     const showAvatar = () => (

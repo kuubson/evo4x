@@ -22,16 +22,7 @@ interface IInput {
     onChange: React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>
 }
 
-const Input: React.FC<IInput> = ({
-    id,
-    name,
-    type,
-    label,
-    value,
-    placeholder,
-    error,
-    onChange
-}) => {
+const Input = ({ id, name, type, label, value, placeholder, error, onChange }: IInput) => {
     return (
         <InputContainer>
             <Dashboard.Label htmlFor={id}>{label}</Dashboard.Label>

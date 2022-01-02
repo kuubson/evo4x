@@ -18,7 +18,7 @@ interface ILoginModal {
     toggleModal: () => void
 }
 
-const LoginModal: React.FC<ILoginModal> = ({ role, setRole, showModal, toggleModal }) => {
+const LoginModal = ({ role, setRole, showModal, toggleModal }: ILoginModal) => {
     const {
         form: { email, emailError, password, passwordError },
         formHandler,

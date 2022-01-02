@@ -19,12 +19,7 @@ interface IHelpSidebar {
     showLoginModal: () => void
 }
 
-const HelpSidebar: React.FC<IHelpSidebar> = ({
-    showSidebar,
-    toggleSidebar,
-    hideSidebar,
-    showLoginModal
-}) => {
+const HelpSidebar = ({ showSidebar, toggleSidebar, hideSidebar, showLoginModal }: IHelpSidebar) => {
     const {
         form: {
             email,

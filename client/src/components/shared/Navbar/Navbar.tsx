@@ -28,7 +28,7 @@ interface INavbar {
     hamburger?: boolean
 }
 
-const Navbar: React.FC<INavbar> = ({ links, hamburger }) => {
+const Navbar = ({ links, hamburger }: INavbar) => {
     const location = useLocation()
     const [toggleHamburger, setToggleHamburger] = useState(false)
     const withHamburger = hamburger && toggleHamburger

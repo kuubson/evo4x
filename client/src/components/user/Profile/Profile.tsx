@@ -6,7 +6,7 @@ import { useProfile } from './hooks'
 import ApiFeedback from 'components/shared/ApiFeedback/ApiFeedback'
 import Input from 'components/guest/Home/modules/RegistrationModal/components/Input'
 
-import { FileInput } from 'components/User/Chat/styled/Dashboard'
+import { FileInput } from 'components/user/Chat/styled/Dashboard'
 import * as Dashboard from './styled/Dashboard'
 
 const ProfileContainer = styled.section`

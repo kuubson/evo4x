@@ -32,7 +32,7 @@ interface IMessageContent {
     withLastAndNextMessage: boolean
 }
 
-const MessageContent: React.FC<IMessageContent> = ({
+const MessageContent = ({
     type,
     content,
     filename,
@@ -43,7 +43,7 @@ const MessageContent: React.FC<IMessageContent> = ({
     withCurrentUser,
     withLastUserMessage,
     withLastAndNextMessage
-}) => {
+}: IMessageContent) => {
     const [showDetails, setShowDetails] = useState(false)
     const [imageError, setImageError] = useState(false)
     const [videoError, setVideoError] = useState(false)
