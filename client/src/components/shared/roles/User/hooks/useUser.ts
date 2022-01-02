@@ -6,7 +6,7 @@ import { logout } from 'helpers'
 
 import { axios } from 'utils'
 
-type Response = {
+type GetMessagesInfoResponse = {
     user: User
     lastUnreadMessageIndex: number
     unreadMessagesAmount: number
@@ -22,9 +22,9 @@ export const useUser = (chat: boolean | undefined) => {
     } = useMessagesInfo()
     const [currentUser, setCurrentUser] = useState<User>()
     useEffect(() => {
-        const getUnreadMessagesInfo = async () => {
-            const url = '/api/user/communication/getUnreadMessagesInfo'
-            const response = await axios.get<Response>(url)
+        const getMessagesInfo = async () => {
+            const url = '/api/user/communication/getMessagesInfo'
+            const response = await axios.get<GetMessagesInfoResponse>(url)
             if (response) {
                 const { user, lastUnreadMessageIndex, unreadMessagesAmount } = response.data
                 setCurrentUser(user)
@@ -32,7 +32,7 @@ export const useUser = (chat: boolean | undefined) => {
                 setUnreadMessagesAmount(unreadMessagesAmount)
             }
         }
-        getUnreadMessagesInfo()
+        getMessagesInfo()
     }, [])
     useEffect(() => {
         const handleOnSendMessage = (message: Message) => {

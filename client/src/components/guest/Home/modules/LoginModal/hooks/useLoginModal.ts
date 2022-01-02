@@ -6,11 +6,11 @@ import { setRole, handleApiValidation } from 'helpers'
 
 import { axios, history } from 'utils'
 
-type FormHook = {
+type LoginModalHook = {
     role: UserRoles
 }
 
-export const useLoginModal = ({ role }: FormHook) => {
+export const useLoginModal = ({ role }: LoginModalHook) => {
     const [form, setForm] = useState({
         email: '',
         emailError: '',
