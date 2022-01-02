@@ -1,0 +1,1 @@
+export { authenticateEmail } from './authenticateEmail'

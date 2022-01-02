@@ -1,10 +1,11 @@
 import { Socket } from 'socket.io-client'
-import { WritableDraft } from 'immer/dist/internal'
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
+type SocketType = null | Socket
+
 type SliceState = {
-    socket: null | Socket
+    socket: SocketType
 }
 
 const initialState: SliceState = {
@@ -15,8 +16,8 @@ const socket = createSlice({
     name: 'socket',
     initialState,
     reducers: {
-        setSocket: (state, { payload }: PayloadAction<WritableDraft<Socket>>) => {
-            state.socket = payload
+        setSocket: (state, { payload }: PayloadAction<SocketType>) => {
+            state.socket = payload as any
         }
     }
 })

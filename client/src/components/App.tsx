@@ -7,7 +7,7 @@ import axios from 'axios'
 import Loader from 'components/shared/Loader/Loader'
 
 // import AdminAnalysis from 'components/Admin/Analysis/Analysis'
-import Home from 'components/Guest/Home/Home'
+import Home from 'components/guest/Home/Home'
 // import Profile from 'components/User/Profile/Profile'
 // import Chat from 'components/User/Chat/Chat'
 // import Analysis from 'components/User/Analysis/Analysis'
@@ -40,7 +40,7 @@ const App = () => {
         {
             id: 1,
             path: '/',
-            element: () => (
+            element: (
                 // <Guest>
                 <Home />
                 // </Guest>
