@@ -1,8 +1,8 @@
 import styled from 'styled-components/macro'
 
-import { useApiFeedback } from 'hooks'
-
 import { Button } from 'components/shared/styledComponents'
+
+import { useApiFeedback } from 'hooks'
 
 const ApiFeedbackContainer = styled(Button)`
     max-width: 85%;

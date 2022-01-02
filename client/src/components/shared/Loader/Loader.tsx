@@ -1,11 +1,11 @@
 import styled from 'styled-components/macro'
 
-import { useLoader } from 'hooks'
-
 import { BlackLayer } from 'components/shared/styledComponents'
 import * as Dashboard from './styled/Dashboard'
 
 import Logo from 'assets/images/Logo.png'
+
+import { useLoader } from 'hooks'
 
 const LoaderContainer = styled(BlackLayer)`
     position: fixed;

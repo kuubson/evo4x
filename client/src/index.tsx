@@ -11,9 +11,9 @@ import { store, persistor } from 'redux/store'
 import { theme } from 'assets/styles/theme'
 import 'assets/styles/index.scss'
 
-import App from 'components/App'
-
 import Loader from 'components/shared/Loader/Loader'
+
+import App from 'components/App'
 
 render(
     <React.StrictMode>

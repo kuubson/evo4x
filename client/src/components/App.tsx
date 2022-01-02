@@ -3,7 +3,7 @@ import { unstable_HistoryRouter as HistoryRouter, Routes, Route, Navigate } from
 import styled from 'styled-components/macro'
 import axios from 'axios'
 
-// import { Guest, Admin, User } from 'components/Shared/Roles'
+import { Guest, Admin, User } from 'components/shared/roles'
 import Loader from 'components/shared/Loader/Loader'
 
 // import AdminAnalysis from 'components/Admin/Analysis/Analysis'
@@ -41,11 +41,11 @@ const App = () => {
             id: 1,
             path: '/',
             element: (
-                // <Guest>
-                <Home />
-                // </Guest>
+                <Guest>
+                    <Home />
+                </Guest>
             )
-        }
+        },
         // {
         //     id: 2,
         //     path: '/user/profile',
@@ -91,11 +91,11 @@ const App = () => {
         //         </Admin>
         //     )
         // },
-        // {
-        //     id: 7,
-        //     path: '*',
-        //     element: () => <Navigate to="/" />
-        // }
+        {
+            id: 7,
+            path: '*',
+            element: <Navigate to="/" />
+        }
     ]
     return (
         <AppContainer>
