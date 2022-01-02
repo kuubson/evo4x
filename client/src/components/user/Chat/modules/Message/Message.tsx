@@ -1,5 +1,3 @@
-import React from 'react'
-
 import MessageContent from './components/MessageContent'
 
 import * as Dashboard from './styled/Dashboard'

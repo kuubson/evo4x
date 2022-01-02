@@ -8,8 +8,8 @@ import Loader from 'components/shared/Loader/Loader'
 
 import Home from 'components/guest/Home/Home'
 import Profile from 'components/user/Profile/Profile'
-// import Chat from 'components/User/Chat/Chat'
-// import Analysis from 'components/User/Analysis/Analysis'
+import Chat from 'components/user/Chat/Chat'
+import Analysis from 'components/user/Analysis/Analysis'
 import AdminAnalysis from 'components/admin/Analysis/Analysis'
 
 import { setRole, handleApiError } from 'helpers'
@@ -55,33 +55,33 @@ const App = () => {
                 </User>
             )
         },
-        // {
-        //     id: 3,
-        //     path: '/users/:id',
-        //     element: () => (
-        //         <User>
-        //             <Profile />
-        //         </User>
-        //     )
-        // },
-        // {
-        //     id: 4,
-        //     path: '/user/chat',
-        //     element: () => (
-        //         <User chat>
-        //             <Chat />
-        //         </User>
-        //     )
-        // },
-        // {
-        //     id: 5,
-        //     path: '/user/analysis',
-        //     element: () => (
-        //         <User>
-        //             <Analysis />
-        //         </User>
-        //     )
-        // },
+        {
+            id: 3,
+            path: '/users/:id',
+            element: () => (
+                <User>
+                    <Profile />
+                </User>
+            )
+        },
+        {
+            id: 4,
+            path: '/user/chat',
+            element: () => (
+                <User chat>
+                    <Chat />
+                </User>
+            )
+        },
+        {
+            id: 5,
+            path: '/user/analysis',
+            element: () => (
+                <User>
+                    <Analysis />
+                </User>
+            )
+        },
         {
             id: 6,
             path: '/admin/analysis',

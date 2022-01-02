@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
 import styled, { css } from 'styled-components/macro'
 import fileSaver from 'file-saver'
 

@@ -1,5 +1,3 @@
-import React from 'react'
-
 export const pushToTheBottom = (ref: React.RefObject<HTMLDivElement>, withoutDelay?: boolean) => {
     if (ref.current) {
         if (withoutDelay) {

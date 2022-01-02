@@ -1,4 +1,4 @@
-import React from 'react'
+import { StrictMode } from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
@@ -16,7 +16,7 @@ import Loader from 'components/shared/Loader/Loader'
 import App from 'components/App'
 
 render(
-    <React.StrictMode>
+    <StrictMode>
         <Provider store={store}>
             <PersistGate loading={<Loader />} persistor={persistor}>
                 <ThemeProvider theme={theme}>
@@ -24,7 +24,7 @@ render(
                 </ThemeProvider>
             </PersistGate>
         </Provider>
-    </React.StrictMode>,
+    </StrictMode>,
     document.getElementById('root')
 )
 

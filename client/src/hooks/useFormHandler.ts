@@ -1,4 +1,3 @@
-import React from 'react'
 import validator from 'validator'
 import sanitize from 'sanitize-html'
 

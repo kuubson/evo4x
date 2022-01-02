@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from 'styled-components/macro'
 
 import ApiFeedback from 'components/shared/ApiFeedback/ApiFeedback'

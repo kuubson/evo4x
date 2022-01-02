@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import { useFormHandler } from 'hooks'
 
-import { setApiFeedback, handleApiValidation, getDefaultAvatar } from 'helpers'
-import { updateCachedAvatar } from '../helpers'
+import { setApiFeedback, handleApiValidation } from 'helpers'
+import { getDefaultAvatar, updateCachedAvatar } from '../helpers'
 
 import { axios, filesInfo } from 'utils'
 
@@ -63,7 +63,6 @@ export const useProfile = ({ setShowAvatarInput }: ProfileHook) => {
         }
         getProfile()
     }, [])
-    const withDefaultAvatar = avatar.includes('ui-avatars')
     const validateProfile = () => {
         let validated = true
         setProfile(profile => ({
@@ -75,6 +74,7 @@ export const useProfile = ({ setShowAvatarInput }: ProfileHook) => {
         if (!profileHandler.validateProperty('name', name)) validated = false
         return validated
     }
+    const withDefaultAvatar = avatar.includes('ui-avatars')
     const updateProfile = async (event: React.FormEvent) => {
         event.preventDefault()
         if (validateProfile()) {
