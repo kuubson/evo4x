@@ -1,11 +1,11 @@
 import { User, Profile, Message } from 'database/database'
 
-import helpers from 'helpers'
-import userHelpers from 'routes/user/helpers'
+import { validator } from 'helpers'
+import { updateReadByProperty } from 'routes/user/helpers'
 
 import { ProtectedRoute } from 'types/express'
 
-const getMessages: ProtectedRoute = async (req, res, next) => {
+export const getMessages: ProtectedRoute = async (req, res, next) => {
     try {
         const {
             id,
@@ -32,7 +32,7 @@ const getMessages: ProtectedRoute = async (req, res, next) => {
                 }
             ]
         }).then(messages => messages.sort((a, b) => a.id - b.id))
-        await userHelpers.updateReadByProperty(id, messages)
+        await updateReadByProperty(id, messages)
         res.send({
             user: {
                 id,
@@ -49,8 +49,6 @@ const getMessages: ProtectedRoute = async (req, res, next) => {
 }
 
 export const validation = () => [
-    helpers.validator.validateInteger('limit'),
-    helpers.validator.validateInteger('offset')
+    validator.validateInteger('limit'),
+    validator.validateInteger('offset')
 ]
-
-export default getMessages

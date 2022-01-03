@@ -2,11 +2,11 @@ import cloudinary from 'cloudinary'
 
 import { Connection } from 'database/database'
 
-import utils from 'utils'
+import { getDefaultAvatar } from 'helpers'
 
 import { ProtectedRoute } from 'types/express'
 
-const removeAvatar: ProtectedRoute = async (req, res, next) => {
+export const removeAvatar: ProtectedRoute = async (req, res, next) => {
     try {
         await Connection.transaction(async transaction => {
             const { profile } = req.user
@@ -15,7 +15,7 @@ const removeAvatar: ProtectedRoute = async (req, res, next) => {
                     invalidate: true
                 })
             }
-            const avatar = utils.defaultAvatar(profile.name)
+            const avatar = getDefaultAvatar(profile.name)
             await profile.update(
                 {
                     avatar
@@ -33,5 +33,3 @@ const removeAvatar: ProtectedRoute = async (req, res, next) => {
         next(error)
     }
 }
-
-export default removeAvatar

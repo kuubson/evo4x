@@ -1,10 +1,10 @@
 import { Connection } from 'database/database'
 
-import helpers from 'helpers'
+import { validator } from 'helpers'
 
 import { ProtectedRoute } from 'types/express'
 
-const subscribePushNotifications: ProtectedRoute = async (req, res, next) => {
+export const subscribePushNotifications: ProtectedRoute = async (req, res, next) => {
     try {
         await Connection.transaction(async transaction => {
             const {
@@ -32,9 +32,7 @@ const subscribePushNotifications: ProtectedRoute = async (req, res, next) => {
 }
 
 export const validation = () => [
-    helpers.validator.validateProperty('endpoint'),
-    helpers.validator.validateProperty('keys.p256dh'),
-    helpers.validator.validateProperty('keys.auth')
+    validator.validateProperty('endpoint'),
+    validator.validateProperty('keys.p256dh'),
+    validator.validateProperty('keys.auth')
 ]
-
-export default subscribePushNotifications

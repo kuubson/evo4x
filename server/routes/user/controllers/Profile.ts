@@ -1,28 +1,26 @@
 import { Router } from 'express'
 
-import middlewares from 'middlewares'
+import { jwtAuthorization, handleMulterFile, checkValidation } from 'middlewares'
 
-import profile from 'routes/user/services/profile'
+import { profile } from '../services'
 
-const router = Router()
+export const Profile = Router()
 
-router.get('/getProfile', middlewares.jwtAuthorization, profile.getProfile.default as any)
+Profile.get('/getProfile', jwtAuthorization, profile.getProfile.getProfile as any)
 
-router.post(
+Profile.post(
     '/updateProfile',
-    middlewares.jwtAuthorization,
+    jwtAuthorization,
     profile.updateProfile.validation(),
-    middlewares.checkValidation,
-    profile.updateProfile.default as any
+    checkValidation,
+    profile.updateProfile.updateProfile as any
 )
 
-router.post(
+Profile.post(
     '/changeAvatar',
-    middlewares.jwtAuthorization,
-    middlewares.handleMulterFile() as any,
-    profile.changeAvatar.default as any
+    jwtAuthorization,
+    handleMulterFile() as any,
+    profile.changeAvatar.changeAvatar as any
 )
 
-router.get('/removeAvatar', middlewares.jwtAuthorization, profile.removeAvatar.default as any)
-
-export default router
+Profile.get('/removeAvatar', jwtAuthorization, profile.removeAvatar.removeAvatar as any)

@@ -2,13 +2,13 @@ import jwt from 'jsonwebtoken'
 
 import { Admin, User } from 'database/database'
 
-import utils from 'utils'
+import { validator } from 'helpers'
 
-import helpers from 'helpers'
+import { ApiError } from 'utils'
 
 import { Route } from 'types/express'
 
-const checkRole: Route = async (req, res, next) => {
+export const checkRole: Route = async (req, res, next) => {
     const { token } = req.cookies
     if (!token) {
         return res
@@ -25,12 +25,12 @@ const checkRole: Route = async (req, res, next) => {
         try {
             if (error) {
                 if (error.message.includes('expired')) {
-                    throw new utils.ApiError(
+                    throw new ApiError(
                         'The authentication cookie has expired. Please login again',
                         401
                     )
                 }
-                throw new utils.ApiError('Authentication has failed. Please login again', 401)
+                throw new ApiError('Authentication has failed. Please login again', 401)
             }
             const { role, email } = data
             if (role === 'admin') {
@@ -40,7 +40,7 @@ const checkRole: Route = async (req, res, next) => {
                     }
                 })
                 if (!admin) {
-                    throw new utils.ApiError('Authentication has failed. Please login again', 401)
+                    throw new ApiError('Authentication has failed. Please login again', 401)
                 }
                 res.send({
                     role: 'admin'
@@ -52,13 +52,13 @@ const checkRole: Route = async (req, res, next) => {
                     }
                 })
                 if (!user) {
-                    throw new utils.ApiError('Authentication has failed. Please login again', 401)
+                    throw new ApiError('Authentication has failed. Please login again', 401)
                 }
                 res.send({
                     role: 'user'
                 })
             } else {
-                throw new utils.ApiError('Authentication has failed. Please login again', 401)
+                throw new ApiError('Authentication has failed. Please login again', 401)
             }
         } catch (error) {
             next(error)
@@ -66,6 +66,4 @@ const checkRole: Route = async (req, res, next) => {
     })
 }
 
-export const validation = () => [helpers.validator.validateProperty('token').optional()]
-
-export default checkRole
+export const validation = () => [validator.validateProperty('token').optional()]

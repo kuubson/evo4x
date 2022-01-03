@@ -9,7 +9,6 @@ const connection = new Sequelize(DATABASE_NAME!, DATABASE_USERNAME!, DATABASE_PA
         charset: 'utf8mb4',
         collate: 'utf8mb4_unicode_ci'
     }
-    // logging: false
 })
 
 import AdminModel from './models/Admin'
@@ -20,13 +19,13 @@ import MessageModel from './models/Message'
 import AnalysisModel from './models/Analysis'
 import SubscriptionModel from './models/Subscription'
 
-const Admin = AdminModel(connection)
-const User = UserModel(connection)
-const Authentication = AuthenticationModel(connection)
-const Profile = ProfileModel(connection)
-const Message = MessageModel(connection)
-const Analysis = AnalysisModel(connection)
-const Subscription = SubscriptionModel(connection)
+export const Admin = AdminModel(connection)
+export const User = UserModel(connection)
+export const Authentication = AuthenticationModel(connection)
+export const Profile = ProfileModel(connection)
+export const Message = MessageModel(connection)
+export const Analysis = AnalysisModel(connection)
+export const Subscription = SubscriptionModel(connection)
 
 Admin.hasMany(Analysis)
 Analysis.belongsTo(Admin)
@@ -43,7 +42,7 @@ Message.belongsTo(User)
 User.hasMany(Subscription)
 Subscription.belongsTo(User)
 
-const init = async () => {
+const initializeDatabase = async () => {
     try {
         // await connection.sync({ force: true })
         // await connection.sync({ alter: true })
@@ -56,15 +55,6 @@ const init = async () => {
         })
     }
 }
-init()
+initializeDatabase()
 
-export {
-    connection as Connection,
-    Admin,
-    User,
-    Authentication,
-    Profile,
-    Message,
-    Analysis,
-    Subscription
-}
+export { connection as Connection }

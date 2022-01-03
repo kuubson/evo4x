@@ -2,22 +2,20 @@ import { NextFunction } from 'express'
 import fs from 'fs'
 import sharp from 'sharp'
 
-import utils from 'utils'
+import { deleteTemporaryFile } from 'helpers'
 
-import helpers from 'helpers'
+import { ApiError } from 'utils'
 
-const reduceImageSize = async (path: string, next: NextFunction) =>
+export const reduceImageSize = async (path: string, next: NextFunction) =>
     await sharp(path)
         .rotate()
         .resize(800)
         .jpeg({ quality: 75 })
         .toBuffer((error, buffer) => {
             if (error) {
-                helpers.deleteTemporaryFile(path)
-                next(new utils.ApiError('There was a problem sending the file', 500))
+                deleteTemporaryFile(path)
+                next(new ApiError('There was a problem sending the file', 500))
             }
             fs.writeFileSync(path, buffer)
             next()
         })
-
-export default reduceImageSize

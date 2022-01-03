@@ -1,11 +1,11 @@
 import { Analysis } from 'database/database'
 
-import helpers from 'helpers'
-import userHelpers from 'routes/user/helpers'
+import { validator } from 'helpers'
+import { updateReadByProperty, countAnalysisViews } from 'routes/user/helpers'
 
 import { ProtectedRoute } from 'types/express'
 
-const getAnalysis: ProtectedRoute = async (req, res, next) => {
+export const getAnalysis: ProtectedRoute = async (req, res, next) => {
     try {
         const { id } = req.user
         const { limit, offset } = req.body
@@ -16,10 +16,10 @@ const getAnalysis: ProtectedRoute = async (req, res, next) => {
                 exclude: ['adminId']
             }
         })
-        const updatedAnalysis = await userHelpers.updateReadByProperty(id, analysis)
+        const updatedAnalysis = await updateReadByProperty(id, analysis)
         const analysisWithViews = updatedAnalysis.map(analysis => ({
             ...analysis.dataValues,
-            views: userHelpers.countAnalysisViews(analysis)
+            views: countAnalysisViews(analysis)
         }))
         res.send({
             analysis: analysisWithViews
@@ -30,8 +30,6 @@ const getAnalysis: ProtectedRoute = async (req, res, next) => {
 }
 
 export const validation = () => [
-    helpers.validator.validateInteger('limit'),
-    helpers.validator.validateInteger('offset')
+    validator.validateInteger('limit'),
+    validator.validateInteger('offset')
 ]
-
-export default getAnalysis

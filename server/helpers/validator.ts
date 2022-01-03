@@ -1,30 +1,34 @@
 import { check } from 'express-validator'
 
-import helpers from 'helpers'
+import { checkSanitization } from 'helpers'
 
-const validateProperty = (property: string) =>
-    check(`${property}`)
+const validateProperty = (property: string) => {
+    return check(`${property}`)
         .trim()
         .notEmpty()
         .withMessage('This fields cannot be empty')
         .bail()
         .isString()
         .bail()
-        .custom(helpers.checkSanitization)
+        .custom(checkSanitization)
         .withMessage('This field contains incorrect characters')
         .bail()
+}
 const validateInteger = (property: string) => {
     return check(`${property}`).notEmpty().bail().isInt().bail()
 }
 const validateBoolean = (property: string) => {
     return check(`${property}`).isBoolean().bail()
 }
-const validateArray = (property: string, canBeEmpty: boolean) =>
-    !canBeEmpty
-        ? check(`${property}`).notEmpty().bail().isArray().bail()
-        : check(`${property}`).isArray().bail()
-const validateEmail = () =>
-    check('email')
+const validateArray = (property: string, canBeEmpty: boolean) => {
+    if (!canBeEmpty) {
+        return check(`${property}`).notEmpty().bail().isArray().bail()
+    } else {
+        check(`${property}`).isArray().bail()
+    }
+}
+const validateEmail = () => {
+    return check('email')
         .trim()
         .notEmpty()
         .withMessage('Type your email address')
@@ -32,33 +36,37 @@ const validateEmail = () =>
         .isEmail()
         .withMessage('Type proper email address')
         .normalizeEmail()
-const validatePassword = (withLogin = false) =>
-    !withLogin
-        ? check('password')
-              .notEmpty()
-              .withMessage('Type your password')
-              .bail()
-              .custom((password: string, { req }) => {
-                  if (!/(?=.{8,})/.test(password)) {
-                      throw new Error('Password must be at least 8 characters long')
-                  }
-                  if (!/(?=.*[a-z])/.test(password)) {
-                      throw new Error('Password must contain at least one small letter')
-                  }
-                  if (!/(?=.*[A-Z])/.test(password)) {
-                      throw new Error('Password must contain at least one big letter')
-                  }
-                  if (!/(?=.*[0-9])/.test(password)) {
-                      throw new Error('Password must contain at least one digit')
-                  }
-                  if (password !== req.body.password) {
-                      throw new Error('Passwords are different')
-                  }
-                  return password
-              })
-        : check('password').notEmpty().withMessage('Type your password')
-const validateRepeatedPassword = () =>
-    check('repeatedPassword')
+}
+const validatePassword = (withLogin = false) => {
+    if (!withLogin) {
+        return check('password')
+            .notEmpty()
+            .withMessage('Type your password')
+            .bail()
+            .custom((password: string, { req }) => {
+                if (!/(?=.{8,})/.test(password)) {
+                    throw new Error('Password must be at least 8 characters long')
+                }
+                if (!/(?=.*[a-z])/.test(password)) {
+                    throw new Error('Password must contain at least one small letter')
+                }
+                if (!/(?=.*[A-Z])/.test(password)) {
+                    throw new Error('Password must contain at least one big letter')
+                }
+                if (!/(?=.*[0-9])/.test(password)) {
+                    throw new Error('Password must contain at least one digit')
+                }
+                if (password !== req.body.password) {
+                    throw new Error('Passwords are different')
+                }
+                return password
+            })
+    } else {
+        return check('password').notEmpty().withMessage('Type your password')
+    }
+}
+const validateRepeatedPassword = () => {
+    return check('repeatedPassword')
         .notEmpty()
         .withMessage('Type password twice')
         .bail()
@@ -68,8 +76,9 @@ const validateRepeatedPassword = () =>
             }
             return repeatedPassword
         })
+}
 
-const validator = {
+export const validator = {
     validateProperty,
     validateInteger,
     validateBoolean,
@@ -78,5 +87,3 @@ const validator = {
     validatePassword,
     validateRepeatedPassword
 }
-
-export default validator

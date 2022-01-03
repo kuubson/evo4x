@@ -3,13 +3,13 @@ import bcrypt from 'bcrypt'
 
 import { Connection, User } from 'database/database'
 
-import utils from 'utils'
+import { validator } from 'helpers'
 
-import helpers from 'helpers'
+import { ApiError } from 'utils'
 
 import { Route } from 'types/express'
 
-const changePassword: Route = async (req, res, next) => {
+export const changePassword: Route = async (req, res, next) => {
     try {
         await Connection.transaction(async transaction => {
             const { password, passwordToken } = req.body
@@ -20,15 +20,12 @@ const changePassword: Route = async (req, res, next) => {
                     try {
                         if (error) {
                             if (error.message.includes('expired')) {
-                                throw new utils.ApiError(
+                                throw new ApiError(
                                     'The link to change your password has expired',
                                     400
                                 )
                             }
-                            throw new utils.ApiError(
-                                'The link to change your password is invalid',
-                                400
-                            )
+                            throw new ApiError('The link to change your password is invalid', 400)
                         }
                         const user = await User.findOne({
                             where: {
@@ -37,10 +34,7 @@ const changePassword: Route = async (req, res, next) => {
                             }
                         })
                         if (!user) {
-                            throw new utils.ApiError(
-                                'The link to change your password is incorrect',
-                                404
-                            )
+                            throw new ApiError('The link to change your password is incorrect', 404)
                         }
                         await user.update(
                             {
@@ -66,9 +60,7 @@ const changePassword: Route = async (req, res, next) => {
 }
 
 export const validation = () => [
-    helpers.validator.validatePassword(),
-    helpers.validator.validateRepeatedPassword(),
-    helpers.validator.validateProperty('passwordToken').isJWT()
+    validator.validatePassword(),
+    validator.validateRepeatedPassword(),
+    validator.validateProperty('passwordToken').isJWT()
 ]
-
-export default changePassword

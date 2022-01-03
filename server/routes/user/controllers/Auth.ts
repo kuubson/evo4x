@@ -1,57 +1,55 @@
 import { Router } from 'express'
 
-import middlewares from 'middlewares'
+import { rateLimiter, checkValidation } from 'middlewares'
 
-import auth from 'routes/user/services/auth'
+import { auth } from '../services'
 
-const router = Router()
+export const Auth = Router()
 
-router.post(
+Auth.post(
     '/register',
-    middlewares.rateLimiter('registration'),
+    rateLimiter('registration'),
     auth.register.validation(),
-    middlewares.checkValidation,
-    auth.register.default
+    checkValidation,
+    auth.register.register
 )
 
-router.post(
+Auth.post(
     '/authenticateEmail',
-    middlewares.rateLimiter('email address authentication'),
+    rateLimiter('email address authentication'),
     auth.authenticateEmail.validation(),
-    middlewares.checkValidation,
-    auth.authenticateEmail.default
+    checkValidation,
+    auth.authenticateEmail.authenticateEmail
 )
 
-router.post(
+Auth.post(
     '/resendEmail',
-    middlewares.rateLimiter('e-mail resend'),
+    rateLimiter('e-mail resend'),
     auth.resendEmail.validation(),
-    middlewares.checkValidation,
-    auth.resendEmail.default
+    checkValidation,
+    auth.resendEmail.resendEmail
 )
 
-router.post(
+Auth.post(
     '/login',
-    middlewares.rateLimiter('login'),
+    rateLimiter('login'),
     auth.login.validation(),
-    middlewares.checkValidation,
-    auth.login.default
+    checkValidation,
+    auth.login.login
 )
 
-router.post(
+Auth.post(
     '/requestPasswordChange',
-    middlewares.rateLimiter('password change'),
+    rateLimiter('password change'),
     auth.requestPasswordChange.validation(),
-    middlewares.checkValidation,
-    auth.requestPasswordChange.default
+    checkValidation,
+    auth.requestPasswordChange.requestPasswordChange
 )
 
-router.post(
+Auth.post(
     '/changePassword',
-    middlewares.rateLimiter('password change'),
+    rateLimiter('password change'),
     auth.changePassword.validation(),
-    middlewares.checkValidation,
-    auth.changePassword.default
+    checkValidation,
+    auth.changePassword.changePassword
 )
-
-export default router

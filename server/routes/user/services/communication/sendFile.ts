@@ -2,19 +2,19 @@ import cloudinary from 'cloudinary'
 
 import { Connection } from 'database/database'
 
-import utils from 'utils'
+import { deleteTemporaryFile } from 'helpers'
+import { sendNotificationsForOtherUsers } from 'routes/user/helpers'
 
-import helpers from 'helpers'
-import userHelpers from 'routes/user/helpers'
+import { ApiError, baseUrl, filesInfo } from 'utils'
 
 import { ProtectedMulterRoute } from 'types/express'
 
-const sendFile: ProtectedMulterRoute = async (req, res, next) => {
+export const sendFile: ProtectedMulterRoute = async (req, res, next) => {
     try {
         await Connection.transaction(async transaction => {
             const { id } = req.user
             const { name } = req.user.profile
-            const { regex } = utils.filesInfo
+            const { regex } = filesInfo
             const { mimetype, originalname, path } = req.file
             let type, content, cloudinaryId
             switch (true) {
@@ -28,7 +28,7 @@ const sendFile: ProtectedMulterRoute = async (req, res, next) => {
                     type = 'FILE'
                     break
                 default:
-                    throw new utils.ApiError('There was a problem sending the file', 500)
+                    throw new ApiError('There was a problem sending the file', 500)
             }
             let message = ''
             if (type === 'IMAGE') {
@@ -57,7 +57,7 @@ const sendFile: ProtectedMulterRoute = async (req, res, next) => {
                 content = secure_url
                 cloudinaryId = public_id
             }
-            helpers.deleteTemporaryFile(path)
+            deleteTemporaryFile(path)
             await req.user.createMessage(
                 {
                     type,
@@ -70,14 +70,14 @@ const sendFile: ProtectedMulterRoute = async (req, res, next) => {
                     transaction
                 }
             )
-            userHelpers.sendNotificationsForOtherUsers(id, {
+            sendNotificationsForOtherUsers(id, {
                 tag: id,
                 title: `From ${name}`,
                 body: message,
-                icon: `${utils.baseUrl(req)}/Logo.png`,
+                icon: `${baseUrl(req)}/Logo.png`,
                 data: {
                     userName: name,
-                    url: `${utils.baseUrl(req)}/user/chat`
+                    url: `${baseUrl(req)}/user/chat`
                 }
             })
             res.send({
@@ -86,14 +86,12 @@ const sendFile: ProtectedMulterRoute = async (req, res, next) => {
             })
         })
     } catch (error) {
-        helpers.deleteTemporaryFile(req.file.path)
+        deleteTemporaryFile(req.file.path)
         const emptyTextFile = (error as any).message === 'Empty file'
         if (emptyTextFile) {
-            next(new utils.ApiError('The selected text file is empty', 422))
+            next(new ApiError('The selected text file is empty', 422))
         } else {
             next(error)
         }
     }
 }
-
-export default sendFile

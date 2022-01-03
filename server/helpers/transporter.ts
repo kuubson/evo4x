@@ -2,7 +2,7 @@ import nodemailer from 'nodemailer'
 
 const { NODEMAILER_USERNAME, NODEMAILER_PASSWORD } = process.env
 
-const transporter = nodemailer.createTransport({
+export const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         user: NODEMAILER_USERNAME,
@@ -21,5 +21,3 @@ transporter.verify((error, success) => {
         console.log('The connection with evo4x email has been established')
     }
 })
-
-export default transporter

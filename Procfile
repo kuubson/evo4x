@@ -1,1 +1,0 @@
-web: cd server && node -r ts-node/register/transpile-only -r tsconfig-paths/register dist/server.js

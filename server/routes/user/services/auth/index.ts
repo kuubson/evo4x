@@ -5,7 +5,7 @@ import * as login from './login'
 import * as requestPasswordChange from './requestPasswordChange'
 import * as changePassword from './changePassword'
 
-const auth = {
+export const auth = {
     register,
     authenticateEmail,
     resendEmail,
@@ -13,5 +13,3 @@ const auth = {
     requestPasswordChange,
     changePassword
 }
-
-export default auth

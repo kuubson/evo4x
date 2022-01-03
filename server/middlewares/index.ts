@@ -1,9 +1,9 @@
 import express, { Application } from 'express'
 import { Server } from 'http'
-import { Server as SocketServer } from 'socket.io'
 import helmet from 'helmet'
 import cookieParser from 'cookie-parser'
 import passport from 'passport'
+import { Server as SocketServer } from 'socket.io'
 
 import webpush from 'web-push'
 webpush.setVapidDetails(
@@ -13,51 +13,31 @@ webpush.setVapidDetails(
 )
 
 import cloudinary from 'cloudinary'
+cloudinary.v2.config({
+    cloud_name: process.env.CLOUDINARY_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+})
 
-const initCloudinary = () => {
-    ;(cloudinary as any).config({
-        cloud_name: process.env.CLOUDINARY_NAME,
-        api_key: process.env.CLOUDINARY_API_KEY,
-        api_secret: process.env.CLOUDINARY_API_SECRET
-    })
-}
-initCloudinary()
+import { initializeSocketIO } from 'socketio/socketio'
+import { initializePassport } from './passport'
+import { initializeCsrf } from './csrf'
 
-import initSocketIo from 'socketio/socketio'
-import initCSRF from './csrf'
-import initPassport from './passport'
-initPassport(passport)
+initializePassport(passport)
 
-import errorHandler from './errorHandler'
-import checkValidation from './checkValidation'
-import rateLimiter from './rateLimiter'
-import jwtAuthorization from './jwtAuthorization'
-import multerFile from './multerFile'
-import handleMulterFile from './handleMulterFile'
-
-const init = (app: Application, server: Server) => {
-    initSocketIo(new SocketServer(server))
-    app.use(
-        helmet({
-            contentSecurityPolicy: false
-        })
-    )
+export const initializeMiddlewares = (app: Application, server: Server) => {
+    app.use(helmet())
+    initializeSocketIO(new SocketServer(server))
     app.use(express.json({ limit: '200kb' }))
     app.use(express.urlencoded({ extended: true, limit: '200kb' }))
     app.use(cookieParser())
     app.use(passport.initialize())
-    initCSRF(app)
-    app.set('trust proxy', true)
+    initializeCsrf(app)
 }
 
-const middlewares = {
-    init,
-    errorHandler,
-    checkValidation,
-    rateLimiter,
-    jwtAuthorization,
-    multerFile,
-    handleMulterFile
-}
-
-export default middlewares
+export { errorHandler } from './errorHandler'
+export { rateLimiter } from './rateLimiter'
+export { jwtAuthorization } from './jwtAuthorization'
+export { handleMulterFile } from './handleMulterFile'
+export { multerFile } from './multerFile'
+export { checkValidation } from './checkValidation'

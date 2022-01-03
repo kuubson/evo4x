@@ -1,11 +1,9 @@
 import { Router } from 'express'
 
-import Controllers from './controllers'
+import { Auth, Profile, Communication } from './controllers'
 
-const router = Router()
+export const User = Router()
 
-router.use('/auth', Controllers.Auth)
-router.use('/profile', Controllers.Profile)
-router.use('/communication', Controllers.Communication)
-
-export default router
+User.use('/auth', Auth)
+User.use('/profile', Profile)
+User.use('/communication', Communication)
