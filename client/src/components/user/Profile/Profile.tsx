@@ -2,7 +2,6 @@ import { useState } from 'react'
 import styled from 'styled-components/macro'
 
 import ApiFeedback from 'components/shared/ApiFeedback/ApiFeedback'
-
 import Input from 'components/guest/Home/modules/RegistrationModal/components/Input'
 
 import { FileInput } from 'components/user/Chat/styled'

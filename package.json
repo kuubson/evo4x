@@ -1,0 +1,8 @@
+{
+    "name": "evo4x",
+    "private": true,
+    "scripts": {
+        "heroku-prebuild": "cd server && npm install && npm run build",
+        "heroku-postbuild": "cd client && npm install && npm run build"
+    }
+}

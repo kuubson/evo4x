@@ -1,7 +1,6 @@
 import styled from 'styled-components/macro'
 
 import ApiFeedback from 'components/shared/ApiFeedback/ApiFeedback'
-
 import Input from '../RegistrationModal/components/Input'
 
 import { BlackLayer } from 'components/shared/styledComponents'
