@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import styled from 'styled-components/macro'
 
-import { useProfile } from './hooks'
-
 import ApiFeedback from 'components/shared/ApiFeedback/ApiFeedback'
 
 import Input from 'components/guest/Home/modules/RegistrationModal/components/Input'
 
 import { FileInput } from 'components/user/Chat/styled'
 import * as Styled from './styled'
+
+import { useProfile } from './hooks'
 
 const ProfileContainer = styled.section`
     min-height: 100%;

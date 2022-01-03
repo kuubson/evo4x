@@ -3,14 +3,9 @@ import { unstable_HistoryRouter as HistoryRouter, Routes, Route, Navigate } from
 import styled from 'styled-components/macro'
 import axios from 'axios'
 
-import { Guest, User, Admin } from 'components/shared/roles'
 import Loader from 'components/shared/Loader/Loader'
 
-import Home from 'components/guest/Home/Home'
-import Profile from 'components/user/Profile/Profile'
-import Chat from 'components/user/Chat/Chat'
-import Analysis from 'components/user/Analysis/Analysis'
-import AdminAnalysis from 'components/admin/Analysis/Analysis'
+import { HomeRoute, ProfileRoute, ChatRoute, AnalysisRoute, AdminAnalysisRoute } from './routes'
 
 import { setRole, handleApiError } from 'helpers'
 
@@ -36,75 +31,18 @@ const App = () => {
         }
         checkRole()
     }, [])
-    const routes = [
-        {
-            id: 1,
-            path: '/',
-            element: (
-                <Guest>
-                    <Home />
-                </Guest>
-            )
-        },
-        {
-            id: 2,
-            path: '/user/profile',
-            element: (
-                <User>
-                    <Profile />
-                </User>
-            )
-        },
-        {
-            id: 3,
-            path: '/users/:id',
-            element: (
-                <User>
-                    <Profile />
-                </User>
-            )
-        },
-        {
-            id: 4,
-            path: '/user/chat',
-            element: (
-                <User chat>
-                    <Chat />
-                </User>
-            )
-        },
-        {
-            id: 5,
-            path: '/user/analysis',
-            element: (
-                <User>
-                    <Analysis />
-                </User>
-            )
-        },
-        {
-            id: 6,
-            path: '/admin/analysis',
-            element: (
-                <Admin>
-                    <AdminAnalysis />
-                </Admin>
-            )
-        },
-        {
-            id: 7,
-            path: '*',
-            element: <Navigate to="/" />
-        }
-    ]
     return (
         <AppContainer>
             <Loader />
             <HistoryRouter history={history}>
                 <Routes>
-                    {routes.map(({ id, path, element }) => (
-                        <Route key={id} path={path} element={element} />
-                    ))}
+                    <Route path="/" element={<HomeRoute />} />
+                    <Route path="/users/:id" element={<ProfileRoute />} />
+                    <Route path="/user/profile" element={<ProfileRoute />} />
+                    <Route path="/user/chat" element={<ChatRoute />} />
+                    <Route path="/user/analysis" element={<AnalysisRoute />} />
+                    <Route path="/admin/analysis" element={<AdminAnalysisRoute />} />
+                    <Route path="*" element={<Navigate to="/" />} />
                 </Routes>
             </HistoryRouter>
         </AppContainer>
