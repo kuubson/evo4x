@@ -1,1 +1,0 @@
-export { useRegistrationModal } from './useRegistrationModal'
