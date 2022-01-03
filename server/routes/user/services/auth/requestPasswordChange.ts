@@ -2,13 +2,13 @@ import jwt from 'jsonwebtoken'
 
 import { Connection, User, Authentication } from 'database/database'
 
-import utils from 'utils'
+import { transporter, validator } from 'helpers'
 
-import helpers from 'helpers'
+import { ApiError, baseUrl, emailTemplate } from 'utils'
 
 import { Route } from 'types/express'
 
-const requestPasswordChange: Route = async (req, res, next) => {
+export const requestPasswordChange: Route = async (req, res, next) => {
     try {
         await Connection.transaction(async transaction => {
             const { email } = req.body
@@ -19,13 +19,10 @@ const requestPasswordChange: Route = async (req, res, next) => {
                 include: [Authentication]
             })
             if (!user || !user.authentication) {
-                throw new utils.ApiError('The email address provided is incorrect', 404)
+                throw new ApiError('The email address provided is incorrect', 404)
             }
             if (!user.authentication.authenticated) {
-                throw new utils.ApiError(
-                    'The email address provided must first be authenticated',
-                    409
-                )
+                throw new ApiError('The email address provided must first be authenticated', 409)
             }
             const passwordToken = jwt.sign({ email }, process.env.JWT_KEY!, { expiresIn: '1h' })
             await user.update(
@@ -40,17 +37,17 @@ const requestPasswordChange: Route = async (req, res, next) => {
                 from: `"evo4x app" <${process.env.NODEMAILER_USERNAME}>`,
                 to: email,
                 subject: 'Password changing in the evo4x app',
-                html: utils.emailTemplate(
+                html: emailTemplate(
                     'Password changing in the evo4x app',
                     `To change your password click the button`,
                     'Change password',
-                    `${utils.baseUrl(req)}/?passwordToken=${passwordToken}`
+                    `${baseUrl(req)}/?passwordToken=${passwordToken}`
                 )
             }
-            helpers.transporter.sendMail(mailOptions, (error, info) => {
+            transporter.sendMail(mailOptions, (error, info) => {
                 try {
                     if (error || !info) {
-                        throw new utils.ApiError(
+                        throw new ApiError(
                             'There was a problem sending an e-mail with a link to change your password',
                             502
                         )
@@ -69,6 +66,4 @@ const requestPasswordChange: Route = async (req, res, next) => {
     }
 }
 
-export const validation = () => [helpers.validator.validateEmail()]
-
-export default requestPasswordChange
+export const validation = () => [validator.validateEmail()]

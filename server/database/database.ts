@@ -19,13 +19,13 @@ import MessageModel from './models/Message'
 import AnalysisModel from './models/Analysis'
 import SubscriptionModel from './models/Subscription'
 
-const Admin = AdminModel(connection)
-const User = UserModel(connection)
-const Authentication = AuthenticationModel(connection)
-const Profile = ProfileModel(connection)
-const Message = MessageModel(connection)
-const Analysis = AnalysisModel(connection)
-const Subscription = SubscriptionModel(connection)
+export const Admin = AdminModel(connection)
+export const User = UserModel(connection)
+export const Authentication = AuthenticationModel(connection)
+export const Profile = ProfileModel(connection)
+export const Message = MessageModel(connection)
+export const Analysis = AnalysisModel(connection)
+export const Subscription = SubscriptionModel(connection)
 
 Admin.hasMany(Analysis)
 Analysis.belongsTo(Admin)
@@ -57,13 +57,4 @@ const initializeDatabase = async () => {
 }
 initializeDatabase()
 
-export {
-    connection as Connection,
-    Admin,
-    User,
-    Authentication,
-    Profile,
-    Message,
-    Analysis,
-    Subscription
-}
+export { connection as Connection }

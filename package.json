@@ -1,6 +1,5 @@
 {
     "name": "evo4x",
-    "version": "0.1.0",
     "private": true,
     "scripts": {
         "heroku-prebuild": "cd server && npm install && npm run build",

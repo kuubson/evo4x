@@ -1,15 +1,7 @@
-import useSocket from './useSocket'
-import useQueryParams from './useQueryParams'
-import useRole from './useRole'
-import useFormHandler from './useFormHandler'
-import useMessagesInfo from './useMessagesInfo'
-
-const hooks = {
-    useSocket,
-    useQueryParams,
-    useRole,
-    useFormHandler,
-    useMessagesInfo
-}
-
-export default hooks
+export { useSocket } from './useSocket'
+export { useLoader } from './useLoader'
+export { useApiFeedback } from './useApiFeedback'
+export { useRole } from './useRole'
+export { useMessagesInfo } from './useMessagesInfo'
+export { useQueryParams } from './useQueryParams'
+export { useFormHandler } from './useFormHandler'

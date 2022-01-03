@@ -1,6 +1,4 @@
 import { useLocation } from 'react-router'
 import queryString from 'query-string'
 
-const useQueryParams = () => queryString.parse(useLocation().search)
-
-export default useQueryParams
+export const useQueryParams = () => queryString.parse(useLocation().search)

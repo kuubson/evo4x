@@ -2,7 +2,7 @@ import webpush from 'web-push'
 
 import { User, Subscription } from 'database/database'
 
-import utils from 'utils'
+import { Op } from 'utils'
 
 type Options = {
     tag: number
@@ -17,14 +17,14 @@ type Options = {
 
 type NotificationsForOtherUsersSender = (userId: number, options: Options) => void
 
-const sendNotificationsForOtherUsers: NotificationsForOtherUsersSender = async (
+export const sendNotificationsForOtherUsers: NotificationsForOtherUsersSender = async (
     userId,
     options
 ) => {
     const users = await User.findAll({
         where: {
             id: {
-                [utils.Op.ne]: userId
+                [Op.ne]: userId
             }
         },
         include: [Subscription]
@@ -50,5 +50,3 @@ const sendNotificationsForOtherUsers: NotificationsForOtherUsersSender = async (
         })
     })
 }
-
-export default sendNotificationsForOtherUsers

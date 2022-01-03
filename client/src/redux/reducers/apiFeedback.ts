@@ -1,24 +1,15 @@
-import actions from 'redux/actions'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-const initialState = {
-    apiFeedback: ''
-}
-
-type Action = {
-    payload: string
-    type: 'SET_API_FEEDBACK'
-}
-
-const apiFeedback = (state = initialState, { payload, type }: Action) => {
-    switch (type) {
-        case actions.SET_API_FEEDBACK:
-            return {
-                ...state,
-                apiFeedback: payload
-            }
-        default:
-            return state
+const apiFeedback = createSlice({
+    name: 'apiFeedback',
+    initialState: {
+        apiFeedback: ''
+    },
+    reducers: {
+        setApiFeedback: (state, { payload }: PayloadAction<string>) => {
+            state.apiFeedback = payload
+        }
     }
-}
+})
 
-export default apiFeedback
+export default apiFeedback.reducer

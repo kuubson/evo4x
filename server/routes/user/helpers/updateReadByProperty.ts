@@ -5,7 +5,7 @@ type Items = MessageClass[] | Analysis[]
 
 type ReadByPropertyUpdater = (userId: number, items: Items) => Promise<Items>
 
-const updateReadByProperty: ReadByPropertyUpdater = async (userId, items) => {
+export const updateReadByProperty: ReadByPropertyUpdater = async (userId, items) => {
     return await Promise.all(
         items.map(async item => {
             const readByIds = item.readBy.split(',').filter(v => v)
@@ -20,5 +20,3 @@ const updateReadByProperty: ReadByPropertyUpdater = async (userId, items) => {
         })
     )
 }
-
-export default updateReadByProperty

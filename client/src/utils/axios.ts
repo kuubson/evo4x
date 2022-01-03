@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import utils from 'utils'
+import { setLoading, setApiFeedback, handleApiError } from 'helpers'
 
 const apiAxios = axios.create()
 
@@ -8,12 +8,12 @@ let timeoutId: any
 
 apiAxios.interceptors.request.use(
     request => {
-        !timeoutId && (timeoutId = setTimeout(() => utils.setLoading(true), 500))
+        !timeoutId && (timeoutId = setTimeout(() => setLoading(true), 1000))
         return request
     },
     error => {
-        utils.setLoading(false)
-        utils.handleApiError(error)
+        setLoading(false)
+        handleApiError(error)
         clearTimeout(timeoutId)
         timeoutId = undefined
         throw error
@@ -22,15 +22,15 @@ apiAxios.interceptors.request.use(
 
 apiAxios.interceptors.response.use(
     response => {
-        utils.setLoading(false)
-        utils.setApiFeedback(response.data.feedback)
+        setLoading(false)
+        setApiFeedback(response.data.feedback)
         clearTimeout(timeoutId)
         timeoutId = undefined
         return response
     },
     error => {
-        utils.setLoading(false)
-        utils.handleApiError(error)
+        setLoading(false)
+        handleApiError(error)
         clearTimeout(timeoutId)
         timeoutId = undefined
         throw error

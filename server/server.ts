@@ -8,18 +8,18 @@ import './aliases'
 
 import 'database/database'
 
-import middlewares from 'middlewares/middlewares'
+import { initializeMiddlewares, errorHandler } from 'middlewares'
 
-import routes from 'routes/routes'
+import { routes } from 'routes'
 
 const app = express()
 const server = http.createServer(app)
 
-middlewares.initializeMiddlewares(app, server)
+initializeMiddlewares(app, server)
 
 routes(app)
 
-middlewares.errorHandler(app)
+errorHandler(app)
 
 const buildPath = process.env.NODE_ENV === 'production' ? '../../client/build' : '../client/build'
 

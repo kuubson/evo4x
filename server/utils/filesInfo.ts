@@ -10,9 +10,7 @@ const sizes = {
     maxFileSize: 10485760 // 10MB
 }
 
-const filesInfo = {
+export const filesInfo = {
     regex,
     sizes
 }
-
-export default filesInfo

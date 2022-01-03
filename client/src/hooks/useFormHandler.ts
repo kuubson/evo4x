@@ -1,4 +1,3 @@
-import React from 'react'
 import validator from 'validator'
 import sanitize from 'sanitize-html'
 
@@ -14,7 +13,7 @@ type PasswordValidator = (password: string, repeatedPassword: string, withLogin:
 
 type RepeatedPasswordValidator = (repeatedPassword: string, password: string) => boolean
 
-type FormHandler = <T>(setForm: React.Dispatch<React.SetStateAction<T>>) => {
+type FormHandler = <T>(setForm: ReactDispatch<T>) => {
     handleInputValue: InputValueHandler
     handleInputError: InputErrorHandler
     validateProperty: PropertyValidator
@@ -23,7 +22,7 @@ type FormHandler = <T>(setForm: React.Dispatch<React.SetStateAction<T>>) => {
     validateRepeatedPassword: RepeatedPasswordValidator
 }
 
-const useFormHandler: FormHandler = setForm => {
+export const useFormHandler: FormHandler = setForm => {
     const handleInputValue: InputValueHandler = ({ target: { name, value } }) =>
         setForm(form => ({ ...form, [name]: value }))
     const handleInputError: InputErrorHandler = (errorKey, error) =>
@@ -132,5 +131,3 @@ const useFormHandler: FormHandler = setForm => {
         validateRepeatedPassword
     }
 }
-
-export default useFormHandler

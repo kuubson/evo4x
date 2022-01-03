@@ -1,15 +1,6 @@
-import reduceImageSize from './reduceImageSize'
-import transporter from './transporter'
-import validator from './validator'
-import deleteTemporaryFile from './deleteTemporaryFile'
-import checkSanitization from './checkSanitization'
-
-const helpers = {
-    transporter,
-    validator,
-    deleteTemporaryFile,
-    checkSanitization,
-    reduceImageSize
-}
-
-export default helpers
+export { transporter } from './transporter'
+export { validator } from './validator'
+export { checkSanitization } from './checkSanitization'
+export { deleteTemporaryFile } from './deleteTemporaryFile'
+export { reduceImageSize } from './reduceImageSize'
+export { getDefaultAvatar } from './getDefaultAvatar'

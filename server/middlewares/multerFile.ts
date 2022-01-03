@@ -3,7 +3,7 @@ import path from 'path'
 import crypto from 'crypto'
 import multer from 'multer'
 
-import utils from 'utils'
+import { filesInfo } from 'utils'
 
 import { MulterRequest } from 'types/multer'
 
@@ -21,10 +21,10 @@ const storage = multer.diskStorage({
     }
 })
 
-const multerFile = multer({
+export const multerFile = multer({
     storage,
     fileFilter: (req: MulterRequest, { mimetype, originalname }, callback) => {
-        const { regex, sizes } = utils.filesInfo
+        const { regex, sizes } = filesInfo
         const isImage = regex.images.test(mimetype) || regex.images.test(originalname)
         const isVideo = regex.videos.test(mimetype) || regex.videos.test(originalname)
         const isFile = regex.files.test(mimetype) || regex.files.test(originalname)
@@ -50,5 +50,3 @@ const multerFile = multer({
         return callback(null, true)
     }
 })
-
-export default multerFile

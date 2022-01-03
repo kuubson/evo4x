@@ -1,27 +1,5 @@
-import axios from './axios'
-import subscribePushNotifications from './subscribePushNotifications'
-import setLoading from './setLoading'
-import handleApiError from './handleApiError'
-import handleApiValidation from './handleApiValidation'
-import setRole from './setRole'
-import setApiFeedback from './setApiFeedback'
-import detectMobileDevice from './detectMobileDevice'
-import history from './history'
-import filesInfo from './filesInfo'
-import defaultAvatar from './defaultAvatar'
+export { history } from './history'
 
-const utils = {
-    axios,
-    subscribePushNotifications,
-    setLoading,
-    handleApiError,
-    handleApiValidation,
-    setRole,
-    setApiFeedback,
-    detectMobileDevice,
-    history,
-    filesInfo,
-    defaultAvatar
-}
+export { filesInfo } from './filesInfo'
 
-export default utils
+export { default as axios } from './axios'

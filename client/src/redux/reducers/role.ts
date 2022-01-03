@@ -1,28 +1,21 @@
-import actions from 'redux/actions'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-type State = {
-    role: Role
+type SliceState = {
+    role: AllRoles
 }
 
-const initialState: State = {
+const initialState: SliceState = {
     role: 'guest'
 }
 
-type Action = {
-    payload: Role
-    type: 'SET_ROLE'
-}
-
-const role = (state = initialState, { payload, type }: Action) => {
-    switch (type) {
-        case actions.SET_ROLE:
-            return {
-                ...state,
-                role: payload
-            }
-        default:
-            return state
+const roleSlice = createSlice({
+    name: 'role',
+    initialState,
+    reducers: {
+        setRole: (state, { payload }: PayloadAction<AllRoles>) => {
+            state.role = payload
+        }
     }
-}
+})
 
-export default role
+export default roleSlice.reducer

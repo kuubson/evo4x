@@ -1,0 +1,7 @@
+export { Header } from './Header'
+export { Logo } from './Logo'
+export { HiddenButton } from './HiddenButton'
+export { Button } from './Button'
+export { Advantages } from './Advantages'
+export { Advantage } from './Advantage'
+export { Dollar } from './Dollar'

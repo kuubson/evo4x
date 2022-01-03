@@ -2,7 +2,7 @@ import passport from 'passport'
 
 import { Route } from 'types/express'
 
-const jwtAuthorization: Route = (req, res, next) => {
+export const jwtAuthorization: Route = (req, res, next) => {
     passport.authenticate('jwt', { session: false }, (error, { role, user }) => {
         if (error || !user || role !== req.originalUrl.split('/')[2]) {
             return res
@@ -20,5 +20,3 @@ const jwtAuthorization: Route = (req, res, next) => {
         next()
     })(req, res, next)
 }
-
-export default jwtAuthorization

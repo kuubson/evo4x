@@ -1,6 +1,6 @@
 import { Response } from 'express'
 
-const handleError = (res: Response, error: any) => {
+export const handleError = (res: Response, error: any) => {
     if (process.env.NODE_ENV !== 'production') {
         console.log(error)
     }
@@ -23,5 +23,3 @@ const handleError = (res: Response, error: any) => {
         error: apiError
     })
 }
-
-export default handleError

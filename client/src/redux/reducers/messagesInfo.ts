@@ -1,42 +1,30 @@
-import actions from 'redux/actions'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-type State = {
-    lastUnreadMessageIndex: number | undefined
+type SliceState = {
+    lastUnreadMessageIndex: number | null
     unreadMessagesAmount: number
 }
 
-const initialState: State = {
-    lastUnreadMessageIndex: undefined,
+type Payload = PayloadAction<number>
+
+const initialState: SliceState = {
+    lastUnreadMessageIndex: null,
     unreadMessagesAmount: 0
 }
 
-type LastUnreadMessageIndexAction = {
-    payload: number
-    type: 'SET_LAST_UNREAD_MESSAGE_INDEX'
-}
-
-type UnreadMessagesAmountAction = {
-    payload: number
-    type: 'SET_UNREAD_MESSAGES_AMOUNT'
-}
-
-type Action = LastUnreadMessageIndexAction | UnreadMessagesAmountAction
-
-const messagesInfo = (state = initialState, { payload, type }: Action) => {
-    switch (type) {
-        case actions.SET_LAST_UNREAD_MESSAGE_INDEX:
-            return {
-                ...state,
-                lastUnreadMessageIndex: payload
-            }
-        case actions.SET_UNREAD_MESSAGES_AMOUNT:
-            return {
-                ...state,
-                unreadMessagesAmount: payload
-            }
-        default:
-            return state
+const messagesInfo = createSlice({
+    name: 'messagesInfo',
+    initialState,
+    reducers: {
+        setLastUnreadMessageIndex: (state, { payload }: Payload) => {
+            state.lastUnreadMessageIndex = payload
+        },
+        setUnreadMessagesAmount: (state, { payload }: Payload) => {
+            state.unreadMessagesAmount = payload
+        }
     }
-}
+})
 
-export default messagesInfo
+export const { setLastUnreadMessageIndex, setUnreadMessagesAmount } = messagesInfo.actions
+
+export default messagesInfo.reducer

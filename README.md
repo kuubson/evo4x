@@ -18,30 +18,30 @@ Code isn't public because application has potential of being launched to the pub
 ### Imports order
 
 -   **Packages from package.json**
+-   **components**
+    -   shared components (**'components/shared'** path)
+    -   components from other components (**absolute path**)
+    -   components from current components (**'./components'** path)
+-   **modules**
+    -   modules from other components (**absolute path**)
+    -   modules from current components (**'./modules'** path)
+-   **images**
+-   **styled components**
+    -   shared styled components (**'components/shared/styledComponents'** path)
+    -   \* as Styled*ComponentName* (**absolute path**)
+    -   \* as Styled (**'./styled'** path)
 -   **hooks**
     -   global hooks (**'hooks'** path)
     -   hooks from other components (**absolute path**)
-    -   hooks for certain component (**'.'** or **'../'** or **'../../'** path)
--   **components**
-    -   shared components (**'components/Shared'** path)
-    -   other components (**absolute path**)
--   **styled components**
-    -   shared styled components (**'components/Shared/styled'** path)
-    -   Styled*ComponentName* (**'../styled/_ComponentName_'** or **absolute path**)
-    -   _ComponentNameDashboard_ (**absolute path**)
-    -   Dashboard (**'../'** or **'../../'** path)
--   **composed**
-    -   _ComponentNameComposed_ (**absolute path**)
-    -   Composed (**'.'** or **'../'** or **'../../'** path)
--   **utils**
-    -   global utils (**'utils'** path)
-    -   utils from other components (**absolute path**)
-    -   utils for certain component (**'.'** or **'../'** or **'../../'** path)
+    -   hooks for current component (**'./hooks'** path)
 -   **helpers**
     -   global helpers (**'helpers'** path)
     -   helpers from other components (**absolute path**)
-    -   helpers for certain component (**'.'** or **'../'** or **'../../'** path)
--   **images**
+    -   helpers for current component (**'./helpers'** path)
+-   **utils**
+    -   global utils (**'utils'** path)
+    -   utils from other components (**absolute path**)
+    -   utils for current component (**'./utils'** path)
 
 ## Some screenshots
 

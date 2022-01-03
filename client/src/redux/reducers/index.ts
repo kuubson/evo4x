@@ -1,4 +1,4 @@
-import { configureStore, combineReducers } from '@reduxjs/toolkit'
+import { combineReducers } from '@reduxjs/toolkit'
 import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
@@ -18,19 +18,10 @@ const messagesConfig = {
     storage
 }
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
     socket,
     loader,
     apiFeedback,
     role: persistReducer(roleConfig, role),
     messagesInfo: persistReducer(messagesConfig, messagesInfo)
 })
-
-const reducer = configureStore({
-    reducer: rootReducer
-})
-
-export type RootState = ReturnType<typeof rootReducer>
-export type AppDispatch = typeof reducer.dispatch
-
-export default rootReducer
