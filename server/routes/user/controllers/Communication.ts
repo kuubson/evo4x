@@ -1,54 +1,52 @@
 import { Router } from 'express'
 
-import middlewares from 'middlewares/middlewares'
+import { jwtAuthorization, handleMulterFile, checkValidation } from 'middlewares'
 
-import communication from 'routes/user/services/communication'
+import { communication } from '../services'
 
-const router = Router()
+export const Communication = Router()
 
-router.post(
+Communication.post(
     '/subscribePushNotifications',
-    middlewares.jwtAuthorization,
+    jwtAuthorization,
     communication.subscribePushNotifications.validation(),
-    middlewares.checkValidation,
-    communication.subscribePushNotifications.default as any
+    checkValidation,
+    communication.subscribePushNotifications.subscribePushNotifications as any
 )
 
-router.post(
+Communication.post(
     '/getMessages',
-    middlewares.jwtAuthorization,
+    jwtAuthorization,
     communication.getMessages.validation(),
-    middlewares.checkValidation,
-    communication.getMessages.default as any
+    checkValidation,
+    communication.getMessages.getMessages as any
 )
 
-router.post(
+Communication.post(
     '/sendMessage',
-    middlewares.jwtAuthorization,
+    jwtAuthorization,
     communication.sendMessage.validation(),
-    middlewares.checkValidation,
-    communication.sendMessage.default as any
+    checkValidation,
+    communication.sendMessage.sendMessage as any
 )
 
-router.post(
+Communication.post(
     '/sendFile',
-    middlewares.jwtAuthorization,
-    middlewares.handleMulterFile() as any,
-    communication.sendFile.default as any
+    jwtAuthorization,
+    handleMulterFile() as any,
+    communication.sendFile.sendFile as any
 )
 
-router.get(
-    '/getUnreadMessagesInfo',
-    middlewares.jwtAuthorization,
-    communication.getUnreadMessagesInfo.default as any
+Communication.get(
+    '/getMessagesInfo',
+    jwtAuthorization,
+    communication.getMessagesInfo.getMessagesInfo as any
 )
 
-router.post(
+Communication.post(
     '/getAnalysis',
-    middlewares.jwtAuthorization,
+    jwtAuthorization,
     communication.getAnalysis.validation(),
-    middlewares.checkValidation,
-    communication.getAnalysis.default as any
+    checkValidation,
+    communication.getAnalysis.getAnalysis as any
 )
-
-export default router

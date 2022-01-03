@@ -2,13 +2,13 @@ import { check } from 'express-validator'
 
 import { Connection } from 'database/database'
 
-import utils from 'utils'
+import { sendNotificationsForOtherUsers } from 'routes/user/helpers'
 
-import userHelpers from 'routes/user/helpers'
+import { baseUrl } from 'utils'
 
 import { ProtectedRoute } from 'types/express'
 
-const sendMessage: ProtectedRoute = async (req, res, next) => {
+export const sendMessage: ProtectedRoute = async (req, res, next) => {
     try {
         await Connection.transaction(async transaction => {
             const { id } = req.user
@@ -24,14 +24,14 @@ const sendMessage: ProtectedRoute = async (req, res, next) => {
                     transaction
                 }
             )
-            userHelpers.sendNotificationsForOtherUsers(id, {
+            sendNotificationsForOtherUsers(id, {
                 tag: id,
                 title: `From ${name}`,
                 body: content,
-                icon: `${utils.baseUrl(req)}/Logo.png`,
+                icon: `${baseUrl(req)}/Logo.png`,
                 data: {
                     userName: name,
-                    url: `${utils.baseUrl(req)}/user/chat`
+                    url: `${baseUrl(req)}/user/chat`
                 }
             })
             res.send()
@@ -42,5 +42,3 @@ const sendMessage: ProtectedRoute = async (req, res, next) => {
 }
 
 export const validation = () => [check('content').trim().isString().bail()]
-
-export default sendMessage

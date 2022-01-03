@@ -34,18 +34,18 @@ export const useUser = (chat: boolean | undefined) => {
         }
         getMessagesInfo()
     }, [])
-    useEffect(() => {
-        const handleOnSendMessage = (message: Message) => {
-            const withoutChatAndCurrentUser = !chat && message.user.id !== currentUser!.id
-            if (withoutChatAndCurrentUser) {
-                setUnreadMessagesAmount(unreadMessagesAmount + 1)
-                if (!lastUnreadMessageIndex) {
-                    setLastUnreadMessageIndex(1)
-                } else {
-                    setLastUnreadMessageIndex(lastUnreadMessageIndex + 1)
-                }
+    const handleOnSendMessage = (message: Message) => {
+        const withoutChatAndCurrentUser = !chat && message.user.id !== currentUser!.id
+        if (withoutChatAndCurrentUser) {
+            setUnreadMessagesAmount(unreadMessagesAmount + 1)
+            if (!lastUnreadMessageIndex) {
+                setLastUnreadMessageIndex(1)
+            } else {
+                setLastUnreadMessageIndex(lastUnreadMessageIndex + 1)
             }
         }
+    }
+    useEffect(() => {
         if (socket) {
             socket.on('sendMessage', handleOnSendMessage)
         }

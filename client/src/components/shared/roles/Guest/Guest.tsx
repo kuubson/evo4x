@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components/macro'
 
-import { useSocket, useRole } from 'hooks'
-
-import { logout } from 'helpers'
+import { useRole } from 'hooks'
 
 import { history } from 'utils'
 
@@ -12,7 +10,6 @@ const GuestContainer = styled.section`
 `
 
 export const Guest: React.FC = ({ children }) => {
-    const { closeSocketConnection } = useSocket()
     const { role } = useRole()
     useEffect(() => {
         switch (true) {
@@ -21,9 +18,6 @@ export const Guest: React.FC = ({ children }) => {
                 break
             case role === 'user':
                 history.push('/user/profile')
-                break
-            default:
-                logout(closeSocketConnection)
                 break
         }
     }, [])

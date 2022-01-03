@@ -4,7 +4,7 @@ import { Server, Socket } from 'socket.io'
 import { User, Profile, Message } from 'database/database'
 import { User as UserClass } from 'database/models/User'
 
-import userHelpers from 'routes/user/helpers'
+import { updateReadByProperty } from 'routes/user/helpers'
 
 import { cookie } from 'utils'
 
@@ -12,7 +12,7 @@ type ISocket = Socket & {
     user?: UserClass
 }
 
-const user = (io: Server) => {
+export const user = (io: Server) => {
     const userIo = io.of('/user')
     userIo.use((socket: ISocket, next) => {
         const token = cookie.getCookie(socket.request.headers.cookie, 'token')
@@ -49,9 +49,7 @@ const user = (io: Server) => {
         socket.on('sendMessage', data => socket.broadcast.emit('sendMessage', data))
         socket.on('readMessages', async () => {
             const messages = await Message.findAll()
-            await userHelpers.updateReadByProperty(id, messages)
+            await updateReadByProperty(id, messages)
         })
     })
 }
-
-export default user

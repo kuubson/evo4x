@@ -2,7 +2,7 @@ import { store } from 'redux/store'
 
 export const setApiFeedback = (apiFeedback: string) => {
     store.dispatch({
-        type: 'setApiFeedback',
+        type: 'apiFeedback/setApiFeedback',
         payload: apiFeedback
     })
 }

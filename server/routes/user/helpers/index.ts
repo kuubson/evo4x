@@ -1,11 +1,3 @@
-import updateReadByProperty from './updateReadByProperty'
-import sendNotificationsForOtherUsers from './sendNotificationsForOtherUsers'
-import countAnalysisViews from './countAnalysisViews'
-
-const userUtils = {
-    updateReadByProperty,
-    sendNotificationsForOtherUsers,
-    countAnalysisViews
-}
-
-export default userUtils
+export { sendNotificationsForOtherUsers } from './sendNotificationsForOtherUsers'
+export { updateReadByProperty } from './updateReadByProperty'
+export { countAnalysisViews } from './countAnalysisViews'

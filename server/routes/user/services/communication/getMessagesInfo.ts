@@ -2,7 +2,7 @@ import { Message } from 'database/database'
 
 import { ProtectedRoute } from 'types/express'
 
-const getUnreadMessagesInfo: ProtectedRoute = async (req, res, next) => {
+export const getMessagesInfo: ProtectedRoute = async (req, res, next) => {
     try {
         const { id } = req.user
         const messages = await Message.findAll()
@@ -35,5 +35,3 @@ const getUnreadMessagesInfo: ProtectedRoute = async (req, res, next) => {
         next(error)
     }
 }
-
-export default getUnreadMessagesInfo

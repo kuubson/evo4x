@@ -94,12 +94,12 @@ export const useChat = ({ setShowFileInput, setUploadPercentage }: ChatHook) => 
         })
         subscribePushNotifications('/api/user/communication/subscribePushNotifications')
     }, [])
+    const handleOnSendMessage = (message: Message) => {
+        setMessages(messages => [...messages, message])
+        pushToTheBottom(messagesRef)
+        socket!.emit('readMessages')
+    }
     useEffect(() => {
-        const handleOnSendMessage = (message: Message) => {
-            setMessages(messages => [...messages, message])
-            pushToTheBottom(messagesRef)
-            socket!.emit('readMessages')
-        }
         if (socket) {
             socket.on('sendMessage', handleOnSendMessage)
         }

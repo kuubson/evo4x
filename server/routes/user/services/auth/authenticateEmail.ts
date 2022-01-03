@@ -2,13 +2,13 @@ import jwt from 'jsonwebtoken'
 
 import { Connection, Authentication } from 'database/database'
 
-import utils from 'utils'
+import { validator } from 'helpers'
 
-import helpers from 'helpers'
+import { ApiError } from 'utils'
 
 import { Route } from 'types/express'
 
-const authenticateEmail: Route = async (req, res, next) => {
+export const authenticateEmail: Route = async (req, res, next) => {
     try {
         await Connection.transaction(async transaction => {
             const { emailToken } = req.body
@@ -21,18 +21,18 @@ const authenticateEmail: Route = async (req, res, next) => {
                     })
                     if (error || !authentication) {
                         if (authentication && error.message.includes('expired')) {
-                            throw new utils.ApiError(
+                            throw new ApiError(
                                 'The link to authenticate your email address has expired',
                                 400
                             )
                         }
-                        throw new utils.ApiError(
+                        throw new ApiError(
                             'The link to authenticate your email address is invalid',
                             400
                         )
                     }
                     if (authentication.authenticated) {
-                        throw new utils.ApiError(
+                        throw new ApiError(
                             'The email address provided is already authenticated',
                             400
                         )
@@ -58,6 +58,4 @@ const authenticateEmail: Route = async (req, res, next) => {
     }
 }
 
-export const validation = () => [helpers.validator.validateProperty('emailToken').isJWT()]
-
-export default authenticateEmail
+export const validation = () => [validator.validateProperty('emailToken').isJWT()]

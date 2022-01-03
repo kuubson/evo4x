@@ -13,34 +13,31 @@ webpush.setVapidDetails(
 )
 
 import cloudinary from 'cloudinary'
-const initializeCloudinary = () =>
-    (cloudinary as any).config({
-        cloud_name: process.env.CLOUDINARY_NAME,
-        api_key: process.env.CLOUDINARY_API_KEY,
-        api_secret: process.env.CLOUDINARY_API_SECRET
-    })
-initializeCloudinary()
+cloudinary.v2.config({
+    cloud_name: process.env.CLOUDINARY_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+})
 
-import { initializeCsrf } from './csrf'
 import { initializeSocketIO } from 'socketio/socketio'
-
 import { initializePassport } from './passport'
-initializePassport(passport)
+import { initializeCsrf } from './csrf'
 
-export { rateLimiter } from './rateLimiter'
-export { jwtAuthorization } from './jwtAuthorization'
-export { errorHandler } from './errorHandler'
-export { checkValidation } from './checkValidation'
-export { multerFile } from './multerFile'
-export { handleMulterFile } from './handleMulterFile'
+initializePassport(passport)
 
 export const initializeMiddlewares = (app: Application, server: Server) => {
     app.use(helmet())
-    initializeCsrf(app)
     initializeSocketIO(new SocketServer(server))
     app.use(express.json({ limit: '200kb' }))
     app.use(express.urlencoded({ extended: true, limit: '200kb' }))
     app.use(cookieParser())
     app.use(passport.initialize())
-    app.set('trust proxy', true)
+    initializeCsrf(app)
 }
+
+export { errorHandler } from './errorHandler'
+export { rateLimiter } from './rateLimiter'
+export { jwtAuthorization } from './jwtAuthorization'
+export { handleMulterFile } from './handleMulterFile'
+export { multerFile } from './multerFile'
+export { checkValidation } from './checkValidation'

@@ -2,13 +2,13 @@ import jwt from 'jsonwebtoken'
 
 import { Connection, User, Authentication } from 'database/database'
 
-import utils from 'utils'
+import { ApiError, baseUrl, emailTemplate } from 'utils'
 
-import helpers from 'helpers'
+import { transporter, validator } from 'helpers'
 
 import { Route } from 'types/express'
 
-const resendEmail: Route = async (req, res, next) => {
+export const resendEmail: Route = async (req, res, next) => {
     try {
         await Connection.transaction(async transaction => {
             const { email } = req.body
@@ -19,10 +19,10 @@ const resendEmail: Route = async (req, res, next) => {
                 include: [Authentication]
             })
             if (!user || !user.authentication) {
-                throw new utils.ApiError('The email address provided is incorrect', 404)
+                throw new ApiError('The email address provided is incorrect', 404)
             }
             if (user.authentication.authenticated) {
-                throw new utils.ApiError('The email address provided is already authenticated', 409)
+                throw new ApiError('The email address provided is already authenticated', 409)
             }
             const emailToken = jwt.sign({ email }, process.env.JWT_KEY!, { expiresIn: '2h' })
             await user.authentication.update(
@@ -37,17 +37,17 @@ const resendEmail: Route = async (req, res, next) => {
                 from: `"evo4x app" <${process.env.NODEMAILER_USERNAME}>`,
                 to: email,
                 subject: 'Email address authentication in the evo4x app',
-                html: utils.emailTemplate(
+                html: emailTemplate(
                     'Email address authentication in the evo4x app',
                     `To authenticate your email address click the button`,
                     'Authenticate email address',
-                    `${utils.baseUrl(req)}/?emailToken=${emailToken}`
+                    `${baseUrl(req)}/?emailToken=${emailToken}`
                 )
             }
-            helpers.transporter.sendMail(mailOptions, (error, info) => {
+            transporter.sendMail(mailOptions, (error, info) => {
                 try {
                     if (error || !info) {
-                        throw new utils.ApiError(
+                        throw new ApiError(
                             'There was a problem resending an e-mail with a link to authenticate your email address',
                             502
                         )
@@ -66,6 +66,4 @@ const resendEmail: Route = async (req, res, next) => {
     }
 }
 
-export const validation = () => [helpers.validator.validateEmail()]
-
-export default resendEmail
+export const validation = () => [validator.validateEmail()]

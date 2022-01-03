@@ -62,7 +62,7 @@ const validatePassword = (withLogin = false) => {
                 return password
             })
     } else {
-        check('password').notEmpty().withMessage('Type your password')
+        return check('password').notEmpty().withMessage('Type your password')
     }
 }
 const validateRepeatedPassword = () => {

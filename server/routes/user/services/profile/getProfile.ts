@@ -1,6 +1,6 @@
 import { ProtectedRoute } from 'types/express'
 
-const getProfile: ProtectedRoute = async (req, res, next) => {
+export const getProfile: ProtectedRoute = async (req, res, next) => {
     try {
         const { name, story, avatar } = req.user.profile
         res.send({
@@ -12,5 +12,3 @@ const getProfile: ProtectedRoute = async (req, res, next) => {
         next(error)
     }
 }
-
-export default getProfile

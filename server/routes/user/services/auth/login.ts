@@ -3,13 +3,13 @@ import bcrypt from 'bcrypt'
 
 import { User, Authentication } from 'database/database'
 
-import utils from 'utils'
+import { validator } from 'helpers'
 
-import helpers from 'helpers'
+import { ApiError, cookie } from 'utils'
 
 import { Route } from 'types/express'
 
-const login: Route = async (req, res, next) => {
+export const login: Route = async (req, res, next) => {
     try {
         const { email, password } = req.body
         const user = await User.findOne({
@@ -19,26 +19,21 @@ const login: Route = async (req, res, next) => {
             include: [Authentication]
         })
         if (!user || !bcrypt.compareSync(password, user.password)) {
-            throw new utils.ApiError('The email address or password provided is incorrect', 404)
+            throw new ApiError('The email address or password provided is incorrect', 404)
         }
         if (!user.authentication.authenticated) {
-            throw new utils.ApiError('The email address provided must first be authenticated', 409)
+            throw new ApiError('The email address provided must first be authenticated', 409)
         }
         const token = jwt.sign({ role: 'user', email }, process.env.JWT_KEY!)
         res.cookie('token', token, {
             secure: process.env.NODE_ENV === 'production',
             httpOnly: true,
             sameSite: true,
-            maxAge: utils.cookie.maxAge
+            maxAge: cookie.maxAge
         }).send()
     } catch (error) {
         next(error)
     }
 }
 
-export const validation = () => [
-    helpers.validator.validateEmail(),
-    helpers.validator.validatePassword(true)
-]
-
-export default login
+export const validation = () => [validator.validateEmail(), validator.validatePassword(true)]

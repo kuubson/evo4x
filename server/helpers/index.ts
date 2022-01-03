@@ -1,5 +1,6 @@
 export { transporter } from './transporter'
-export { deleteTemporaryFile } from './deleteTemporaryFile'
-export { reduceImageSize } from './reduceImageSize'
 export { validator } from './validator'
 export { checkSanitization } from './checkSanitization'
+export { deleteTemporaryFile } from './deleteTemporaryFile'
+export { reduceImageSize } from './reduceImageSize'
+export { getDefaultAvatar } from './getDefaultAvatar'

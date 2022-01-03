@@ -1,17 +1,9 @@
 import { Router } from 'express'
 
-import middlewares from 'middlewares/middlewares'
+import { rateLimiter, checkValidation } from 'middlewares'
 
-import auth from 'routes/admin/services/auth'
+import { auth } from '../services/'
 
-const router = Router()
+export const Auth = Router()
 
-router.post(
-    '/login',
-    middlewares.rateLimiter('login'),
-    auth.login.validation(),
-    middlewares.checkValidation,
-    auth.login.default
-)
-
-export default router
+Auth.post('/login', rateLimiter('login'), auth.login.validation, checkValidation, auth.login.login)
