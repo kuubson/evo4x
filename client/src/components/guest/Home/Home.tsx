@@ -6,13 +6,13 @@ import HelpSidebar from './modules/HelpSidebar/HelpSidebar'
 import RegistrationModal from './modules/RegistrationModal/RegistrationModal'
 import LoginModal from './modules/LoginModal/LoginModal'
 
-import * as Dashboard from './styled/Dashboard'
+import Logo from 'assets/images/Logo.png'
+
+import * as Styled from './styled'
 
 import { useHome } from './hooks'
 
 import { handleDispatcher } from 'helpers'
-
-import Logo from 'assets/images/Logo.png'
 
 const HomeContainer = styled.section`
     min-height: 100%;
@@ -75,31 +75,31 @@ const Home = () => {
                 toggleModal={() => handleDispatcher(setShowLoginModal)}
             />
             <Navbar links={links} />
-            <Dashboard.Advantages>
-                <Dashboard.Advantage>
-                    <Dashboard.Dollar>$</Dashboard.Dollar>
+            <Styled.Advantages>
+                <Styled.Advantage>
+                    <Styled.Dollar>$</Styled.Dollar>
                     Straightforward trading message - keep it simple.
-                </Dashboard.Advantage>
-                <Dashboard.Advantage>
-                    <Dashboard.Dollar>$</Dashboard.Dollar>
+                </Styled.Advantage>
+                <Styled.Advantage>
+                    <Styled.Dollar>$</Styled.Dollar>
                     Profitable either poor analysis? We don't care - trust the process!
-                </Dashboard.Advantage>
-                <Dashboard.Advantage>
-                    <Dashboard.Dollar>$</Dashboard.Dollar>
+                </Styled.Advantage>
+                <Styled.Advantage>
+                    <Styled.Dollar>$</Styled.Dollar>
                     Remember - it's a mental battle, not technical one.
-                </Dashboard.Advantage>
-                <Dashboard.Logo src={Logo} alt="evo4x" mobile />
-                <Dashboard.Button
+                </Styled.Advantage>
+                <Styled.Logo src={Logo} alt="evo4x" mobile />
+                <Styled.Button
                     onClick={() => handleDispatcher(setShowRegistrationModal)}
                     $fill={showRegistrationModal}
                 >
                     join evo4x's community
-                </Dashboard.Button>
-            </Dashboard.Advantages>
-            <Dashboard.Header>
-                <Dashboard.Logo src={Logo} alt="evo4x" />
-            </Dashboard.Header>
-            <Dashboard.HiddenButton onDoubleClick={showLoginModalForAdmin} />
+                </Styled.Button>
+            </Styled.Advantages>
+            <Styled.Header>
+                <Styled.Logo src={Logo} alt="evo4x" />
+            </Styled.Header>
+            <Styled.HiddenButton onDoubleClick={showLoginModalForAdmin} />
         </HomeContainer>
     )
 }

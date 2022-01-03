@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import styled from 'styled-components/macro'
 import { useLocation } from 'react-router'
 
-import * as Dashboard from './styled/Dashboard'
+import * as Styled from './styled'
 
 import { history } from 'utils'
 
@@ -34,20 +34,20 @@ const Navbar = ({ links, hamburger }: INavbar) => {
     const withHamburger = hamburger && toggleHamburger
     return (
         <NavbarContainer>
-            <Dashboard.Brand>evo4x</Dashboard.Brand>
+            <Styled.Brand>evo4x</Styled.Brand>
             {hamburger && (
-                <Dashboard.Hamburger
+                <Styled.Hamburger
                     onClick={() => setToggleHamburger(toggleHamburger => !toggleHamburger)}
                     withHamburger={withHamburger}
                 >
-                    <Dashboard.Line withHamburger={withHamburger} />
-                    <Dashboard.Line withHamburger={withHamburger} />
-                    <Dashboard.Line withHamburger={withHamburger} />
-                </Dashboard.Hamburger>
+                    <Styled.Line withHamburger={withHamburger} />
+                    <Styled.Line withHamburger={withHamburger} />
+                    <Styled.Line withHamburger={withHamburger} />
+                </Styled.Hamburger>
             )}
-            <Dashboard.Menu withHamburger={withHamburger}>
+            <Styled.Menu withHamburger={withHamburger}>
                 {links.map(({ link, pathname, counter, onClick }) => (
-                    <Dashboard.Link
+                    <Styled.Link
                         key={link}
                         onClick={onClick ? onClick : () => history.push(pathname!)}
                         active={pathname === location.pathname}
@@ -55,21 +55,21 @@ const Navbar = ({ links, hamburger }: INavbar) => {
                         withHamburger={withHamburger}
                     >
                         {link}
-                    </Dashboard.Link>
+                    </Styled.Link>
                 ))}
-            </Dashboard.Menu>
-            <Dashboard.Links hamburger={hamburger}>
+            </Styled.Menu>
+            <Styled.Links hamburger={hamburger}>
                 {links.map(({ link, pathname, counter, onClick }) => (
-                    <Dashboard.Link
+                    <Styled.Link
                         key={link}
                         onClick={onClick ? onClick : () => history.push(pathname!)}
                         active={pathname === location.pathname}
                         counter={counter}
                     >
                         {link}
-                    </Dashboard.Link>
+                    </Styled.Link>
                 ))}
-            </Dashboard.Links>
+            </Styled.Links>
         </NavbarContainer>
     )
 }

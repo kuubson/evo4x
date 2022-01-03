@@ -1,6 +1,6 @@
 import MessageContent from './components/MessageContent'
 
-import * as Dashboard from './styled/Dashboard'
+import * as Styled from './styled'
 
 import { history } from 'utils'
 
@@ -18,7 +18,7 @@ const Message = ({
     const withCurrentUser = user.id === currentUser?.id
     const withLastUserMessage = (nextMessage && user.id !== nextMessage.user.id) || !nextMessage
     const showAvatar = () => (
-        <Dashboard.Avatar
+        <Styled.Avatar
             src={user.profile!.avatar}
             onDoubleClick={() => history.push(`/users/${user.id}`)}
             name={user.profile!.name}
@@ -26,14 +26,14 @@ const Message = ({
         />
     )
     const showError = (error: string) => (
-        <Dashboard.Content
+        <Styled.Content
             withCurrentUser={withCurrentUser}
             withLastUserMessage={withLastUserMessage}
             withError
         >
             {error}
             {withLastUserMessage && showAvatar()}
-        </Dashboard.Content>
+        </Styled.Content>
     )
     return (
         <MessageContent

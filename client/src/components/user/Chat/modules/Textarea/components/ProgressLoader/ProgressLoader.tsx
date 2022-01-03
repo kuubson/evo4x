@@ -1,7 +1,7 @@
-import React, { useRef, useEffect } from 'react'
+import { useRef, useEffect } from 'react'
 import styled from 'styled-components/macro'
 
-import * as Dashboard from './styled/Dashboard'
+import * as Styled from './styled'
 
 const ProgressLoaderContainer = styled.div`
     margin-right: 10px;
@@ -29,24 +29,24 @@ const ProgressLoader = ({ percentage }: IProgressLoader) => {
     }, [percentage])
     return (
         <ProgressLoaderContainer>
-            <Dashboard.RingsContainer dimension={dimension}>
-                <Dashboard.Rings dimension={dimension}>
-                    <Dashboard.Ring
+            <Styled.RingsContainer dimension={dimension}>
+                <Styled.Rings dimension={dimension}>
+                    <Styled.Ring
                         ref={circle}
                         r={radius}
                         cx={dimension / 2}
                         cy={dimension / 2}
                         strokeDashoffset={radius * 2 * Math.PI}
                     />
-                    <Dashboard.Ring
+                    <Styled.Ring
                         strokeOpacity="0.3"
                         r={radius}
                         cx={dimension / 2}
                         cy={dimension / 2}
                     />
-                </Dashboard.Rings>
-                <Dashboard.Percentage>{percentage.toFixed(0)}%</Dashboard.Percentage>
-            </Dashboard.RingsContainer>
+                </Styled.Rings>
+                <Styled.Percentage>{percentage.toFixed(0)}%</Styled.Percentage>
+            </Styled.RingsContainer>
         </ProgressLoaderContainer>
     )
 }

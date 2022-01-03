@@ -1,10 +1,11 @@
 import styled from 'styled-components/macro'
 
 import ApiFeedback from 'components/shared/ApiFeedback/ApiFeedback'
+
 import Input from '../RegistrationModal/components/Input'
 
 import { BlackLayer } from 'components/shared/styledComponents'
-import * as RegistrationModalDashboard from '../RegistrationModal/styled/Dashboard'
+import * as StyledRegistrationModal from '../RegistrationModal/styled'
 
 import { useLoginModal } from './hooks'
 
@@ -31,14 +32,14 @@ const LoginModal = ({ role, setRole, showModal, toggleModal }: ILoginModal) => {
     }
     return (
         <LoginModalContainer showLayer={showModal}>
-            <RegistrationModalDashboard.Content showModal={showModal}>
-                <RegistrationModalDashboard.CloseButton onClick={closeModal}>
+            <StyledRegistrationModal.Content showModal={showModal}>
+                <StyledRegistrationModal.CloseButton onClick={closeModal}>
                     ✕
-                </RegistrationModalDashboard.CloseButton>
-                <RegistrationModalDashboard.Header>
+                </StyledRegistrationModal.CloseButton>
+                <StyledRegistrationModal.Header>
                     "Get rich or die trying"
-                </RegistrationModalDashboard.Header>
-                <RegistrationModalDashboard.Form onSubmit={login} noValidate>
+                </StyledRegistrationModal.Header>
+                <StyledRegistrationModal.Form onSubmit={login} noValidate>
                     <Input
                         id="loginEmail"
                         name="email"
@@ -59,10 +60,10 @@ const LoginModal = ({ role, setRole, showModal, toggleModal }: ILoginModal) => {
                         error={passwordError}
                         onChange={formHandler.handleInputValue}
                     />
-                    <RegistrationModalDashboard.Submit>Login</RegistrationModalDashboard.Submit>
+                    <StyledRegistrationModal.Submit>Login</StyledRegistrationModal.Submit>
                     <ApiFeedback />
-                </RegistrationModalDashboard.Form>
-            </RegistrationModalDashboard.Content>
+                </StyledRegistrationModal.Form>
+            </StyledRegistrationModal.Content>
         </LoginModalContainer>
     )
 }

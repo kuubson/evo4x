@@ -58,7 +58,7 @@ const App = () => {
         {
             id: 3,
             path: '/users/:id',
-            element: () => (
+            element: (
                 <User>
                     <Profile />
                 </User>
@@ -67,7 +67,7 @@ const App = () => {
         {
             id: 4,
             path: '/user/chat',
-            element: () => (
+            element: (
                 <User chat>
                     <Chat />
                 </User>
@@ -76,7 +76,7 @@ const App = () => {
         {
             id: 5,
             path: '/user/analysis',
-            element: () => (
+            element: (
                 <User>
                     <Analysis />
                 </User>
@@ -85,7 +85,7 @@ const App = () => {
         {
             id: 6,
             path: '/admin/analysis',
-            element: () => (
+            element: (
                 <Admin>
                     <AdminAnalysis />
                 </Admin>

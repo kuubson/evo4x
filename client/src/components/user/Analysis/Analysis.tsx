@@ -2,7 +2,7 @@ import styled from 'styled-components/macro'
 
 import AnalysisModule from './modules/Analysis'
 
-import * as ChatDashboard from 'components/user/Chat/styled/Dashboard'
+import * as StyledChat from 'components/user/Chat/styled'
 
 import { useAnalysis } from './hooks'
 
@@ -14,8 +14,8 @@ const Analysis = () => {
     const areThereAnalysis = !!analysis.length
     return (
         <AnalysisContainer>
-            <ChatDashboard.Content withAnalysis>
-                <ChatDashboard.Messages
+            <StyledChat.Content withAnalysis>
+                <StyledChat.Messages
                     ref={analysisRef}
                     onScroll={event =>
                         getAnalysis({
@@ -34,10 +34,10 @@ const Analysis = () => {
                             />
                         ))
                     ) : (
-                        <ChatDashboard.Warning>There are no analysis yet</ChatDashboard.Warning>
+                        <StyledChat.Warning>There are no analysis yet</StyledChat.Warning>
                     )}
-                </ChatDashboard.Messages>
-            </ChatDashboard.Content>
+                </StyledChat.Messages>
+            </StyledChat.Content>
         </AnalysisContainer>
     )
 }

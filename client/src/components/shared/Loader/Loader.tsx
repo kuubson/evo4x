@@ -1,9 +1,9 @@
 import styled from 'styled-components/macro'
 
-import { BlackLayer } from 'components/shared/styledComponents'
-import * as Dashboard from './styled/Dashboard'
-
 import Logo from 'assets/images/Logo.png'
+
+import { BlackLayer } from 'components/shared/styledComponents'
+import * as Styled from './styled'
 
 import { useLoader } from 'hooks'
 
@@ -16,7 +16,7 @@ const Loader = () => {
     const { loading } = useLoader()
     return (
         <LoaderContainer showLayer={loading}>
-            <Dashboard.Logo src={Logo} $loading={loading} />
+            <Styled.Logo src={Logo} $loading={loading} />
         </LoaderContainer>
     )
 }

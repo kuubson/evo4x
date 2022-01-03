@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import styled, { css } from 'styled-components/macro'
 import fileSaver from 'file-saver'
 
-import * as Dashboard from '../styled/Dashboard'
+import * as Styled from '../styled'
 
 type MessageContainerType = {
     withLastUserMessage: boolean
@@ -66,22 +66,22 @@ const MessageContent = ({
                 imageError ? (
                     showError('Image has failed to load')
                 ) : (
-                    <Dashboard.AssetContainer withCurrentUser={withCurrentUser}>
-                        <Dashboard.Image src={content} onError={handleFileLoadingError} />
+                    <Styled.AssetContainer withCurrentUser={withCurrentUser}>
+                        <Styled.Image src={content} onError={handleFileLoadingError} />
                         {withLastUserMessage && showAvatar && showAvatar()}
-                    </Dashboard.AssetContainer>
+                    </Styled.AssetContainer>
                 )
             ) : type === 'VIDEO' ? (
                 videoError ? (
                     showError('Video has failed to load')
                 ) : (
-                    <Dashboard.AssetContainer withCurrentUser={withCurrentUser}>
-                        <Dashboard.Video src={content} onError={handleFileLoadingError} controls />
+                    <Styled.AssetContainer withCurrentUser={withCurrentUser}>
+                        <Styled.Video src={content} onError={handleFileLoadingError} controls />
                         {withLastUserMessage && showAvatar && showAvatar()}
-                    </Dashboard.AssetContainer>
+                    </Styled.AssetContainer>
                 )
             ) : (
-                <Dashboard.Content
+                <Styled.Content
                     onClick={() => {
                         if (withFile) {
                             fileSaver.saveAs(content, filename)
@@ -93,10 +93,10 @@ const MessageContent = ({
                 >
                     {withFile ? filename : content}
                     {withLastUserMessage && showAvatar && showAvatar()}
-                </Dashboard.Content>
+                </Styled.Content>
             )}
             {(withLastUserMessage || showDetails) && (
-                <Dashboard.Date
+                <Styled.Date
                     withCurrentUser={withCurrentUser}
                     withLastUserMessage={withLastUserMessage}
                     showDetails={showDetails}
@@ -105,7 +105,7 @@ const MessageContent = ({
                         ? date.toLocaleTimeString()
                         : date.toLocaleString()}
                     {views && `, ${views}👁️`}
-                </Dashboard.Date>
+                </Styled.Date>
             )}
         </MessageContentContainer>
     )

@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro'
 
-import * as Dashboard from '../styled/Dashboard'
+import * as Styled from '../styled'
 
 const InputContainer = styled.div`
     width: 100%;
@@ -24,9 +24,9 @@ interface IInput {
 const Input = ({ id, name, type, label, value, placeholder, error, onChange }: IInput) => {
     return (
         <InputContainer>
-            <Dashboard.Label htmlFor={id}>{label}</Dashboard.Label>
+            <Styled.Label htmlFor={id}>{label}</Styled.Label>
             {type === 'textarea' ? (
-                <Dashboard.Textarea
+                <Styled.Textarea
                     id={id}
                     name={name}
                     value={value}
@@ -34,7 +34,7 @@ const Input = ({ id, name, type, label, value, placeholder, error, onChange }: I
                     onChange={onChange}
                 />
             ) : (
-                <Dashboard.Input
+                <Styled.Input
                     id={id}
                     name={name}
                     type={type}
@@ -43,7 +43,7 @@ const Input = ({ id, name, type, label, value, placeholder, error, onChange }: I
                     onChange={onChange}
                 />
             )}
-            {error && <Dashboard.Error>{error}</Dashboard.Error>}
+            {error && <Styled.Error>{error}</Styled.Error>}
         </InputContainer>
     )
 }

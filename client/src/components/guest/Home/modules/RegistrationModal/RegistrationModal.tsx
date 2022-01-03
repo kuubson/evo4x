@@ -4,7 +4,7 @@ import ApiFeedback from 'components/shared/ApiFeedback/ApiFeedback'
 import Input from './components/Input'
 
 import { BlackLayer } from 'components/shared/styledComponents'
-import * as Dashboard from './styled/Dashboard'
+import * as Styled from './styled'
 
 import { useRegistrationModal } from './hooks'
 
@@ -33,13 +33,13 @@ const RegistrationModal = ({ showModal, toggleModal }: IRegistrationModal) => {
     const formCompleted = !!name && !!email && !!password && !!repeatedPassword
     return (
         <RegistrationModalContainer showLayer={showModal}>
-            <Dashboard.Content showModal={showModal}>
-                <Dashboard.CloseButton onClick={toggleModal}>✕</Dashboard.CloseButton>
-                <Dashboard.Header scaleOut={formCompleted}>
+            <Styled.Content showModal={showModal}>
+                <Styled.CloseButton onClick={toggleModal}>✕</Styled.CloseButton>
+                <Styled.Header scaleOut={formCompleted}>
                     {`"You either win or learn - 
                     not win or lose"`}
-                </Dashboard.Header>
-                <Dashboard.Form onSubmit={register} noValidate>
+                </Styled.Header>
+                <Styled.Form onSubmit={register} noValidate>
                     <Input
                         id="name"
                         name="name"
@@ -80,10 +80,10 @@ const RegistrationModal = ({ showModal, toggleModal }: IRegistrationModal) => {
                         error={repeatedPasswordError}
                         onChange={formHandler.handleInputValue}
                     />
-                    <Dashboard.Submit scaleIn={formCompleted}>Join evo4x</Dashboard.Submit>
+                    <Styled.Submit scaleIn={formCompleted}>Join evo4x</Styled.Submit>
                     <ApiFeedback />
-                </Dashboard.Form>
-            </Dashboard.Content>
+                </Styled.Form>
+            </Styled.Content>
         </RegistrationModalContainer>
     )
 }

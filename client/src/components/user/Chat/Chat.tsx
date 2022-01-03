@@ -5,7 +5,7 @@ import ApiFeedback from 'components/shared/ApiFeedback/ApiFeedback'
 import Message from './modules/Message/Message'
 import Textarea from './modules/Textarea/Textarea'
 
-import * as Dashboard from './styled/Dashboard'
+import * as Styled from './styled'
 
 import { useMessagesInfo } from 'hooks'
 import { useChat, useTextarea } from './hooks'
@@ -40,12 +40,12 @@ const Chat = () => {
     return (
         <ChatContainer>
             {areThereUnreadMessages && (
-                <Dashboard.UnreadMessagesInfo onClick={getUnreadMessages}>
+                <Styled.UnreadMessagesInfo onClick={getUnreadMessages}>
                     Unread messages
-                </Dashboard.UnreadMessagesInfo>
+                </Styled.UnreadMessagesInfo>
             )}
-            <Dashboard.Content>
-                <Dashboard.Messages
+            <Styled.Content>
+                <Styled.Messages
                     ref={messagesRef}
                     onTouchStart={() => textareaRef.current && textareaRef.current.blur()}
                     onScroll={event =>
@@ -67,12 +67,12 @@ const Chat = () => {
                                 />
                             ))
                         ) : (
-                            <Dashboard.Warning>There are no messages yet</Dashboard.Warning>
+                            <Styled.Warning>There are no messages yet</Styled.Warning>
                         ))}
-                </Dashboard.Messages>
-                <Dashboard.Error>
+                </Styled.Messages>
+                <Styled.Error>
                     <ApiFeedback />
-                </Dashboard.Error>
+                </Styled.Error>
                 <Textarea
                     message={message}
                     setMessage={setMessage}
@@ -82,7 +82,7 @@ const Chat = () => {
                     sendMessage={sendMessage}
                     sendFile={sendFile}
                 />
-            </Dashboard.Content>
+            </Styled.Content>
         </ChatContainer>
     )
 }

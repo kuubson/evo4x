@@ -1,6 +1,6 @@
 import MessageContent from 'components/user/Chat/modules/Message/components/MessageContent'
 
-import * as MessageDashboard from 'components/user/Chat/modules/Message/styled/Dashboard'
+import * as StyledMessage from 'components/user/Chat/modules/Message/styled'
 
 interface IAnalysis {
     analysis: Analysis
@@ -13,13 +13,9 @@ const Analysis = ({
 }: IAnalysis) => {
     const withLastUserMessage = !nextAnalysis
     const showError = (error: string) => (
-        <MessageDashboard.Content
-            withCurrentUser
-            withLastUserMessage={withLastUserMessage}
-            withError
-        >
+        <StyledMessage.Content withCurrentUser withLastUserMessage={withLastUserMessage} withError>
             {error}
-        </MessageDashboard.Content>
+        </StyledMessage.Content>
     )
     return (
         <MessageContent

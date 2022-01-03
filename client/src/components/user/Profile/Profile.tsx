@@ -4,10 +4,11 @@ import styled from 'styled-components/macro'
 import { useProfile } from './hooks'
 
 import ApiFeedback from 'components/shared/ApiFeedback/ApiFeedback'
+
 import Input from 'components/guest/Home/modules/RegistrationModal/components/Input'
 
-import { FileInput } from 'components/user/Chat/styled/Dashboard'
-import * as Dashboard from './styled/Dashboard'
+import { FileInput } from 'components/user/Chat/styled'
+import * as Styled from './styled'
 
 const ProfileContainer = styled.section`
     min-height: 100%;
@@ -32,8 +33,8 @@ const Profile = () => {
     })
     return (
         <ProfileContainer>
-            <Dashboard.Content>
-                <Dashboard.Info onSubmit={updateProfile}>
+            <Styled.Content>
+                <Styled.Info onSubmit={updateProfile}>
                     <Input
                         id="name"
                         name="name"
@@ -54,24 +55,22 @@ const Profile = () => {
                         error={storyError}
                         onChange={profileHandler.handleInputValue}
                     />
-                    <Dashboard.Button>Update profile</Dashboard.Button>
+                    <Styled.Button>Update profile</Styled.Button>
                     <ApiFeedback />
-                </Dashboard.Info>
-                <Dashboard.AvatarContainer>
-                    <Dashboard.Avatar src={avatar} />
-                    <Dashboard.Buttons>
-                        <Dashboard.Button as="label" htmlFor="file">
+                </Styled.Info>
+                <Styled.AvatarContainer>
+                    <Styled.Avatar src={avatar} />
+                    <Styled.Buttons>
+                        <Styled.Button as="label" htmlFor="file">
                             Change avatar
-                        </Dashboard.Button>
+                        </Styled.Button>
                         {!withDefaultAvatar && (
-                            <Dashboard.Button onClick={removeAvatar}>
-                                Remove avatar
-                            </Dashboard.Button>
+                            <Styled.Button onClick={removeAvatar}>Remove avatar</Styled.Button>
                         )}
-                    </Dashboard.Buttons>
+                    </Styled.Buttons>
                     {showAvatarInput && <FileInput onChange={changeAvatar} />}
-                </Dashboard.AvatarContainer>
-            </Dashboard.Content>
+                </Styled.AvatarContainer>
+            </Styled.Content>
         </ProfileContainer>
     )
 }

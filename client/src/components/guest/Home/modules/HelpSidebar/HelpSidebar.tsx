@@ -1,11 +1,12 @@
 import styled from 'styled-components/macro'
 
 import ApiFeedback from 'components/shared/ApiFeedback/ApiFeedback'
+
 import Input from '../RegistrationModal/components/Input'
 
 import { BlackLayer } from 'components/shared/styledComponents'
-import * as RegistrationModalDashboard from '../RegistrationModal/styled/Dashboard'
-import * as Dashboard from './styled/Dashboard'
+import * as StyledRegistrationModal from '../RegistrationModal/styled'
+import * as Styled from './styled'
 
 import { useHelpSidebar } from './hooks'
 
@@ -44,17 +45,17 @@ const HelpSidebar = ({ showSidebar, toggleSidebar, hideSidebar, showLoginModal }
     }
     return (
         <HelpSidebarContainer showLayer={showSidebar}>
-            <Dashboard.Content showSidebar={showSidebar}>
-                <RegistrationModalDashboard.CloseButton onClick={closeHelpSidebar}>
+            <Styled.Content showSidebar={showSidebar}>
+                <StyledRegistrationModal.CloseButton onClick={closeHelpSidebar}>
                     ✕
-                </RegistrationModalDashboard.CloseButton>
+                </StyledRegistrationModal.CloseButton>
                 {issues.map(({ issue, active, handleOnClick }) => (
-                    <Dashboard.Issue key={issue} active={active} onClick={handleOnClick}>
+                    <Styled.Issue key={issue} active={active} onClick={handleOnClick}>
                         {issue}
-                    </Dashboard.Issue>
+                    </Styled.Issue>
                 ))}
                 {issue && (
-                    <Dashboard.Form onSubmit={handleHelpSidebar} noValidate>
+                    <Styled.Form onSubmit={handleHelpSidebar} noValidate>
                         {issue === 'changePassword' ? (
                             <>
                                 <Input
@@ -90,7 +91,7 @@ const HelpSidebar = ({ showSidebar, toggleSidebar, hideSidebar, showLoginModal }
                                 onChange={formHandler.handleInputValue}
                             />
                         )}
-                        <RegistrationModalDashboard.Submit>
+                        <StyledRegistrationModal.Submit>
                             {issue === 'email'
                                 ? 'Resend e-mail'
                                 : issue === 'link'
@@ -98,11 +99,11 @@ const HelpSidebar = ({ showSidebar, toggleSidebar, hideSidebar, showLoginModal }
                                 : issue === 'password'
                                 ? 'Request password change'
                                 : issue === 'changePassword' && 'Change password'}
-                        </RegistrationModalDashboard.Submit>
+                        </StyledRegistrationModal.Submit>
                         <ApiFeedback />
-                    </Dashboard.Form>
+                    </Styled.Form>
                 )}
-            </Dashboard.Content>
+            </Styled.Content>
         </HelpSidebarContainer>
     )
 }

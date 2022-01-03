@@ -2,8 +2,8 @@ import styled from 'styled-components/macro'
 
 import ProgressLoader from './components/ProgressLoader/ProgressLoader'
 
-import { FileInput } from '../../styled/Dashboard'
-import * as Dashboard from './styled/Dashboard'
+import { FileInput } from '../../styled'
+import * as Styled from './styled'
 
 import { detectMobileDevice } from 'helpers'
 
@@ -62,7 +62,7 @@ const Textarea = ({
     const fileUploadInProgress = !!uploadPercentage
     return (
         <TextareaContainer>
-            <Dashboard.Content
+            <Styled.Content
                 ref={textareaRef}
                 value={message}
                 placeholder="Type your message"
@@ -72,17 +72,17 @@ const Textarea = ({
                 }
                 onKeyPress={handlePressingTextarea}
             />
-            <Dashboard.Buttons>
+            <Styled.Buttons>
                 {showFileInput && <FileInput onChange={sendFile} />}
                 {fileUploadInProgress ? (
                     <ProgressLoader percentage={uploadPercentage} />
                 ) : (
-                    <Dashboard.Button as="label" htmlFor="file">
+                    <Styled.Button as="label" htmlFor="file">
                         Upload 📁
-                    </Dashboard.Button>
+                    </Styled.Button>
                 )}
-                <Dashboard.Button onClick={handleSendButton}>Send ✉️</Dashboard.Button>
-            </Dashboard.Buttons>
+                <Styled.Button onClick={handleSendButton}>Send ✉️</Styled.Button>
+            </Styled.Buttons>
         </TextareaContainer>
     )
 }
