@@ -24,26 +24,29 @@ const storage = multer.diskStorage({
 export const multerFile = multer({
     storage,
     fileFilter: (req: MulterRequest, { mimetype, originalname }, callback) => {
-        const { regex, sizes } = filesInfo
-        const isImage = regex.images.test(mimetype) || regex.images.test(originalname)
-        const isVideo = regex.videos.test(mimetype) || regex.videos.test(originalname)
-        const isFile = regex.files.test(mimetype) || regex.files.test(originalname)
+        const {
+            regex: { images, videos, files },
+            sizes: { maxImageSize, maxVideoSize, maxFileSize }
+        } = filesInfo
+        const size = parseInt(req.headers['content-length']!)
+        const isImage = images.test(mimetype) || images.test(originalname)
+        const isVideo = videos.test(mimetype) || videos.test(originalname)
+        const isFile = files.test(mimetype) || files.test(originalname)
         if (!isImage && !isVideo && !isFile) {
             req.allowedExtenstionsError = true
         }
-        const size = parseInt(req.headers['content-length']!)
         if (isImage) {
-            if (size > sizes.imageMaxSize) {
+            if (size > maxImageSize) {
                 req.sizeLimit = true
             }
         }
         if (isVideo) {
-            if (size > sizes.maxVideoSize) {
+            if (size > maxVideoSize) {
                 req.sizeLimit = true
             }
         }
         if (isFile) {
-            if (size > sizes.maxFileSize) {
+            if (size > maxFileSize) {
                 req.sizeLimit = true
             }
         }

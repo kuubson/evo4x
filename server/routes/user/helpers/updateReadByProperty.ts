@@ -1,9 +1,9 @@
-import { Message as MessageClass } from 'database/models/Message'
+import { Message } from 'database/models/Message'
 import { Analysis } from 'database/models/Analysis'
 
 type ReadByPropertyUpdater = (userId: number, items: Items) => Promise<Items>
 
-type Items = MessageClass[] | Analysis[]
+type Items = Message[] | Analysis[]
 
 export const updateReadByProperty: ReadByPropertyUpdater = async (userId, items) => {
     return await Promise.all(

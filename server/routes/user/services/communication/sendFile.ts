@@ -14,17 +14,17 @@ export const sendFile: ProtectedMulterRoute = async (req, res, next) => {
         await Connection.transaction(async transaction => {
             const { id } = req.user
             const { name } = req.user.profile
-            const { regex } = filesInfo
+            const { images, videos, files } = filesInfo.regex
             const { mimetype, originalname, path } = req.file
             let type, content, cloudinaryId
             switch (true) {
-                case regex.images.test(mimetype) || regex.images.test(originalname):
+                case images.test(mimetype) || images.test(originalname):
                     type = 'IMAGE'
                     break
-                case regex.videos.test(mimetype) || regex.videos.test(originalname):
+                case videos.test(mimetype) || videos.test(originalname):
                     type = 'VIDEO'
                     break
-                case regex.files.test(mimetype) || regex.files.test(originalname):
+                case files.test(mimetype) || files.test(originalname):
                     type = 'FILE'
                     break
                 default:

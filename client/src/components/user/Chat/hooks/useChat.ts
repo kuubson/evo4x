@@ -158,11 +158,14 @@ export const useChat = ({ setShowFileInput, setUploadPercentage }: ChatHook) => 
         let percentage = 0
         const file = event.currentTarget.files![0]
         if (file) {
-            const { regex, sizes } = filesInfo
+            const {
+                regex: { images, videos, files },
+                sizes: { maxImageSize, maxVideoSize, maxFileSize }
+            } = filesInfo
             const { name, size } = file
-            const isImage = regex.images.test(name)
-            const isVideo = regex.videos.test(name)
-            const isFile = regex.files.test(name)
+            const isImage = images.test(name)
+            const isVideo = videos.test(name)
+            const isFile = files.test(name)
             const resetFileInput = () => {
                 setShowFileInput(false)
                 setTimeout(() => setShowFileInput(true), 0)
@@ -175,19 +178,19 @@ export const useChat = ({ setShowFileInput, setUploadPercentage }: ChatHook) => 
                 return setApiFeedback('You cannot send a file with this extension')
             }
             if (isImage) {
-                if (size > sizes.imageMaxSize) {
+                if (size > maxImageSize) {
                     resetFileInput()
                     largeSizeError()
                 }
             }
             if (isVideo) {
-                if (size > sizes.maxVideoSize) {
+                if (size > maxVideoSize) {
                     resetFileInput()
                     largeSizeError()
                 }
             }
             if (isFile) {
-                if (size > sizes.maxFileSize) {
+                if (size > maxFileSize) {
                     resetFileInput()
                     largeSizeError()
                 }

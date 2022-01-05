@@ -21,9 +21,9 @@ export const handleMulterFile = (): MulterMiddleware => (req, res, next) =>
                 next(new ApiError('You cannot send this large file', 500))
                 break
             default:
-                const { regex } = filesInfo
+                const { images } = filesInfo.regex
                 const { mimetype, originalname, path } = req.file
-                if (regex.images.test(mimetype) || regex.images.test(originalname)) {
+                if (images.test(mimetype) || images.test(originalname)) {
                     reduceImageSize(path, next)
                 } else {
                     next()

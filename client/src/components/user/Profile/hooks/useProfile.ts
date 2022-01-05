@@ -105,9 +105,12 @@ export const useProfile = ({ setShowAvatarInput }: ProfileHook) => {
     const changeAvatar = async (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.currentTarget.files![0]
         if (file) {
-            const { regex, sizes } = filesInfo
+            const {
+                regex: { images },
+                sizes: { maxImageSize }
+            } = filesInfo
             const { name, size } = file
-            const isImage = regex.images.test(name)
+            const isImage = images.test(name)
             const resetAvatarFileInput = () => {
                 setShowAvatarInput(false)
                 setShowAvatarInput(true)
@@ -117,7 +120,7 @@ export const useProfile = ({ setShowAvatarInput }: ProfileHook) => {
                 return setApiFeedback('You cannot upload this file as an avatar')
             }
             if (isImage) {
-                if (size > sizes.imageMaxSize) {
+                if (size > maxImageSize) {
                     resetAvatarFileInput()
                     return setApiFeedback('You cannot upload this large file')
                 }
