@@ -1,15 +1,6 @@
-import * as register from './register'
-import * as authenticateEmail from './authenticateEmail'
-import * as resendEmail from './resendEmail'
-import * as login from './login'
-import * as requestPasswordChange from './requestPasswordChange'
-import * as changePassword from './changePassword'
-
-export const auth = {
-    register,
-    authenticateEmail,
-    resendEmail,
-    login,
-    requestPasswordChange,
-    changePassword
-}
+export * as register from './register'
+export * as authenticateEmail from './authenticateEmail'
+export * as resendEmail from './resendEmail'
+export * as login from './login'
+export * as requestPasswordChange from './requestPasswordChange'
+export * as changePassword from './changePassword'

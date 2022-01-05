@@ -27,7 +27,7 @@ const RegistrationModal = ({ showModal, toggleModal }: IRegistrationModal) => {
             repeatedPassword,
             repeatedPasswordError
         },
-        formHandler,
+        formHandler: { handleInputValue },
         register
     } = useRegistrationModal()
     const formCompleted = !!name && !!email && !!password && !!repeatedPassword
@@ -48,7 +48,7 @@ const RegistrationModal = ({ showModal, toggleModal }: IRegistrationModal) => {
                         value={name}
                         placeholder="Type your name"
                         error={nameError}
-                        onChange={formHandler.handleInputValue}
+                        onChange={handleInputValue}
                     />
                     <Input
                         id="registrationEmail"
@@ -58,7 +58,7 @@ const RegistrationModal = ({ showModal, toggleModal }: IRegistrationModal) => {
                         value={email}
                         placeholder="Type your email address"
                         error={emailError}
-                        onChange={formHandler.handleInputValue}
+                        onChange={handleInputValue}
                     />
                     <Input
                         id="registrationPassword"
@@ -68,7 +68,7 @@ const RegistrationModal = ({ showModal, toggleModal }: IRegistrationModal) => {
                         value={password}
                         placeholder="Type your password"
                         error={passwordError}
-                        onChange={formHandler.handleInputValue}
+                        onChange={handleInputValue}
                     />
                     <Input
                         id="registrationRepeatedPassword"
@@ -78,7 +78,7 @@ const RegistrationModal = ({ showModal, toggleModal }: IRegistrationModal) => {
                         value={repeatedPassword}
                         placeholder="Type your password again"
                         error={repeatedPasswordError}
-                        onChange={formHandler.handleInputValue}
+                        onChange={handleInputValue}
                     />
                     <Styled.Submit scaleIn={formCompleted}>Join evo4x</Styled.Submit>
                     <ApiFeedback />

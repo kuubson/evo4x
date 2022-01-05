@@ -20,7 +20,7 @@ interface ILoginModal {
 const LoginModal = ({ role, setRole, showModal, toggleModal }: ILoginModal) => {
     const {
         form: { email, emailError, password, passwordError },
-        formHandler,
+        formHandler: { handleInputValue },
         login
     } = useLoginModal({
         role
@@ -47,7 +47,7 @@ const LoginModal = ({ role, setRole, showModal, toggleModal }: ILoginModal) => {
                         value={email}
                         placeholder="Type your email address"
                         error={emailError}
-                        onChange={formHandler.handleInputValue}
+                        onChange={handleInputValue}
                     />
                     <Input
                         id="loginPassword"
@@ -57,7 +57,7 @@ const LoginModal = ({ role, setRole, showModal, toggleModal }: ILoginModal) => {
                         value={password}
                         placeholder="Type your password"
                         error={passwordError}
-                        onChange={formHandler.handleInputValue}
+                        onChange={handleInputValue}
                     />
                     <StyledRegistrationModal.Submit>Login</StyledRegistrationModal.Submit>
                     <ApiFeedback />

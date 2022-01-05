@@ -1,8 +1,10 @@
 import webpush from 'web-push'
 
-import { User, Subscription } from 'database/database'
+import { User, Subscription } from 'database'
 
 import { Op } from 'utils'
+
+type NotificationsForOtherUsersSender = (userId: number, options: Options) => void
 
 type Options = {
     tag: number
@@ -14,8 +16,6 @@ type Options = {
         url: string
     }
 }
-
-type NotificationsForOtherUsersSender = (userId: number, options: Options) => void
 
 export const sendNotificationsForOtherUsers: NotificationsForOtherUsersSender = async (
     userId,

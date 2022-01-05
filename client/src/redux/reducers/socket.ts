@@ -2,17 +2,17 @@ import { Socket } from 'socket.io-client'
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-type SocketType = Socket | null
-
 type SliceState = {
     socket: SocketType
 }
+
+type SocketType = Socket | null
 
 const initialState: SliceState = {
     socket: null
 }
 
-const socket = createSlice({
+const socketSlice = createSlice({
     name: 'socket',
     initialState,
     reducers: {
@@ -22,6 +22,6 @@ const socket = createSlice({
     }
 })
 
-export const { setSocket } = socket.actions
+export const { setSocket } = socketSlice.actions
 
-export default socket.reducer
+export default socketSlice.reducer

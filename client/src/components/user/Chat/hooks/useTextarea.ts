@@ -7,8 +7,8 @@ export const useTextarea = () => {
     return {
         textareaRef,
         showFileInput,
-        setShowFileInput,
         uploadPercentage,
+        setShowFileInput,
         setUploadPercentage
     }
 }

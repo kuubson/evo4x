@@ -1,7 +1,7 @@
 import { PassportStatic } from 'passport'
 import passportJwt from 'passport-jwt'
 
-import { Admin, User, Profile } from 'database/database'
+import { Admin, User, Profile } from 'database'
 
 const JwtStrategy = passportJwt.Strategy
 const ExtractJwt = passportJwt.ExtractJwt

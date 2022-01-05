@@ -1,10 +1,10 @@
 import jwt from 'jsonwebtoken'
 
-import { Connection, User, Authentication } from 'database/database'
-
-import { ApiError, baseUrl, emailTemplate } from 'utils'
+import { Connection, User, Authentication } from 'database'
 
 import { transporter, validator } from 'helpers'
+
+import { ApiError, baseUrl, emailTemplate } from 'utils'
 
 import { Route } from 'types/express'
 
@@ -34,7 +34,6 @@ export const resendEmail: Route = async (req, res, next) => {
                 }
             )
             const mailOptions = {
-                from: `"evo4x app" <${process.env.NODEMAILER_USERNAME}>`,
                 to: email,
                 subject: 'Email address authentication in the evo4x app',
                 html: emailTemplate(

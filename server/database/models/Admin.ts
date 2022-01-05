@@ -27,7 +27,7 @@ const AdminModel = (sequelize: Sequelize) => {
             sequelize,
             modelName: 'admin',
             hooks: {
-                beforeCreate: admin => {
+                beforeCreate: (admin: Admin) => {
                     admin.password = bcrypt.hashSync(admin.password, 11)
                 }
             }

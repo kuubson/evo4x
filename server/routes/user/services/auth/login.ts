@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 
-import { User, Authentication } from 'database/database'
+import { User, Authentication } from 'database'
 
 import { validator } from 'helpers'
 

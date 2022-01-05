@@ -1,6 +1,5 @@
 export { Op } from 'sequelize'
 export { ApiError } from './ApiError'
-export { handleError } from './handleError'
 export { baseUrl } from './baseUrl'
 export { emailTemplate } from './emailTemplate'
 export { cookie } from './cookie'

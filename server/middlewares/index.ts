@@ -18,19 +18,19 @@ cloudinary.v2.config({
     api_secret: process.env.CLOUDINARY_API_SECRET
 })
 
+import { initializeCsrf } from './csrf'
 import { initializeSocketIO } from 'socketio/socketio'
 import { initializePassport } from './passport'
-import { initializeCsrf } from './csrf'
 
 initializePassport(passport)
 
 export const initializeMiddlewares = (app: Application, server: Server) => {
-    initializeSocketIO(new SocketServer(server))
     app.use(express.json({ limit: '200kb' }))
     app.use(express.urlencoded({ extended: true, limit: '200kb' }))
     app.use(cookieParser())
     app.use(passport.initialize())
     initializeCsrf(app)
+    initializeSocketIO(new SocketServer(server))
 }
 
 export { errorHandler } from './errorHandler'

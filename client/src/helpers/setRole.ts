@@ -1,7 +1,5 @@
 import { store } from 'redux/store'
 
-export const setRole = (role: AllRoles) =>
-    store.dispatch({
-        type: 'role/setRole',
-        payload: role
-    })
+import { setRole as setRoleAction } from 'redux/reducers/role'
+
+export const setRole = (role: AllRoles) => store.dispatch(setRoleAction(role))

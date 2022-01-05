@@ -13,9 +13,9 @@ type Response = {
 }
 
 export const handleApiValidation: ApiValidationHandler = (error, setForm) => {
-    let errors = {}
     const response: Response = error.response
     if (response && response.status === 422) {
+        let errors = {}
         response.data.results.map(
             ({ parameter, error }) =>
                 (errors = {

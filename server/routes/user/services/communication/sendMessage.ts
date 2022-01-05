@@ -1,6 +1,6 @@
 import { check } from 'express-validator'
 
-import { Connection } from 'database/database'
+import { Connection } from 'database'
 
 import { sendNotificationsForOtherUsers } from 'routes/user/helpers'
 

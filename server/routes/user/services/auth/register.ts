@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 
-import { Connection, User, Authentication, Profile } from 'database/database'
+import { Connection, User, Authentication, Profile } from 'database'
 
 import { transporter, validator, getDefaultAvatar } from 'helpers'
 
@@ -39,7 +39,6 @@ export const register: Route = async (req, res, next) => {
                 }
             )
             const mailOptions = {
-                from: `"evo4x app" <${process.env.NODEMAILER_USERNAME}>`,
                 to: email,
                 subject: 'Email address authentication in the evo4x app',
                 html: emailTemplate(

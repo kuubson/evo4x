@@ -1,7 +1,2 @@
-import * as checkRole from './checkRole'
-import * as logout from './logout'
-
-export const auth = {
-    checkRole,
-    logout
-}
+export * as checkRole from './checkRole'
+export * as logout from './logout'

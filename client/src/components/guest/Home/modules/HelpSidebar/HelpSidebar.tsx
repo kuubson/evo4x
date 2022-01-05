@@ -28,8 +28,8 @@ const HelpSidebar = ({ showSidebar, toggleSidebar, hideSidebar, showLoginModal }
             repeatedPassword,
             repeatedPasswordError
         },
-        formHandler,
         issue,
+        formHandler: { handleInputValue },
         setIssue,
         handleHelpSidebar,
         issues
@@ -65,7 +65,7 @@ const HelpSidebar = ({ showSidebar, toggleSidebar, hideSidebar, showLoginModal }
                                     value={password}
                                     placeholder="Type your password"
                                     error={passwordError}
-                                    onChange={formHandler.handleInputValue}
+                                    onChange={handleInputValue}
                                 />
                                 <Input
                                     id="helpSidebarRepeatedPassword"
@@ -75,7 +75,7 @@ const HelpSidebar = ({ showSidebar, toggleSidebar, hideSidebar, showLoginModal }
                                     value={repeatedPassword}
                                     placeholder="Type your password again"
                                     error={repeatedPasswordError}
-                                    onChange={formHandler.handleInputValue}
+                                    onChange={handleInputValue}
                                 />
                             </>
                         ) : (
@@ -87,7 +87,7 @@ const HelpSidebar = ({ showSidebar, toggleSidebar, hideSidebar, showLoginModal }
                                 value={email}
                                 placeholder="Type your email address"
                                 error={emailError}
-                                onChange={formHandler.handleInputValue}
+                                onChange={handleInputValue}
                             />
                         )}
                         <StyledRegistrationModal.Submit>

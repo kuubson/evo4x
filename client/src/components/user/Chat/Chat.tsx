@@ -17,7 +17,7 @@ const ChatContainer = styled.section`
 
 const Chat = () => {
     const { lastUnreadMessageIndex } = useMessagesInfo()
-    const { textareaRef, showFileInput, setShowFileInput, uploadPercentage, setUploadPercentage } =
+    const { textareaRef, showFileInput, uploadPercentage, setShowFileInput, setUploadPercentage } =
         useTextarea()
     const {
         messagesRef,

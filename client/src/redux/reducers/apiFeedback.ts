@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-const apiFeedback = createSlice({
+const apiFeedbackSlice = createSlice({
     name: 'apiFeedback',
     initialState: {
         apiFeedback: ''
@@ -12,4 +12,6 @@ const apiFeedback = createSlice({
     }
 })
 
-export default apiFeedback.reducer
+export const { setApiFeedback } = apiFeedbackSlice.actions
+
+export default apiFeedbackSlice.reducer

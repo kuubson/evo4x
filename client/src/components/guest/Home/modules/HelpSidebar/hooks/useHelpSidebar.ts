@@ -22,8 +22,8 @@ export const useHelpSidebar = ({ toggleSidebar, hideSidebar, showLoginModal }: H
         repeatedPassword: '',
         repeatedPasswordError: ''
     })
-    const formHandler = useFormHandler(setForm)
     const [issue, setIssue] = useState<Issue>('')
+    const formHandler = useFormHandler(setForm)
     useEffect(() => {
         if (failedAuthentication) {
             showLoginModal()
@@ -101,8 +101,8 @@ export const useHelpSidebar = ({ toggleSidebar, hideSidebar, showLoginModal }: H
     ]
     return {
         form,
-        formHandler,
         issue,
+        formHandler,
         setIssue,
         handleHelpSidebar,
         issues

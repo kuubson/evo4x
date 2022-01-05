@@ -6,7 +6,7 @@ import 'dotenv/config'
 
 import './aliases'
 
-import 'database/database'
+import 'database'
 
 import { initializeMiddlewares, errorHandler } from 'middlewares'
 

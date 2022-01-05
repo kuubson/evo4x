@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { ThemeProvider } from 'styled-components'
 
-import { register } from './serviceWorkerRegistration'
+import * as serviceWorkerRegistration from './serviceWorkerRegistration'
 
 import { store, persistor } from 'redux/store'
 
@@ -28,7 +28,7 @@ render(
     document.getElementById('root')
 )
 
-register({
+serviceWorkerRegistration.register({
     onUpdate: async registration => {
         await registration.unregister()
         window.location.reload()

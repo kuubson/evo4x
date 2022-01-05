@@ -1,11 +1,4 @@
-import * as getProfile from './getProfile'
-import * as updateProfile from './updateProfile'
-import * as changeAvatar from './changeAvatar'
-import * as removeAvatar from './removeAvatar'
-
-export const profile = {
-    getProfile,
-    updateProfile,
-    changeAvatar,
-    removeAvatar
-}
+export * as getProfile from './getProfile'
+export * as updateProfile from './updateProfile'
+export * as changeAvatar from './changeAvatar'
+export * as removeAvatar from './removeAvatar'

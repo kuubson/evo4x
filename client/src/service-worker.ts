@@ -67,7 +67,7 @@ self.addEventListener('push', event => {
                 .then(notifications => {
                     let notificationExists = false
                     let messagesAmount = 1
-                    notifications.map(notification => {
+                    notifications.forEach(notification => {
                         if (notification) {
                             notificationExists = true
                             messagesAmount = notification.data.messagesAmount + 1

@@ -1,3 +1,4 @@
+export { handleError } from './handleError'
 export { transporter } from './transporter'
 export { validator } from './validator'
 export { checkSanitization } from './checkSanitization'

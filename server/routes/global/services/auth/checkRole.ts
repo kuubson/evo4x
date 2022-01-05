@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 
-import { Admin, User } from 'database/database'
+import { Admin, User } from 'database'
 
 import { validator } from 'helpers'
 

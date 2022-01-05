@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 
-import { Connection, User, Authentication } from 'database/database'
+import { Connection, User, Authentication } from 'database'
 
 import { transporter, validator } from 'helpers'
 
@@ -34,7 +34,6 @@ export const requestPasswordChange: Route = async (req, res, next) => {
                 }
             )
             const mailOptions = {
-                from: `"evo4x app" <${process.env.NODEMAILER_USERNAME}>`,
                 to: email,
                 subject: 'Password changing in the evo4x app',
                 html: emailTemplate(

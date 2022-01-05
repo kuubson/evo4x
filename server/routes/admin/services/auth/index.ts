@@ -1,5 +1,1 @@
-import * as login from './login'
-
-export const auth = {
-    login
-}
+export * as login from './login'

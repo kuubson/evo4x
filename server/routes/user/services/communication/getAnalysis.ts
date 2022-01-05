@@ -1,4 +1,4 @@
-import { Analysis } from 'database/database'
+import { Analysis } from 'database'
 
 import { validator } from 'helpers'
 import { updateReadByProperty, countAnalysisViews } from 'routes/user/helpers'

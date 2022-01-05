@@ -1,7 +1,7 @@
+export { useQueryParams } from './useQueryParams'
 export { useSocket } from './useSocket'
 export { useLoader } from './useLoader'
 export { useApiFeedback } from './useApiFeedback'
 export { useRole } from './useRole'
 export { useMessagesInfo } from './useMessagesInfo'
-export { useQueryParams } from './useQueryParams'
 export { useFormHandler } from './useFormHandler'

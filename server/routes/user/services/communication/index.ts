@@ -1,15 +1,6 @@
-import * as subscribePushNotifications from './subscribePushNotifications'
-import * as getMessages from './getMessages'
-import * as sendMessage from './sendMessage'
-import * as sendFile from './sendFile'
-import * as getMessagesInfo from './getMessagesInfo'
-import * as getAnalysis from './getAnalysis'
-
-export const communication = {
-    subscribePushNotifications,
-    getMessages,
-    sendMessage,
-    sendFile,
-    getMessagesInfo,
-    getAnalysis
-}
+export * as subscribePushNotifications from './subscribePushNotifications'
+export * as getMessages from './getMessages'
+export * as sendMessage from './sendMessage'
+export * as sendFile from './sendFile'
+export * as getMessagesInfo from './getMessagesInfo'
+export * as getAnalysis from './getAnalysis'

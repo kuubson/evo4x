@@ -1,6 +1,6 @@
 import cloudinary from 'cloudinary'
 
-import { Connection } from 'database/database'
+import { Connection } from 'database'
 
 import { deleteTemporaryFile } from 'helpers'
 

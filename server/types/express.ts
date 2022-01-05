@@ -6,10 +6,6 @@ import { MulterRequest } from 'types/multer'
 
 export type Route = (req: Request, res: Response, next: NextFunction) => void
 
-export type UserRequest = Request & {
-    user: User
-}
-
 export type ProtectedRoute = (req: UserRequest, res: Response, next: NextFunction) => Promise<void>
 
 export type ProtectedMulterRoute = (
@@ -17,3 +13,7 @@ export type ProtectedMulterRoute = (
     res: Response,
     next: NextFunction
 ) => Promise<void>
+
+export type UserRequest = Request & {
+    user: User
+}

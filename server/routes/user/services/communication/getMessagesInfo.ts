@@ -1,4 +1,4 @@
-import { Message } from 'database/database'
+import { Message } from 'database'
 
 import { ProtectedRoute } from 'types/express'
 

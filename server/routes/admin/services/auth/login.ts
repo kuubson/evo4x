@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 
-import { Admin } from 'database/database'
+import { Admin } from 'database'
 
 import { validator } from 'helpers'
 

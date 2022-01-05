@@ -1,5 +1,3 @@
-type MessageTypes = 'MESSAGE' | 'IMAGE' | 'VIDEO' | 'FILE'
-
 type Message = {
     id: number
     type: MessageTypes
@@ -8,3 +6,5 @@ type Message = {
     createdAt: Date
     user: User
 }
+
+type MessageTypes = 'MESSAGE' | 'IMAGE' | 'VIDEO' | 'FILE'

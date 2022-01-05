@@ -1,4 +1,4 @@
-import { User, Profile, Message } from 'database/database'
+import { User, Profile, Message } from 'database'
 
 import { validator } from 'helpers'
 import { updateReadByProperty } from 'routes/user/helpers'
