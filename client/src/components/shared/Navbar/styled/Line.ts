@@ -1,10 +1,10 @@
 import styled, { css } from 'styled-components/macro'
 
-type Props = {
+type StyledProps = {
     withHamburger: boolean | undefined
 }
 
-export const Line = styled.div<Props>`
+export const Line = styled.div<StyledProps>`
     width: 20px;
     border-bottom: 3px solid black;
     margin-bottom: 4px;

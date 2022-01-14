@@ -1,10 +1,10 @@
 import styled, { css } from 'styled-components/macro'
 
-type Props = {
+type StyledProps = {
     withHamburger: boolean | undefined
 }
 
-export const Hamburger = styled.div<Props>`
+export const Hamburger = styled.div<StyledProps>`
     cursor: pointer;
     transition: all ease-in-out 0.3s;
     transition-property: right, transform;

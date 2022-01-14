@@ -1,10 +1,10 @@
 import styled, { css } from 'styled-components/macro'
 
-type Props = {
+type StyledProps = {
     mobile?: boolean
 }
 
-export const Logo = styled.img<Props>`
+export const Logo = styled.img<StyledProps>`
     width: 200px;
     margin-bottom: 50px;
     @media (max-width: ${({ theme }) => theme.firstBreakpoint}) {

@@ -1,10 +1,10 @@
 import styled, { css } from 'styled-components/macro'
 
-type Props = {
+type StyledProps = {
     showSidebar: boolean
 }
 
-export const Content = styled.aside<Props>`
+export const Content = styled.aside<StyledProps>`
     width: 350px;
     height: 100%;
     padding-top: 40px;

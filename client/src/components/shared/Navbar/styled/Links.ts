@@ -1,10 +1,10 @@
 import styled, { css } from 'styled-components/macro'
 
-type Props = {
+type StyledProps = {
     hamburger: boolean | undefined
 }
 
-export const Links = styled.ul<Props>`
+export const Links = styled.ul<StyledProps>`
     display: flex;
     justify-content: center;
     align-items: center;

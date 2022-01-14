@@ -4,11 +4,11 @@ import fileSaver from 'file-saver'
 
 import * as Styled from '../styled'
 
-type Props = {
+type StyledProps = {
     withLastUserMessage: boolean
 }
 
-const MessageContentContainer = styled.div<Props>`
+const MessageContentContainer = styled.div<StyledProps>`
     display: flex;
     flex-direction: column;
     ${({ withLastUserMessage }) =>

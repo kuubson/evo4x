@@ -2,11 +2,11 @@ import styled, { css } from 'styled-components/macro'
 
 import { Button } from 'components/shared/styledComponents'
 
-type Props = {
+type StyledProps = {
     active: boolean
 }
 
-export const Issue = styled(Button)<Props>`
+export const Issue = styled(Button)<StyledProps>`
     max-width: 80%;
     margin-bottom: 40px;
     padding: 10px 20px;

@@ -1,10 +1,10 @@
 import styled, { css } from 'styled-components/macro'
 
-type Props = {
+type StyledProps = {
     withHamburger: boolean | undefined
 }
 
-export const Menu = styled.ul<Props>`
+export const Menu = styled.ul<StyledProps>`
     width: 100%;
     height: 100%;
     background: ${({ theme }) => theme.primaryColor};

@@ -1,13 +1,13 @@
 import styled, { css } from 'styled-components/macro'
 
-type Props = {
+type StyledProps = {
     withCurrentUser: boolean
     withLastUserMessage: boolean
     withFile?: boolean
     withError?: boolean
 }
 
-export const Content = styled.div<Props>`
+export const Content = styled.div<StyledProps>`
     width: max-content;
     max-width: 70%;
     padding: 8px 15px;

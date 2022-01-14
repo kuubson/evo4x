@@ -1,10 +1,10 @@
 import styled, { css } from 'styled-components/macro'
 
-type Props = {
+type StyledProps = {
     $fill: boolean
 }
 
-export const Button = styled.button<Props>`
+export const Button = styled.button<StyledProps>`
     margin: 60px auto 0px auto;
     padding: 15px 20px 10px 20px;
     border-bottom: 3px solid ${({ theme }) => theme.primaryColor};

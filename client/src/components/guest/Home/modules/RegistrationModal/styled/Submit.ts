@@ -2,11 +2,11 @@ import styled, { css } from 'styled-components/macro'
 
 import { Button } from 'components/shared/styledComponents'
 
-type Props = {
+type StyledProps = {
     scaleIn?: boolean
 }
 
-export const Submit = styled(Button)<Props>`
+export const Submit = styled(Button)<StyledProps>`
     max-height: 0px;
     margin: 0px auto;
     padding: 0px;

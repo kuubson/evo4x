@@ -1,10 +1,10 @@
 import styled, { css } from 'styled-components/macro'
 
-type Props = {
+type StyledProps = {
     showModal: boolean
 }
 
-export const Content = styled.dialog<Props>`
+export const Content = styled.dialog<StyledProps>`
     width: 50%;
     min-height: 70%;
     background: ${({ theme }) => theme.primaryColor};

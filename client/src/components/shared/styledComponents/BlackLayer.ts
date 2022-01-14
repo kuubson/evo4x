@@ -1,10 +1,10 @@
 import styled, { css } from 'styled-components/macro'
 
-type Props = {
+type StyledProps = {
     showLayer: boolean
 }
 
-export const BlackLayer = styled.section<Props>`
+export const BlackLayer = styled.section<StyledProps>`
     width: 100%;
     height: 100%;
     transition: background ease-in-out 0.3s;

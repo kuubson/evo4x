@@ -1,10 +1,10 @@
 import styled, { css } from 'styled-components/macro'
 
-type Props = {
+type StyledProps = {
     withCurrentUser: boolean
 }
 
-export const AssetContainer = styled.div<Props>`
+export const AssetContainer = styled.div<StyledProps>`
     min-height: 40px;
     margin-bottom: 10px;
     border-radius: 12px;

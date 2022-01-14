@@ -1,12 +1,12 @@
 import styled, { css } from 'styled-components/macro'
 
-type Props = {
+type StyledProps = {
     active: boolean
     counter: number | undefined
     withHamburger?: boolean
 }
 
-export const Link = styled.li<Props>`
+export const Link = styled.li<StyledProps>`
     margin-right: 20px;
     white-space: nowrap;
     cursor: pointer;

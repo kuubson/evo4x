@@ -1,10 +1,10 @@
 import styled, { css } from 'styled-components/macro'
 
-type Props = {
+type StyledProps = {
     scaleOut?: boolean
 }
 
-export const Header = styled.h2<Props>`
+export const Header = styled.h2<StyledProps>`
     max-height: 92px;
     margin-bottom: 30px;
     font-size: 25px;

@@ -1,12 +1,12 @@
 import styled, { css } from 'styled-components/macro'
 
-type Props = {
+type StyledProps = {
     src: string
     name: string
     withCurrentUser: boolean
 }
 
-export const Avatar = styled.div<Props>`
+export const Avatar = styled.div<StyledProps>`
     width: 40px;
     height: 40px;
     margin-left: 15px;

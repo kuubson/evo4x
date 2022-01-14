@@ -1,6 +1,6 @@
 import styled, { keyframes, css } from 'styled-components/macro'
 
-type Props = {
+type StyledProps = {
     $loading: boolean
 }
 
@@ -16,7 +16,7 @@ const rotate = keyframes`
     }
 `
 
-export const Logo = styled.img<Props>`
+export const Logo = styled.img<StyledProps>`
     width: 40px;
     border-radius: 10px;
     box-shadow: 0px 0px 15px -10px black;
