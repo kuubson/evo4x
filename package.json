@@ -1,8 +1,21 @@
 {
-    "name": "evo4x",
-    "private": true,
-    "scripts": {
-        "heroku-prebuild": "cd server && npm install && npm run build",
-        "heroku-postbuild": "cd client && npm install && npm run build"
-    }
+   "name": "evo4x",
+   "private": true,
+   "workspaces": [
+      "client",
+      "server"
+   ],
+   "scripts": {
+      "heroku-prebuild": "cd server && npm run build",
+      "heroku-postbuild": "cd client && npm run build"
+   },
+   "devDependencies": {
+      "@trivago/prettier-plugin-sort-imports": "^3.3.0",
+      "@typescript-eslint/eslint-plugin": "^5.30.5",
+      "@typescript-eslint/parser": "^5.30.5",
+      "eslint-plugin-react": "^7.30.1",
+      "eslint-config-prettier": "^8.5.0",
+      "eslint-plugin-prettier": "^4.0.0",
+      "eslint-plugin-unused-imports": "^2.0.0"
+   }
 }

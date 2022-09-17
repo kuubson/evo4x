@@ -1,70 +1,42 @@
-# Project "evo4x"
+## 🔧 Stack
 
-## Technologies
+-  **typescript**
+-  **react.js** ⚛️ + **redux** (CRA, hooks)
+-  **styled components** 💅🏾 + **SCSS**
+-  **node.js** + **express.js**
+-  **passport.js** + **JWT** (kept in cookies) for 🔑 auth
+-  **multer** + **cloudinary** for files upload 📁
+-  **sequelize** with **PostgreSQL** database
 
--   HTML, CSS, JS, TS
--   React.js + Redux (Hooks, Styled Components, PWA, Web Push Notifications, PayPal)
--   Node.js + Express (passport.js, JWT, socket.io, multer, cloudinary)
--   MySQL (ORM Sequelize)
+## 📄 Some notes
 
-## Description
+> **Note** Prototype of an app for a trading/investing community.
 
-This one is my own vision of an app for a trading community that provides easy start with the market by signals, covers all the psychology stuff which is needed there and direct people towards proper learning path.
+Acts as a platform that helps with starting the market journey:
 
-Code isn't public because application has potential of being launched to the public in the future.
+-  possibility to share ideas with others users
+-  analysis provided by most capable traders
+-  own profile (nickname, bio, avatar)
 
-## Code workflow
+> **Still missing:**
 
-### Imports order
+-  sessions tab: video conferences with other experienced traders
+-  events tab: event scheduler for market-related meetings (interactive map, invitations etc)
+-  indicators tab: set of free/paid indicators that helps predicts next market's move
+-  mottos tab: quotes to stay inspired and motivated
+-  aha moments tab: list of breakthrough moments of other traders that can help save thousands
+-  mentors tab: list of most reliable mentors, rated by community
 
--   **Packages from package.json**
--   **components**
-    -   shared components (**'components/shared'** path)
-    -   components from other components (**absolute path**)
-    -   components from current components (**'./components'** path)
--   **modules**
-    -   modules from other components (**absolute path**)
-    -   modules from current components (**'./modules'** path)
--   **images**
--   **styled components**
-    -   shared styled components (**'components/shared/styledComponents'** path)
-    -   \* as Styled*ComponentName* (**absolute path**)
-    -   \* as Styled (**'./styled'** path)
--   **hooks**
-    -   global hooks (**'hooks'** path)
-    -   hooks from other components (**absolute path**)
-    -   hooks for current component (**'./hooks'** path)
--   **helpers**
-    -   global helpers (**'helpers'** path)
-    -   helpers from other components (**absolute path**)
-    -   helpers for current component (**'./helpers'** path)
--   **utils**
-    -   global utils (**'utils'** path)
-    -   utils from other components (**absolute path**)
-    -   utils for current component (**'./utils'** path)
+## 📺 App preview
 
-## Some screenshots
+| Home                                                                                                            | Registration                                                                                                    | Sidebar                                                                                                         |
+| --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| ![image](https://user-images.githubusercontent.com/38701627/190876177-627e0dcb-7bc4-43f8-9d27-466ef8fd1bd6.png) | ![image](https://user-images.githubusercontent.com/38701627/190876112-1fad550e-1e3d-4937-80a4-68c5656aeedf.png) | ![image](https://user-images.githubusercontent.com/38701627/190876196-724faf80-cf5d-4b16-b0bf-f802fef61145.png) |
 
-### Home
+| Profile                                                                                                         | Chat                                                                                                            | Analysis                                                                                                        |
+| --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| ![image](https://user-images.githubusercontent.com/38701627/190876592-db0a8ba9-b33b-48ba-bd92-e2a741be738a.png) | ![image](https://user-images.githubusercontent.com/38701627/190876727-705dd64f-6b51-4bc8-ac93-98da68691e00.png) | ![image](https://user-images.githubusercontent.com/38701627/190877026-1cbf4137-b544-4f2b-a7bf-888350a03bcb.png) |
 
-[![Home.png](https://i.postimg.cc/0NynS9ws/Home.png)](https://postimg.cc/CR9bTT7P)
+## ⚙ Scripts
 
-### Help sidebar
-
-[![Help.png](https://i.postimg.cc/66kGVMn1/Help.png)](https://postimg.cc/5jm0bqPw)
-
-### Login form
-
-[![Login.png](https://i.postimg.cc/xd1kjhVq/Login.png)](https://postimg.cc/K1CcJ9zy)
-
-### Profile
-
-[![Profile.png](https://i.postimg.cc/vHPwFNh0/Profile.png)](https://postimg.cc/TpW4nQZb)
-
-### Chat
-
-[![Chat.png](https://i.postimg.cc/sfwNvZWX/Chat.png)](https://postimg.cc/5jQ3rynd)
-
-### Analysis
-
-[![Analysis.png](https://i.postimg.cc/W3f0PjD2/Analysis.png)](https://postimg.cc/jwPDzpQ9)
+> **Note** To run locally, fill all `.env` files (see `.env-example`), trigger `yarn install` and then `yarn dev` in both `/client` & `/server`

@@ -1,5 +1,5 @@
-import path from 'path'
 import moduleAlias from 'module-alias'
+import path from 'path'
 
 moduleAlias.addAlias('database', path.resolve(__dirname, './database'))
 moduleAlias.addAlias('middlewares', path.resolve(__dirname, './middlewares'))

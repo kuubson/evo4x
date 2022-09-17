@@ -1,6 +1,6 @@
 import { Router } from 'express'
 
-import { Auth, Profile, Communication } from './controllers'
+import { Auth, Communication, Profile } from './controllers'
 
 export const User = Router()
 

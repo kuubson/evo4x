@@ -1,5 +1,10 @@
 {
-    "workbench.colorCustomizations": {
-        "titleBar.inactiveBackground": "#ffff00"
-    }
+   "workbench.colorCustomizations": {
+      "titleBar.inactiveBackground": "#ffff00"
+   },
+   "editor.codeActionsOnSave": {
+      "source.organizeImports": true,
+      "source.fixAll.eslint": true
+   },
+   "typescript.tsserver.experimental.enableProjectDiagnostics": true
 }

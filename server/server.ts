@@ -1,16 +1,16 @@
-import path from 'path'
 import express from 'express'
 import http from 'http'
+import path from 'path'
 
 import 'dotenv/config'
 
-import './aliases'
-
 import 'database'
 
-import { initializeMiddlewares, errorHandler } from 'middlewares'
+import { errorHandler, initializeMiddlewares } from 'middlewares'
 
 import { routes } from 'routes'
+
+import './aliases'
 
 const app = express()
 const server = http.createServer(app)

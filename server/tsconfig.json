@@ -1,12 +1,13 @@
 {
-    "compilerOptions": {
-        "baseUrl": ".",
-        "target": "es6",
-        "module": "commonjs",
-        "rootDir": ".",
-        "outDir": "./dist",
-        "esModuleInterop": true,
-        "strict": true,
-        "strictPropertyInitialization": false
-    }
+   "compilerOptions": {
+      "baseUrl": ".",
+      "target": "es6",
+      "module": "commonjs",
+      "rootDir": ".",
+      "outDir": "./dist",
+      "esModuleInterop": true,
+      "strict": true,
+      "strictPropertyInitialization": false
+   },
+   "ts-node": { "swc": true }
 }

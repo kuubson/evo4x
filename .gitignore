@@ -1,11 +1,13 @@
-node_modules/
-
-dist/
-build/
+build
+dist
 
 uploads/
 
-.env
+tsconfig.tsbuildinfo
 
-# Prevent crashing heroku build
-package-lock.json
+.env
+.turbo
+.DS_Store
+
+node_modules/
+yarn-error.log
