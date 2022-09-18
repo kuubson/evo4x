@@ -4,13 +4,13 @@ import path from 'path'
 
 import 'dotenv/config'
 
+import './config/aliases'
+
 import 'database'
 
 import { errorHandler, initializeMiddlewares } from 'middlewares'
 
 import { routes } from 'routes'
-
-import './aliases'
 
 const app = express()
 const server = http.createServer(app)

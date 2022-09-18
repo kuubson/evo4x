@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import { multerFile } from 'middlewares'
 
 import { deleteTemporaryFile, reduceImageSize } from 'helpers'

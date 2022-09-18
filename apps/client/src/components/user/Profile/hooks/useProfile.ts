@@ -104,7 +104,7 @@ export const useProfile = ({ setShowAvatarInput }: ProfileHook) => {
       }
    }
    const changeAvatar = async (event: React.ChangeEvent<HTMLInputElement>) => {
-      const file = event.currentTarget.files![0]
+      const file = event.currentTarget.files?.[0]
       if (file) {
          const {
             regex: { images },

@@ -11,7 +11,7 @@
    "importOrder": [
       "<THIRD_PARTY_MODULES>",
 
-      "^dotenv(.*)",
+      "^dotenv/config$",
       "^./config/aliases$",
       "^config$",
 

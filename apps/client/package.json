@@ -5,9 +5,10 @@
    "scripts": {
       "dev": "react-scripts start",
       "lint": "eslint . && tsc --noEmit",
-      "build": "npm run lint && react-scripts build"
+      "build": "react-scripts build"
    },
    "dependencies": {
+      "@online-library/eslint-config": "^1.0.0",
       "@reduxjs/toolkit": "^1.8.5",
       "@testing-library/jest-dom": "^5.16.1",
       "@testing-library/react": "^11.2.7",
@@ -50,20 +51,8 @@
       "@types/sanitize-html": "^2.6.1",
       "@types/styled-components": "^5.1.19",
       "@types/validator": "^13.7.1",
-      "@typescript-eslint/eslint-plugin": "^5.8.1",
-      "@typescript-eslint/parser": "^5.8.1",
-      "eslint": "^8.6.0",
-      "eslint-config-prettier": "^8.3.0",
-      "eslint-plugin-prettier": "^4.0.0",
       "eslint-plugin-react": "^7.28.0",
-      "eslint-plugin-unused-imports": "^2.0.0",
       "prettier": "^2.5.1"
-   },
-   "eslintConfig": {
-      "extends": [
-         "react-app",
-         "react-app/jest"
-      ]
    },
    "browserslist": {
       "production": [

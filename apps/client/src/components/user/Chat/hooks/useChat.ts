@@ -154,7 +154,7 @@ export const useChat = ({ setShowFileInput, setUploadPercentage }: ChatHook) => 
    const sendFile = async (event: React.ChangeEvent<HTMLInputElement>) => {
       let intervalId: any
       let percentage = 0
-      const file = event.currentTarget.files![0]
+      const file = event.currentTarget.files?.[0]
       if (file) {
          const {
             regex: { images, videos, files },
