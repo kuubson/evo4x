@@ -1,4 +1,4 @@
-## 🔧 Stack
+## 🔧 Technologies
 
 -  **typescript**
 -  **react.js** ⚛️ + **redux** (CRA, hooks)
@@ -7,8 +7,9 @@
 -  **passport.js** + **JWT** (kept in cookies) for 🔑 auth
 -  **multer** + **cloudinary** for files upload 📁
 -  **sequelize** with **PostgreSQL** database
+-  **turborepo**
 
-## 📄 Some notes
+## 📄 Description
 
 > **Note** Prototype of an app for a trading/investing community.
 
@@ -39,4 +40,4 @@ Acts as a platform that helps with starting the market journey:
 
 ## ⚙ Scripts
 
-> **Note** To run locally, fill all `.env` files (see `.env-example`), trigger `yarn install` and then `yarn dev` in both `/client` & `/server`
+> **Note** To run locally, fill all `.env` files (see `.env-example`), trigger `yarn install` and `yarn dev`
